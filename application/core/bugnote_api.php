@@ -637,7 +637,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 				$t_from_where $t_to_where
 				GROUP BY u.username, u.realname";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, array() );
 
 	while( $row = db_fetch_array( $result ) ) {
 		$t_results[] = $row;
@@ -697,7 +697,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 			GROUP BY bn.bug_id, u.username, u.realname, b.summary
 			ORDER BY bn.bug_id";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query, array() );
 
 	$t_cost_min = $p_cost / 60.0;
 
