@@ -24,7 +24,7 @@
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
 define( 'STRINGS_ENGLISH', 'strings_english.txt' );
-$t_mantis_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
+$t_mantis_dir = dirname( dirname( __FILE__ ) ) . '/';
 
 /**
  * MantisBT Core API's
@@ -44,7 +44,7 @@ else {
 	define( 'T_DOC_COMMENT', T_ML_COMMENT );
 }
 
-if(!checkfile( $t_mantis_dir . 'lang' . DIRECTORY_SEPARATOR, STRINGS_ENGLISH, true)) {
+if(!checkfile( $t_mantis_dir . 'lang/', STRINGS_ENGLISH, true)) {
 	print_error( "Language file '" . STRINGS_ENGLISH . "' failed.", 'FAILED' );
 	die;
 }
@@ -71,7 +71,6 @@ else {
 	checklangdir( $t_mantis_dir, $t_lang_files );
 }
 
-
 // attempt to find plugin language files
 echo "<br />Trying to find+check plugin language files...<br />";
 if( function_exists( 'scandir' ) ) {
@@ -81,7 +80,7 @@ if( function_exists( 'scandir' ) ) {
 }
 
 function checkplugins( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+	$t_path = rtrim( $p_path, '/' ) . '/';
 
 	$t_plugins = @scandir( $t_path );
 	if( false == $t_plugins ) {
@@ -99,7 +98,7 @@ function checkplugins( $p_path ) {
 }
 
 function checklangdir( $p_path, $p_lang_files = null ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+	$t_path = rtrim( $p_path, '/' ) . '/lang/';
 
 	if( is_array( $p_lang_files ) ) {
 		$t_lang_files = $p_lang_files;
