@@ -28,14 +28,11 @@ require_once 'SoapBase.php';
  */
 class UserTest extends SoapBase {
 
-    /**
-     * Tests getting a user preference
-     */
-    public function testGetPreference() {
-        
-        $bugnote_order = $this->client->mc_user_pref_get_pref( $this->userName, $this->password, 0 /*ALL_PROJECTS*/, 'bugnote_order' );
-
-        $this->assertEquals( 'ASC', $bugnote_order );
-        
-    }
+	/**
+	 * Tests getting a user preference
+	 */
+	public function testGetPreference() {
+		$bugnote_order = $this->client->mc_user_pref_get_pref( $this->userName, $this->password, 0 /*ALL_PROJECTS*/, 'bugnote_order' );
+		$this->assertEquals( 'ASC', $bugnote_order );
+	}
 }

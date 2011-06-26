@@ -114,7 +114,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors ( $p_issue_id ) );
 	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id , $t_user_id );
-	
+
 	return $t_issue_data;
 }
 
@@ -323,7 +323,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
 		$t_bugnote['note_type'] = $t_value->note_type;
 		$t_bugnote['note_attr'] = $t_value->note_attr;
-		
+
 		$t_result[] = $t_bugnote;
 	}
 
@@ -332,25 +332,25 @@ function mci_issue_get_notes( $p_issue_id ) {
 
 /**
  * Sets the monitors of the specified issue
- * 
+ *
  * <p>This functions performs access level checks and only performs operations which would
  * modify the existing monitors list.</p>
- * 
+ *
  * @param int $p_issue_id the issue id to set the monitors for
  * @param int $p_user_id the user which requests the monitor change
- * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id 
+ * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id
  *  of the users which should monitor this issue.
  */
 function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
-    
+
     $t_existing_monitors = bug_get_monitors( $p_issue_id );
 
     $t_monitors = array();
-    foreach ( $p_monitors as $t_monitor ) 
+    foreach ( $p_monitors as $t_monitor )
         $t_monitors[] = $t_monitor['id'];
-    
+
     foreach ( $t_monitors as $t_user_id ) {
-        
+
     	if ( $p_user_id == $t_user_id ) {
     		if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
     		    continue;
@@ -358,13 +358,13 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
 	    	if ( !access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id ) )
 	    	    continue;
 	    }
-	        
+
        if ( in_array( $p_user_id, $t_existing_monitors) )
            continue;
-	        
+
         bug_monitor( $p_issue_id, $t_user_id);
     }
-    
+
     foreach ( $t_existing_monitors as $t_user_id ) {
 
     	if ( $p_user_id == $t_user_id ) {
@@ -374,10 +374,10 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
 	    	if ( !access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $p_issue_id ) )
 	    	    continue;
 	    }
-        
+
         if ( in_array( $p_user_id, $t_monitors) )
             continue;
-            
+
         bug_unmonitor( $p_issue_id, $t_user_id);
     }
 }
@@ -651,7 +651,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
-	
+
 	# omitted:
 	# var $bug_text_id
 	# $t_bug_data->profile_id;
@@ -674,7 +674,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			} else {
 				$t_view_state = config_get( 'default_bugnote_view_status' );
 			}
-			
+
 			$note_type = isset ( $t_note['note_type'] ) ? (int) $t_note['note_type'] : BUGNOTE;
 			$note_attr = isset ( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
 
@@ -727,8 +727,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_project = $p_issue['project'];
 	$t_summary = isset( $p_issue['summary'] ) ? $p_issue['summary'] : '';
 	$t_description = isset( $p_issue['description'] ) ? $p_issue['description'] : '';
-	
-	
+
+
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
 			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
@@ -886,10 +886,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 				}
 			} else {
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-				
+
 				$note_type = isset ( $t_note['note_type'] ) ? (int) $t_note['note_type'] : BUGNOTE;
 			    $note_attr = isset ( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
-				
+
 				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id, FALSE );
 			}
 		}
@@ -1005,7 +1005,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	}
 
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-	
+
 	$note_type = isset ( $p_note['note_type'] ) ? (int) $p_note['note_type'] : BUGNOTE;
 	$note_attr = isset ( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
@@ -1066,7 +1066,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
  */
 function mc_issue_note_update( $p_username, $p_password, $p_note ) {
     $t_user_id = mci_check_login( $p_username, $p_password );
-    
+
     if( $t_user_id === false ) {
         return mci_soap_fault_login_failed();
     }
@@ -1074,19 +1074,19 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
     if ( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
         return new soap_fault( 'Client', '', "Issue id must not be blank." );
     }
-    
+
     if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
         return new soap_fault( 'Client', '', "Issue note text must not be blank." );
     }
-    
+
     $t_issue_note_id = $p_note['id'];
 
     if( !bugnote_exists( $t_issue_note_id ) ) {
         return new soap_fault( 'Server', '', "Issue note '$t_issue_note_id' does not exist." );
     }
-    
+
 	$t_issue_id = bugnote_get_field( $t_issue_note_id, 'bug_id' );
-	
+
 	$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
 
     if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {

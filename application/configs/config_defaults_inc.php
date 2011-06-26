@@ -4000,7 +4000,7 @@ $g_show_queries_count = OFF;
  * Toggles between:
  * i) showing friendly error messages - designed for end users.
  * OR
- * ii) Showing users designed for administrators/developers - showing a list of variables and their values 
+ * ii) Showing users designed for administrators/developers - showing a list of variables and their values
  * Only turn this off when you really need it for debugging
  * @global int $g_show_show_friendly_errors
  */

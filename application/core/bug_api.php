@@ -611,7 +611,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	$result = db_query_bound( $query, array( $c_bug_id ) );
 
 	$row = db_fetch_array( $result );
-	
+
 	if( !$row ) {
 		$g_cache_bug[$c_bug_id] = false;
 
@@ -723,7 +723,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	$result = db_query_bound( $query, array( $c_bug_id ) );
 
 	$row = db_fetch_array( $result );
-	
+
 	if( !$row ) {
 		$g_cache_bug_text[$c_bug_id] = false;
 
