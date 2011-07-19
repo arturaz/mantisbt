@@ -177,20 +177,6 @@ $(document).ready( function() {
 	});
 
 
-	$('.bug-jump').find('[name=bug_id]').focus( function() {
-		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
-		if( $(this).val() == bug_label ) {
-			$(this).val('');
-			$(this).removeClass('field-default');
-		}
-	});
-	$('.bug-jump').find('[name=bug_id]').blur( function() {
-		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
-		if( $(this).val() == '' ) {
-			$(this).val(bug_label);
-			$(this).addClass('field-default');
-		}
-	});
 	$('[name=source_query_id]').change( function() {
 		$(this).parent().submit();
 	});
@@ -198,7 +184,6 @@ $(document).ready( function() {
 		$('#form-set-project').submit();
 	});
 	$('#project-selector').children('.button').hide();
-	setBugLabel();
 
 	$('input[type=checkbox]#use_date_filters').live('click', function() {
 		if (!$(this).is(':checked')) {
@@ -245,15 +230,6 @@ $(document).ready( function() {
 		$(this).val(0);
 	});
 });
-
-function setBugLabel() {
-	var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
-	var field = $('.bug-jump').find('[name=bug_id]');
-	if( field.val() == '' ) {
-		field.val(bug_label);
-		field.addClass('field-default');
-	}
-}
 
 /*
  * String manipulation
