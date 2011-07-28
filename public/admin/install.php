@@ -612,7 +612,7 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				} else {
 					$t_error = db_error();
-					if( strstr( $t_error, 'Database exists' ) ) {
+					if ( stristr( $t_error, 'Database exists' ) ) {
 						print_test_result( BAD, false, 'Database already exists? ( ' . db_error() . ' )' );
 					} else {
 						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error() . ' )' );
