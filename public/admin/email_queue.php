@@ -30,6 +30,7 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 html_page_top();
 
 $f_to = gpc_get( 'send', null );
+$f_mail_test = gpc_get_bool( 'mail_test' );
 
 if ( $f_to !== null ) {
 	if ( $f_to == 'all' ) {
@@ -59,6 +60,28 @@ if ( $f_to !== null ) {
 	}
 }
 
+if( $f_mail_test ) {
+	echo '<strong>Testing Mail</strong> - ';
+
+	# @@@ thraxisp - workaround to ensure a language is set without authenticating
+	#  will disappear when this is properly localized
+	lang_push( 'english' );
+
+	$t_email_data = new EmailData;
+	$t_email_data->email = config_get_global( 'webmaster_email' );
+	$t_email_data->subject = 'Testing PHP mail() function';
+	$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
+	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
+	$t_email_data->metadata['charset'] = 'utf-8';
+	$result = email_send( $t_email_data );
+
+	if( !$result ) {
+		echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.<br />';
+	} else {
+		echo ' mail() send successful.<br />';
+	}
+}
+
 $t_ids = email_queue_get_ids();
 
 if( count( $t_ids ) > 0 ) {
@@ -78,5 +101,21 @@ if( count( $t_ids ) > 0 ) {
 	echo 'Email Queue Empty';
 }
 
+?>
+<br /><hr /><br />
+<table width="100%" bgcolor="#222222" cellpadding="20" cellspacing="1">
+<tr>
+	<td bgcolor="#f4f4f4">
+		<span class="title">Testing Email</span>
+		<p>You can test the ability for MantisBT to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
+		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>">
+		Email Address: <?php echo config_get_global( 'webmaster_email' );?><br />
+		<input type="submit" value="Send Mail" name="mail_test" />
+		</form>
+	</td>
+</tr>
+</table>
+
+<?php
 
 html_page_bottom();

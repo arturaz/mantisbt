@@ -1483,7 +1483,8 @@ If you requested this verification, visit the following URL to change your passw
 	'install_information' => 'MantisBT Installation Information',
 	'database_information' => 'MantisBT Database Information',
 	'path_information' => 'MantisBT Path Information',
-
+	'database_statistics' => 'MantisBT Database Statistics',
+	
 	# months
 	'month_january' => 'January',
 	'month_february' => 'February',
