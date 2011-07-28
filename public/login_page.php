@@ -204,71 +204,60 @@ if( $f_error || $f_cookie_error ) {
 # Do some checks to warn administrators of possible security holes.
 # Since this is considered part of the admin-checks, the strings are not translated.
 #
+$t_warnings = array();
 
-if ( config_get_global( 'admin_checks' ) == ON ) {
-	$t_warnings = array();
+# Check if the admin directory is available and is readable.
+$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
+if ( is_dir( $t_admin_dir ) ) {
+	$t_warnings[] = lang_get( 'warning_admin_directory_present' );
+}
+if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) && is_executable( $t_admin_dir ) && @file_exists( "$t_admin_dir/." ) ) {
+	# since admin directory and db_upgrade lists are available check for missing db upgrades
+	# Check for db upgrade for versions < 1.0.0 using old upgrader
+	$t_db_version = config_get( 'database_version' , 0 );
+	# if db version is 0, we haven't moved to new installer.
+	if ( $t_db_version == 0 ) {
+		$t_upgrade_count = 0;
+		if ( db_table_exists( db_get_table( 'upgrade' ) ) ) {
+			$query = "SELECT COUNT(*) from " . db_get_table( 'upgrade' ) . ";";
+			$result = db_query_bound( $query );
+			$t_upgrade_count = (int)db_result( $result );
+		}
 
-	# Generate a warning if administrator/root is valid.
-	$t_admin_user_id = user_get_id_by_name( 'administrator' );
-	if ( $t_admin_user_id !== false ) {
-		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
-			$t_warnings[] = lang_get( 'warning_default_administrator_account_present' );
+		if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
+
+			# new config table database version is 0.
+			# old upgrade tables exist.
+			# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
+			$t_warnings[] = lang_get( 'error_database_version_out_of_date_1' );
+		} else {
+			# old upgrade tables do not exist, yet config database_version is 0
+			$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 		}
 	}
 
-	# Check if the admin directory is available and is readable.
-	$t_admin_dir = dirname( __FILE__ ) . '/admin/';
-	if ( is_dir( $t_admin_dir ) ) {
-		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
-	}
-	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) && is_executable( $t_admin_dir ) && @file_exists( "$t_admin_dir/." ) ) {
-		# since admin directory and db_upgrade lists are available check for missing db upgrades
-		# Check for db upgrade for versions < 1.0.0 using old upgrader
-		$t_db_version = config_get( 'database_version' , 0 );
-		# if db version is 0, we haven't moved to new installer.
-		if ( $t_db_version == 0 ) {
-			$t_upgrade_count = 0;
-			if ( db_table_exists( db_get_table( 'upgrade' ) ) ) {
-				$query = "SELECT COUNT(*) from " . db_get_table( 'upgrade' ) . ";";
-				$result = db_query_bound( $query );
-				$t_upgrade_count = (int)db_result( $result );
-			}
+	# Check for db upgrade for versions > 1.0.0 using new installer and schema
+	require_once( 'admin/schema.php' );
+	$t_upgrades_reqd = count( $upgrade ) - 1;
 
-			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
+	if ( ( 0 < $t_db_version ) &&
+			( $t_db_version != $t_upgrades_reqd ) ) {
 
-				# new config table database version is 0.
-				# old upgrade tables exist.
-				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
-				$t_warnings[] = lang_get( 'error_database_version_out_of_date_1' );
-			} else {
-				# old upgrade tables do not exist, yet config database_version is 0
-				$t_warnings[] = lang_get( 'error_database_no_schema_version' );
-			}
-		}
-
-		# Check for db upgrade for versions > 1.0.0 using new installer and schema
-		require_once( 'admin/schema.php' );
-		$t_upgrades_reqd = count( $upgrade ) - 1;
-
-		if ( ( 0 < $t_db_version ) &&
-				( $t_db_version != $t_upgrades_reqd ) ) {
-
-			if ( $t_db_version < $t_upgrades_reqd ) {
-				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
-			} else {
-				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
-			}
+		if ( $t_db_version < $t_upgrades_reqd ) {
+			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
+		} else {
+			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
 		}
 	}
-	if( count( $t_warnings ) > 0 ) {
-		echo '<div class="important-msg">';
-		echo '<ul>';
-		foreach( $t_warnings AS $t_warning ) {
-			echo '<li>' . $t_warning . '</li>';
-		}
-		echo '</ul>';
-		echo '</div>';
+}
+if( count( $t_warnings ) > 0 ) {
+	echo '<div class="important-msg">';
+	echo '<ul>';
+	foreach( $t_warnings AS $t_warning ) {
+		echo '<li>' . $t_warning . '</li>';
 	}
-} # if 'admin_checks'
+	echo '</ul>';
+	echo '</div>';
+}
 
 html_page_bottom1a( __FILE__ );

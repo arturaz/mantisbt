@@ -766,12 +766,6 @@ $g_window_title = 'MantisBT';
 $g_page_title = '';
 
 /**
- * Check for admin directory, database upgrades, etc.
- * @global int $g_admin_checks
- */
-$g_admin_checks = ON;
-
-/**
  * Favicon image
  * @global string $g_favicon_image
  */
