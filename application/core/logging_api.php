@@ -151,13 +151,13 @@ function log_print_to_page() {
 		$t_total_queries_count = 0;
 		$t_total_event_count = count( $g_log_events );
 
+		echo "\t<hr />\n";
+		echo "\n\n<!--Mantis Debug Log Output-->";
 		if( $t_total_event_count == 0 ) {
-			echo "\n\n<!--Mantis Debug Log Output-->";
 			echo "<!--END Mantis Debug Log Output-->\n\n";
 			return;
 		}
 
-		echo "\n\n<!--Mantis Debug Log Output-->";
 		echo "<hr />\n";
 		echo "<table id=\"log-event-list\">\n";
 		echo "\t<thead>\n";
