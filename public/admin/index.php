@@ -45,9 +45,7 @@ function print_info_row( $p_description, $p_value ) {
 		<p>[ <a href="upgrade_warning.php"><strong>Upgrade your installation</strong></a> ]</p>
 	<?php } ?>
 		<p>[ <a href="system_utils.php">System Utilities</a> ]</p>
-		<p>[ <a href="test_icons.php">Test Icons</a> ]</p>
 		<p>[ <a href="test_langs.php">Test Langs</a> ]</p>
-		<p>[ <a href="test_email.php">Test Email</a> ]</p>
 		<p>[ <a href="email_queue.php">Email Queue</a> ]</p>
 </div>
 
