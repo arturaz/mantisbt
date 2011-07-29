@@ -369,7 +369,7 @@ if( 2 == $t_install_state ) {
 			$t_db_open = true;
 				print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error() . ' )' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . $g_db->get_last_error() . ' )' );
 		}
 		?>
 </tr>
@@ -611,11 +611,11 @@ if( 3 == $t_install_state ) {
 					print_test_result( GOOD );
 					$t_db_open = true;
 				} else {
-					$t_error = db_error();
-					if ( stristr( $t_error, 'Database exists' ) ) {
-						print_test_result( BAD, false, 'Database already exists? ( ' . db_error() . ' )' );
+					$t_error_msg = $g_db->get_last_error();
+					if( strstr( $t_error_msg, 'atabase exists' ) ) {
+						print_test_result( BAD, false, 'Database already exists? ( ' . $t_error_msg . ' )' );
 					} else {
-						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error() . ' )' );
+						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . $t_error_msg . ' )' );
 						$t_install_state--; # db creation failed, allow user to re-enter user/password info
 					}
 				}
@@ -670,7 +670,7 @@ if( 3 == $t_install_state ) {
 		if( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error() . ' )' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . $g_db->get_last_error() . ' )' );
 		}
 		//@todo $g_db->Close();
 		?>
@@ -930,7 +930,7 @@ if( 6 == $t_install_state ) {
 	if( $t_result == true ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error() . ' )' );
+		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 
 	?>
@@ -946,7 +946,7 @@ if( 6 == $t_install_state ) {
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error() . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 	?>
 </tr>
@@ -976,7 +976,7 @@ if( 6 == $t_install_state ) {
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error() . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 	?>
 </tr>
@@ -991,7 +991,7 @@ if( 6 == $t_install_state ) {
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . db_error() . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 	?>
 </tr>
