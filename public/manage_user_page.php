@@ -65,13 +65,12 @@ $f_save = gpc_get_bool( 'save' );
 $f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number		= gpc_get_int( 'page_number', 1 );
 
-$t_user_table = db_get_table( 'user' );
 $t_cookie_name = config_get( 'manage_cookie' );
 $t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
 $c_filter = '';
 
 # Clean up the form variables
-if ( !db_field_exists( $f_sort, $t_user_table ) ) {
+if ( !db_field_exists( $f_sort, 'user' ) ) {
 	$c_sort = 'username';
 } else {
 	$c_sort = addslashes($f_sort);
@@ -118,8 +117,7 @@ print_manage_menu( 'manage_user_page.php' );
 # New Accounts Form BEGIN
 
 $t_days_old = 7 * SECONDS_PER_DAY;
-$t_query = "SELECT COUNT(*) AS new_user_count
-	FROM $t_user_table
+$t_query = "SELECT COUNT(*) AS new_user_count FROM {user}
 	WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $t_days_old")."
 	ORDER BY date_created DESC";
 $t_result = db_query_bound( $t_query );
@@ -128,8 +126,7 @@ $t_new_user_count = $t_row['new_user_count'];
 
 # Never Logged In Form BEGIN
 
-$t_query = "SELECT COUNT(*) AS unused_user_count
-	FROM $t_user_table
+$t_query = "SELECT COUNT(*) AS unused_user_count FROM {user}
 	WHERE ( login_count = 0 ) AND ( date_created = last_visit )
 	ORDER BY date_created DESC";
 $t_result = db_query_bound( $t_query );
@@ -195,15 +192,12 @@ $t_total_user_count = 0;
 # Get the user data in $c_sort order
 $t_result = '';
 if ( $c_hide == 0 ) {
-	$t_query = "SELECT COUNT(*) as user_count
-			FROM $t_user_table
-			WHERE $t_where";
+	$t_query = "SELECT COUNT(*) as user_count FROM {user} WHERE $t_where";
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	$t_total_user_count = $t_row['user_count'];
 } else {
-	$t_query = "SELECT count(*) as user_count
-			FROM $t_user_table
+	$t_query = "SELECT count(*) as user_count FROM {user}
 			WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $t_days_old");
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
@@ -227,15 +221,11 @@ if ( $f_page_number < 1 ) {
 
 
 if ( 0 == $c_hide ) {
-	$t_query = "SELECT *
-			FROM $t_user_table
-			WHERE $t_where
-			ORDER BY $c_sort $c_dir";
+	$t_query = "SELECT * FROM {user} WHERE $t_where ORDER BY $c_sort $c_dir";
 	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
 } else {
 
-	$t_query = "SELECT *
-			FROM $t_user_table
+	$t_query = "SELECT * FROM {user}
 			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $t_days_old" ) . "
 			ORDER BY $c_sort $c_dir";
 	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );

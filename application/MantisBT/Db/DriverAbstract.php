@@ -56,6 +56,9 @@ abstract class DriverAbstract {
 	 */
     protected $dbDsn;
 
+	protected $tableNamePrefix = '';
+	protected $tableNameSuffix = '';
+
     /** @var array Database or driver specific options, such as sockets or TCPIP db connections */
     protected $dbOptions;
 
@@ -227,6 +230,28 @@ abstract class DriverAbstract {
 		$a->params = $params;
 		throw new Db( ERROR_DB_QUERY_FAILED, $a );
     }
+
+	public function getTableNamePrefix() {
+		return $this->tableNamePrefix;
+	}
+
+	public function setTableNamePrefix($prefix) {
+		$this->tableNamePrefix = $prefix;
+	}
+
+	public function getTableNameSuffix() {
+		return $this->tableNameSuffix;
+	}
+
+	public function setTableNameSuffix($suffix) {
+		$this->tableNameSuffix = $suffix;
+	}
+
+	protected function remapTableNames($statement) {
+		$mappings = array('{' => $this->getTableNamePrefix(),
+		                  '}' => $this->getTableNameSuffix());
+		return strtr($statement, $mappings);
+	}
 
 	/* legacy functions */
 	public function legacyNullDate() {

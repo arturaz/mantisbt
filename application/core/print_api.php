@@ -350,18 +350,14 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 # --------------------
 # Get current headlines and id  prefix with v_
 function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'news' );
-
 	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
+		$query = "SELECT id, headline, announcement, view_state FROM {news}
 				ORDER BY date_posted DESC";
 	} else {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
+		$query = "SELECT id, headline, announcement, view_state FROM {news}
 				WHERE project_id=" . db_param() . "
 				ORDER BY date_posted DESC";
 	}
@@ -569,9 +565,6 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 # We check in the project category table and in the bug table
 # We put them all in one array and make sure the entries are unique
 function print_category_option_list( $p_category_id = 0, $p_project_id = null ) {
-	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
-
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
@@ -721,7 +714,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 }
 
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -729,8 +721,7 @@ function print_build_option_list( $p_build = '' ) {
 	$t_project_where = helper_project_specific_where( $t_project_id );
 
 	# Get the "found in" build list
-	$query = "SELECT DISTINCT build
-				FROM $t_bug_table
+	$query = "SELECT DISTINCT build FROM {bug}
 				WHERE $t_project_where
 				ORDER BY build DESC";
 	$t_result = db_query_bound( $query );
@@ -895,14 +886,11 @@ function print_project_user_list_option_list( $p_project_id = null ) {
 
 # list of projects that a user is NOT in
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
-
 	$c_user_id = db_prepare_int( $p_user_id );
 
 	$query = "SELECT DISTINCT p.id, p.name
-				FROM $t_mantis_project_table p
-				LEFT JOIN $t_mantis_project_user_list_table u
+				FROM {project} p
+				LEFT JOIN {project_user_list} u
 				ON p.id=u.project_id AND u.user_id=" . db_param() . "
 				WHERE p.enabled = " . db_param() . " AND
 					u.user_id IS NULL
@@ -1560,9 +1548,8 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 			}
 			break;
 		default:
-			$t_bug_file_table = db_get_table( 'bug_file' );
 			$c_attachment_id = db_prepare_int( $p_attachment['id'] );
-			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
+			$t_query = "SELECT * FROM {bug_file} WHERE id=" . db_param();
 			$t_result = db_query_bound( $t_query, array( $c_attachment_id ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];

@@ -77,16 +77,10 @@ $c_file_id = (integer)$f_file_id;
 $query = '';
 switch ( $f_type ) {
 	case 'bug':
-		$t_bug_file_table = db_get_table( 'bug_file' );
-		$query = "SELECT *
-			FROM $t_bug_file_table
-			WHERE id=" . db_param();
+		$query = "SELECT * FROM {bug_file} WHERE id=" . db_param();
 		break;
 	case 'doc':
-		$t_project_file_table = db_get_table( 'project_file' );
-		$query = "SELECT *
-			FROM $t_project_file_table
-			WHERE id=" . db_param();
+		$query = "SELECT * FROM {project_file} WHERE id=" . db_param();
 		break;
 	default:
 		throw new AccessDenied();

@@ -64,13 +64,10 @@ $t_restriction = '';
 if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) )
 	$t_restriction = 'AND view_state=' . VS_PUBLIC;
 
-$t_bugnote_table = db_get_table( 'bugnote' );
-$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 # get the bugnote data
 $t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
-$t_query = "SELECT *
-		FROM $t_bugnote_table
+$t_query = "SELECT * FROM {bugnote}
 		WHERE bug_id=" . db_param() . " $t_restriction
 		ORDER BY date_submitted $t_bugnote_order";
 $t_result = db_query_bound( $t_query, array( $c_bug_id ) );
@@ -108,8 +105,7 @@ $t_note_count = count( $t_notes );
 		$v3_last_modified = date( config_get( 'normal_date_format' ), $v3_last_modified );
 
 		# grab the bugnote text and id and prefix with v3_
-		$t_query = "SELECT note, id
-				FROM $t_bugnote_text_table
+		$t_query = "SELECT note, id FROM {bugnote_text}
 				WHERE id=" . db_param();
 		$t_result2 = db_query_bound( $t_query, array( $v3_bugnote_text_id ) );
 		$v3_note = db_result( $t_result2, 0, 0 );

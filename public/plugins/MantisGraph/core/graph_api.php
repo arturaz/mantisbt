@@ -574,7 +574,6 @@ function graph_total_metrics( $p_metrics ) {
 # summarize metrics by a single field in the bug table
 function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	$t_project_id = helper_get_current_project();
-	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
@@ -583,7 +582,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 
 	foreach ( $t_assoc_array as $t_value => $t_label  ) {
 		$query = "SELECT COUNT(*)
-					FROM $t_bug_table
+					FROM {bug}
 					WHERE $p_enum='$t_value' $specific_where";
 		$result = db_query_bound( $query, array() );
 		$t_metrics[$t_label] = db_result( $result );
@@ -594,10 +593,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 
 # Function which gives the absolute values according to the status (opened/closed/resolved)
 function enum_bug_group( $p_enum_string, $p_enum ) {
-	$t_bug_table = db_get_table( 'bug' );
-
 	$t_project_id = helper_get_current_project();
-	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
@@ -607,24 +603,21 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 	$enum_count = count( $t_array_indexed_by_enum_values );
 	foreach ( $t_array_indexed_by_enum_values as $t_value => $t_label ) {
 		# Calculates the number of bugs opened and puts the results in a table
-		$query = "SELECT COUNT(*)
-					FROM $t_bug_table
+		$query = "SELECT COUNT(*) FROM {bug}
 					WHERE $p_enum='$t_value' AND
 						status<'$t_res_val' $specific_where";
 		$result2 = db_query_bound( $query, array() );
 		$t_metrics['open'][$t_label] = db_result( $result2 );
 
 		# Calculates the number of bugs closed and puts the results in a table
-		$query = "SELECT COUNT(*)
-					FROM $t_bug_table
+		$query = "SELECT COUNT(*) FROM {bug}
 					WHERE $p_enum='$t_value' AND
 						status='$t_clo_val' $specific_where";
 		$result2 = db_query_bound( $query, array() );
 		$t_metrics['closed'][$t_label] = db_result( $result2 );
 
 		# Calculates the number of bugs resolved and puts the results in a table
-		$query = "SELECT COUNT(*)
-					FROM $t_bug_table
+		$query = "SELECT COUNT(*) FROM {bug}
 					WHERE $p_enum='$t_value' AND
 						status>='$t_res_val'  AND
 						status<'$t_clo_val' $specific_where";
@@ -640,16 +633,13 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 # --------------------
 function create_developer_summary() {
 	$t_project_id = helper_get_current_project();
-	$t_user_table = db_get_table( 'user' );
-	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 
-	$query = "SELECT handler_id, status
-				 FROM $t_bug_table
+	$query = "SELECT handler_id, status FROM {bug}
 				 WHERE handler_id > 0 $specific_where";
 	$result = db_query_bound( $query );
 
@@ -697,13 +687,10 @@ function create_reporter_summary() {
 	global $reporter_name, $reporter_count;
 
 	$t_project_id = helper_get_current_project();
-	$t_user_table = db_get_table( 'user' );
-	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$query = "SELECT reporter_id
-				 FROM $t_bug_table
+	$query = "SELECT reporter_id FROM {bug}
 				 WHERE $specific_where";
 	$result = db_query_bound( $query );
 
@@ -737,13 +724,10 @@ function create_category_summary() {
 	global $category_name, $category_bug_count;
 
 	$t_project_id = helper_get_current_project();
-	$t_cat_table = db_get_table( 'category' );
-	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$query = "SELECT id, name
-				FROM $t_cat_table
+	$query = "SELECT id, name FROM {category}
 				WHERE $specific_where
 				ORDER BY name";
 	$result = db_query_bound( $query );
@@ -752,8 +736,7 @@ function create_category_summary() {
 	while( $row = db_fetch_array( $result ) ) {
 		$t_cat_name = $row['name'];
 		$t_cat_id = $row['id'];
-		$query = "SELECT COUNT(*)
-					FROM $t_bug_table
+		$query = "SELECT COUNT(*) FROM {bug}
 					WHERE category_id=" . db_param() . " AND $specific_where";
 		$result2 = db_query_bound( $query, array( $t_cat_id ) );
 		if ( isset($t_metrics[$t_cat_name]) ) {
@@ -768,11 +751,8 @@ function create_category_summary() {
 
 # --------------------
 function create_cumulative_bydate() {
-
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table = db_get_table( 'bug' );
-	$t_history_table = db_get_table( 'bug_history' );
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -780,7 +760,7 @@ function create_cumulative_bydate() {
 
 	# Get all the submitted dates
 	$query = "SELECT date_submitted
-				FROM $t_bug_table
+				FROM {bug}
 				WHERE $specific_where
 				ORDER BY date_submitted";
 	$result = db_query_bound( $query );
@@ -799,15 +779,15 @@ function create_cumulative_bydate() {
 
 	# ## Get all the dates where a transition from not resolved to resolved may have happened
 	#    also, get the last updated date for the bug as this may be all the information we have
-	$query = "SELECT $t_bug_table.id, last_updated, date_modified, new_value, old_value
-			FROM $t_bug_table LEFT JOIN $t_history_table
-			ON $t_bug_table.id = $t_history_table.bug_id
+	$query = "SELECT {bug}.id, last_updated, date_modified, new_value, old_value
+			FROM {bug} LEFT JOIN {history}
+			ON {bug}.id = {history}.bug_id
 			WHERE $specific_where
-						AND $t_bug_table.status >= '$t_res_val'
-						AND ( ( $t_history_table.new_value >= '$t_res_val'
-								AND $t_history_table.field_name = 'status' )
-						OR $t_history_table.id is NULL )
-			ORDER BY $t_bug_table.id, date_modified ASC";
+						AND {bug}.status >= '$t_res_val'
+						AND ( ( {history}.new_value >= '$t_res_val'
+								AND {history}.field_name = 'status' )
+						OR {history}.id is NULL )
+			ORDER BY {bug}.id, date_modified ASC";
 	$result = db_query_bound( $query, array() );
 
 	$t_last_id = 0;

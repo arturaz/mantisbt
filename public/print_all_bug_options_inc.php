@@ -92,8 +92,6 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 		user_ensure_unprotected( $p_user_id );
 	}
 
-	$t_user_print_pref_table = db_get_table( 'user_print_pref' );
-
 	if ( is_blank( $p_redirect_url ) ) {
 		$p_redirect_url = 'print_all_bug_page.php';
 	}
@@ -103,9 +101,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$field_name_count = count( $t_field_name_arr );
 
 	# Grab the data
-	$query = "SELECT print_pref
-			FROM $t_user_print_pref_table
-			WHERE user_id=" . db_param();
+	$query = "SELECT print_pref FROM {user_print_pref} WHERE user_id=" . db_param();
 	$result = db_query_bound( $query, array( $c_user_id ) );
 
 	$row = db_fetch_array( $result );
@@ -120,7 +116,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 		# all fields are added by default
 		$query = "INSERT
-				INTO $t_user_print_pref_table
+				INTO {user_print_pref}
 				(user_id, print_pref)
 				VALUES
 				(" . db_param() . "," . db_param() . ")";
@@ -129,7 +125,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 		# Rerun select query
 		$query = "SELECT print_pref
-				FROM $t_user_print_pref_table
+				FROM {user_print_pref}
 				WHERE user_id=" . db_param();
 		$result = db_query_bound( $query, array( $c_user_id ) );
 

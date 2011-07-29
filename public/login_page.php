@@ -207,11 +207,9 @@ if( $f_error || $f_cookie_error ) {
 $t_warnings = array();
 
 # since admin directory and db_upgrade lists are available check for missing db upgrades
-# Check for db upgrade for versions < 1.0.0 using old upgrader
+# if db version is 0, we do not have a valid database.
 $t_db_version = config_get( 'database_version' , 0 );
-# if db version is 0, we haven't moved to new installer.
-if ( $t_db_version == 0 ) {
-	# old upgrade tables do not exist, yet config database_version is 0
+if ( $t_db_version == 0 ) {	
 	$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 }
 

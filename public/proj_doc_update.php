@@ -78,8 +78,6 @@ $c_file_id = db_prepare_int( $f_file_id );
 $c_title = db_prepare_string( $f_title );
 $c_description = db_prepare_string( $f_description );
 
-$t_project_file_table = db_get_table( 'project_file' );
-
 /** @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files */
 
 file_ensure_uploaded( $f_file );
@@ -133,13 +131,13 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 			/** @todo Such errors should be checked in the admin checks */
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
-	$query = "UPDATE $t_project_file_table
+	$query = "UPDATE {project_file}
 		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
 			filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
 			WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( $c_title, $c_description, db_now(), $c_file_name, $c_file_size, $c_file_type, $c_content, $c_file_id ) );
 } else {
-	$query = "UPDATE $t_project_file_table
+	$query = "UPDATE {project_file}
 			SET title=" . db_param() . ", description=" . db_param() . "
 			WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( $c_title, $c_description, $c_file_id ) );

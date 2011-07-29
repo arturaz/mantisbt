@@ -112,10 +112,6 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 function install_category_migrate() {
 	global $g_db_log_queries;
 
-	$t_bug_table = db_get_table( 'bug' );
-	$t_category_table = db_get_table( 'category' );
-	$t_project_category_table = db_get_table( 'project_category' );
-
 	// disable query logging (even if it's enabled in config for this)
 	if ( $g_db_log_queries !== 0 ) {
 		$t_log_queries = $g_db_log_queries;
@@ -124,10 +120,10 @@ function install_category_migrate() {
 		$t_log_queries = null;
 	}
 
-	$query = "SELECT project_id, category, user_id FROM $t_project_category_table ORDER BY project_id, category";
+	$query = "SELECT project_id, category, user_id FROM {project_category} ORDER BY project_id, category";
 	$t_category_result = db_query_bound( $query );
 
-	$query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
+	$query = "SELECT project_id, category FROM {bug} ORDER BY project_id, category";
 	$t_bug_result = db_query_bound( $query );
 
 	$t_data = array();
@@ -155,7 +151,7 @@ function install_category_migrate() {
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = utf8_strtolower( trim( $t_name ) );
 			if ( !isset( $t_inserted[$t_lower_name] ) ) {
-				$query = "INSERT INTO $t_category_table ( name, project_id, user_id ) VALUES ( " .
+				$query = "INSERT INTO {category} ( name, project_id, user_id ) VALUES ( " .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $query, array( $t_name, $t_project_id, $t_user_id ) );
 				$t_category_id = db_insert_id( $t_category_table );
@@ -164,7 +160,7 @@ function install_category_migrate() {
 				$t_category_id = $t_inserted[$t_lower_name];
 			}
 
-			$query = "UPDATE $t_bug_table SET category_id=" . db_param() . '
+			$query = "UPDATE {bug} SET category_id=" . db_param() . '
 						WHERE project_id=' . db_param() . ' AND category=' . db_param();
 			db_query_bound( $query, array( $t_category_id, $t_project_id, $t_name ) );
 		}
@@ -275,13 +271,10 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$t_log_queries = null;
 	}
 
-	$t_value_table = db_get_table( 'custom_field_string' );
-	$t_field_table = db_get_table( 'custom_field' );
-
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
-		LEFT JOIN $t_field_table c
+	$t_query = "SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE (c.type = " . CUSTOM_FIELD_TYPE_MULTILIST . " OR c.type = " . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
@@ -292,7 +285,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
-		$t_update_query = "UPDATE $t_value_table
+		$t_update_query = "UPDATE {custom_field_string}
 			SET value = '$c_value'
 			WHERE field_id = $c_field_id
 				AND bug_id = $c_bug_id";
@@ -300,8 +293,8 @@ function install_correct_multiselect_custom_fields_db_format() {
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
-		LEFT JOIN $t_field_table c
+	$t_query = "SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE c.type = " . CUSTOM_FIELD_TYPE_RADIO . "
 			AND v.value != ''
@@ -312,7 +305,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
-		$t_update_query = "UPDATE $t_value_table
+		$t_update_query = "UPDATE {custom_field_string}
 			SET value = '$c_value'
 			WHERE field_id = $c_field_id
 				AND bug_id = $c_bug_id";
@@ -363,8 +356,7 @@ function install_stored_filter_migrate() {
 	$t_filter_fields['and_not_assigned'] = null;
 	$t_filter_fields['sticky_issues'] = 'sticky';
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = "SELECT * FROM $t_filters_table";
+	$t_query = "SELECT * FROM {filters}";
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
@@ -400,9 +392,7 @@ function install_do_nothing() {
 }
 
 function install_create_admin_if_not_exist( $p_data ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = "SELECT count(*) FROM $t_user_table";
+	$t_query = "SELECT count(*) FROM {user}";
 	$t_result = db_query_bound( $t_query );
 
 	if ( db_result($t_result) != 0 ) {
@@ -416,7 +406,7 @@ function install_create_admin_if_not_exist( $p_data ) {
 	$t_cookie_string = auth_generate_unique_cookie_string( $t_seed );
 	$t_password = auth_process_plain_password( $p_password );
 
-	$query = "INSERT INTO $t_user_table
+	$query = "INSERT INTO {user}
 				    ( username, email, password, date_created, last_visit,
 				     enabled, protected, access_level, login_count, cookie_string, realname )
 				  VALUES

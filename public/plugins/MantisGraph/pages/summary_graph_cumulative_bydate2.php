@@ -151,8 +151,6 @@ function create_cumulative_bydate2() {
 
 	$t_clo_val = CLOSED;
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table = db_get_table( 'bug' );
-	$t_history_table = db_get_table( 'bug_history' );
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -160,7 +158,7 @@ function create_cumulative_bydate2() {
 
 	# Get all the submitted dates
 	$query = "SELECT date_submitted
-				FROM $t_bug_table
+				FROM {bug}
 				WHERE $specific_where
 				ORDER BY date_submitted";
 	$result = db_query_bound( $query, array() );
@@ -180,15 +178,15 @@ function create_cumulative_bydate2() {
 
 	# ## Get all the dates where a transition from not resolved to resolved may have happened
 	#    also, get the last updated date for the bug as this may be all the information we have
-	$query = "SELECT $t_bug_table.id, last_updated, date_modified, new_value, old_value
-			FROM $t_bug_table LEFT JOIN $t_history_table
-			ON $t_bug_table.id = $t_history_table.bug_id
+	$query = "SELECT {bug}.id, last_updated, date_modified, new_value, old_value
+			FROM {bug} LEFT JOIN {bug_history}
+			ON {bug}.id = {bug_history}.bug_id
 			WHERE $specific_where
-						AND $t_bug_table.status >= '$t_res_val'
-						AND ( ( $t_history_table.new_value >= '$t_res_val'
-								AND $t_history_table.field_name = 'status' )
-						OR $t_history_table.id is NULL )
-			ORDER BY $t_bug_table.id, date_modified ASC";
+						AND {bug}.status >= '$t_res_val'
+						AND ( ( {bug_history}.new_value >= '$t_res_val'
+								AND {bug_history}.field_name = 'status' )
+						OR {bug_history}.id is NULL )
+			ORDER BY {bug}.id, date_modified ASC";
 	$result = db_query_bound( $query, array() );
 
 	$t_last_id = 0;

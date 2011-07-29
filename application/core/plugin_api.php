@@ -563,8 +563,6 @@ function plugin_priority( $p_basename ) {
  * @return boolean True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
-	$t_plugin_table = db_get_table( 'plugin' );
-
 	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
 	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
 		if ( $t_basename == $p_basename ) {
@@ -572,7 +570,7 @@ function plugin_is_installed( $p_basename ) {
 		}
 	}
 
-	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
+	$t_query = "SELECT COUNT(*) FROM {plugin} WHERE basename=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
 }
@@ -596,10 +594,7 @@ function plugin_install( $p_plugin ) {
 		return null;
 	}
 
-	$t_plugin_table = db_get_table( 'plugin' );
-
-	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
-				VALUES ( " . db_param() . ", '1' )";
+	$t_query = "INSERT INTO {plugin} ( basename, enabled ) VALUES ( " . db_param() . ", '1' )";
 	db_query_bound( $t_query, array( $p_plugin->basename ) );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
@@ -710,9 +705,7 @@ function plugin_uninstall( $p_plugin ) {
 		return;
 	}
 
-	$t_plugin_table = db_get_table( 'plugin' );
-
-	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param();
+	$t_query = "DELETE FROM {plugin} WHERE basename=" . db_param();
 	db_query_bound( $t_query, array( $p_plugin->basename ) );
 
 	plugin_push_current( $p_plugin->basename );
@@ -834,9 +827,8 @@ function plugin_register_installed() {
 	}
 
 	# register plugins installed via the interface/database
-	$t_plugin_table = db_get_table( 'plugin' );
-
-	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
+	$t_query = "SELECT basename, priority, protected FROM {plugin} WHERE enabled=" . db_param() . 
+				' ORDER BY priority DESC';
 	$t_result = db_query_bound( $t_query, array( 1 ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {

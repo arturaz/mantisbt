@@ -65,10 +65,7 @@ function category_exists( $p_category_id ) {
 
 	$c_category_id = db_prepare_int( $p_category_id );
 
-	$t_category_table = db_get_table( 'category' );
-
-	$query = "SELECT COUNT(*) FROM $t_category_table
-					WHERE id=" . db_param();
+	$query = "SELECT COUNT(*) FROM {category} WHERE id=" . db_param();
 	$count = db_result( db_query_bound( $query, array( $c_category_id ) ) );
 
 	if( 0 < $count ) {
@@ -100,10 +97,7 @@ function category_exists( $p_category_id ) {
  function category_is_unique( $p_project_id, $p_name ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$t_category_table = db_get_table( 'category' );
-
-	$query = "SELECT COUNT(*) FROM $t_category_table
-					WHERE project_id=" . db_param() . " AND " . db_helper_like( 'name' );
+	$query = "SELECT COUNT(*) FROM {category} WHERE project_id=" . db_param() . " AND " . db_helper_like( 'name' );
 	$count = db_result( db_query_bound( $query, array( $c_project_id, $p_name ) ) );
 
 	if( 0 < $count ) {
@@ -143,11 +137,7 @@ function category_exists( $p_category_id ) {
 
 	category_ensure_unique( $p_project_id, $p_name );
 
-	$t_category_table = db_get_table( 'category' );
-
-	$query = "INSERT INTO $t_category_table
-					( project_id, name )
-				  VALUES
+	$query = "INSERT INTO {category} ( project_id, name ) VALUES
 					( " . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $query, array( $c_project_id, $p_name ) );
 
@@ -173,10 +163,7 @@ function category_exists( $p_category_id ) {
 	$c_category_id = db_prepare_int( $p_category_id );
 	$c_assigned_to = db_prepare_int( $p_assigned_to );
 
-	$t_category_table = db_get_table( 'category' );
-	$t_bug_table = db_get_table( 'bug' );
-
-	$query = "UPDATE $t_category_table
+	$query = "UPDATE {category}
 				  SET name=" . db_param() . ',
 					user_id=' . db_param() . '
 				  WHERE id=' . db_param();
@@ -184,7 +171,7 @@ function category_exists( $p_category_id ) {
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {
-		$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param();
+		$query = "SELECT id FROM {bug} WHERE category_id=" . db_param();
 		$t_result = db_query_bound( $query, array( $c_category_id ) );
 
 		while( $t_bug_row = db_fetch_array( $t_result ) ) {
@@ -214,15 +201,11 @@ function category_exists( $p_category_id ) {
 		category_ensure_exists( $p_new_category_id );
 	}
 
-	$t_category_table = db_get_table( 'category' );
-	$t_bug_table = db_get_table( 'bug' );
-
-	$query = "DELETE FROM $t_category_table
-				  WHERE id=" . db_param();
+	$query = "DELETE FROM {category} WHERE id=" . db_param();
 	db_query_bound( $query, array( $c_category_id ) );
 
 	# update bug history entries
-	$query = "SELECT id FROM $t_bug_table WHERE category_id=" . db_param();
+	$query = "SELECT id FROM {bug} WHERE category_id=" . db_param();
 	$t_result = db_query_bound( $query, array( $c_category_id ) );
 
 	while( $t_bug_row = db_fetch_array( $t_result ) ) {
@@ -230,8 +213,7 @@ function category_exists( $p_category_id ) {
 	}
 
 	# update bug data
-	$query = "UPDATE $t_bug_table
-				  SET category_id=" . db_param() . "
+	$query = "UPDATE {bug} SET category_id=" . db_param() . "
 				  WHERE category_id=" . db_param();
 	db_query_bound( $query, array( $c_new_category_id, $c_category_id ) );
 
@@ -256,11 +238,8 @@ function category_exists( $p_category_id ) {
 	# cache category names
 	category_get_all_rows( $p_project_id );
 
-	$t_category_table = db_get_table( 'category' );
-	$t_bug_table = db_get_table( 'bug' );
-
 	# get a list of affected categories
-	$t_query = "SELECT id FROM $t_category_table WHERE project_id=" . db_param();
+	$t_query = "SELECT id FROM {category} WHERE project_id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_project_id ) );
 
 	$t_category_ids = array();
@@ -276,7 +255,7 @@ function category_exists( $p_category_id ) {
 	$t_category_ids = join( ',', $t_category_ids );
 
 	# update bug history entries
-	$t_query = "SELECT id, category_id FROM $t_bug_table WHERE category_id IN ( $t_category_ids )";
+	$t_query = "SELECT id, category_id FROM {bug} WHERE category_id IN ( $t_category_ids )";
 	$t_result = db_query_bound( $t_query );
 
 	while( $t_bug_row = db_fetch_array( $t_result ) ) {
@@ -284,11 +263,11 @@ function category_exists( $p_category_id ) {
 	}
 
 	# update bug data
-	$t_query = "UPDATE $t_bug_table SET category_id=" . db_param() . " WHERE category_id IN ( $t_category_ids )";
+	$t_query = "UPDATE {bug} SET category_id=" . db_param() . " WHERE category_id IN ( $t_category_ids )";
 	db_query_bound( $t_query, array( $p_new_category_id ) );
 
 	# delete categories
-	$t_query = "DELETE FROM $t_category_table WHERE project_id=" . db_param();
+	$t_query = "DELETE FROM {category} WHERE project_id=" . db_param();
 	db_query_bound( $t_query, array( $p_project_id ) );
 
 	return true;
@@ -308,11 +287,7 @@ function category_exists( $p_category_id ) {
 
 	$c_category_id = db_prepare_int( $p_category_id );
 
-	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
-
-	$query = "SELECT * FROM $t_category_table
-				WHERE id=" . db_param();
+	$query = 'SELECT * FROM {category} WHERE id=' . db_param();
 	$result = db_query_bound( $query, array( $c_category_id ) );
 	$row = db_fetch_array( $result );
 	if( !$row ) {
@@ -375,11 +350,8 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
 		return;
 	}
 
-	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
-
-	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
-				LEFT JOIN $t_project_table p
+	$query = "SELECT c.*, p.name AS project_name FROM {category} c
+				LEFT JOIN {project} p
 					ON c.project_id=p.id
 				WHERE project_id IN ( " . implode( ', ', $c_project_id_array ) . " )
 				ORDER BY c.name ";
@@ -472,9 +444,6 @@ function category_get_filter_list( $p_project_id = null ) {
 
 	$c_project_id = db_prepare_int( $p_project_id );
 
-	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
-
 	if ( $c_project_id == ALL_PROJECTS ) {
 		$t_inherit = false;
 	} else {
@@ -492,8 +461,8 @@ function category_get_filter_list( $p_project_id = null ) {
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
-	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
-				LEFT JOIN $t_project_table p
+	$query = "SELECT c.*, p.name AS project_name FROM {category} c
+				LEFT JOIN {project} p
 					ON c.project_id=p.id
 				WHERE $t_project_where
 				ORDER BY c.name ";
@@ -534,11 +503,8 @@ function category_cache_array_rows( $p_cat_id_array ) {
 		return;
 	}
 
-	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
-
-	$query = "SELECT c.*, p.name AS project_name FROM $t_category_table c
-				LEFT JOIN $t_project_table p
+	$query = "SELECT c.*, p.name AS project_name FROM {category} c
+				LEFT JOIN {project} p
 					ON c.project_id=p.id
 				WHERE c.id IN (" . implode( ',', $c_cat_id_array ) . ')';
 	$result = db_query_bound( $query );
@@ -584,10 +550,9 @@ function category_get_field( $p_category_id, $p_field_name ) {
  * @access public
  */
  function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
-	$t_category_table = db_get_table( 'category' );
 	$t_project_name = project_get_name( $p_project_id );
 
-	$t_query = "SELECT id FROM $t_category_table
+	$t_query = "SELECT id FROM {category}
 				WHERE name=" . db_param() . " AND project_id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_category_name, (int) $p_project_id ) );
 	$t_id = db_result( $t_result );

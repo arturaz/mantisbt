@@ -119,8 +119,7 @@ function print_config_value_as_string( $p_type, $p_value ) {
 	echo '</pre>';
 }
 
-$t_config_table = db_get_table( 'config' );
-$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
+$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config} ORDER BY user_id, project_id, config_id";
 $result = db_query_bound( $query );
 ?>
 <div id="adm-config-div" class="table-container">

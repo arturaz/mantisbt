@@ -67,8 +67,7 @@ $t_project_id = $t_row['project_id'];
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
 # Get a bug count
-$t_bug_table = db_get_table( 'bug' );
-$t_query = "SELECT COUNT(id) FROM $t_bug_table WHERE category_id=" . db_param();
+$t_query = "SELECT COUNT(id) FROM {bug} WHERE category_id=" . db_param();
 $t_bug_count = db_result( db_query_bound( $t_query, array( $f_category_id ) ) );
 
 # Confirm with the user

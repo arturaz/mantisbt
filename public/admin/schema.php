@@ -31,7 +31,7 @@ if ( !function_exists( 'db_null_date' ) ) {
 	}
 }
 
-$upgrade[] = array('CreateTableSQL',array(db_get_table( 'config' ),"
+$upgrade[] = array('CreateTableSQL',array('{config}',"
 			  config_id C(64) NOTNULL PRIMARY,
 			  project_id I DEFAULT '0' PRIMARY,
 			  user_id I DEFAULT '0' PRIMARY,
@@ -39,8 +39,8 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table( 'config' ),"
 			  type I DEFAULT '90',
 			  value XL NOTNULL",
 array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_config',db_get_table( 'config' ),'config_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bug_file'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_config','{config}','config_id'));
+$upgrade[] = array('CreateTableSQL',array('{bug_file}',"
   id			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   title 		C(250) NOTNULL DEFAULT '',
@@ -53,8 +53,8 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('bug_file'),"
   date_added 		T NOTNULL DEFAULT '" . db_null_date() . "',
   content 		B NOTNULL
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_bug_file_bug_id',db_get_table('bug_file'),'bug_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bug_history'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_bug_file_bug_id','{bug_file}','bug_id'));
+$upgrade[] = array('CreateTableSQL',array('{bug_history}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -64,22 +64,22 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('bug_history'),"
   new_value 		C(128) NOTNULL DEFAULT '',
   type 			I2 NOTNULL DEFAULT '0'
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_bug_history_bug_id',db_get_table('bug_history'),'bug_id'));
-$upgrade[] = array('CreateIndexSQL',array('idx_history_user_id',db_get_table('bug_history'),'user_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bug_monitor'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_bug_history_bug_id','{bug_history}','bug_id'));
+$upgrade[] = array('CreateIndexSQL',array('idx_history_user_id','{bug_history}','user_id'));
+$upgrade[] = array('CreateTableSQL',array('{bug_monitor}',"
   user_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
   bug_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bug_relationship'),"
+$upgrade[] = array('CreateTableSQL',array('{bug_relationship}',"
   id 			 I  UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
   source_bug_id		 I  UNSIGNED NOTNULL DEFAULT '0',
   destination_bug_id 	 I  UNSIGNED NOTNULL DEFAULT '0',
   relationship_type 	I2 NOTNULL DEFAULT '0'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_relationship_source',db_get_table('bug_relationship'),'source_bug_id'));
+$upgrade[] = array('CreateIndexSQL',array('idx_relationship_source','{bug_relationship}','source_bug_id'));
 /* 10 */
-$upgrade[] = array('CreateIndexSQL',array('idx_relationship_destination',db_get_table('bug_relationship'),'destination_bug_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bug'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_relationship_destination','{bug_relationship}','destination_bug_id'));
+$upgrade[] = array('CreateTableSQL',array('{bug}',"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   reporter_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -108,17 +108,17 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('bug'),"
   sponsorship_total 	 I  NOTNULL DEFAULT '0',
   sticky		L  NOTNULL DEFAULT  '0'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_bug_sponsorship_total',db_get_table('bug'),'sponsorship_total'));
-$upgrade[] = array('CreateIndexSQL',array('idx_bug_fixed_in_version',db_get_table('bug'),'fixed_in_version'));
-$upgrade[] = array('CreateIndexSQL',array('idx_bug_status',db_get_table('bug'),'status'));
-$upgrade[] = array('CreateIndexSQL',array('idx_project',db_get_table('bug'),'project_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bug_text'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_bug_sponsorship_total','{bug}','sponsorship_total'));
+$upgrade[] = array('CreateIndexSQL',array('idx_bug_fixed_in_version','{bug}','fixed_in_version'));
+$upgrade[] = array('CreateIndexSQL',array('idx_bug_status','{bug}','status'));
+$upgrade[] = array('CreateIndexSQL',array('idx_project','{bug}','project_id'));
+$upgrade[] = array('CreateTableSQL',array('{bug_text}',"
   id 			 I  PRIMARY UNSIGNED NOTNULL AUTOINCREMENT,
   description 		XL NOTNULL,
   steps_to_reproduce 	XL NOTNULL,
   additional_information XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bugnote'),"
+$upgrade[] = array('CreateTableSQL',array('{bugnote}',"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   bug_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   reporter_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -129,25 +129,25 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('bugnote'),"
   note_type 		 I  DEFAULT '0',
   note_attr 		C(250) DEFAULT ''
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_bug',db_get_table('bugnote'),'bug_id'));
-$upgrade[] = array('CreateIndexSQL',array('idx_last_mod',db_get_table('bugnote'),'last_modified'));
+$upgrade[] = array('CreateIndexSQL',array('idx_bug','{bugnote}','bug_id'));
+$upgrade[] = array('CreateIndexSQL',array('idx_last_mod','{bugnote}','last_modified'));
 /* 20 */
-$upgrade[] = array('CreateTableSQL',array(db_get_table('bugnote_text'),"
+$upgrade[] = array('CreateTableSQL',array('{bugnote_text}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   note 			XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('custom_field_project'),"
+$upgrade[] = array('CreateTableSQL',array('{custom_field_project}',"
   field_id 		 I  NOTNULL PRIMARY DEFAULT '0',
   project_id 		 I  UNSIGNED PRIMARY NOTNULL DEFAULT '0',
   sequence 		I2 NOTNULL DEFAULT '0'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('custom_field_string'),"
+$upgrade[] = array('CreateTableSQL',array('{custom_field_string}',"
   field_id 		 I  NOTNULL PRIMARY DEFAULT '0',
   bug_id 		 I  NOTNULL PRIMARY DEFAULT '0',
   value 		C(255) NOTNULL DEFAULT ''
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_custom_field_bug',db_get_table('custom_field_string'),'bug_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('custom_field'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_custom_field_bug','{custom_field_string}','bug_id'));
+$upgrade[] = array('CreateTableSQL',array('{custom_field}',"
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   name 			C(64) NOTNULL DEFAULT '',
   type 			I2 NOTNULL DEFAULT '0',
@@ -168,8 +168,8 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('custom_field'),"
   display_closed 	L NOTNULL DEFAULT '0',
   require_closed 	L NOTNULL DEFAULT '0'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_custom_field_name',db_get_table('custom_field'),'name'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('filters'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_custom_field_name','{custom_field}','name'));
+$upgrade[] = array('CreateTableSQL',array('{filters}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  NOTNULL DEFAULT '0',
   project_id 		 I  NOTNULL DEFAULT '0',
@@ -177,7 +177,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('filters'),"
   name 			C(64) NOTNULL DEFAULT '',
   filter_string 	XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('news'),"
+$upgrade[] = array('CreateTableSQL',array('{news}',"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   poster_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -188,12 +188,12 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('news'),"
   headline 		C(64) NOTNULL DEFAULT '',
   body 			XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('project_category'),"
+$upgrade[] = array('CreateTableSQL',array('{project_category}',"
   project_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
   category 		C(64) NOTNULL PRIMARY DEFAULT '',
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('project_file'),"
+$upgrade[] = array('CreateTableSQL',array('{project_file}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   title 		C(250) NOTNULL DEFAULT '',
@@ -207,11 +207,11 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project_file'),"
   content 		B NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 /* 30 */
-$upgrade[] = array('CreateTableSQL',array(db_get_table('project_hierarchy'),"
+$upgrade[] = array('CreateTableSQL',array('{project_hierarchy}',"
 			  child_id I UNSIGNED NOTNULL,
 			  parent_id I UNSIGNED NOTNULL",
 array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
+$upgrade[] = array('CreateTableSQL',array('{project}',"
   id 			 I  UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
   name 			C(128) NOTNULL DEFAULT '',
   status 		I2 NOTNULL DEFAULT '10',
@@ -221,16 +221,16 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
   file_path 		C(250) NOTNULL DEFAULT '',
   description 		XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
-$upgrade[] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
-$upgrade[] = array('CreateIndexSQL',array('idx_project_view',db_get_table('project'),'view_state'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('project_user_list'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_project_id','{project}','id'));
+$upgrade[] = array('CreateIndexSQL',array('idx_project_name','{project}','name',array('UNIQUE')));
+$upgrade[] = array('CreateIndexSQL',array('idx_project_view','{project}','view_state'));
+$upgrade[] = array('CreateTableSQL',array('{project_user_list}',"
   project_id 		 I  UNSIGNED PRIMARY NOTNULL DEFAULT '0',
   user_id 		 I  UNSIGNED PRIMARY NOTNULL DEFAULT '0',
   access_level 		I2 NOTNULL DEFAULT '10'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array( 'CreateIndexSQL',array('idx_project_user',db_get_table('project_user_list'),'user_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('project_version'),"
+$upgrade[] = array( 'CreateIndexSQL',array('idx_project_user','{project_user_list}','user_id'));
+$upgrade[] = array('CreateTableSQL',array('{project_version}',"
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   version 		C(64) NOTNULL DEFAULT '',
@@ -238,8 +238,8 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project_version'),"
   description 		XL NOTNULL,
   released 		L NOTNULL DEFAULT '1'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_project_version',db_get_table('project_version'),'project_id,version',array('UNIQUE')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('sponsorship'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_project_version','{project_version}','project_id,version',array('UNIQUE')));
+$upgrade[] = array('CreateTableSQL',array('{sponsorship}',"
   id 			 I  NOTNULL PRIMARY AUTOINCREMENT,
   bug_id 		 I  NOTNULL DEFAULT '0',
   user_id 		 I  NOTNULL DEFAULT '0',
@@ -251,9 +251,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('sponsorship'),"
   last_updated 		T NOTNULL DEFAULT '" . db_null_date() . "'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 /* 40 */
-$upgrade[] = array('CreateIndexSQL',array('idx_sponsorship_bug_id',db_get_table('sponsorship'),'bug_id'));
-$upgrade[] = array('CreateIndexSQL',array('idx_sponsorship_user_id',db_get_table('sponsorship'),'user_id'));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('tokens'),"
+$upgrade[] = array('CreateIndexSQL',array('idx_sponsorship_bug_id','{sponsorship}','bug_id'));
+$upgrade[] = array('CreateIndexSQL',array('idx_sponsorship_user_id','{sponsorship}','user_id'));
+$upgrade[] = array('CreateTableSQL',array('{tokens}',"
 			  id I NOTNULL PRIMARY AUTOINCREMENT,
 			  owner I NOTNULL,
 			  type I NOTNULL,
@@ -261,7 +261,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('tokens'),"
 			  expiry T,
 			  value XL NOTNULL",
 array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('user_pref'),"
+$upgrade[] = array('CreateTableSQL',array('{user_pref}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   project_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
@@ -294,11 +294,11 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('user_pref'),"
   email_bugnote_limit 	I2 NOTNULL DEFAULT '0',
   language 		C(32) NOTNULL DEFAULT 'english'
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('user_print_pref'),"
+$upgrade[] = array('CreateTableSQL',array('{user_print_pref}',"
   user_id 		 I  UNSIGNED NOTNULL PRIMARY DEFAULT '0',
   print_pref 		C(27) NOTNULL DEFAULT ''
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('user_profile'),"
+$upgrade[] = array('CreateTableSQL',array('{user_profile}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   user_id 		 I  UNSIGNED NOTNULL DEFAULT '0',
   platform 		C(32) NOTNULL DEFAULT '',
@@ -306,7 +306,7 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('user_profile'),"
   os_build 		C(32) NOTNULL DEFAULT '',
   description 		XL NOTNULL
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateTableSQL',array(db_get_table('user'),"
+$upgrade[] = array('CreateTableSQL',array('{user}',"
   id 			 I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   username 		C(32) NOTNULL DEFAULT '',
   realname 		C(64) NOTNULL DEFAULT '',
@@ -322,16 +322,16 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('user'),"
   failed_login_count 	I2 NOTNULL DEFAULT '0',
   cookie_string 	C(64) NOTNULL DEFAULT ''
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_user_cookie_string',db_get_table('user'),'cookie_string',array('UNIQUE')));
-$upgrade[] = array('CreateIndexSQL',array('idx_user_username',db_get_table('user'),'username',array('UNIQUE')));
-$upgrade[] = array('CreateIndexSQL',array('idx_enable',db_get_table('user'),'enabled'));
+$upgrade[] = array('CreateIndexSQL',array('idx_user_cookie_string','{user}','cookie_string',array('UNIQUE')));
+$upgrade[] = array('CreateIndexSQL',array('idx_user_username','{user}','username',array('UNIQUE')));
+$upgrade[] = array('CreateIndexSQL',array('idx_enable','{user}','enabled'));
 /* 50 */
-$upgrade[] = array('CreateIndexSQL',array('idx_access',db_get_table('user'),'access_level'));
+$upgrade[] = array('CreateIndexSQL',array('idx_access','{user}','access_level'));
 $upgrade[] = array( 'UpdateFunction', "do_nothing" );
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value C(255) NOTNULL" ) );
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value C(255) NOTNULL" ) );
+$upgrade[] = array('AlterColumnSQL', array( '{bug_history}', "old_value C(255) NOTNULL" ) );
+$upgrade[] = array('AlterColumnSQL', array( '{bug_history}', "new_value C(255) NOTNULL" ) );
 
-$upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
+$upgrade[] = array('CreateTableSQL',array('{email}',"
   email_id 		I  UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
   email		 	C(64) NOTNULL DEFAULT '',
   subject		C(250) NOTNULL DEFAULT '',
@@ -339,17 +339,17 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
   metadata 		XL NOTNULL,
   body 			XL NOTNULL
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
-$upgrade[] = array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
-$upgrade[] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT ''"));
-$upgrade[] = array('AddColumnSQL',array(db_get_table('bugnote'), "time_tracking I UNSIGNED NOTNULL DEFAULT 0"));
-$upgrade[] = array('CreateIndexSQL',array('idx_diskfile',db_get_table('bug_file'),'diskfile'));
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_print_pref' ), "print_pref C(64) NOTNULL" ) );
+$upgrade[] = array('CreateIndexSQL',array('idx_email_id','{email}','email_id'));
+$upgrade[] = array('AddColumnSQL',array('{bug}', "target_version C(64) NOTNULL DEFAULT ''"));
+$upgrade[] = array('AddColumnSQL',array('{bugnote}', "time_tracking I UNSIGNED NOTNULL DEFAULT 0"));
+$upgrade[] = array('CreateIndexSQL',array('idx_diskfile','{bug_file}','diskfile'));
+$upgrade[] = array('AlterColumnSQL', array( '{user_print_pref}', "print_pref C(64) NOTNULL" ) );
 /* 60 */
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "field_name C(64) NOTNULL" ) );
+$upgrade[] = array('AlterColumnSQL', array( '{bug_history}', "field_name C(64) NOTNULL" ) );
 
 # Release marker: 1.1.0a4
 
-$upgrade[] = array('CreateTableSQL', array( db_get_table( 'tag' ), "
+$upgrade[] = array('CreateTableSQL', array( '{tag}', "
 	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0',
 	name			C(100)	NOTNULL PRIMARY DEFAULT '',
@@ -357,66 +357,66 @@ $upgrade[] = array('CreateTableSQL', array( db_get_table( 'tag' ), "
 	date_created	T		NOTNULL DEFAULT '" . db_null_date() . "',
 	date_updated	T		NOTNULL DEFAULT '" . db_null_date() . "'
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
-$upgrade[] = array('CreateTableSQL', array( db_get_table( 'bug_tag' ), "
+$upgrade[] = array('CreateTableSQL', array( '{bug_tag}', "
 	bug_id			I	UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	tag_id			I	UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	user_id			I	UNSIGNED NOTNULL DEFAULT '0',
 	date_attached	T	NOTNULL DEFAULT '" . db_null_date() . "'
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
-$upgrade[] = array('CreateIndexSQL', array( 'idx_typeowner', db_get_table( 'tokens' ), 'type, owner' ) );
+$upgrade[] = array('CreateIndexSQL', array( 'idx_typeowner', '{tokens}', 'type, owner' ) );
 
 # Release marker: 1.2.0-SVN
 
-$upgrade[] = array('CreateTableSQL', array( db_get_table( 'plugin' ), "
+$upgrade[] = array('CreateTableSQL', array( '{plugin}', "
 	basename		C(40)	NOTNULL PRIMARY,
 	enabled			L		NOTNULL DEFAULT '0'
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
 
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redirect_delay 	I NOTNULL DEFAULT 0" ) );
+$upgrade[] = array('AlterColumnSQL', array( '{user_pref}', "redirect_delay 	I NOTNULL DEFAULT 0" ) );
 
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'custom_field' ), "possible_values X NOTNULL" ) );
+	$upgrade[] = array('AlterColumnSQL', array( '{custom_field}', "possible_values X NOTNULL" ) );
 
-$upgrade[] = array( 'CreateTableSQL', array( db_get_table( 'category' ), "
+$upgrade[] = array( 'CreateTableSQL', array( '{category}', "
 	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	project_id		I		UNSIGNED NOTNULL DEFAULT '0',
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0',
 	name			C(128)	NOTNULL DEFAULT '',
 	status			I		UNSIGNED NOTNULL DEFAULT '0'
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_category_project_name', db_get_table( 'category' ), 'project_id, name', array( 'UNIQUE' ) ) );
-$upgrade[] = array( 'InsertData', array( db_get_table( 'category' ), "
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_category_project_name', '{category}', 'project_id, name', array( 'UNIQUE' ) ) );
+$upgrade[] = array( 'InsertData', array( '{category}', "
 	( project_id, user_id, name, status ) VALUES
 	( '0', '0', 'General', '0' ) " ) );
 /* 70 */
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
+$upgrade[] = array( 'AddColumnSQL', array( '{bug}', "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
 $upgrade[] = array( 'UpdateFunction', "category_migrate" );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug' ), "category" ) );
-$upgrade[] = array( 'DropTableSQL', array( db_get_table( 'project_category' ) ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project' ), "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug}', "category" ) );
+$upgrade[] = array( 'DropTableSQL', array( '{project_category}' ) );
+$upgrade[] = array( 'AddColumnSQL', array( '{project}', "category_id I UNSIGNED NOTNULL DEFAULT '1'" ) );
 // remove unnecessary indexes
-$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id', array('DROP')), array( 'db_index_exists', array( db_get_table('project'), 'idx_project_id')));
-$upgrade[] = array('CreateIndexSQL',array('idx_config',db_get_table( 'config' ),'config_id', array('DROP')), array( 'db_index_exists', array( db_get_table('config'), 'idx_config')));
+$upgrade[] = array('CreateIndexSQL',array('idx_project_id','{project}','id', array('DROP')), array( 'db_index_exists', array( '{project}', 'idx_project_id')));
+$upgrade[] = array('CreateIndexSQL',array('idx_config','{config}','config_id', array('DROP')), array( 'db_index_exists', array( '{config}', 'idx_config')));
 
-$upgrade[] = array( 'InsertData', array( db_get_table( 'plugin' ), "
+$upgrade[] = array( 'InsertData', array( '{plugin}', "
 	( basename, enabled ) VALUES
 	( 'MantisCoreFormatting', '1' )" ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project' ), "inherit_global I UNSIGNED NOTNULL DEFAULT '0'" ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project_hierarchy' ), "inherit_parent I UNSIGNED NOTNULL DEFAULT '0'" ) );
+$upgrade[] = array( 'AddColumnSQL', array( '{project}', "inherit_global I UNSIGNED NOTNULL DEFAULT '0'" ) );
+$upgrade[] = array( 'AddColumnSQL', array( '{project_hierarchy}', "inherit_parent I UNSIGNED NOTNULL DEFAULT '0'" ) );
 /* 80 */
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'plugin' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{plugin}', "
 	protected		L		NOTNULL DEFAULT '0',
 	priority		I		UNSIGNED NOTNULL DEFAULT '3'
 	" ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project_version' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{project_version}', "
 	obsolete		L		NOTNULL DEFAULT '0'" ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug}', "
     due_date        T       NOTNULL DEFAULT '" . db_null_date() . "' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'custom_field' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{custom_field}', "
   filter_by 		L 		NOTNULL DEFAULT '1'" ) );
-$upgrade[] = array( 'CreateTableSQL', array( db_get_table( 'bug_revision' ), "
+$upgrade[] = array( 'CreateTableSQL', array( '{bug_revision}', "
 	id			I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	bug_id		I		UNSIGNED NOTNULL,
 	bugnote_id	I		UNSIGNED NOTNULL DEFAULT '0',
@@ -425,174 +425,174 @@ $upgrade[] = array( 'CreateTableSQL', array( db_get_table( 'bug_revision' ), "
 	type		I		UNSIGNED NOTNULL,
 	value		XL		NOTNULL
 	", array( 'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS' ) ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_rev_id_time', db_get_table( 'bug_revision' ), 'bug_id, timestamp' ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_rev_type', db_get_table( 'bug_revision' ), 'type' ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_rev_id_time', '{bug_revision}', 'bug_id, timestamp' ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_rev_type', '{bug_revision}', 'type' ) );
 
 #date conversion
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug}', "
 	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug}', "
 	due_date_int        			I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug}', "
 	last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 /* 90 */
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bug' ), 'id', array( 'date_submitted', 'due_date', 'last_updated' ), array( 'date_submitted_int', 'due_date_int', 'last_updated_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{bug}', 'id', array( 'date_submitted', 'due_date', 'last_updated' ), array( 'date_submitted_int', 'due_date_int', 'last_updated_int' ) ) );
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug' ), "date_submitted" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug' ), "due_date" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug' ), "due_date_int", "due_date", "due_date_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug' ), "last_updated" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug}', "date_submitted" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug}', "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug}', "due_date" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug}', "due_date_int", "due_date", "due_date_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug}', "last_updated" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug}', "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array('CreateIndexSQL',array('idx_last_mod',db_get_table( 'bugnote' ),'last_modified', array('DROP')), array( 'db_index_exists', array( db_get_table('bugnote'), 'idx_last_mod')));
+$upgrade[] = array('CreateIndexSQL',array('idx_last_mod', '{bugnote}','last_modified', array('DROP')), array( 'db_index_exists', array( '{bugnote}', 'idx_last_mod')));
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bugnote' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bugnote}', "
 	last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bugnote' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bugnote}', "
 	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 /* 100 */
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bugnote' ), 'id', array( 'last_modified', 'date_submitted' ), array( 'last_modified_int', 'date_submitted_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{bugnote}', 'id', array( 'last_modified', 'date_submitted' ), array( 'last_modified_int', 'date_submitted_int' ) ) );
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bugnote' ), "last_modified" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bugnote' ), "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array('CreateIndexSQL',array('idx_last_mod',db_get_table('bugnote'),'last_modified'));
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bugnote' ), "date_submitted" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bugnote' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bugnote}', "last_modified" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bugnote}', "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array('CreateIndexSQL',array('idx_last_mod','{bugnote}','last_modified'));
+$upgrade[] = array( 'DropColumnSQL', array( '{bugnote}', "date_submitted" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bugnote}', "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug_file' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug_file}', "
 	date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bug_file' ), 'id', 'date_added', 'date_added_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug_file' ), "date_added" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug_file' ), "date_added_int", "date_added", "date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{bug_file}', 'id', 'date_added', 'date_added_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug_file}', "date_added" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug_file}', "date_added_int", "date_added", "date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 /* 110 */
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project_file' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{project_file}', "
 	date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'project_file' ), 'id', 'date_added', 'date_added_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'project_file' ), "date_added" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'project_file' ), "date_added_int", "date_added", "date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{project_file}', 'id', 'date_added', 'date_added_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{project_file}', "date_added" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{project_file}', "date_added_int", "date_added", "date_added_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug_history' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug_history}', "
 	date_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bug_history' ), 'id', 'date_modified', 'date_modified_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug_history' ), "date_modified" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug_history' ), "date_modified_int", "date_modified", "date_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{bug_history}', 'id', 'date_modified', 'date_modified_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug_history}', "date_modified" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug_history}', "date_modified_int", "date_modified", "date_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'user' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{user}', "
 	last_visit_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'user' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{user}', "
 	date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 /* 120 */
 
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'user' ), 'id', array( 'last_visit', 'date_created' ), array( 'last_visit_int', 'date_created_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{user}', 'id', array( 'last_visit', 'date_created' ), array( 'last_visit_int', 'date_created_int' ) ) );
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user' ), "date_created" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'user' ), "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user' ), "last_visit" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'user' ), "last_visit_int", "last_visit", "last_visit_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{user}', "date_created" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{user}', "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{user}', "last_visit" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{user}', "last_visit_int", "last_visit", "last_visit_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'email' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{email}', "
 	submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'email' ), 'email_id', 'submitted', 'submitted_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'email' ), "submitted" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'email' ), "submitted_int", "submitted", "submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{email}', 'email_id', 'submitted', 'submitted_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{email}', "submitted" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{email}', "submitted_int", "submitted", "submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'tag' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{tag}', "
 	date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 /* 130 */
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'tag' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{tag}', "
 	date_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'tag' ), 'id', array( 'date_created', 'date_updated' ), array( 'date_created_int', 'date_updated_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{tag}', 'id', array( 'date_created', 'date_updated' ), array( 'date_created_int', 'date_updated_int' ) ) );
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'tag' ), "date_created" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'tag' ), "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'tag' ), "date_updated" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'tag' ), "date_updated_int", "date_updated", "date_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{tag}', "date_created" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{tag}', "date_created_int", "date_created", "date_created_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{tag}', "date_updated" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{tag}', "date_updated_int", "date_updated", "date_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug_tag' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug_tag}', "
 	date_attached_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bug_tag' ), 'bug_id', 'date_attached', 'date_attached_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug_tag' ), "date_attached" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug_tag' ), "date_attached_int", "date_attached", "date_attached_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{bug_tag}', 'bug_id', 'date_attached', 'date_attached_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug_tag}', "date_attached" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug_tag}', "date_attached_int", "date_attached", "date_attached_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 /* 140 */
 
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'tokens' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{tokens}', "
 	timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'tokens' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{tokens}', "
 	expiry_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'tokens' ), 'id', array( 'timestamp', 'expiry' ), array( 'timestamp_int', 'expiry_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{tokens}', 'id', array( 'timestamp', 'expiry' ), array( 'timestamp_int', 'expiry_int' ) ) );
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'tokens' ), "timestamp" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'tokens' ), "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'tokens' ), "expiry" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'tokens' ), "expiry_int", "expiry", "expiry_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{tokens}', "timestamp" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{tokens}', "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{tokens}', "expiry" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{tokens}', "expiry_int", "expiry", "expiry_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'news' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{news}', "
 	last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'news' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{news}', "
 	date_posted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'news' ), 'id', array( 'date_posted', 'last_modified' ), array( 'date_posted_int', 'last_modified_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{news}', 'id', array( 'date_posted', 'last_modified' ), array( 'date_posted_int', 'last_modified_int' ) ) );
 /* 150 */
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'news' ), "last_modified" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'news' ), "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'news' ), "date_posted" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'news' ), "date_posted_int", "date_posted", "date_posted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{news}', "last_modified" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{news}', "last_modified_int", "last_modified", "last_modified_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{news}', "date_posted" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{news}', "date_posted_int", "date_posted", "date_posted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array('CreateIndexSQL',array('idx_bug_rev_id_time',db_get_table( 'bug_revision' ),'bug_id, timestamp', array('DROP')), array( 'db_index_exists', array( db_get_table('bug_revision'), 'idx_bug_rev_id_time')));
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug_revision' ), "
+$upgrade[] = array('CreateIndexSQL',array('idx_bug_rev_id_time','{bug_revision}','bug_id, timestamp', array('DROP')), array( 'db_index_exists', array( '{bug_revision}', 'idx_bug_rev_id_time')));
+$upgrade[] = array( 'AddColumnSQL', array( '{bug_revision}', "
 	timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'bug_revision' ), 'id', 'timestamp', 'timestamp_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'bug_revision' ), "timestamp" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'bug_revision' ), "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_rev_id_time', db_get_table( 'bug_revision' ), 'bug_id, timestamp' ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{bug_revision}', 'id', 'timestamp', 'timestamp_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{bug_revision}', "timestamp" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{bug_revision}', "timestamp_int", "timestamp", "timestamp_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_rev_id_time', '{bug_revision}', 'bug_id, timestamp' ) );
 /* 160 */
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'user_pref' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{user_pref}', "
 	 timezone C(32) NOTNULL DEFAULT '' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project_version' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{project_version}', "
 	date_order_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'project_version' ), 'id', 'date_order', 'date_order_int' ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'project_version' ), "date_order" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'project_version' ), "date_order_int", "date_order", "date_order_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{project_version}', 'id', 'date_order', 'date_order_int' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{project_version}', "date_order" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{project_version}', "date_order_int", "date_order", "date_order_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'sponsorship' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{sponsorship}', "
 	date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'sponsorship' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{sponsorship}', "
 	last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'UpdateFunction', "date_migrate", array( db_get_table( 'sponsorship' ), 'id', array( 'date_submitted', 'last_updated' ), array( 'date_submitted_int', 'last_updated_int' ) ) );
+$upgrade[] = array( 'UpdateFunction', "date_migrate", array( '{sponsorship}', 'id', array( 'date_submitted', 'last_updated' ), array( 'date_submitted_int', 'last_updated_int' ) ) );
 
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'sponsorship' ), "last_updated" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'sponsorship' ), "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{sponsorship}', "last_updated" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{sponsorship}', "last_updated_int", "last_updated", "last_updated_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
 /* 170 */
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'sponsorship' ), "date_submitted" ) );
-$upgrade[] = array( 'RenameColumnSQL', array( db_get_table( 'sponsorship' ), "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{sponsorship}', "date_submitted" ) );
+$upgrade[] = array( 'RenameColumnSQL', array( '{sponsorship}', "date_submitted_int", "date_submitted", "date_submitted_int		I  UNSIGNED     NOTNULL DEFAULT '1' " ) );
 
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'project_file' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{project_file}', "
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0' " ) );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'bug_file' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{bug_file}', "
 	user_id		I  			UNSIGNED NOTNULL DEFAULT '0' " ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'custom_field'), "advanced" ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_report" ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_view" ) );
-$upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_update" ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_parent_id', db_get_table( 'project_hierarchy' ), 'parent_id' ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{custom_field}', "advanced" ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{user_pref}', "advanced_report" ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{user_pref}', "advanced_view" ) );
+$upgrade[] = array( 'DropColumnSQL', array( '{user_pref}', "advanced_update" ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_child_id', '{project_hierarchy}', 'child_id' ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_parent_id', '{project_hierarchy}', 'parent_id' ) );
 
 /* 180 */
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_tag_name', db_get_table( 'tag' ), 'name' ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
-$upgrade[] = array( 'CreateIndexSQL', array( 'idx_email_id', db_get_table( 'email' ), 'email_id', array( 'DROP' ) ), array( 'db_index_exists', array( db_get_table( 'email' ), 'idx_email_id') ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_tag_name', '{tag}', 'name' ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_tag_tag_id', '{bug_tag}', 'tag_id' ) );
+$upgrade[] = array( 'CreateIndexSQL', array( 'idx_email_id', '{email}', 'email_id', array( 'DROP' ) ), array( 'db_index_exists', array( '{email}', 'idx_email_id') ) );
 $upgrade[] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );
 $upgrade[] = array( 'UpdateFunction', "stored_filter_migrate" );
-$upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), "
+$upgrade[] = array( 'AddColumnSQL', array( '{custom_field_string}', "
 	text		XL  			NULL DEFAULT NULL " ) );

@@ -141,6 +141,7 @@ abstract class PDOAbstract extends DriverAbstract {
      */
     public function execute( $sql, array $params=null ) {
         list( $sql, $params ) = $this->checkSqlParameters($sql, $params);
+        $sql = $this->remapTableNames($sql);
 
         $result = true;
         $this->queryStart( $sql, $params );

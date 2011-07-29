@@ -91,14 +91,12 @@ function email_queue_add( $p_email_data ) {
 		throw new EmptyField( 'body' );
 	}
 
-	$t_email_table = db_get_table( 'email' );
-
 	$c_email = $t_email_data->email;
 	$c_subject = $t_email_data->subject;
 	$c_body = $t_email_data->body;
 	$c_metadata = serialize( $t_email_data->metadata );
 
-	$query = "INSERT INTO $t_email_table
+	$query = "INSERT INTO {email}
 				    ( email,
 				      subject,
 					  body,
@@ -155,9 +153,8 @@ function email_queue_row_to_object( $p_row ) {
  */
 function email_queue_get( $p_email_id ) {
 	$c_email_id = db_prepare_int( $p_email_id );
-	$t_email_table = db_get_table( 'email' );
 
-	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
+	$query = 'SELECT * FROM {email} WHERE email_id=' . db_param();
 	$result = db_query_bound( $query, array( $c_email_id ) );
 
 	$t_row = db_fetch_array( $result );
@@ -172,9 +169,8 @@ function email_queue_get( $p_email_id ) {
  */
 function email_queue_delete( $p_email_id ) {
 	$c_email_id = db_prepare_int( $p_email_id );
-	$t_email_table = db_get_table( 'email' );
 
-	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
+	$query = 'DELETE FROM {email} WHERE email_id=' . db_param();
 	db_query_bound( $query, array( $c_email_id ) );
 }
 
@@ -183,9 +179,7 @@ function email_queue_delete( $p_email_id ) {
  * @return array
  */
 function email_queue_get_ids() {
-	$t_email_table = db_get_table( 'email' );
-
-	$query = 'SELECT email_id FROM ' . $t_email_table . ' ORDER BY email_id DESC';
+	$query = 'SELECT email_id FROM {email} ORDER BY email_id DESC';
 	$result = db_query_bound( $query );
 
 	$t_ids = array();
