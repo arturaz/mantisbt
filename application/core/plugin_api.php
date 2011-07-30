@@ -643,7 +643,7 @@ function plugin_upgrade( $p_plugin ) {
 	$t_schema = $p_plugin->schema();
 
 	global $g_db;
-	$t_dict = NewDataDictionary( $g_db );
+	$t_dict = new Dictionary( $g_db );
 
 	$i = $t_schema_version + 1;
 	while( $i < count( $t_schema ) ) {
@@ -844,7 +844,7 @@ function plugin_register_installed() {
  * Post-signals EVENT_PLUGIN_INIT.
  */
 function plugin_init_installed() {
-	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( 'plugin' ) ) {
+	if( config_get_global( 'plugins_enabled' ) == OFF ) {
 		return;
 	}
 

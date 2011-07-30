@@ -130,7 +130,7 @@ $i = $t_last_update + 1;
 
 while(( $i <= $lastid ) && !$g_failed ) {
 	echo 'Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )';
-	$dict = NewDataDictionary( $g_db );
+	$dict = new Dictionary( $g_db );
 
 	if( $upgrade[$i][0] == 'InsertData' ) {
 		$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );

@@ -315,9 +315,13 @@ function db_insert_id( $table = null, $field = "id" ) {
  * @return bool indicating whether the table exists
  */
 function db_table_exists( $tableName ) {
+	global $g_db;
+
 	if( is_blank( $tableName ) ) {
 		return false;
 	}
+
+	$tableName = $g_db->getTableNamePrefix() . $tableName . $g_db->getTableNameSuffix();
 
 	$tables = db_get_table_list();
 
