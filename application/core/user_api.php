@@ -79,11 +79,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		return $g_cache_user[$p_user_id];
 	}
 
-	$t_user_table = db_get_table( 'user' );
-
-	$query = "SELECT *
-				  FROM $t_user_table
-				  WHERE id=" . db_param();
+	$query = "SELECT * FROM {user} WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( $p_user_id ) );
 
 	$row = db_fetch_array( $result );
@@ -422,10 +418,8 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	# Generate timestamp
 	$t_last_timestamp_threshold = mktime( date( 'H' ), date( 'i' ) - 1 * $t_session_duration_in_minutes, date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) );
 
-	$t_user_table = db_get_table( 'user' );
-
 	# Execute query
-	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
+	$query = 'SELECT id FROM {user} WHERE last_visit > ' . db_param();
 	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
@@ -473,7 +467,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	db_query_bound( $query, array( $p_username, $p_email, $t_password, db_now(), db_now(), $c_enabled, $c_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
-	$t_user_id = db_insert_id( $t_user_table );
+	$t_user_id = db_insert_id( 'user' );
 
 	# Users are added with protected set to FALSE in order to be able to update
 	# preferences.  Now set the real value of protected.
@@ -642,8 +636,6 @@ function user_get_id_by_email( $p_email ) {
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
 		return $t_user['id'];
 	}
-
-	$t_user_table = db_get_table( 'user' );
 
 	$t_query = "SELECT * FROM {user} WHERE email=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_email ) );

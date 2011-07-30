@@ -337,8 +337,7 @@ function file_delete_attachments( $p_bug_id ) {
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete files from disk
-	$t_query = "SELECT diskfile, filename FROM {bug_file}
-				WHERE bug_id=" . db_param();
+	$t_query = "SELECT diskfile, filename FROM {bug_file} WHERE bug_id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_bug_id ) );
 
 	$t_files = array();
@@ -372,8 +371,7 @@ function file_delete_attachments( $p_bug_id ) {
 	}
 
 	# Delete the corresponding db records
-	$t_query = "DELETE FROM $t_bug_file_table
-				  WHERE bug_id=" . db_param();
+	$t_query = "DELETE FROM {bug_file} WHERE bug_id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_bug_id ) );
 
 	# db_query errors on failure so:
@@ -387,9 +385,7 @@ function file_delete_project_files( $p_project_id ) {
 	if ( ( $t_method == DISK ) || ( $t_method == FTP ) ) {
 
 		# Delete files from disk
-		$t_query = "SELECT diskfile, filename
-					FROM {project_file}
-					WHERE project_id=" . db_param();
+		$t_query = "SELECT diskfile, filename FROM {project_file} WHERE project_id=" . db_param();
 		$t_result = db_query_bound( $t_query, array( (int) $p_project_id ) );
 
 		$t_files = array();
@@ -417,8 +413,7 @@ function file_delete_project_files( $p_project_id ) {
 	}
 
 	# Delete the corresponding db records
-	$t_query = "DELETE FROM {project_file}
-				WHERE project_id=" . db_param();
+	$t_query = "DELETE FROM {project_file} WHERE project_id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( (int) $p_project_id ) );
 }
 
@@ -471,12 +466,10 @@ function file_delete_local( $p_filename ) {
 # Return the specified field value
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	$c_field_name = db_prepare_string( $p_field_name );
-	$t_bug_file_table = db_get_table( $p_table . '_file' );
+	$t_file_table = '{' . $p_table . '_file}';
 
 	# get info
-	$query = "SELECT $c_field_name
-				  FROM $t_bug_file_table
-				  WHERE id=" . db_param();
+	$query = "SELECT $c_field_name FROM $t_file_table WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( (int) $p_file_id ), 1 );
 
 	return db_result( $result );
@@ -514,9 +507,8 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 		history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name( $t_filename ) );
 	}
 
-	$t_file_table = db_get_table( $p_table . '_file' );
-	$query = "DELETE FROM $t_file_table
-				WHERE id=" . db_param();
+	$t_file_table = '{' . $p_table . '_file}';
+	$query = "DELETE FROM $t_file_table WHERE id=" . db_param();
 	db_query_bound( $query, array( $c_file_id ) );
 	return true;
 }
@@ -593,8 +585,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 
 # Return true if the file name identifier is unique, false otherwise
 function file_is_name_unique( $p_name, $p_bug_id ) {
-	$query = "SELECT COUNT(*) FROM {bug_file}
-				  WHERE filename=" . db_param() . " AND bug_id=" . db_param();
+	$query = "SELECT COUNT(*) FROM {bug_file} WHERE filename=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, array( $p_name, $p_bug_id ) );
 	$t_count = db_result( $result );
 
@@ -711,7 +702,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$t_file_table = db_get_table( $p_table . '_file' );
+	$t_file_table = '{' . $p_table . '_file}';
 	$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
 
 	$query = "INSERT INTO $t_file_table
@@ -969,12 +960,8 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 	}
 
 	# Initialize the update query to update a single row
-	$t_bug_file_table = db_get_table( 'bug_file' );
 	$c_bug_id = db_prepare_int( $p_bug_id );
-	$query_disk_attachment_update = "UPDATE $t_bug_file_table
-	                                 SET folder=" . db_param() . "
-	                                 WHERE bug_id=" . db_param() . "
-	                                 AND id =" . db_param();
+	$query_disk_attachment_update = "UPDATE {bug_file} SET folder=" . db_param() . " WHERE bug_id=" . db_param() . " AND id =" . db_param();
 
 	$t_attachment_rows = bug_get_attachments( $p_bug_id );
 	$t_attachments_count = count( $t_attachment_rows );
@@ -1002,10 +989,6 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 }
 
 /**
-<<<<<<< ours
- *
-=======
->>>>>>> theirs
  * Copies all attachments from the source bug to the destination bug
  *
  * <p>Does not perform history logging and does not perform access checks.</p>
@@ -1014,10 +997,8 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  * @param int $p_dest_bug_id
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
-	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
-
-	$t_query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-	$t_result = db_query_bound( $t_query, Array( $p_source_bug_id ) );
+	$t_query = 'SELECT * FROM {bug_file} WHERE bug_id = ' . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_source_bug_id ) );
 
 	$t_bug_file = array();
 	while ( $t_bug_file = db_fetch_array( $t_result ) ) {
@@ -1030,7 +1011,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 			chmod( $t_new_diskfile_name, config_get( 'attachments_file_permissions' ) );
 		}
 
-		$t_query = "INSERT INTO $t_mantis_bug_file_table
+		$t_query = "INSERT INTO {bug_file}
 		          ( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
 		          VALUES ( " . db_param() . ",
 		                   " . db_param() . ",
@@ -1042,7 +1023,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		                   " . db_param() . ",
 		                   " . db_param() . ",
 		                   " . db_param() . ");";
-		db_query_bound( $t_query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
+		db_query_bound( $t_query, array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
 	}
 }
 

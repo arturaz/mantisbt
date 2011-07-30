@@ -80,7 +80,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $t_query, array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
 
-	return db_insert_id( $t_user_profile_table );
+	return db_insert_id( 'user_profile' );
 }
 
 /**

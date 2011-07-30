@@ -303,7 +303,7 @@ function sponsorship_set( $p_sponsorship ) {
 				    (" . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
 		db_query_bound( $query, array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_now ) );
-		$t_sponsorship_id = db_insert_id( $t_sponsorship_table );
+		$t_sponsorship_id = db_insert_id( 'sponsorship' );
 
 		history_log_event_special( $c_bug_id, BUG_ADD_SPONSORSHIP, $c_user_id, $c_amount );
 	} else {

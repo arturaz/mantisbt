@@ -69,7 +69,7 @@ $t_resolved = config_get( 'bug_resolved_status_threshold' );
 #  (e.g., bug is CLOSED, not RESOLVED). The linkage to the history field
 #  will look up the most recent 'resolved' status change and return it as well
 $query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) AS hist_update, b.status
-	FROM {bug} b LEFT JOIN {history} h
+	FROM {bug} b LEFT JOIN {bug_history} h
 		ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value=" . db_param() . "
 		WHERE b.status >=" . db_param() . " AND $specific_where
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated

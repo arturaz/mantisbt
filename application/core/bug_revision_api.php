@@ -83,7 +83,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 			$p_value
 		) );
 
-	return db_insert_id( $t_bug_rev_table );
+	return db_insert_id( 'bug_rev' );
 }
 
 /**

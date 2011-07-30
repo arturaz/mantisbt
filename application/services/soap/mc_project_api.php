@@ -556,10 +556,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	$t_project_file_table = db_get_table( 'project_file' );
-	$t_project_table = db_get_table( 'project' );
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_user_table = db_get_table( 'user' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
 	$t_admin = config_get_global( 'admin_site_threshold' );
@@ -589,11 +585,11 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	$t_query = "SELECT pft.id, pft.project_id, pft.filename, pft.file_type, pft.filesize, pft.title, pft.description, pft.date_added, pft.user_id
-		FROM $t_project_file_table pft
-		LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
-		LEFT JOIN $t_project_user_list_table pult
+		FROM {project_file} pft
+		LEFT JOIN {project} pt ON pft.project_id = pt.id
+		LEFT JOIN {project_user_list} pult
 		ON pft.project_id = pult.project_id AND pult.user_id = $t_user_id
-		LEFT JOIN $t_user_table ut ON ut.id = $t_user_id
+		LEFT JOIN {user} ut ON ut.id = $t_user_id
 		WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
 		( ( ( pt.view_state = $t_pub OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
 		( ( pult.user_id = $t_user_id ) AND ( pult.access_level $t_access_clause ) ) OR

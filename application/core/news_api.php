@@ -65,10 +65,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 	}
 
 	# Add item
-	$query = "INSERT
-				INTO {news}
-	    		  ( project_id, poster_id, date_posted, last_modified,
-	    		    view_state, announcement, headline, body )
+	$query = "INSERT INTO {news} ( project_id, poster_id, date_posted, last_modified, view_state, announcement, headline, body )
 				VALUES
 				    ( " . db_param() . ",
 				      " . db_param() . ",
@@ -81,7 +78,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 					)";
 	db_query_bound( $query, array( $c_project_id, $c_poster_id, db_now(), db_now(), $c_view_state, $c_announcement, $p_headline, $p_body ) );
 
-	$t_news_id = db_insert_id( $t_news_table );
+	$t_news_id = db_insert_id( 'news' );
 
 	twitter_news( $t_news_id );
 

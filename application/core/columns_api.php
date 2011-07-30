@@ -246,7 +246,7 @@ function columns_get_all( $p_project_id = null ) {
 
 /**
  * Checks if the specified column is an extended column.  Extended columns are native columns that are
- * associated with the issue but are saved in mantis_bug_text_table.
+ * associated with the issue but are saved in the 'bug_text' table.
  * @param string $p_column The column name
  * @return bool true for extended; false otherwise.
  * @access public

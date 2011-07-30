@@ -190,7 +190,7 @@ function plugin_table( $p_name, $p_basename = null ) {
 	} else {
 		$t_current = $p_basename;
 	}
-	return db_get_table( 'plugin_' . $t_current . '_' . $p_name );
+	return 'plugin_' . $t_current . '_' . $p_name;
 }
 
 /**
@@ -844,7 +844,7 @@ function plugin_register_installed() {
  * Post-signals EVENT_PLUGIN_INIT.
  */
 function plugin_init_installed() {
-	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'plugin' ) ) ) {
+	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( 'plugin' ) ) {
 		return;
 	}
 

@@ -118,7 +118,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 			break;
 	}
 
-	$t_file_table = db_get_table( $p_table . '_file' );
+	$t_file_table = '{' . $p_table . '_file}';
 	$c_id = ( 'bug' == $p_table ) ? $c_issue_id : $c_project_id;
 	$query = "INSERT INTO $t_file_table
 			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
@@ -127,7 +127,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	db_query_bound( $query, array() );
 
 	# get attachment id
-	$t_attachment_id = db_insert_id( $t_file_table );
+	$t_attachment_id = db_insert_id( $p_table . '_file' );
 
 	if( 'bug' == $p_table ) {
 
@@ -155,16 +155,10 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	$query = '';
 	switch( $p_type ) {
 		case 'bug':
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$query = "SELECT *
-				FROM $t_bug_file_table
-				WHERE id='$p_file_id'";
+			$query = "SELECT * FROM {bug_file} WHERE id='$p_file_id'";
 			break;
 		case 'doc':
-			$t_project_file_table = db_get_table( 'project_file' );
-			$query = "SELECT *
-				FROM $t_project_file_table
-				WHERE id='$p_file_id'";
+			$query = "SELECT * FROM {project_file} WHERE id='$p_file_id'";
 			break;
 		default:
 			return new soap_fault( 'Server', '', 'Invalid file type '.$p_type. ' .' );

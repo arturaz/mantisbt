@@ -302,7 +302,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	db_query_bound( $query, array( $p_name, (int) $p_status, $c_enabled, (int) $p_view_state, $p_file_path, $p_description, $c_inherit_global ) );
 
 	# return the id of the new project
-	return db_insert_id( $t_project_table );
+	return db_insert_id( 'project' );
 }
 
 # --------------------

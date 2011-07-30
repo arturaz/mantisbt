@@ -154,7 +154,7 @@ function install_category_migrate() {
 				$query = "INSERT INTO {category} ( name, project_id, user_id ) VALUES ( " .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $query, array( $t_name, $t_project_id, $t_user_id ) );
-				$t_category_id = db_insert_id( $t_category_table );
+				$t_category_id = db_insert_id( 'category' );
 				$t_inserted[$t_lower_name] = $t_category_id;
 			} else {
 				$t_category_id = $t_inserted[$t_lower_name];
@@ -187,7 +187,7 @@ function install_date_migrate( $p_data) {
 		$t_log_queries = null;
 	}
 
-	$t_table = $p_data[0];
+	$t_table = '{' . $p_data[0] . '}';
 	$t_id_column = $p_data[1];
 
 	if ( is_array( $p_data[2] ) ) {
@@ -373,7 +373,7 @@ function install_stored_filter_migrate() {
 		$t_filter_serialized = serialize( $t_filter_arr );
 		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
 
-		$t_update_query = "UPDATE $t_filters_table SET filter_string=" . db_param() . ' WHERE id=' . db_param();
+		$t_update_query = "UPDATE {filters} SET filter_string=" . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
 	}
 
@@ -415,7 +415,7 @@ function install_create_admin_if_not_exist( $p_data ) {
 	db_query_bound( $query, array( $p_username, $p_email, $t_password, db_now(), db_now(), 1, 0, 90, 0, $t_cookie_string, '' ) );
 
 	# Create preferences for the user
-	$t_user_id = db_insert_id( $t_user_table );
+	$t_user_id = db_insert_id( 'user' );
 
 	if( $t_user_id === 1 ) {
 		return 2;

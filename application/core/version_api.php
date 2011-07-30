@@ -205,7 +205,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	db_query_bound( $query, array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	# db_query errors on failure so:
-	return db_insert_id( $t_project_version_table );
+	return db_insert_id( 'project_version' );
 }
 
 /**
@@ -266,14 +266,14 @@ function version_update( $p_version_info ) {
 			SET old_value=".db_param()."
 			WHERE field_name IN ('version','fixed_in_version','target_version')
 				AND old_value=".db_param()."
-				AND bug_id IN (SELECT id FROM $t_bug_table WHERE project_id IN ( $t_project_list ))";
+				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( $t_project_list ))";
 		db_query_bound( $query, array( $c_version_name, $c_old_version_name ) );
 
 		$query = "UPDATE {history}
 			SET new_value=".db_param()."
 			WHERE field_name IN ('version','fixed_in_version','target_version')
 				AND new_value=".db_param()."
-				AND bug_id IN (SELECT id FROM $t_bug_table WHERE project_id IN ( $t_project_list ))";
+				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( $t_project_list ))";
 		db_query_bound( $query, array( $c_version_name, $c_old_version_name ) );
 
 		/**
