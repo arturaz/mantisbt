@@ -39,6 +39,7 @@
 use MantisBT\Exception\Attachment\AttachmentDuplicate;
 use MantisBT\Exception\Attachment\AttachmentFileTypeDisallowed;
 use MantisBT\Exception\Attachment\AttachmentMoveFailed;
+use MantisBT\Exception\Attachment\AttachmentNotReadable;
 use MantisBT\Exception\Attachment\AttachmentOversized;
 use MantisBT\Exception\Attachment\AttachmentsPathInvalid;
 use MantisBT\Exception\Attachment\EmptyAttachment;
@@ -833,7 +834,7 @@ function file_ensure_uploaded( $p_file ) {
 		throw new EmptyAttachment();
 	}
 	if( !is_readable( $p_file['tmp_name'] ) ) {
-		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
+		throw new AttachmentNotReadable();
 	}
 }
 
