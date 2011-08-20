@@ -39,6 +39,7 @@
 use MantisBT\Exception\Attachment\AttachmentDuplicate;
 use MantisBT\Exception\Attachment\AttachmentFileTypeDisallowed;
 use MantisBT\Exception\Attachment\AttachmentOversized;
+use MantisBT\Exception\Attachment\AttachmentsPathInvalid;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -799,7 +800,7 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 # checks whether the specified upload path exists and is writable
 function file_ensure_valid_upload_path( $p_upload_path ) {
 	if( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
-		trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
+		throw new AttachmentsPathInvalid();
 	}
 }
 
