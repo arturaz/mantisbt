@@ -26,6 +26,8 @@
  * @uses database_api.php
  */
 
+use MantisBT\Exception\Issue\Revision\RevisionNotFound;
+
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
@@ -113,7 +115,7 @@ function bug_revision_get( $p_revision_id ) {
 
 	$t_row = db_fetch_array( $t_result );
 	if ( !$t_row ) {
-		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
+		throw new RevisionNotFound( $p_revision_id );
 	}
 
 	return $t_row;
@@ -306,7 +308,7 @@ function bug_revision_like( $p_rev_id ) {
 	$t_row = db_fetch_array( $t_result );
 
 	if ( !$t_row ) {
-		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
+		throw new RevisionNotFound( $p_rev_id );
 	}
 
 	$t_bug_id = $t_row['bug_id'];
