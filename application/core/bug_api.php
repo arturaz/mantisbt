@@ -50,6 +50,7 @@
 
 use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\IssueDuplicateSelf;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -290,7 +291,7 @@ class BugData {
 		}
 
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+			throw new IssueDuplicateSelf();
 			# never returns
 		}
 	}
@@ -1526,8 +1527,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
 		if( $p_bug_id == $p_duplicate_id ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
-
+			throw new IssueDuplicateSelf();
 			# never returns
 		}
 
