@@ -36,6 +36,7 @@
  */
 
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\Category\CategoryDuplicate;
 use MantisBT\Exception\Issue\Category\CategoryNotFound;
 use MantisBT\Exception\Issue\Category\CategoryNotFoundForProject;
 
@@ -119,7 +120,7 @@ function category_exists( $p_category_id ) {
  */
  function category_ensure_unique( $p_project_id, $p_name ) {
 	if( !category_is_unique( $p_project_id, $p_name ) ) {
-		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
+		throw new CategoryDuplicate();
 	}
 }
 
