@@ -37,6 +37,7 @@
  */
 
 use MantisBT\Exception\Attachment\AttachmentOversized;
+use MantisBT\Exception\Attachment\AttachmentFileTypeDisallowed;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -618,7 +619,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$c_date_added = $p_date_added <= 0 ? db_now() : db_prepare_int( $p_date_added );
 
 	if( !file_type_check( $t_file_name ) ) {
-		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
+		throw new AttachmentFileTypeDisallowed();
 	}
 
 	if( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
