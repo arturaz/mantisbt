@@ -36,6 +36,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Attachment\AttachmentOversized;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -666,7 +668,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	}
 	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		throw new AttachmentOversized();
 	}
 	$c_file_size = db_prepare_int( $t_file_size );
 
@@ -811,7 +813,7 @@ function file_ensure_uploaded( $p_file ) {
 	switch( $p_file['error'] ) {
 		case UPLOAD_ERR_INI_SIZE:
 		case UPLOAD_ERR_FORM_SIZE:
-			trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+			throw new AttachmentOversized();
 			break;
 		case UPLOAD_ERR_PARTIAL:
 		case UPLOAD_ERR_NO_FILE:
