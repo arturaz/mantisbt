@@ -37,6 +37,7 @@
 
 use MantisBT\Exception\Field\EmptyField;
 use MantisBT\Exception\Issue\Category\CategoryNotFound;
+use MantisBT\Exception\Issue\Category\CategoryNotFoundForProject;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -559,8 +560,7 @@ function category_get_field( $p_category_id, $p_field_name ) {
 	$t_id = db_result( $t_result );
 	if( $t_id ) {
 		if( $p_trigger_errors ) {
-			error_parameters( $p_category_name, $t_project_name );
-			trigger_error( ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT, ERROR );
+			throw new CategoryNotFoundForProject( $p_category_name, $t_project_name );
 		} else {
 			return false;
 		}
