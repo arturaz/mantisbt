@@ -42,6 +42,7 @@ use MantisBT\Exception\Attachment\AttachmentMoveFailed;
 use MantisBT\Exception\Attachment\AttachmentOversized;
 use MantisBT\Exception\Attachment\AttachmentsPathInvalid;
 use MantisBT\Exception\Attachment\EmptyAttachment;
+use MantisBT\Exception\Attachment\FTPConnectionFailed;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -434,7 +435,7 @@ function file_ftp_connect() {
 	$login_result = ftp_login( $conn_id, config_get( 'file_upload_ftp_user' ), config_get( 'file_upload_ftp_pass' ) );
 
 	if(( !$conn_id ) || ( !$login_result ) ) {
-		trigger_error( ERROR_FTP_CONNECT_ERROR, ERROR );
+		throw new FTPConnectionFailed();
 	}
 
 	return $conn_id;
