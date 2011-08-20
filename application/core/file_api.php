@@ -36,8 +36,9 @@
  * @uses utility_api.php
  */
 
-use MantisBT\Exception\Attachment\AttachmentOversized;
+use MantisBT\Exception\Attachment\AttachmentDuplicate;
 use MantisBT\Exception\Attachment\AttachmentFileTypeDisallowed;
+use MantisBT\Exception\Attachment\AttachmentOversized;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -695,7 +696,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 				$c_content = "''";
 			} else {
-				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+				throw new AttachmentDuplicate();
 			}
 			break;
 		case DATABASE:
@@ -986,7 +987,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 			chmod( $t_disk_file_name_to, config_get( 'attachments_file_permissions' ) );
 			db_query_bound( $query_disk_attachment_update, array( db_prepare_string( $t_path_to ), $c_bug_id, db_prepare_int( $t_row['id'] ) ) );
 		} else {
-			trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+			throw new AttachmentDuplicate();
 		}
 	}
 }
