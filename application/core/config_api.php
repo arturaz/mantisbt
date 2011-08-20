@@ -31,6 +31,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Configuration\ConfigurationOptionNotFound;
+
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -197,8 +199,7 @@ function config_get_global( $p_option, $p_default = null ) {
 		# unless we were allowing for the option not to exist by passing
 		#  a default, trigger a WARNING
 		if( null === $p_default ) {
-			error_parameters( $p_option );
-			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
+			throw new ConfigurationOptionNotFound( $p_option );
 		}
 		return $p_default;
 	}
