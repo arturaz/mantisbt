@@ -38,6 +38,7 @@
 
 use MantisBT\Exception\Attachment\AttachmentDuplicate;
 use MantisBT\Exception\Attachment\AttachmentFileTypeDisallowed;
+use MantisBT\Exception\Attachment\AttachmentMoveFailed;
 use MantisBT\Exception\Attachment\AttachmentOversized;
 use MantisBT\Exception\Attachment\AttachmentsPathInvalid;
 use MantisBT\Exception\Attachment\EmptyAttachment;
@@ -691,7 +692,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 				}
 
 				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
-					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+					throw new AttachmentMoveFailed();
 				}
 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
@@ -982,7 +983,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 			chmod( $t_disk_file_name_from, 0775 );
 			if ( !rename( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
 				if ( !copy( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
-					trigger_error( FILE_MOVE_FAILED, ERROR );
+					throw new AttachmentMoveFailed();
 				}
 				file_delete_local( $t_disk_file_name_from );
 			}
