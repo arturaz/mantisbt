@@ -42,6 +42,7 @@
 
 use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\Comment\CommentNotFound;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -107,7 +108,7 @@ function bugnote_exists( $p_bugnote_id ) {
  */
 function bugnote_ensure_exists( $p_bugnote_id ) {
 	if( !bugnote_exists( $p_bugnote_id ) ) {
-		trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
+		throw new CommentNotFound( $p_bugnote_id );
 	}
 }
 
