@@ -34,6 +34,8 @@
  * @uses project_hierarchy_api.php
  */
 
+use MantisBT\Exception\Database\ColumnNotFound;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -537,8 +539,7 @@ function version_get_field( $p_version_id, $p_field_name ) {
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
 	} else {
-		error_parameters( $p_field_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+		throw new ColumnNotFound( $p_field_name );
 		return '';
 	}
 }

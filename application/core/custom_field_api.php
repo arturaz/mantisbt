@@ -41,6 +41,7 @@
 use MantisBT\Exception\CustomField\CustomFieldInvalidDefinition;
 use MantisBT\Exception\CustomField\CustomFieldNameNotUnique;
 use MantisBT\Exception\CustomField\CustomFieldNotFound;
+use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Field\EmptyField;
 
 require_api( 'access_api.php' );
@@ -948,8 +949,7 @@ function custom_field_get_field( $p_field_id, $p_field_name ) {
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
 	} else {
-		error_parameters( $p_field_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+		throw new ColumnNotFound( $p_field_name );
 		return '';
 	}
 }

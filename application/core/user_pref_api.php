@@ -33,6 +33,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Database\ColumnNotFound;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -509,8 +511,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 	if( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 		return $t_prefs->Get( $p_pref_name );
 	} else {
-		error_parameters( $p_pref_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+		throw new ColumnNotFound( $p_pref_name );
 		return '';
 	}
 }

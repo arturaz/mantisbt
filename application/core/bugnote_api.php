@@ -40,6 +40,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Field\EmptyField;
 
 require_api( 'access_api.php' );
@@ -309,8 +310,7 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 	}
 
 	if( !array_key_exists( $p_field_name, $t_vars ) ) {
-		error_parameters($p_field_name);
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+		throw new ColumnNotFound( $p_field_name );
 	}
 
 	$query = "SELECT $p_field_name FROM {bugnote} WHERE id=" . db_param();

@@ -41,6 +41,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Database\ColumnNotFound;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -704,8 +706,7 @@ function user_get_field( $p_user_id, $p_field_name ) {
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
 	} else {
-		error_parameters( $p_field_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+		throw new ColumnNotFound( $p_field_name );
 		return '';
 	}
 }
