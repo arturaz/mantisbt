@@ -51,6 +51,7 @@
 use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\Field\EmptyField;
 use MantisBT\Exception\Issue\IssueDuplicateSelf;
+use MantisBT\Exception\Issue\IssueNotFound;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -598,8 +599,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		$g_cache_bug[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_bug_id );
-			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
+			throw new IssueNotFound( $p_bug_id );
 		} else {
 			return false;
 		}
@@ -703,8 +703,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		$g_cache_bug_text[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_bug_id );
-			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
+			throw new IssueNotFound( $p_bug_id );
 		} else {
 			return false;
 		}
@@ -755,8 +754,7 @@ function bug_exists( $p_bug_id ) {
  */
 function bug_ensure_exists( $p_bug_id ) {
 	if( !bug_exists( $p_bug_id ) ) {
-		error_parameters( $p_bug_id );
-		trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
+		throw new IssueNotFound( $p_bug_id );
 	}
 }
 

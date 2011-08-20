@@ -1,5 +1,5 @@
 <?php
-namespace MantisBT\Exception\Attachment;
+namespace MantisBT\Exception\Issue;
 use MantisBT\Exception\ExceptionAbstract;
 
 require_api('lang_api.php');
