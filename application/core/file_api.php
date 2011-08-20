@@ -628,7 +628,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	}
 
 	if( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
-		trigger_error( ERROR_DUPLICATE_FILE, ERROR );
+		throw new AttachmentDuplicate();
 	}
 
 	if( 'bug' == $p_table ) {
