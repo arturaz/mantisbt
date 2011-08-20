@@ -53,6 +53,7 @@ use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Field\EmptyField;
 use MantisBT\Exception\Issue\IssueDuplicateSelf;
 use MantisBT\Exception\Issue\IssueNotFound;
+use MantisBT\Exception\Issue\NewHandlerDisallowed;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -1444,7 +1445,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 	$c_user_id = db_prepare_int( $p_user_id );
 
 	if(( $c_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
-		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
+		throw new NewHandlerDisallowed();
 	}
 
 	# extract current information into history variables
