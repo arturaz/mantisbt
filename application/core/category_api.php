@@ -36,6 +36,7 @@
  */
 
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\Category\CategoryNotFound;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -83,7 +84,7 @@ function category_exists( $p_category_id ) {
  */
  function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
-		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+		throw new CategoryNotFound();
 	}
 }
 
@@ -291,7 +292,7 @@ function category_exists( $p_category_id ) {
 	$result = db_query_bound( $query, array( $c_category_id ) );
 	$row = db_fetch_array( $result );
 	if( !$row ) {
-		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+		throw new CategoryNotFound();
 	}
 
 	$g_category_cache[$p_category_id] = $row;
