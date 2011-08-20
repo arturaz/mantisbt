@@ -30,6 +30,8 @@
  * @uses lang_api.php
  */
 
+use MantisBT\Exception\TimeZone\TimeZoneUpdateFailed;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'helper_api.php' );
@@ -77,7 +79,7 @@ function date_set_timezone( $p_timezone ) {
 
 	if( !date_default_timezone_set( $p_timezone ) ) {
 		// unable to set timezone
-		trigger_error( ERROR_UPDATING_TIMEZONE, WARNING );
+		throw new TimeZoneUpdateFailed();
 	}
 }
 
@@ -97,7 +99,7 @@ function date_restore_timezone( ) {
 
 	if( !date_default_timezone_set( $t_timezone ) ) {
 		// unable to set timezone
-		trigger_error( ERROR_UPDATING_TIMEZONE, WARNING );
+		throw new TimeZoneUpdateFailed();
 	}
 }
 
