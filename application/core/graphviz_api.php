@@ -37,6 +37,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
@@ -312,7 +314,7 @@ class Graph {
 	function output( $p_format = 'dot', $p_headers = false ) {
 		# Check if it is a recognized format.
 		if( !isset( $this->formats[$p_format] ) ) {
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 		}
 
 		$t_binary = $this->formats[$p_format]['binary'];

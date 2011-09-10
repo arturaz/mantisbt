@@ -37,6 +37,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -561,7 +563,7 @@ function string_get_bug_page( $p_action, $p_user_id = null ) {
 		return 'bug_report_page.php';
 	}
 
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new UnspecifiedException();
 }
 
 /**

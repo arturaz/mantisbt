@@ -37,6 +37,8 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 /**
  * MantisBT Core API's
  */
@@ -81,7 +83,7 @@ if ( $f_bug_id ) {
 	$t_bug_revisions = array_reverse( bug_revision_like( $f_rev_id ), true );
 
 	if ( count( $t_bug_revisions ) < 1 ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 	}
 
 	$t_bug_id = $t_bug_revisions[$f_rev_id]['bug_id'];
@@ -90,7 +92,7 @@ if ( $f_bug_id ) {
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
 } else {
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new UnspecifiedException();
 }
 
 function show_revision( $t_revision ) {

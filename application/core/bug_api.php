@@ -34,7 +34,6 @@
  * @uses database_api.php
  * @uses date_api.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
  * @uses helper_api.php
@@ -48,6 +47,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Field\EmptyField;
@@ -66,7 +66,6 @@ require_api( 'custom_field_api.php' );
 require_api( 'database_api.php' );
 require_api( 'date_api.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
@@ -1390,7 +1389,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'date_submitted':
 		case 'due_date':
 			if ( !is_numeric( $p_value ) ) {
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new UnspecifiedException();
 			}
 			$c_value = $p_value;
 			break;

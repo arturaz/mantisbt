@@ -81,6 +81,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'collapse_api.php' );
@@ -174,7 +176,7 @@ if( file_exists( CONFIG_PATH . '/custom_relationships_inc.php' ) ) {
 function relationship_get_complementary_type( $p_relationship_type ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 	}
 	return $g_relationships[$p_relationship_type]['#complementary'];
 }

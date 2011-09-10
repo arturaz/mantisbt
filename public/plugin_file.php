@@ -26,6 +26,8 @@
  * @uses plugin_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 $g_bypass_headers = true;
 header( 'Content-type: ' );
 
@@ -41,7 +43,7 @@ $f_file = gpc_get_string( 'file' );
 $t_matches = array();
 
 if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*\.?[a-zA-Z0-9_-]*)/', $f_file, $t_matches ) ) {
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new UnspecifiedException();
 }
 
 $t_basename = $t_matches[1];

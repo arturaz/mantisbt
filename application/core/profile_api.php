@@ -26,19 +26,18 @@
  * @uses authentication_api.php
  * @uses constant_inc.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses helper_api.php
  * @uses lang_api.php
  * @uses user_api.php
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Field\EmptyField;
 
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'user_api.php' );
@@ -242,7 +241,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 			$c_field = $p_field;
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 	}
 
 	$t_query = "SELECT DISTINCT $c_field FROM {user_profile} WHERE ( user_id=" . db_param() . " ) OR ( user_id = 0 ) ORDER BY $c_field";

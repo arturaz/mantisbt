@@ -40,6 +40,8 @@
  * @uses version_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 /**
  * MantisBT Core API's
  */
@@ -226,7 +228,7 @@ switch ( $f_action )  {
 		break;
 
 	default:
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 }
 
 bug_group_action_print_top();

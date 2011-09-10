@@ -32,6 +32,8 @@
  * @uses string_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -52,12 +54,12 @@ function bug_group_action_init( $p_action ) {
 	if( !isset( $t_valid_actions[$t_action] ) &&
 		!isset( $t_valid_actions['EXT_' . $t_action] )
 		) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 	}
 
 	$t_include_file = config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php';
 	if( !file_exists( $t_include_file ) ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 	} else {
 		require_once( $t_include_file );
 	}

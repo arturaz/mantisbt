@@ -37,6 +37,8 @@
  * @uses lang_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -149,7 +151,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	$t_file_path = plugin_file_path( $p_filename, $t_current );
 	if( false === $t_file_path ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 	}
 	
 	$t_content_type = '';

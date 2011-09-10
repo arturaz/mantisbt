@@ -35,6 +35,7 @@
  */
 
 use MantisBT\Error;
+use MantisBT\Exception\UnspecifiedException;
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );

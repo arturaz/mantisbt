@@ -17,8 +17,10 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace MantisBT\Db;
+
 use MantisBT\Db\PDO\Mysql;
 use MantisBT\Exception\Db;
+use MantisBT\Exception\UnspecifiedException;
 
 /**
  * Abstract database driver class.
@@ -261,7 +263,7 @@ abstract class DriverAbstract {
 	public function legacyTimestamp( $date ) {
 		$timestamp = strtotime( $date );
 		if ( $timestamp == false ) {
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 		}
 		return $timestamp;
 	}

@@ -33,6 +33,8 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 /**
  * MantisBT Core API's
  */
@@ -62,7 +64,7 @@ $t_query = "SELECT id, access_level FROM {user}
 $t_result = db_query_bound( $t_query, array( db_now() ) );
 
 if ( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new UnspecifiedException();
 }
 
 $t_count = db_num_rows( $t_result );

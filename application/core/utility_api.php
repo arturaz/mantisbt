@@ -36,6 +36,8 @@
  * @uses error_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -165,8 +167,8 @@ function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 		return $p_array;
 	}
 	if( !is_array( current($p_array ) ) ) {
-		error_parameters( 'tried to multisort an invalid multi-dimensional array' );
-		trigger_error(ERROR_GENERIC, ERROR);
+		//tried to multisort an invalid multi-dimensional array
+		throw new UnspecifiedException();
 	}
 
 	// Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details

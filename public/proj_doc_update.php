@@ -35,6 +35,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\Field\EmptyField;
 
@@ -129,7 +130,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 			break;
 		default:
 			/** @todo Such errors should be checked in the admin checks */
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 	}
 	$query = "UPDATE {project_file}
 		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
@@ -144,7 +145,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 }
 
 if ( !$result ) {
-	trigger_error( ERROR_GENERIC, ERROR  );
+	throw new UnspecifiedException();
 }
 
 form_security_purge( 'proj_doc_update' );

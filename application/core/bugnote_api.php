@@ -31,7 +31,6 @@
  * @uses constant_inc.php
  * @uses database_api.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses helper_api.php
  * @uses history_api.php
@@ -40,6 +39,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Field\EmptyField;
 use MantisBT\Exception\Issue\Comment\CommentNotFound;
@@ -52,7 +52,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
@@ -624,8 +623,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 	$c_from = strtotime( $p_from );
 
 	if ( $c_to === false || $c_from === false ) {
-		error_parameters( array( $p_form, $p_to ) );
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new UnspecifiedException();
 	}
 
 	if( !is_blank( $c_from ) ) {

@@ -36,6 +36,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Attachment\AttachmentDuplicate;
 use MantisBT\Exception\Attachment\AttachmentFileTypeDisallowed;
 use MantisBT\Exception\Attachment\AttachmentMoveFailed;
@@ -708,7 +709,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 			$c_content = db_prepare_binary_string( fread( fopen( $t_tmp_file, 'rb' ), $t_file_size ) );
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 	}
 
 	$t_file_table = '{' . $p_table . '_file}';
