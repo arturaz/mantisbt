@@ -40,6 +40,7 @@
 
 use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\Issue\Tag\TagAlreadyAttached;
+use MantisBT\Exception\Issue\Tag\TagNotAttached;
 use MantisBT\Exception\Tag\TagNameInvalid;
 use MantisBT\Exception\Tag\TagNameNotUnique;
 use MantisBT\Exception\Tag\TagNotFound;
@@ -535,7 +536,7 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 
 	$t_row = db_fetch_array( $result );
 	if( !$t_row ) {
-		trigger_error( TAG_NOT_ATTACHED, ERROR );
+		throw new TagNotAttached();
 	}
 	return $t_row;
 }
@@ -646,7 +647,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	}
 
 	if( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( TAG_NOT_ATTACHED, ERROR );
+		throw new TagNotAttached();
 	}
 
 	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id);
