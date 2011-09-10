@@ -28,6 +28,8 @@
  * @uses database_api.php
  */
 
+use MantisBT\Exception\Project\RecursiveHierarchyDisallowed;
+
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
@@ -44,7 +46,7 @@ $g_cache_show_disabled = null;
  */
 function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = true ) {
 	if( in_array( $p_parent_id, project_hierarchy_get_all_subprojects( $p_child_id ) ) ) {
-		trigger_error( ERROR_PROJECT_RECURSIVE_HIERARCHY, ERROR );
+		throw new RecursiveHierarchyDisallowed( $p_parent_id, $p_child_id );
 	}
 
 	$c_child_id = db_prepare_int( $p_child_id );
