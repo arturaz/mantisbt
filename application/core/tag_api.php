@@ -30,7 +30,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses history_api.php
  * @uses lang_api.php
@@ -40,6 +39,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Tag\TagNameInvalid;
 use MantisBT\Exception\Tag\TagNameNotUnique;
 use MantisBT\Exception\Tag\TagNotFound;
 
@@ -49,7 +49,6 @@ require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
@@ -136,7 +135,7 @@ function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = '' ) {
 function tag_ensure_name_is_valid( $p_name ) {
 	$t_matches = array();
 	if( !tag_name_is_valid( $p_name, $t_matches ) ) {
-		trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
+		throw new TagNameInvalid( $p_name );
 	}
 }
 
