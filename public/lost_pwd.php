@@ -36,6 +36,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Authentication\LostPasswordBlankEmail;
 use MantisBT\Exception\Authentication\LostPasswordDisabled;
 
 /**
@@ -84,7 +85,7 @@ if ( 0 == db_num_rows( $result ) ) {
 }
 
 if( is_blank( $f_email ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
+	throw new LostPasswordBlankEmail();
 }
 
 $row = db_fetch_array( $result );
