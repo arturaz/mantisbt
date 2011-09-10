@@ -30,6 +30,7 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\Authentication\LostPasswordConfirmationHashInvalid;
 use MantisBT\Exception\Authentication\LostPasswordDisabled;
 
 # don't auto-login when trying to verify new user
@@ -67,7 +68,7 @@ if( auth_is_user_authenticated() ) {
 $t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
 
 if ( $f_confirm_hash != $t_calculated_confirm_hash ) {
-	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
+	throw new LostPasswordConfirmationHashInvalid();
 }
 
 # set a temporary cookie so the login information is passed between pages.
