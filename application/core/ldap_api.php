@@ -30,6 +30,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\LDAP\AuthenticationFailed;
 use MantisBT\Exception\LDAP\ExtensionNotLoaded;
 use MantisBT\Exception\LDAP\ServerConnectFailed;
 
@@ -321,7 +322,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		$t_ds = ldap_connect_bind();
 		if ( $t_ds === false ) {
 			ldap_log_error( $t_ds );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			throw new AuthenticationFailed();
 		}
 
 		# Search for the user id
@@ -331,7 +332,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
 			log_event( LOG_LDAP, "ldap search failed" );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			throw new AuthenticationFailed();
 		}
 
 		$t_info = @ldap_get_entries( $t_ds, $t_sr );
@@ -339,7 +340,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			ldap_log_error( $t_ds );
 			ldap_free_result( $t_sr );
 			ldap_unbind( $t_ds );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			throw new AuthenticationFailed();
 		}
 
 		$t_authenticated = false;
