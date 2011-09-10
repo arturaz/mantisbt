@@ -31,6 +31,7 @@
  */
 
 use MantisBT\Exception\LDAP\ExtensionNotLoaded;
+use MantisBT\Exception\LDAP\ServerConnectFailed;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -101,13 +102,13 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		if ( !$t_br ) {
 			ldap_log_error( $t_ds );
 			log_event( LOG_LDAP, "Bind to ldap server failed" );
-			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+			throw new ServerConnectFailed();
 		} else {
 			log_event( LOG_LDAP, "Bind to ldap server successful" );
 		}
 	} else {
 		log_event( LOG_LDAP, "Connection to ldap server failed" );
-		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+		throw new ServerConnectFailed();
 	}
 
 	return $t_ds;
@@ -412,7 +413,7 @@ function ldap_simulation_get_user( $p_username ) {
 	$t_lines = file( $t_filename );
 	if ( $t_lines === false ) {
 		log_event( LOG_LDAP, "ldap_simulation_get_user: could not read simulation data from $t_filename." );
-		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+		throw new ServerConnectFailed();
 	}
 
 	foreach ( $t_lines as $t_line ) {
