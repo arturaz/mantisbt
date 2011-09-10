@@ -38,6 +38,7 @@
 
 use MantisBT\Exception\Authentication\LostPasswordBlankEmail;
 use MantisBT\Exception\Authentication\LostPasswordDisabled;
+use MantisBT\Exception\Authentication\LostPasswordInvalidAccount;
 
 /**
  * MantisBT Core API's
@@ -81,7 +82,7 @@ $query = 'SELECT id FROM {user} WHERE username = ' . db_param() . ' AND email = 
 $result = db_query_bound( $query, array( $f_username, $f_email, true ) );
 
 if ( 0 == db_num_rows( $result ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
+	throw new LostPasswordInvalidAccount();
 }
 
 if( is_blank( $f_email ) ) {
