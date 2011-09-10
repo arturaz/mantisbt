@@ -30,6 +30,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\LDAP\ExtensionNotLoaded;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'logging_api.php' );
@@ -54,7 +56,7 @@ function ldap_log_error( $p_ds ) {
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	if( !extension_loaded( 'ldap' ) ) {
 		log_event( LOG_LDAP, "Error: LDAP extension missing in php" );
-		trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
+		throw new ExtensionNotLoaded();
 	}
 
 	$t_ldap_server = config_get( 'ldap_server' );
