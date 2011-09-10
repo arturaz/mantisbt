@@ -39,6 +39,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Issue\Tag\TagAlreadyAttached;
 use MantisBT\Exception\Tag\TagNameInvalid;
 use MantisBT\Exception\Tag\TagNameNotUnique;
 use MantisBT\Exception\Tag\TagNotFound;
@@ -594,7 +595,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	tag_ensure_exists( $p_tag_id );
 
 	if( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( TAG_ALREADY_ATTACHED, ERROR );
+		throw new TagAlreadyAttached();
 	}
 
 	if( null == $p_user_id ) {
