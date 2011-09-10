@@ -31,17 +31,16 @@
  *
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses gpc_api.php
  * @uses php_api.php
  */
 
 use MantisBT\Exception\Session\SessionHandlerInvalid;
+use MantisBT\Exception\Session\SessionInvalid;
 use MantisBT\Exception\Session\SessionVariableNotFound;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'php_api.php' );
 
@@ -230,13 +229,7 @@ function session_validate( $p_session ) {
 		# Check a continued session request
 		if ( $t_user_ip != $t_last_ip ) {
 			session_clean();
-
-			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
-
-			$t_url = config_get_global( 'path' ) . config_get_global( 'default_home_page' );
-			echo "\t<meta http-equiv=\"Refresh\" content=\"4;URL=$t_url\" />\n";
-
-			die();
+			throw new SessionInvalid();
 		}
 	}
 }
