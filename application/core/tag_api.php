@@ -40,6 +40,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Tag\TagNotFound;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -75,8 +76,7 @@ function tag_exists( $p_tag_id ) {
  */
 function tag_ensure_exists( $p_tag_id ) {
 	if( !tag_exists( $p_tag_id ) ) {
-		error_parameters( $p_tag_id );
-		trigger_error( ERROR_TAG_NOT_FOUND, ERROR );
+		throw new TagNotFound( $p_tag_id );
 	}
 }
 
