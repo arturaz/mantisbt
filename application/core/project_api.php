@@ -41,6 +41,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Project\ProjectNotFound;
 
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
@@ -100,8 +101,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		$g_cache_project_missing[(int) $p_project_id] = true;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_project_id );
-			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+			throw new ProjectNotFound( $p_project_id );
 		} else {
 			return false;
 		}
@@ -207,8 +207,7 @@ function project_exists( $p_project_id ) {
 #  otherwise let execution continue undisturbed
 function project_ensure_exists( $p_project_id ) {
 	if( !project_exists( $p_project_id ) ) {
-		error_parameters( $p_project_id );
-		trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+		throw new ProjectNotFound( $p_project_id );
 	}
 }
 

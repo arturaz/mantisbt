@@ -43,6 +43,8 @@
  * @uses version_api.php
  */
 
+use MantisBT\Exception\Project\ProjectNotFound;
+
 /**
  * MantisBT Core API's
  */
@@ -118,7 +120,7 @@ if ( is_blank( $f_project ) ) {
 	$f_project_id = project_get_id_by_name( $f_project );
 
 	if ( $f_project_id === 0 ) {
-		trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+		throw new ProjectNotFound( 0 );
 	}
 }
 
