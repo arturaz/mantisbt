@@ -29,7 +29,6 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses file_api.php
  * @uses lang_api.php
  * @uses news_api.php
@@ -41,6 +40,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Project\ProjectNameInvalid;
 use MantisBT\Exception\Project\ProjectNameNotUnique;
 use MantisBT\Exception\Project\ProjectNotFound;
 
@@ -50,7 +50,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'file_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'news_api.php' );
@@ -289,7 +288,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
 	if( is_blank( $p_name ) ) {
-		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
+		throw new ProjectNameInvalid( '{blank}' );
 	}
 
 	project_ensure_name_unique( $p_name );
@@ -369,7 +368,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	$c_inherit_global = db_prepare_bool( $p_inherit_global );
 
 	if( is_blank( $p_name ) ) {
-		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
+		throw new ProjectNameInvalid( '{blank}' );
 	}
 
 	$t_old_name = project_get_field( $p_project_id, 'name' );
