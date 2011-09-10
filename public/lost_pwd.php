@@ -39,6 +39,7 @@
 use MantisBT\Exception\Authentication\LostPasswordBlankEmail;
 use MantisBT\Exception\Authentication\LostPasswordDisabled;
 use MantisBT\Exception\Authentication\LostPasswordInvalidAccount;
+use MantisBT\Exception\Authentication\LostPasswordMaximumAttemptsExceeded;
 
 /**
  * MantisBT Core API's
@@ -97,7 +98,7 @@ if( user_is_protected( $t_user_id ) ) {
 }
 
 if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED, ERROR );
+	throw new LostPasswordMaximumAttemptsExceeded();
 }
 
 $t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
