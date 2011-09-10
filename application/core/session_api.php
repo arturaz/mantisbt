@@ -36,6 +36,8 @@
  * @uses php_api.php
  */
 
+use MantisBT\Exception\Session\SessionVariableNotFound;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -148,8 +150,7 @@ class MantisPHPSession extends MantisSession {
 			return $p_default;
 		}
 
-		error_parameters( $p_name );
-		trigger_error( ERROR_SESSION_VAR_NOT_FOUND, ERROR );
+		throw new SessionVariableNotFound( $p_name );
 	}
 
 	/**
