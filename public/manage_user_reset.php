@@ -33,6 +33,8 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\Authentication\LostPasswordDisabled;
+
 /**
  * MantisBT Core API's
  */

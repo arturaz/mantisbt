@@ -30,6 +30,8 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\Authentication\LostPasswordDisabled;
+
 # don't auto-login when trying to verify new user
 $g_login_anonymous = false;
 
@@ -48,7 +50,7 @@ require_api( 'user_api.php' );
 if ( OFF == config_get( 'allow_signup' ) &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	throw new LostPasswordDisabled();
 }
 
 $f_user_id = gpc_get_string('id');

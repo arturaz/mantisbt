@@ -31,6 +31,8 @@
  * @uses print_api.php
  */
 
+use MantisBT\Exception\Authentication\LostPasswordDisabled;
+
 /**
  * MantisBT Core API's
  */
@@ -49,7 +51,7 @@ if ( LDAP == config_get_global( 'login_method' ) ||
 	OFF == config_get( 'lost_password_feature' ) ||
 	OFF == config_get( 'send_reset_password' )  ||
 	OFF == config_get( 'enable_email_notification' ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	throw new LostPasswordDisabled();
 }
 
 # don't index lost password page
