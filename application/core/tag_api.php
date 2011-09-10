@@ -40,6 +40,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Tag\TagNameNotUnique;
 use MantisBT\Exception\Tag\TagNotFound;
 
 require_api( 'access_api.php' );
@@ -104,7 +105,7 @@ function tag_is_unique( $p_name ) {
  */
 function tag_ensure_unique( $p_name ) {
 	if( !tag_is_unique( $p_name ) ) {
-		trigger_error( ERROR_TAG_DUPLICATE, ERROR );
+		throw new TagNameNotUnique( $p_name );
 	}
 }
 
