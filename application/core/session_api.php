@@ -36,6 +36,7 @@
  * @uses php_api.php
  */
 
+use MantisBT\Exception\Session\SessionHandlerInvalid;
 use MantisBT\Exception\Session\SessionVariableNotFound;
 
 require_api( 'config_api.php' );
@@ -201,8 +202,7 @@ function session_init( $p_session_id=null ) {
 
 			# Not yet implemented
 		default:
-			trigger_error( ERROR_SESSION_HANDLER_INVALID, ERROR );
-			break;
+			throw new SessionHandlerInvalid();
 	}
 
 	if ( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
