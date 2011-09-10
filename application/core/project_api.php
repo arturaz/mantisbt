@@ -41,6 +41,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Project\ProjectNameNotUnique;
 use MantisBT\Exception\Project\ProjectNotFound;
 
 require_api( 'bug_api.php' );
@@ -228,7 +229,7 @@ function project_is_name_unique( $p_name ) {
 #  otherwise let execution continue undisturbed
 function project_ensure_name_unique( $p_name ) {
 	if( !project_is_name_unique( $p_name ) ) {
-		trigger_error( ERROR_PROJECT_NAME_NOT_UNIQUE, ERROR );
+		throw new ProjectNameNotUnique( $p_name );
 	}
 }
 
