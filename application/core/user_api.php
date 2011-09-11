@@ -42,6 +42,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\User\UserNameInvalid;
 use MantisBT\Exception\User\UserNameNotUnique;
 use MantisBT\Exception\User\UserProfileNotFound;
 
@@ -314,7 +315,7 @@ function user_is_name_valid( $p_username ) {
 # Trigger an error if the username is not valid
 function user_ensure_name_valid( $p_username ) {
 	if( !user_is_name_valid( $p_username ) ) {
-		trigger_error( ERROR_USER_NAME_INVALID, ERROR );
+		throw new UserNameInvalid( $p_username );
 	}
 }
 
