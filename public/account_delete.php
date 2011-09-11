@@ -51,6 +51,8 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\User\LastAdministratorProtected;
+
 /**
  * MantisBT Core API's
  */
@@ -83,7 +85,7 @@ if ( OFF == config_get( 'allow_account_delete' ) &&
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if ( current_user_is_administrator() &&
      user_count_level( $t_admin_threshold ) <= 1 ) {
-	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	throw new LastAdministratorProtected();
 }
 
 helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
