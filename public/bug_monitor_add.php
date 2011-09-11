@@ -28,7 +28,6 @@
  * @uses bug_api.php
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
@@ -36,6 +35,8 @@
  * @uses user_api.php
  * @uses utility_api.php
  */
+
+use MantisBT\Exception\User\UserByNameNotFound;
 
 /**
  * MantisBT Core API's
@@ -46,7 +47,6 @@ require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
@@ -70,8 +70,7 @@ if ( is_blank( $f_username ) ) {
 		$t_user_id = user_get_id_by_realname( $f_username );
 
 		if ( $t_user_id === false ) {
-			error_parameters( $f_username );
-			trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, E_USER_ERROR );
+			throw new UserByNameNotFound( $f_username );
 		}
 	}
 }
