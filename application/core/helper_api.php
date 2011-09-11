@@ -28,7 +28,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses current_user_api.php
- * @uses error_api.php
  * @uses gpc_api.php
  * @uses html_api.php
  * @uses lang_api.php
@@ -39,12 +38,13 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Configuration\ConfigurationOptionInvalidValue;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
-require_api( 'error_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
@@ -624,22 +624,19 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	// time can be composed of max 3 parts (hh:mm:ss)
 	if( count( $t_a ) > 3 ) {
-		error_parameters( 'p_hhmm', $p_hhmm );
-		trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		throw new ConfigurationOptionInvalidValue( 'p_hhmm', $p_hhmm );
 	}
 
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		// all time parts should be integers and non-negative.
 		if( !is_numeric( $t_a[$i] ) || ( (integer) $t_a[$i] < 0 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ConfigurationOptionInvalidValue( 'p_hhmm', $p_hhmm );
 		}
 
 		// minutes and seconds are not allowed to exceed 59.
 		if(( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ConfigurationOptionInvalidValue( 'p_hhmm', $p_hhmm );
 		}
 	}
 
