@@ -45,6 +45,7 @@ use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\User\UserNameInvalid;
 use MantisBT\Exception\User\UserNameNotUnique;
 use MantisBT\Exception\User\UserProfileNotFound;
+use MantisBT\Exception\User\UserRealNameMatchesExistingUserName;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -281,7 +282,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 # Trigger an error if the username is not valid
 function user_ensure_realname_unique( $p_username, $p_realname ) {
 	if( 1 > user_is_realname_unique( $p_username, $p_realname ) ) {
-		trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
+		throw new UserRealNameMatchesExistingUserName( $p_realname );
 	}
 }
 
