@@ -34,6 +34,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\User\UserPreferencesNotFound;
 
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -192,7 +193,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 
 	if( !$row ) {
 		if( $p_trigger_errors ) {
-			trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
+			throw new UserPreferencesNotFound();
 		} else {
 			$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = false;
 			return false;
