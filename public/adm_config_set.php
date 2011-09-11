@@ -26,7 +26,6 @@
  * @uses access_api.php
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
@@ -34,6 +33,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Configuration\ConfigurationOptionCannotBeSpecifiedInDatabase;
 use MantisBT\Exception\Configuration\ConfigurationOptionNotFound;
 use MantisBT\Exception\Field\EmptyField;
 
@@ -41,7 +41,6 @@ require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
@@ -74,8 +73,7 @@ if ( config_get_global( $f_config_option, $t_not_found_value ) === $t_not_found_
 
 # make sure that configuration option specified can be stored in the database
 if ( !config_can_set_in_database( $f_config_option ) ) {
-	error_parameters( $f_config_option );
-	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
+	throw new ConfigurationOptionCannotBeSpecifiedInDatabase( $f_config_option );
 }
 
 if ( $f_type === 'default' ) {
