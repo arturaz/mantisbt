@@ -43,6 +43,7 @@
 
 use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\User\UserNameNotUnique;
+use MantisBT\Exception\User\UserProfileNotFound;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -1102,7 +1103,7 @@ function user_get_profile_row( $p_user_id, $p_profile_id ) {
 
 	$row = db_fetch_array( $result );
 	if( !$row ) {
-		trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
+		throw new UserProfileNotFound();
 	}
 
 	return $row;
