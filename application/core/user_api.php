@@ -42,6 +42,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\User\UserByIDNotFound;
 use MantisBT\Exception\User\UserNameInvalid;
 use MantisBT\Exception\User\UserNameNotUnique;
 use MantisBT\Exception\User\UserProfileNotFound;
@@ -98,8 +99,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		$g_cache_user[$p_user_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( (integer)$p_user_id );
-			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+			throw new UserByIDNotFound( $p_user_id );
 		}
 
 		return false;
@@ -204,8 +204,7 @@ function user_ensure_exists( $p_user_id ) {
 	$c_user_id = (integer)$p_user_id;
 
 	if ( !user_exists( $c_user_id ) ) {
-		error_parameters( $c_user_id );
-		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+		throw new UserByIDNotFound( $c_user_id );
 	}
 }
 
