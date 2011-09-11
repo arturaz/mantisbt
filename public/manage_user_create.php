@@ -38,6 +38,7 @@
  */
 
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\User\UserPasswordMismatch;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -84,7 +85,7 @@ user_ensure_name_valid( $f_username );
 user_ensure_realname_unique( $f_username, $f_realname );
 
 if ( $f_password != $f_password_verify ) {
-	trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+	throw new UserPasswordMismatch();
 }
 
 $f_email = email_append_domain( $f_email );

@@ -40,6 +40,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\User\UserPasswordMismatch;
+
 /**
  * MantisBT Core API's
  */
@@ -110,7 +112,7 @@ if ( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
 # Update password if the two match and are not empty
 if ( !is_blank( $f_password ) ) {
 	if ( $f_password != $f_password_confirm ) {
-		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+		throw new UserPasswordMismatch();
 	} else {
 		if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
 			user_set_password( $t_user_id, $f_password );
