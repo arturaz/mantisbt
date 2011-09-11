@@ -39,6 +39,8 @@
  * @uses user_pref_api.php
  */
 
+use MantisBT\Exception\User\UserNameNotUnique;
+
 /**
  * MantisBT Core API's
  */
@@ -100,7 +102,7 @@ access_ensure_global_level( $t_user['access_level'] );
 # check that the username is unique
 if ( 0 != strcasecmp( $t_old_username, $f_username )
 	&& false == user_is_name_unique( $f_username ) ) {
-	trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+	throw new UserNameNotUnique( $f_username );
 }
 
 user_ensure_name_valid( $f_username );

@@ -42,6 +42,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\User\UserNameNotUnique;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -223,7 +224,7 @@ function user_is_name_unique( $p_username ) {
 # Check if the username is unique and trigger an ERROR if it isn't
 function user_ensure_name_unique( $p_username ) {
 	if( !user_is_name_unique( $p_username ) ) {
-		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+		throw new UserNameNotUnique( $p_username );
 	}
 }
 
