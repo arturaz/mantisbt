@@ -42,6 +42,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\User\CannotModifyProtectedAccount;
 use MantisBT\Exception\User\UserByIDNotFound;
 use MantisBT\Exception\User\UserNameInvalid;
 use MantisBT\Exception\User\UserNameNotUnique;
@@ -381,7 +382,7 @@ function user_is_anonymous( $p_user_id ) {
 # Trigger an ERROR if the user account is protected
 function user_ensure_unprotected( $p_user_id ) {
 	if( user_is_protected( $p_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+		throw new CannotModifyProtectedAccount();
 	}
 }
 

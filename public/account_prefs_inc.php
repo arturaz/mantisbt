@@ -38,6 +38,8 @@ if ( !defined( 'ACCOUNT_PREFS_INC_ALLOW' ) ) {
 	return;
 }
 
+use MantisBT\Exception\User\CannotModifyProtectedAccount;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -64,7 +66,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 	# protected account check
 	if ( user_is_protected( $p_user_id ) ) {
 		if ( $p_error_if_protected ) {
-			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+			throw new CannotModifyProtectedAccount();
 		} else {
 			return;
 		}

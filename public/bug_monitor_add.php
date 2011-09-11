@@ -36,6 +36,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\User\CannotModifyProtectedAccount;
 use MantisBT\Exception\User\UserByNameNotFound;
 
 /**
@@ -76,7 +77,7 @@ if ( is_blank( $f_username ) ) {
 }
 
 if ( user_is_anonymous( $t_user_id ) ) {
-	trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
+	throw new CannotModifyProtectedAccount();
 }
 
 bug_ensure_exists( $f_bug_id );

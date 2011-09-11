@@ -35,6 +35,8 @@
  * @uses user_api.php
  */
 
+use MantisBT\Exception\User\CannotModifyProtectedAccount;
+
 /**
  * MantisBT Core API's
  */
@@ -66,7 +68,7 @@ if ( $f_user_id === NO_USER ) {
 }
 
 if ( user_is_anonymous( $t_user_id ) ) {
-	trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
+	throw new CannotModifyProtectedAccount();
 }
 
 bug_ensure_exists( $f_bug_id );

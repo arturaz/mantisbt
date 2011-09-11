@@ -40,6 +40,7 @@ use MantisBT\Exception\Authentication\LostPasswordBlankEmail;
 use MantisBT\Exception\Authentication\LostPasswordDisabled;
 use MantisBT\Exception\Authentication\LostPasswordInvalidAccount;
 use MantisBT\Exception\Authentication\LostPasswordMaximumAttemptsExceeded;
+use MantisBT\Exception\User\CannotModifyProtectedAccount;
 
 /**
  * MantisBT Core API's
@@ -94,7 +95,7 @@ $row = db_fetch_array( $result );
 $t_user_id = $row['id'];
 
 if( user_is_protected( $t_user_id ) ) {
-	trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+	throw new CannotModifyProtectedAccount();
 }
 
 if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
