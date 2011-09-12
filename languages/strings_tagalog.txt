@@ -1094,7 +1094,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Hindi natagpuan ang pagtataguyod n
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Ang pagtataguyod (%1$s) ay mas mababa kaysa pinakamababang bilang (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Walang kinakailangang kaantasan sa pagpunta ang tagahawak upang mapanghawakan ang tinataguyod na mga labas.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Tinanggihan ang Pagpasok: Nangangailangan ng mas mataas na kaantasan ng pagpunta ang pagtatalaga ng tinataguyod na mga labas.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Hindi nagbigay ng isang adres ng e-liham ang tagapagtaguyod. Pakisapanahon ang iyong talaan ng katangian.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Ang piniling pagkakaayos na "%1$s" ay may hindi tanggap na halagang "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Hindi maisasagawa ang galaw dahil ang labas na "%1$d" ay mababasa lamang.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Mayroon nang isang kaugnayan sa pagitan ng dalawang mga labas na ito.';

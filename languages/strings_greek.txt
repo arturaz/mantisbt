@@ -760,7 +760,6 @@ $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Άκυρη τιμή για το πεδίο "%1$s".';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%1$s\' not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(-).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%1$s\' has invalid value \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%1$d\' is read-only';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';

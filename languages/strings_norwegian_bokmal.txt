@@ -1194,7 +1194,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorskap %1$d ikke funnet.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponset beløp (%1$s) er under minimumsbeløpet (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Ikke tilstrekkelig tilgangsnivå for å håndtere sponsing av saker.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Tilgang nektet: Delegering av sponsede saker krever høyere tilgangsnivå.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angitt epost-adresse. Vennligst oppdater profilen din.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurasjonsinnstillingen \'%1$s\' har en ugyldig verdi \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke utføres pga at saken \'%1$d\' er kun lesbar';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Det finnes allerede en relasjon mellom disse sakene.';

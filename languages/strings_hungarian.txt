@@ -1142,7 +1142,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'A(z) %1$d támogatás nem találha
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'A támogatás (%1$s) a minimumösszeg (%2$s) alatt van.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'A kezelőnek nincs elég joga a támogatott ügy kezeléséhez.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Hozzáférés megtagadva: támogatott ügyek hozzárendeléséhez magasabb jogosultsági szint szükséges.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'A támogató nem adott meg email-címet. Frissítse a profilját.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A(z) \'%1$s\' konfigurációs beállítás hibás értéket tartalmaz: \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A művelet nem végrehajtható, mert a(z) \'%1$d\' ügy csak olvasható';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Már van kapcsolat ezen két ügy között.';

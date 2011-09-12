@@ -1198,7 +1198,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsor %1$d nit gfunde.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorschaft (%1$s) lyt unter em Mindeschtbetrag (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Bearbeiter het nit d Zuegangsrächt, wu s brucht fir gsponsereti Probläm.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zuegang verweigeret: fir d Zuewysig vu gsponserete Probläm brucht s hecheri Benutzerrächt.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor het kei E-Mail-Adräss aagee. Bitte aktualisier Dyy Konto.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'In dr Yystellig „%1$s“ het s e nit giltige Wärt „%2$s“.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Aktion nit uusfierbar, wel s Probläm „%1$d“ schrybgschitzt isch.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'S git scho ne Beziehig zwische däne zwei Probläm.';

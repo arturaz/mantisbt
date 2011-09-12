@@ -930,7 +930,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorizarea %1$d nu este găsit�
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorizarea (%1$s) este sub valaoarea minimă (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Procesorul nu are nivelul de acces necesar pentru a procesa probleme sponsorizate.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acces interzis: Atribuirea problemelor sponsorizate necesită un nivel de acces mai înalt.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsorul nu a furnizat o adresă de e-mail. Actualizaţi-vă profilul.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opţiunea de configurare \'%1$s\' are o valoare invalidă \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Operaţiunea nu poate fi finalizată pentru că problema \'%1$d\' se poate doar citi';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'EROARE: Există deja o relaţionare între aceste două probleme.';

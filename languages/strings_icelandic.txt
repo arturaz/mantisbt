@@ -874,7 +874,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Útgáfa \'%1$s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Notendanafnið er ógilt. Þau mega aðeins innihalda bókstafi, tölur, bil, bandstrik og undirstrik.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Notandi hefur ekki viðeigandi aðgangsstig.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Nafnið sem valið var er það sama og notendanafn annars notanda. Veldu annað nafn.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Stillimöguleiki \'%1$s\'hefur ógilt gildi \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hægt að framkvæma aðgerðina þar sem beiðnin \'%1$d\' er aðeins lesanlegt.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Það eru þegar tengsl milli þessara beiðna.';

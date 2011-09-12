@@ -1183,7 +1183,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsolust %1$d ei leitud.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorlus (%1$s) on väiksm kui miinimumväärtus (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Puudub vajalik pöördusõiguste tase, et käsitleda spondeeritud kandeid.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Keelatud: Spondeeritud kannete määramiseks on vajalik kõrgem pöördusõiguste tase.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor pole oma e-posti aadressi andnud. Palun uuenda oma profiili.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguratsiooni parameeter \'%1$s\' omab invaliidset väärtust \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tegevust ei saa sooritada, kuna kanne \'%1$d\' on ainult lugemiseks';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Kahe kande vahel oli juba varem seos.';

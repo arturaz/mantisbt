@@ -690,7 +690,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Podrska sponzorstvu nije ukljuce
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzorstvo %1$d nije pronadjeno.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Спонзорство (%1$s) је испод најмањег износа (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pristup zabranjen: Pristup sponzorisanim greskama zahteva visi nivo pristupa.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nije uneo e-mail adresu. Molim izmenite profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Опција подешавања \'%1$s\' има погрешну вредност \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ova akcija ne moze biti izvrsena jer je greska \'%1$d\' ukljucena samo za citanje';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'vec postoji veza izmedju ove dve greske.';

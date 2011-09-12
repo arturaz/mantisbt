@@ -1185,7 +1185,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '投票 %1$d が見つかりませ�
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '投票 (%1$s) は最低額 (%2$s) 以下です。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '担当者は、投票されたチケットを扱うために必要な権限がありません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 投票されたチケットを割り当てるには、より高い権限が必要です。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'スポンサーはメールアドレスが設定されていません。プロフィールを更新してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '設定項目「%1$s」は不正な値「%2$s」です。';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'チケット「%1$d」は読取専用のため、その操作を行なうことができません。';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'これらの2つのチケット間に関連が既にあります。';

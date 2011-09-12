@@ -1183,7 +1183,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'N\'eo ket bet kavet ar sponsoradur
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Emañ ar sponsoradur (%1$s) dindan ar sammad izelañ (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'N\'emañ ket al live moned rekis gant an atebeg evit plediñ gant drein sponsoret.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Moned nac\'het : evit deverkañ drein sponsoret e vez ezhomm ul live moned uheloc\'h.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Ar sponsor n\'en deus ket pourchaset ur chomlec\'h postel. Hizivait ho profil, mar plij.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'An dibarzh kefluniañ « %1$s » en deus un talvoud direizh « %2$s »';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'An ober ne c\'hall ket bezañ sevenet rak an draen « %1$d » zo da lenn hepken.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Un darempred zo dija etre an daou zraen-mañ.';

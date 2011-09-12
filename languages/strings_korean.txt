@@ -869,7 +869,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '%1$d Sponsorship을 찾을 수 없
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship(%1$s)이 최소량 (%2$s) 이하입니다.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '핸들러가 후원되고 있는 이슈들을 다루기에 요구되는 접근권한을 가지고 있지 않습니다.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '접근거부: 지정된 후원 이슈들은 더 높은 접근권한을 요구합니다.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '스폰서의 전자메일 주소가 없습니다. 프로파일을 갱신해 주세요.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '설정 옵션 \'%1$s\'이 잘못된 값 \'%2$s\'을 가지고 있습니다.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '해당 액션이 수행될 수 없습니다. - \'%1$d\'번 이슈가 읽기 전용입니다.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = '두 이슈사이에 이미 관계가 설정되어 있습니다.';

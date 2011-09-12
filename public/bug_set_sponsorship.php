@@ -92,16 +92,11 @@ if ( $f_amount == 0 ) {
 } else {
 	# add sponsorship
 	$t_user = auth_get_current_user_id();
-	if ( is_blank( user_get_email( $t_user ) ) ) {
-		trigger_error( ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL, ERROR );
-	} else {
-		$sponsorship = new SponsorshipData;
-		$sponsorship->bug_id = $f_bug_id;
-		$sponsorship->user_id = $t_user;
-		$sponsorship->amount = $f_amount;
-
-		sponsorship_set( $sponsorship );
-	}
+	$t_sponsorship = new SponsorshipData;
+	$t_sponsorship->bug_id = $f_bug_id;
+	$t_sponsorship->user_id = $t_user;
+	$t_sponsorship->amount = $f_amount;
+	sponsorship_set( $t_sponsorship );
 }
 
 form_security_purge( 'bug_set_sponsorship' );

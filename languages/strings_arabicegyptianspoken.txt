@@ -1166,7 +1166,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'الرعايه %1$d لم يتم ا
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'الرعايه (%1$s) تحت الكميه الدنيا (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'المعالج لا يمتلك مستوى الصلاحيه المطلوب لمعالجه القضايا المرعيه.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'السماح مرفوض: توكيل القضايا المرعيه يتطلب مستوى صلاحيه أعلى.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'الراعى لم يوفر عنوان بريد إلكترونى. من فضلك حدث ملفك.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'خيار الضبط "%1$s" له قيمه غير صحيحه "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'الفعل لا يمكن تنفيذه لأن القضيه "%1$d" للقراءه فقط.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'توجد علاقه بالفعل بين هاتين القضيتين.';

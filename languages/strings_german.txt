@@ -1200,7 +1200,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsor %1$d nicht gefunden.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorschaft (%1$s) liegt unter dem Mindestbetrag (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Bearbeiter hat nicht die benötigten Zugangsrechte für gesponserte Probleme.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zugang verweigert: Zuweisung gesponserter Probleme erfordert höhere Benutzerrechte.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor hat keine E-Mail-Adresse angegeben. Bitte aktualisieren Sie Ihr Konto.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Einstellung „%1$s“ enthält ungültigen Wert „%2$s“.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Aktion nicht ausführbar, weil Problem „%1$d“ schreibgeschützt ist.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Es besteht bereits eine Beziehung zwischen diesen zwei Problemen.';

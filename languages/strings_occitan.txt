@@ -1131,7 +1131,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Comanditari %1$d introbable.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'La comandita (%1$s) es inferiora a la soma minimum (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Lo responsable a pas lo nivèl d\'accès requerit per manipular los bugs comanditats.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Accès refusat : l\'assignacion dels bògues comanditats requerís un nivèl d\'accès mai elevat.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Lo comanditari a pas provesit d\'adreça de corrièr electronic. Mercés de metre a jorn vòstre perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'L\'opcion de configuracion « %1$s » a una valor invalida « %2$s »';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'L\'accion pòt pas èsser executada perque lo bòg « %1$d » es en lectura sola';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'ERROR : Ja existís una relacion entre aquestes dos bògues.';

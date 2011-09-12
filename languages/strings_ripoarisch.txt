@@ -603,7 +603,6 @@ $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Dä Metmaacher hät nit et
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'De Öngershtözung för Schponsore es nit ennjeschalldt.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Schponsorschaff %1$d nit jefonge.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Schponsorschaff (%1$s) es onger dämm kleinste müjjelesche Bedraach (%2$s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Dä Shponser hät kei Addräß för sing <i lang="en">e-mail</i> aanjejovve. Beß esu joot un donn Ding Profil aanpaße.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'För di Enshtellung „%1$s“ es dä onjöltijje Wäät „%2$s“ ußjesöhk.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Di Aanjelääjeheit „%1$d“ es bloß för ze Lässe, dröm jeiht dat nit ze maache.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Di zwei Aanjelääjeheite han ald ene Bezoch.';
