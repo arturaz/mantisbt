@@ -42,6 +42,7 @@
 
 
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Access\IssueHandlerAccessDenied;
 use MantisBT\Exception\Access\SponsorshipAssignerAccessDenied;
 use MantisBT\Exception\Access\SponsorshipHandlerAccessDenied;
 
@@ -116,7 +117,7 @@ if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 
 	if ( $f_handler_id != NO_USER ) {
 		if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
-			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+			throw new IssueHandlerAccessDenied();
 		}
 
 		if ( $t_bug_sponsored ) {
