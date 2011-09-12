@@ -33,6 +33,8 @@
  * @uses history_api.php
  */
 
+use MantisBT\Exception\Sponsorship\SponsorshipNotFound;
+
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -93,8 +95,7 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 		$g_cache_sponsorships[$c_sponsorship_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_sponsorship_id );
-			trigger_error( ERROR_SPONSORSHIP_NOT_FOUND, ERROR );
+			throw new SponsorshipNotFound( $p_sponsorship_id );
 		} else {
 			return false;
 		}
