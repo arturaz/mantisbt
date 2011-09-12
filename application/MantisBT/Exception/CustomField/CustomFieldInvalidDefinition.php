@@ -6,8 +6,8 @@ require_api('lang_api.php');
 
 class CustomFieldInvalidDefinition extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_CUSTOM_INVALID_DEFINITION, null, false);
-		parent::__construct(ERROR_CUSTOM_INVALID_DEFINITION, $errorMessage, null);
+		$errorMessage = lang_get(ERROR_CUSTOM_FIELD_INVALID_DEFINITION, null, false);
+		parent::__construct(ERROR_CUSTOM_FIELD_INVALID_DEFINITION, $errorMessage, null);
 		$this->responseCode = 400;
 	}
 }
