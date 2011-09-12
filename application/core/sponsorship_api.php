@@ -29,10 +29,10 @@
  * @uses constant_inc.php
  * @uses database_api.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses history_api.php
  */
 
+use MantisBT\Exception\Sponsorship\SponsorshipAmountTooLow;
 use MantisBT\Exception\Sponsorship\SponsorshipNotFound;
 
 require_api( 'authentication_api.php' );
@@ -41,7 +41,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'history_api.php' );
 
 /**
@@ -275,8 +274,7 @@ function sponsorship_update_bug( $p_bug_id ) {
 function sponsorship_set( $p_sponsorship ) {
 	$t_min_sponsorship = config_get( 'minimum_sponsorship_amount' );
 	if( $p_sponsorship->amount < $t_min_sponsorship ) {
-		error_parameters( $p_sponsorship->amount, $t_min_sponsorship );
-		trigger_error( ERROR_SPONSORSHIP_AMOUNT_TOO_LOW, ERROR );
+		throw new SponsorshipAmountTooLow( $p_sponsorship->amount, $t_min_sponsorship );
 	}
 
 	# if id == 0, check if the specified user is already sponsoring the bug, if so, overwrite
