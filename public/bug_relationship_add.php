@@ -82,13 +82,16 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 	# the related bug exists...
 	bug_ensure_exists( $f_dest_bug_id );
 
+	$t_destination_bug = bug_get( $f_dest_bug_id );
+
 	# bug is not read-only...
 	if ( bug_is_readonly( $f_src_bug_id ) ) {
 		throw new IssueReadOnly( $f_src_bug_id );
 	}
 
-	# user can access to the related bug at least as viewer...
-	if ( !access_has_bug_level( VIEWER, $f_dest_bug_id ) ) {
+	# ensure the current user can update the destination issue
+	# because we're changing both sides of the relationship
+	if ( !access_has_bug_level( config_get( 'update_bug_threshold', null, null, $t_destination_bug->project_id ), $f_dest_bug_id ) ) {
 		throw new RelationshipDestinationIssueAccessDenied( $f_dest_bug_id );
 	}
 

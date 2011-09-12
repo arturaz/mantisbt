@@ -85,9 +85,11 @@ if ( bug_is_readonly( $f_bug_id ) ) {
 # retrieve the destination bug of the relationship
 $t_dest_bug_id = relationship_get_linked_bug_id( $f_rel_id, $f_bug_id );
 
-# user can access to the related bug at least as viewer, if it's exist...
+# ensure the current user can update the destination issue (if it exists)
+# because we're changing both sides of the relationship
 if ( bug_exists( $t_dest_bug_id )) {
-	if ( !access_has_bug_level( VIEWER, $t_dest_bug_id ) ) {
+	$t_destination_bug = bug_get( $t_dest_bug_id );
+	if ( !access_has_bug_level( config_get( 'update_bug_threshold', null, null, $t_destination_bug->project_id ), $t_dest_bug_id ) ) {
 		throw new RelationshipDestinationIssueAccessDenied( $t_dest_bug_id );
 	}
 }

@@ -281,7 +281,7 @@ if ( $t_updated_bug->duplicate_id !== 0 ) {
 		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 	}
 	bug_ensure_exists( $t_updated_bug->duplicate_id );
-	if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_updated_bug->duplicate_id ) ) {
+	if ( !access_has_bug_level( config_get( 'update_bug_threshold', null, null, $t_updated_bug->project_id ), $t_updated_bug->duplicate_id ) ) {
 		throw new RelationshipDestinationIssueAccessDenied( $t_updated_bug->duplicate_id );
 	}
 	if ( relationship_exists( $f_bug_id, $t_updated_bug->duplicate_id ) ) {
