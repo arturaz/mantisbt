@@ -46,6 +46,7 @@ use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\CustomField\CustomFieldInvalidValue;
 use MantisBT\Exception\Field\EmptyField;
 use MantisBT\Exception\Issue\IssueReadOnly;
+use MantisBT\Exception\Issue\Relationship\RelationshipDuplicate;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -284,7 +285,7 @@ if ( $t_updated_bug->duplicate_id !== 0 ) {
 		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
 	}
 	if ( relationship_exists( $f_bug_id, $t_updated_bug->duplicate_id ) ) {
-		trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
+		throw new RelationshipDuplicate();
 	}
 }
 

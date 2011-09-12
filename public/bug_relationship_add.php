@@ -38,6 +38,7 @@
  */
 
 use MantisBT\Exception\Issue\IssueReadOnly;
+use MantisBT\Exception\Issue\Relationship\RelationshipDuplicate;
 use MantisBT\Exception\Issue\Relationship\RelationshipLoopbackDisallowed;
 
 /**
@@ -105,7 +106,7 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 
 	if ( $t_old_id_relationship == -1 ) {
 		# the relationship type is exactly the same of the new one. No sense to proceed
-		trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
+		throw new RelationshipDuplicate();
 	}
 	else if ( $t_old_id_relationship > 0 ) {
 		# there is already a relationship between them -> we have to update it and not to add a new one
