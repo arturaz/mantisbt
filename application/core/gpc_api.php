@@ -32,6 +32,7 @@
  */
 
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\GPC\ArrayExpected;
 use MantisBT\Exception\GPC\ArrayUnexpected;
 
 require_api( 'config_api.php' );
@@ -259,8 +260,7 @@ function gpc_get_string_array( $p_var_name, $p_default = null ) {
 
 	# If we the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
+		throw new ArrayExpected( $p_var_name );
 	}
 
 	return $t_result;
@@ -282,8 +282,7 @@ function gpc_get_int_array( $p_var_name, $p_default = null ) {
 
 	# If we the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
+		throw new ArrayExpected( $p_var_name );
 	}
 
 	$t_count = count( $t_result );
@@ -309,8 +308,7 @@ function gpc_get_bool_array( $p_var_name, $p_default = null ) {
 
 	# If we the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
+		throw new ArrayExpected( $p_var_name );
 	}
 
 	$t_count = count( $t_result );
