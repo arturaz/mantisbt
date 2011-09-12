@@ -42,6 +42,7 @@
 
 
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Access\SponsorshipAssignerAccessDenied;
 use MantisBT\Exception\Access\SponsorshipHandlerAccessDenied;
 
 require_once( 'core.php' );
@@ -109,7 +110,7 @@ if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 	if ( $t_bug_sponsored ) {
 		if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-			trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			throw new SponsorshipAssignerAccessDenied();
 		}
 	}
 

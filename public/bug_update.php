@@ -43,6 +43,7 @@
  */
 
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Access\SponsorshipAssignerAccessDenied;
 use MantisBT\Exception\Access\SponsorshipHandlerAccessDenied;
 use MantisBT\Exception\CustomField\CustomFieldInvalidValue;
 use MantisBT\Exception\Field\EmptyField;
@@ -195,7 +196,7 @@ if ( $t_existing_bug->handler_id !== $t_updated_bug->handler_id ) {
 			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 		}
 		if ( $t_issue_is_sponsored && !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-			trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			throw new SponsorshipAssignerAccessDenied();
 		}
 	}
 }
