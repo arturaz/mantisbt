@@ -31,7 +31,6 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -46,6 +45,7 @@
 use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\CustomField\CustomFieldInvalidValue;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\IssueReadOnly;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -56,7 +56,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -84,8 +83,7 @@ access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 # Check if the bug is in a read-only state and whether the current user has
 # permission to update read-only bugs.
 if ( bug_is_readonly( $f_bug_id ) ) {
-	error_parameters( $f_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	throw new IssueReadOnly( $f_bug_id );
 }
 
 $t_updated_bug = clone $t_existing_bug;

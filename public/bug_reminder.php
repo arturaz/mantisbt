@@ -29,7 +29,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
@@ -38,6 +37,8 @@
  * @uses print_api.php
  * @uses string_api.php
  */
+
+use MantisBT\Exception\Issue\IssueReadOnly;
 
 /**
  * MantisBT Core API's
@@ -49,7 +50,6 @@ require_api( 'bugnote_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
@@ -72,8 +72,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 if ( bug_is_readonly( $f_bug_id ) ) {
-	error_parameters( $f_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	throw new IssueReadOnly( $f_bug_id );
 }
 
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );

@@ -32,7 +32,6 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
  * @uses form_api.php
@@ -49,6 +48,8 @@
  * @uses version_api.php
  */
 
+use MantisBT\Exception\Issue\IssueReadOnly;
+
 /**
  * MantisBT Core API's
  */
@@ -62,7 +63,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'form_api.php' );
@@ -93,8 +93,7 @@ if ( $f_master_bug_id > 0 ) {
 
 	# master bug is not read-only...
 	if ( bug_is_readonly( $f_master_bug_id ) ) {
-		error_parameters( $f_master_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		throw new IssueReadOnly( $f_master_bug_id );
 	}
 
 	$t_bug = bug_get( $f_master_bug_id, true );

@@ -31,7 +31,6 @@
  * @uses custom_field_api.php
  * @uses date_api.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
  * @uses form_api.php
@@ -51,6 +50,7 @@
 
 use MantisBT\Exception\CustomField\CustomFieldInvalidValue;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\IssueReadOnly;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -61,7 +61,6 @@ require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'form_api.php' );
@@ -85,8 +84,7 @@ $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 if ( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
 	if ( bug_is_readonly( $f_master_bug_id ) ) {
-		error_parameters( $f_master_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		throw new IssueReadOnly( $f_master_bug_id );
 	}
 	$t_master_bug = bug_get( $f_master_bug_id, true );
 	project_ensure_exists( $t_master_bug->project_id );

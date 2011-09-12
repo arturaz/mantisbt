@@ -39,7 +39,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -49,6 +48,8 @@
  * @uses print_api.php
  * @uses string_api.php
  */
+
+use MantisBT\Exception\Issue\IssueReadOnly;
 
 /**
  * MantisBT Core API's
@@ -61,7 +62,6 @@ require_api( 'bugnote_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -93,8 +93,7 @@ if ( $t_user_id == $t_reporter_id ) {
 
 # Check if the bug is readonly
 if ( bug_is_readonly( $t_bug_id ) ) {
-	error_parameters( $t_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	throw new IssueReadOnly( $t_bug_id );
 }
 
 $t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );

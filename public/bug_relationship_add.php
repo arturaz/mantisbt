@@ -37,6 +37,8 @@
  * @uses relationship_api.php
  */
 
+use MantisBT\Exception\Issue\IssueReadOnly;
+
 /**
  * MantisBT Core API's
  */
@@ -81,8 +83,7 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 
 	# bug is not read-only...
 	if ( bug_is_readonly( $f_src_bug_id ) ) {
-		error_parameters( $f_src_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		throw new IssueReadOnly( $f_src_bug_id );
 	}
 
 	# user can access to the related bug at least as viewer...
