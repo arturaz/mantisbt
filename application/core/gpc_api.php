@@ -28,16 +28,15 @@
  *
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  */
 
 use MantisBT\Exception\Field\EmptyField;
 use MantisBT\Exception\GPC\ArrayExpected;
 use MantisBT\Exception\GPC\ArrayUnexpected;
+use MantisBT\Exception\GPC\NumberExpected;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 
 /**
  * Determines (once-off) whether the client is accessing this script via a
@@ -143,8 +142,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 	}
 	$t_val = str_replace( ' ', '', trim( $t_result ) );
 	if( !preg_match( "/^-?([0-9])*$/", $t_val ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
+		throw new NumberExpected( $p_var_name );
 	}
 
 	return (int) $t_val;
