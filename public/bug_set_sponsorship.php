@@ -38,6 +38,7 @@
  */
 
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Sponsorship\SponsorshipDisabled;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -73,7 +74,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 if ( config_get( 'enable_sponsorship' ) == OFF ) {
-	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
+	throw new SponsorshipDisabled();
 }
 
 access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
