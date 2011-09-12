@@ -38,6 +38,7 @@
  */
 
 use MantisBT\Exception\Issue\IssueReadOnly;
+use MantisBT\Exception\Issue\Relationship\RelationshipLoopbackDisallowed;
 
 /**
  * MantisBT Core API's
@@ -75,7 +76,7 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 
 	# source and destination bugs are the same bug...
 	if ( $f_src_bug_id == $f_dest_bug_id ) {
-		trigger_error( ERROR_RELATIONSHIP_SAME_BUG, ERROR );
+		throw new RelationshipLoopbackDisallowed();
 	}
 
 	# the related bug exists...
