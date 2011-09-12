@@ -33,6 +33,7 @@
  * @uses project_hierarchy_api.php
  */
 
+use MantisBT\Exception\Issue\Version\VersionDuplicate;
 use MantisBT\Exception\Issue\Version\VersionNotFound;
 use MantisBT\Exception\Database\ColumnNotFound;
 
@@ -170,7 +171,7 @@ function version_ensure_exists( $p_version_id ) {
  */
 function version_ensure_unique( $p_version, $p_project_id = null ) {
 	if( !version_is_unique( $p_version, $p_project_id ) ) {
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		throw new VersionDuplicate();
 	}
 }
 
@@ -219,7 +220,7 @@ function version_update( $p_version_info ) {
 
 	# check for duplicates
 	if(( utf8_strtolower( $t_old_version_name ) != utf8_strtolower( $p_version_info->version ) ) && !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		throw new VersionDuplicate();
 	}
 
 	$c_version_id = db_prepare_int( $p_version_info->id );

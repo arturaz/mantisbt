@@ -35,6 +35,7 @@
  * @uses version_api.php
  */
 
+use MantisBT\Exception\Issue\Version\VersionDuplicate;
 use MantisBT\Exception\Field\EmptyField;
 
 require_once( 'core.php' );
@@ -87,8 +88,7 @@ foreach ( $t_versions as $t_version ) {
 		#  given.  If multiple values were given, we just add the
 		#  ones we can.  The others already exist so it isn't really
 		#  an error.
-
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		throw new VersionDuplicate();
 	}
 }
 
