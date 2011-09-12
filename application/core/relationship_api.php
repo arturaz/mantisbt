@@ -82,6 +82,7 @@
  */
 
 use MantisBT\Exception\UnspecifiedException;
+use MantisBT\Exception\Issue\Relationship\RelationshipNotFound;
 
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
@@ -510,7 +511,7 @@ function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
 		return $t_bug_relationship_data->src_bug_id;
 	}
 
-	trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+	throw new RelationshipNotFound();
 }
 
 /**
@@ -521,7 +522,7 @@ function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
 function relationship_get_description_src_side( $p_relationship_type ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new RelationshipNotFound();
 	}
 	return lang_get( $g_relationships[$p_relationship_type]['#description'] );
 }
@@ -534,7 +535,7 @@ function relationship_get_description_src_side( $p_relationship_type ) {
 function relationship_get_description_dest_side( $p_relationship_type ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_relationship_type] ) || !isset( $g_relationships[$g_relationships[$p_relationship_type]['#complementary']] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new RelationshipNotFound();
 	}
 	return lang_get( $g_relationships[$g_relationships[$p_relationship_type]['#complementary']]['#description'] );
 }

@@ -48,6 +48,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Issue\Relationship\RelationshipNotFound;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -622,7 +624,7 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
 	$t_opt[] = bug_format_id( $p_related_bug_id );
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new RelationshipNotFound();
 	}
 	email_generic( $p_bug_id, 'relation', $g_relationships[$p_rel_type]['#notify_added'], $t_opt );
 }
@@ -641,7 +643,7 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type )
 	$t_opt[] = bug_format_id( $p_related_bug_id );
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new RelationshipNotFound();
 	}
 	email_generic( $p_bug_id, 'relation', $g_relationships[$p_rel_type]['#notify_deleted'], $t_opt );
 }
