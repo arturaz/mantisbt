@@ -32,6 +32,7 @@
  */
 
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\GPC\ArrayUnexpected;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -116,8 +117,7 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	if( is_array( $t_result ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+		throw new ArrayUnexpected( $p_var_name );
 	}
 
 	return $t_result;
@@ -138,8 +138,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 	$t_result = call_user_func_array( 'gpc_get', $args );
 
 	if( is_array( $t_result ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+		throw new ArrayUnexpected( $p_var_name );
 	}
 	$t_val = str_replace( ' ', '', trim( $t_result ) );
 	if( !preg_match( "/^-?([0-9])*$/", $t_val ) ) {
@@ -164,8 +163,7 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 		return $p_default;
 	} else {
 		if( is_array( $t_result ) ) {
-			error_parameters( $p_var_name );
-			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+			throw new ArrayUnexpected( $p_var_name );
 		}
 
 		return gpc_string_to_bool( $t_result );
