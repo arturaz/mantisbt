@@ -27,7 +27,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
@@ -37,6 +36,7 @@
  * @uses relationship_api.php
  */
 
+use MantisBT\Exception\Access\RelationshipDestinationIssueAccessDenied;
 use MantisBT\Exception\Issue\IssueReadOnly;
 use MantisBT\Exception\Issue\Relationship\RelationshipDuplicate;
 use MantisBT\Exception\Issue\Relationship\RelationshipLoopbackDisallowed;
@@ -50,7 +50,6 @@ require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
@@ -90,8 +89,7 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 
 	# user can access to the related bug at least as viewer...
 	if ( !access_has_bug_level( VIEWER, $f_dest_bug_id ) ) {
-		error_parameters( $f_dest_bug_id );
-		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
+		throw new RelationshipDestinationIssueAccessDenied( $f_dest_bug_id );
 	}
 
 	$t_bug = bug_get( $f_src_bug_id, true );

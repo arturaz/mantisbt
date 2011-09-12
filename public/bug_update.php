@@ -282,7 +282,7 @@ if ( $t_updated_bug->duplicate_id !== 0 ) {
 	}
 	bug_ensure_exists( $t_updated_bug->duplicate_id );
 	if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_updated_bug->duplicate_id ) ) {
-		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
+		throw new RelationshipDestinationIssueAccessDenied( $t_updated_bug->duplicate_id );
 	}
 	if ( relationship_exists( $f_bug_id, $t_updated_bug->duplicate_id ) ) {
 		throw new RelationshipDuplicate();
