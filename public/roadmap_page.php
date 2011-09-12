@@ -28,7 +28,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses gpc_api.php
@@ -43,6 +42,7 @@
  * @uses version_api.php
  */
 
+use MantisBT\Exception\Issue\Version\VersionNotFound;
 use MantisBT\Exception\Project\ProjectNotFound;
 
 /**
@@ -56,7 +56,6 @@ require_api( 'category_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
@@ -137,8 +136,7 @@ if ( is_blank( $f_version ) ) {
 	$f_version_id = version_get_id( $f_version, $t_project_id );
 
 	if ( $f_version_id === false ) {
-		error_parameters( $f_version );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new VersionNotFound( $f_version );
 	}
 }
 

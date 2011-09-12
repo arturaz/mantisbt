@@ -28,19 +28,18 @@
  * @uses constant_inc.php
  * @uses database_api.php
  * @uses date_api.php
- * @uses error_api.php
  * @uses helper_api.php
  * @uses project_api.php
  * @uses project_hierarchy_api.php
  */
 
+use MantisBT\Exception\Issue\Version\VersionNotFound;
 use MantisBT\Exception\Database\ColumnNotFound;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'date_api.php' );
-require_api( 'error_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
@@ -119,8 +118,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 		$g_cache_versions[$c_version_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_version_id );
-			trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+			throw new VersionNotFound( $p_version_id );
 		} else {
 			return false;
 		}
@@ -160,8 +158,7 @@ function version_is_unique( $p_version, $p_project_id = null ) {
  */
 function version_ensure_exists( $p_version_id ) {
 	if( !version_exists( $p_version_id ) ) {
-		error_parameters( $p_version_id );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new VersionNotFound( $p_version_id );
 	}
 }
 
