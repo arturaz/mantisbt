@@ -48,6 +48,7 @@ use MantisBT\Exception\Access\SponsorshipAssignerAccessDenied;
 use MantisBT\Exception\Access\SponsorshipHandlerAccessDenied;
 use MantisBT\Exception\CustomField\CustomFieldInvalidValue;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\IssueDuplicateSelf;
 use MantisBT\Exception\Issue\IssueReadOnly;
 use MantisBT\Exception\Issue\Relationship\RelationshipDuplicate;
 
@@ -281,7 +282,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 # Perform validation of the duplicate ID of the bug.
 if ( $t_updated_bug->duplicate_id !== 0 ) {
 	if ( $t_updated_bug->duplicate_id === $f_bug_id ) {
-		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+		throw new IssueDuplicateSelf();
 	}
 	bug_ensure_exists( $t_updated_bug->duplicate_id );
 	if ( !access_has_bug_level( config_get( 'update_bug_threshold', null, null, $t_updated_bug->project_id ), $t_updated_bug->duplicate_id ) ) {
