@@ -26,7 +26,6 @@
  * @uses category_api.php
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses lang_api.php
@@ -35,6 +34,7 @@
  */
 
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\Category\CategoryDuplicate;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -42,7 +42,6 @@ require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'lang_api.php' );
@@ -78,8 +77,7 @@ foreach ( $t_names as $t_name ) {
 		#  given.  If multiple values were given, we just add the
 		#  ones we can.  The others already exist so it isn't really
 		#  an error.
-
-		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
+		throw new CategoryDuplicate();
 	}
 }
 
