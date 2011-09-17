@@ -35,6 +35,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Twitter\cURLMissing;
+
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
 require_api( 'config_api.php' );
@@ -63,7 +65,7 @@ function twitter_enabled() {
 	}
 
 	if( $g_twitter_enabled && !function_exists( 'curl_init' ) ) {
-		trigger_error( ERROR_TWITTER_NO_CURL_EXT, ERROR );
+		throw new cURLMissing();
 	}
 
 	return $g_twitter_enabled;
