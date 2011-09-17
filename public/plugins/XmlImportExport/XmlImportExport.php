@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use MantisBT\Exception\Plugin\InstallationFailed;
+
 /**
  * XmlImportExportPlugin Class
  */
@@ -68,9 +70,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	function install() {
 		$result = extension_loaded("xmlreader") && extension_loaded("xmlwriter");
 		if ( ! $result ) {
-			#\todo returning false should trigger some error reporting, needs rethinking error_api
-			error_parameters( plugin_lang_get( 'error_no_xml' ) );
-			trigger_error( ERROR_PLUGIN_INSTALL_FAILED, ERROR );
+			throw new InstallationFailed( plugin_lang_get( 'title' ), plugin_lang_get( 'error_no_xml' ) );
 		}
 		return $result;
 	}
