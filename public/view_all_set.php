@@ -25,7 +25,6 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
- * @uses error_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses gpc_api.php
@@ -37,6 +36,8 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Filter\FilterTooOldToUpgrade;
+
 /**
  * MantisBT Core API's
  */
@@ -45,7 +46,6 @@ require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
-require_api( 'error_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
@@ -433,9 +433,8 @@ if ( !is_blank( $t_view_all_cookie ) ) {
 		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
 		if ( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
 			gpc_clear_cookie( 'view_all_cookie' );
-			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
+			//error_proceed_url( 'view_all_set.php?type=0' );
+			throw new FilterTooOldToUpgrade();
 		}
 	}
 } else {
@@ -522,9 +521,8 @@ switch ( $f_type ) {
 			if ( false === $t_setting_arr ) {
 				# couldn't deserialize, if we were trying to use the filter, clear it and reload
 				gpc_clear_cookie( 'view_all_cookie' );
-				error_proceed_url( 'view_all_set.php?type=0' );
-				trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-				exit; # stop here
+				//error_proceed_url( 'view_all_set.php?type=0' );
+				throw new FilterTooOldToUpgrade();
 			}
 			# Store the source query id to select the correct filter in the drop down.
 			$t_setting_arr['_source_query_id'] = $f_source_query_id;
