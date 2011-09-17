@@ -28,7 +28,6 @@
  * @uses constant_inc.php
  * @uses current_user_api.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses helper_api.php
  * @uses lang_api.php
  * @uses twitter_api.php
@@ -37,12 +36,12 @@
 
 use MantisBT\Exception\Access\AccessDenied;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\News\NewsItemNotFound;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'twitter_api.php' );
@@ -154,7 +153,7 @@ function news_get_row( $p_news_id ) {
 	$row = db_fetch_array( $result );
 
 	if( !$row ) {
-		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
+		throw new NewsItemNotFound( $p_news_id );
 	} else {
 		return $row;
 	}
