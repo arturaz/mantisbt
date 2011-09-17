@@ -30,7 +30,6 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
  * @uses helper_api.php
@@ -43,6 +42,7 @@
  * @uses string_api.php
  */
 
+use MantisBT\Exception\Column\ColumnDuplicate;
 use MantisBT\Exception\Column\ColumnInvalid;
 
 require_api( 'access_api.php' );
@@ -53,7 +53,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
@@ -383,8 +382,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
 	foreach( $p_columns_to_validate as $t_column ) {
 		$t_column_lower = utf8_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
-			error_parameters( $p_field_name, $t_column );
-			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
+			throw new ColumnDuplicate( $p_field_name, $t_column );
 		} else {
 			$t_columns_no_duplicates[] = $t_column_lower;
 		}
