@@ -27,12 +27,13 @@
  * @uses constant_inc.php
  * @uses current_user_api.php
  * @uses custom_field_api.php
- * @uses error_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses gpc_api.php
  * @uses helper_api.php
  */
+
+use MantisBT\Exception\Filter\FilterNotFound;
 
 /**
  * MantisBT Core API's
@@ -44,7 +45,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
 require_api( 'custom_field_api.php' );
-require_api( 'error_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
@@ -151,7 +151,6 @@ if ( function_exists( $t_function_name ) ) {
 
 	if ( !$t_found ) {
 		# error - no function to populate the target (e.g., print_filter_foo)
-		error_parameters( $f_filter_target );
-		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		throw new FilterNotFound( $f_filter_target );
 	}
 }

@@ -34,7 +34,6 @@
  * @uses custom_field_api.php
  * @uses database_api.php
  * @uses date_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses filter_constants_inc.php
  * @uses gpc_api.php
@@ -53,6 +52,7 @@
  */
 
 use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Filter\FilterNotFound;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -65,7 +65,6 @@ require_api( 'current_user_api.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'database_api.php' );
 require_api( 'date_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
@@ -4299,8 +4298,7 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 
 	if( !$row ) {
 		if( $p_trigger_errors ) {
-			error_parameters( $p_filter_id );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			throw new FilterNotFound( $p_filter_id );
 		} else {
 			return false;
 		}
