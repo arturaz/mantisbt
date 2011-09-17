@@ -33,9 +33,10 @@
  * @uses project_hierarchy_api.php
  */
 
+use MantisBT\Exception\Database\ColumnNotFound;
+use MantisBT\Exception\Field\InvalidDateFormat;
 use MantisBT\Exception\Issue\Version\VersionDuplicate;
 use MantisBT\Exception\Issue\Version\VersionNotFound;
-use MantisBT\Exception\Database\ColumnNotFound;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -73,7 +74,7 @@ class VersionData {
 					}  else {
 						$value = strtotime( $value );
 						if ( $value === false ) {
-							trigger_error( ERROR_INVALID_DATE_FORMAT, ERROR );
+							throw new InvalidDateFormat();
 						}
 					}
 				}
