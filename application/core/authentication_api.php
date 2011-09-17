@@ -28,7 +28,6 @@
  * @uses crypto_api.php
  * @uses current_user_api.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
  * @uses html_api.php
@@ -50,7 +49,6 @@ require_api( 'constant_inc.php' );
 require_api( 'crypto_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );

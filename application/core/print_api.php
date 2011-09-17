@@ -34,7 +34,6 @@
  * @uses custom_field_api.php
  * @uses database_api.php
  * @uses email_api.php
- * @uses error_api.php
  * @uses file_api.php
  * @uses form_api.php
  * @uses helper_api.php
@@ -66,7 +65,6 @@ require_api( 'current_user_api.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'database_api.php' );
 require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'file_api.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
@@ -88,7 +86,6 @@ require_api( 'version_api.php' );
 # Print the headers to cause the page to redirect to $p_url
 # If $p_die is true (default), terminate the execution of the script
 #  immediately
-# If we have handled any errors on this page return false and don't redirect.
 # $p_sanitize - true/false - true in the case where the URL is extracted from GET/POST or untrusted source.
 # This would be false if the URL is trusted (e.g. read from config_inc.php).
 #
@@ -97,10 +94,6 @@ require_api( 'version_api.php' );
 # @param boolean apply string_sanitize_url to passed url
 # @return boolean
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
-	if( error_handled() ) {
-		return false;
-	}
-
 	# validate the url as part of this site before continuing
 	if( $p_absolute ) {
 		if( $p_sanitize ) {

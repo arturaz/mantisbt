@@ -26,7 +26,6 @@
  * @uses authentication_api.php
  * @uses constant_inc.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses helper_api.php
  * @uses utility_api.php
  */
@@ -36,7 +35,6 @@ use MantisBT\Exception\Configuration\ConfigurationOptionNotFound;
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'utility_api.php' );
 
@@ -86,9 +84,6 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 		}
 
 		if( $g_cache_db_table_exists ) {
-
-			# @@ debug @@ echo " lu db $p_option ";
-			# @@ debug @@ error_print_stack_trace();
 			# prepare the user's list
 			$t_users = array();
 			if( null === $p_user ) {
@@ -458,9 +453,6 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 		if( !config_can_delete( $p_option ) ) {
 			return;
 		}
-
-		# @@ debug @@ echo "lu table=" . ( db_table_exists( 'config' ) ? "yes" : "no" );
-		# @@ debug @@ error_print_stack_trace();
 
 		$c_user = db_prepare_int( $p_user );
 		$c_project = db_prepare_int( $p_project );

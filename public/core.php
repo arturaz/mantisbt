@@ -206,12 +206,17 @@ if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 
 # Ensure that output is blank so far (output at this stage generally denotes
 # that an error has occurred)
-# that an error has occurred)
 if ( ( $t_output = ob_get_contents() ) != '' ) {
 	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
 	echo var_dump( $t_output );
 	die;
 }
+
+# Register exception handlers
+use MantisBT\Error;
+set_exception_handler(array('MantisBT\Error', 'exception_handler'));
+set_error_handler(array('MantisBT\Error', 'error_handler'));
+register_shutdown_function(array('MantisBT\Error', 'shutdown_error_handler'));
 
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );

@@ -25,7 +25,6 @@
  *
  * @uses constant_api.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses lang_api.php
  * @uses utility_api.php
  */
@@ -34,7 +33,6 @@ use MantisBT\Exception\Field\EmptyField;
 
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 

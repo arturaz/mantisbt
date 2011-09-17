@@ -36,8 +36,6 @@ class Error {
 
 	private static $parameters = array();
 
-	private static $proceedUrl = null;
-
 	public static function init(){
 		if( self::$handled === false ) {
 			// first run
@@ -95,7 +93,7 @@ class Error {
 			self::init();
 		}
 
-		if( $type == E_WARNING || $type == E_USER_WARNING || null !== self::$proceedUrl ) {
+		if( $type == E_WARNING || $type == E_USER_WARNING ) {
 
 			switch( $type ) {
 				case E_WARNING:
@@ -109,9 +107,6 @@ class Error {
 			}
 			$errorDescription = nl2br( $errorDescription );
 			echo '<p style="color:red">', $errorType, ': ', $errorDescription, '</p>';
-			if ( null !== self::$proceedUrl ) {
-				echo '<a href="', self::$proceedUrl, '">', lang_get( 'proceed' ), '</a>';
-			}
 
 			return true; // @todo true|false??
 		}
@@ -148,7 +143,7 @@ class Error {
 		}
 
 		$oblen = ob_get_length();
-		if( error_handled() && $oblen > 0 ) {
+		if( self::$handled === true && $oblen > 0 ) {
 			$oldContents = ob_get_contents();
 		}
 
@@ -296,8 +291,7 @@ class Error {
 		array_shift( $stack );
 
 		foreach( $stack as $frame ) {
-			echo '<tr ', self::error_alternate_class(), '>';
-			echo '<td>', ( isset( $frame['file'] ) ? htmlentities( $frame['file'], ENT_COMPAT, 'UTF-8' ) : '-' ), '</td><td>', ( isset( $frame['line'] ) ? $frame['line'] : '-' ), '</td><td>', ( isset( $frame['class'] ) ? $frame['class'] : '-' ), '</td><td>', ( isset( $frame['type'] ) ? $frame['type'] : '-' ), '</td><td>', ( isset( $frame['function'] ) ? $frame['function'] : '-' ), '</td>';
+			echo '<tr><td>', ( isset( $frame['file'] ) ? htmlentities( $frame['file'], ENT_COMPAT, 'UTF-8' ) : '-' ), '</td><td>', ( isset( $frame['line'] ) ? $frame['line'] : '-' ), '</td><td>', ( isset( $frame['class'] ) ? $frame['class'] : '-' ), '</td><td>', ( isset( $frame['type'] ) ? $frame['type'] : '-' ), '</td><td>', ( isset( $frame['function'] ) ? $frame['function'] : '-' ), '</td>';
 
 			$args = array();
 			if( isset( $frame['args'] ) && !empty( $frame['args'] ) ) {
@@ -371,30 +365,6 @@ class Error {
 		# ripped from string_api
 		$string = call_user_func_array( 'sprintf', array_merge( array( $error ), self::$parameters, $padding ) );
 		return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $string, ENT_COMPAT, 'UTF-8' ) );
-	}
-
-
-	/**
-	 * Simple version of helper_alternate_class for use by error api only.
-	 * @access private
-	 * @return string representing css class
-	 */
-	public static function error_alternate_class() {
-		static $errIndex = 1;
-
-		if( 1 == $errIndex++ % 2 ) {
-			return 'class="row-1"';
-		} else {
-			return 'class="row-2"';
-		}
-	}
-
-	public static function error_parameters( $args ) {
-		self::$parameters = $args;
-	}
-
-	public static function error_proceed_url( $url ) {
-		self::$proceedUrl = $url();
 	}
 
 	public static function error_handled() {

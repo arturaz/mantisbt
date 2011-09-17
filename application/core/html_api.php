@@ -63,7 +63,6 @@
  * @uses constant_inc.php
  * @uses current_user_api.php
  * @uses database_api.php
- * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
  * @uses filter_api.php
@@ -88,7 +87,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
-require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'filter_api.php' );
@@ -108,9 +106,6 @@ require_api( 'utility_api.php' );
 $g_rss_feed_url = null;
 
 $g_robots_meta = '';
-
-# flag for error handler to skip header menus
-$g_error_send_page_header = true;
 
 $g_stylesheets_included = array();
 $g_scripts_included = array();
@@ -237,11 +232,8 @@ function html_page_top2() {
  * @return null
  */
 function html_page_top2a() {
-	global $g_error_send_page_header;
-
 	html_head_end();
 	html_body_begin();
-	$g_error_send_page_header = false;
 	html_header();
 	html_top_banner();
 }
@@ -378,7 +370,6 @@ function html_css_link( $p_filename ) {
  * (6) Print an HTML meta tag to redirect to another page
  * This function is optional and may be called by pages that need a redirect.
  * $p_time is the number of seconds to wait before redirecting.
- * If we have handled any errors on this page return false and don't redirect.
  *
  * @param string $p_url The page to redirect: has to be a relative path
  * @param integer $p_time seconds to wait for before redirecting
@@ -386,10 +377,6 @@ function html_css_link( $p_filename ) {
  * @return boolean
  */
 function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
-	if( error_handled() ) {
-		return false;
-	}
-
 	if( null === $p_time ) {
 		$p_time = current_user_get_pref( 'redirect_delay' );
 	}

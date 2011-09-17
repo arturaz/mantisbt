@@ -788,40 +788,5 @@ functions section.</para>
                     notify after an issue has been deleted
                 </para>
             </section>
-
-            <section id="admin.customize.customfuncs.example">
-                <title>Example Custom Function</title>
-
-                <para>The following function is used to validate an issue before
-                    it is resolved.
-                    <programlisting width="102"><![CDATA[<?php
-# --------------------
-# Hook to validate Validate field settings before resolving
-# verify that the resolution is not set to OPEN
-# verify that the fixed in version is set (if versions of the product exist)
-
-function custom_function_override_issue_update_validate( $p_issue_id, $p_bug_data, $p_bugnote_text ) {
-if ( $p_bug_data->status == RESOLVED ) {
-if ( $p_bug_data->resolution == OPEN ) {
-error_parameters( 'the resolution cannot be open to resolve the issue' );
-trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
-}
-$t_version_count = count( version_get_all_rows( $p_bug_data-&gt;project_id ) );
-if ( ( $t_version_count > 0 ) && ( $p_bug_data->fixed_in_version == '' ) ) {
-error_parameters( 'fixed in version must be set to resolve the issue' );
-trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
-}
-}
-}
-?>]]>
-                    </programlisting>
-                    The errors will also need to be defined by adding the following to <filename>custom_constants_inc.php</filename>
-                    <programlisting>
-                        define ( 'ERROR_VALIDATE_FAILURE', 2000 );
-                        To custom_strings_inc.php
-                        $MANTIS_ERROR['ERROR_VALIDATE_FAILURE'] = 'This change cannot be made because %s';
-                    </programlisting>
-                </para>
-            </section>
         </section>
 </chapter>
