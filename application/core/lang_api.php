@@ -26,15 +26,15 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses plugin_api.php
  * @uses user_pref_api.php
  */
 
+use MantisBT\Exception\Language\LanguageStringNotFound;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'plugin_api.php' );
 require_api( 'user_pref_api.php' );
 
@@ -349,8 +349,7 @@ function lang_get( $p_string, $p_lang = null, $p_error = true ) {
 		// Step 5 - string didn't exist, try fall back to english:
 		if( $t_lang == 'english' ) {
 			if( $p_error ) {
-				error_parameters( $p_string );
-				trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
+				throw new LanguageStringNotFound( $p_string );
 			}
 			return '';
 		} else {
