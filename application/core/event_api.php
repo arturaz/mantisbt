@@ -24,13 +24,13 @@
  * @link http://www.mantisbt.org
  *
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses events_inc.php
  * @uses plugin_api.php
  */
 
+use MantisBT\Exception\Plugin\EventUndeclared;
+
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'events_inc.php' );
 require_api( 'plugin_api.php' );
 
@@ -82,9 +82,7 @@ function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
 
 	if( !isset( $g_event_cache[$p_name] ) ) {
-		error_parameters( $p_name );
-		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
-		return null;
+		throw new EventUndeclared( $p_name );
 	}
 
 	$g_event_cache[$p_name]['callbacks'][$p_plugin][] = $p_callback;
@@ -138,9 +136,7 @@ function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_t
 	global $g_event_cache;
 
 	if( !isset( $g_event_cache[$p_name] ) ) {
-		error_parameters( $p_name );
-		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
-		return null;
+		throw new EventUndeclared( $p_name );
 	}
 
 	if( is_null( $p_type ) ) {
