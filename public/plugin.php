@@ -28,6 +28,7 @@
 
 use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Plugin\PluginNotRegistered;
+use MantisBT\Exception\Plugin\PluginPageNotFound;
 
 /**
  * MantisBT Core API's
@@ -58,7 +59,7 @@ if ( !isset( $g_plugin_cache[$t_basename] ) ) {
 $t_page = "$t_plugin_path$t_basename/pages/$t_action.php";
 
 if ( !is_file( $t_page ) ) {
-		trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
+	throw new PluginPageNotFound( $t_basename, $t_action );
 }
 
 plugin_push_current( $t_basename );
