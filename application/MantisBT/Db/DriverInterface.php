@@ -89,12 +89,10 @@ interface DriverInterface {
      */
     public function queryStart( $sql, array $params=null );
 
-    /**
-     * Called immediately after each db query.
-     * @param mixed db specific result
-     * @return void
-     */
-    public function queryEnd( $result );
+	/**
+	 * Called immediately after each db query.
+	 */
+	public function queryEnd();
 
     /**
      * Returns database server info array
@@ -102,11 +100,6 @@ interface DriverInterface {
      */
     public function getServerInfo();
 
-    /**
-     * Returns last error reported by database engine.
-     * @return string error message
-     */
-    public function getLastError();
 
     /**
      * Return tables in database WITHOUT current prefix

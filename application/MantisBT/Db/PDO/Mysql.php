@@ -15,12 +15,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace MantisBT\Db\PDO;
-use MantisBT\Db\DriverInterface;
-use MantisBT\Db\PDO\PDOAbstract;
-use MantisBT\Exception\Db AS DbException;
+
 use \PDO;
 use \PDOException;
+use MantisBT\Db\DriverInterface;
+use MantisBT\Db\PDO\PDOAbstract;
+use MantisBT\Exception\Database\QueryFailed;
 
 /**
  * MYSQL PDO driver class.
@@ -86,9 +88,8 @@ class Mysql extends PDOAbstract implements DriverInterface {
 		$sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
 		try {
 			$result = $this->execute( $sql, array( $name ) );
-		} catch (PDOException $ex) {
-			throw new DbException(ERROR_DB_QUERY_FAILED, $ex->getMessage());
-			return false;
+		} catch (PDOException $exception) {
+			throw new QueryFailed($exception->getCode(), $exception->getMessage(), $sql);
 		}
 		if ($result) {
 			$value = $result->fetch();

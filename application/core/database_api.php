@@ -28,7 +28,6 @@ use MantisBT\Exception\Database\ConnectionFailed;
  *
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  * @uses logging_api.php
  * @uses utility_api.php
  * @uses adodb/adodb.inc.php
@@ -36,7 +35,6 @@ use MantisBT\Exception\Database\ConnectionFailed;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'utility_api.php' );
 
@@ -182,7 +180,7 @@ function db_is_db2() {
  * @param array $p_arr_parms Array of parameters matching $p_query
  * @param int $limit Number of results to return
  * @param int $offset offset query results for paging
- * @return ADORecordSet|bool adodb result set or false if the query failed.
+ * @return mixed Resulting handle for the executed prepared statement
  */
 function db_query_bound( $p_query, $p_arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries;
@@ -247,13 +245,7 @@ function db_query_bound( $p_query, $p_arr_parms = null, $p_limit = -1, $p_offset
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
-	if( !$t_result ) {
-		db_error( $p_query );
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
-		return false;
-	} else {
-		return $t_result;
-	}
+	return $t_result;
 }
 
 /**
@@ -270,17 +262,15 @@ function db_param() {
  * @return int Record Count
  */
 function db_affected_rows( $result ) {
-	global $g_db;
-
 	return $result->rowCount();
 }
 
 /**
- * Retrieve the next row returned from a specific database query
- * @param bool|ADORecordSet $p_result Database Query Record Set to retrieve next result for.
- * @return array Database result
+ * Retrieve the next row returned from a database query.
+ * @param mixed Result of an executed prepared statement
+ * @return array An array of the next row of the query results
  */
-function db_fetch_array( &$result ) {
+function db_fetch_array( $result ) {
 	return $result->fetch();
 }
 
@@ -380,19 +370,6 @@ function db_field_names( $tableName ) {
 	global $g_db;
 	$columns = $g_db->getColumns( $tableName );
 	return is_array( $columns ) ? $columns : array();
-}
-
-/**
- * send both the error number and error message and query (optional) as paramaters for a triggered error
- * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
- */
-function db_error( $query = null ) {
-	global $g_db;
-	if( null !== $query ) {
-		error_parameters( /* $g_db->ErrorNo(), */ $g_db->getLastError(), $query );
-	} else {
-		error_parameters( /* $g_db->ErrorNo(), */ $g_db->getLastError() );
-	}
 }
 
 /**

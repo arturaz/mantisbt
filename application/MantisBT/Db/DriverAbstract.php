@@ -19,7 +19,8 @@
 namespace MantisBT\Db;
 
 use MantisBT\Db\PDO\Mysql;
-use MantisBT\Exception\Db;
+use MantisBT\Exception\Database\ParameterCountMismatch;
+use MantisBT\Exception\Database\QueryFailed;
 use MantisBT\Exception\UnspecifiedException;
 
 /**
@@ -147,16 +148,10 @@ abstract class DriverAbstract {
 		$this->queries++;
     }
 
-    /**
-     * Called immediately after each db query.
-     * @param mixed db specific result
-     * @return void
-     */
-    public function queryEnd( $result ) {
-        if ( $result !== false ) {
-            return;
-        }
-    }
+	/**
+	 * Called immediately after each db query.
+	 */
+	public function queryEnd() {}
 
     /**
      * Reset internal column details cache
@@ -202,36 +197,35 @@ abstract class DriverAbstract {
     }
 
 	/**
-     * Verify sql parameters
-     * @param string $sql query or part of it
-     * @param array $params query parameters
-     * @return array (sql, params, type of params)
-     */
-    public function checkSqlParameters($sql, array $params=null) {
-        $params = (array)$params; // make null array if needed
-
-        // cast booleans to 1/0 int
-        foreach ($params as $key => $value) {
-            $params[$key] = is_bool($value) ? (int)$value : $value;
-        }
-
-        $t_count = substr_count($sql, '?');
-
-        if (!$t_count) {
-			return array($sql, array() );
-        }
-
-		if ($t_count == count($params)) {
-			return array($sql, array_values($params));
+	 * Verify parameters to SQL query string
+	 * @param string $sql SQL query string (or a portion thereof)
+	 * @param array $parameters Query parameters
+	 * @return array An array containing: [0] = SQL query string, [1] = array of parameters
+	 */
+	public function checkSqlParameters($queryString, array $parameters = null) {
+		$expectedParameterCount = substr_count($queryString, '?');
+		$actualParameterCount = 0;
+		if ($parameters !== null) {
+			$actualParameterCount = count($parameters);
+		} else {
+			$parameters = array();
 		}
 
-		$a = new stdClass;
-		$a->expected = $t_count;
-		$a->actual = count($params);
-		$a->sql = $sql;
-		$a->params = $params;
-		throw new Db( ERROR_DB_QUERY_FAILED, $a );
-    }
+		if ($expectedParameterCount !== $actualParameterCount) {
+			throw new ParameterCountMismatch($queryString, $parameters);
+		}
+
+		if ($actualParameterCount === 0) {
+			return array($queryString, array());
+		} else {
+			// cast booleans to 1/0 int
+			foreach ($parameters as $parameterName => $parameterValue) {
+				$parameters[$parameterName] = is_bool($parameterValue) ? (int)$parameterValue : $parameterValue;
+			}
+
+			return array($queryString, array_values($parameters));
+		}
+	}
 
 	public function getTableNamePrefix() {
 		return $this->tableNamePrefix;

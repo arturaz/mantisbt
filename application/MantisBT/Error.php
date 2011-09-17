@@ -82,7 +82,7 @@ class Error {
         $errorInfo->file = $file;
         $errorInfo->line = $line;
         $errorInfo->context = $context;
-		$errorInfo->trace = debug_backtrace();
+	$errorInfo->trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
 
         self::$allErrors[] = $errorInfo;
 
@@ -135,8 +135,8 @@ class Error {
         $errorInfo->message = $error['message'];
         $errorInfo->file = $error['file'];
         $errorInfo->line = $error['line'];
-        $errorInfo->trace = debug_backtrace();
-		$errorInfo->context = null;
+        $errorInfo->trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
+	$errorInfo->context = null;
 
         self::$allErrors[] = $errorInfo;
 	}
@@ -294,7 +294,6 @@ class Error {
 
 		# remove the call to the error handler from the stack trace
 		array_shift( $stack );
-
 
 		foreach( $stack as $frame ) {
 			echo '<tr ', self::error_alternate_class(), '>';
