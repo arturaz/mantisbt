@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace MantisBT\Db;
+namespace MantisBT\Database;
 
-use MantisBT\Db\PDO\Mysql;
+use MantisBT\Database\PDO\MySQL\MySQLDriver;
 use MantisBT\Exception\Database\ParameterCountMismatch;
 use MantisBT\Exception\Database\QueryFailed;
 use MantisBT\Exception\UnspecifiedException;
@@ -78,25 +78,25 @@ abstract class DriverAbstract {
         $this->dispose();
     }
 
-    /**
-     * Loads and returns a database instance with the specified type and library.
-     * @param string $type database type of the driver (e.g. pdo_pgsql)
-     * @return MantisBT\Db object or null if error
-     * @todo throw an error if $type doesn't match a supported driver type
-     */
-    public static function getDriverInstance($type) {
-        static $driver = null;
-        if( is_null( $driver ) ) {
-		    $type = explode( '_', $type );
-		    switch( strtolower( $type[0] ) ) {
-			    case 'pdo':
-				    $driverType = 'PDO';
-		    }
-            $classname = 'MantisBT\\Db\\' . $driverType . '\\' . ucfirst($type[1]);
-            $driver = new $classname();
-        }
-        return $driver;
-    }
+	/**
+	 * Loads and returns a database instance with the specified type and library.
+	 * @param string $type database type of the driver (e.g. pdo_pgsql)
+	 * @return Database driver object derived from MantisBT\Database\DriverAbstract
+	 */
+	public static function getDriverInstance($type) {
+		static $driver = null;
+		if(is_null($driver)) {
+			switch(strtolower($type)) {
+				case 'pdo_mysql':
+					$driver = new MySQLDriver;
+					break;
+				default:
+					throw new DatabaseTypeNotSupported($type);
+					break;
+			}
+		}
+		return $driver;
+	}
 
     /**
      * Diagnose database and tables, this function is used

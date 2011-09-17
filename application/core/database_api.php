@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-use MantisBT\Db\DriverAbstract;
+use MantisBT\Database\DriverAbstract;
 use MantisBT\Exception\Database\ConnectionFailed;
 
 /**

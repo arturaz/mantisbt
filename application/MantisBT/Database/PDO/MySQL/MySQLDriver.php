@@ -16,12 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace MantisBT\Db\PDO;
+namespace MantisBT\Database\PDO\MySQL;
 
 use \PDO;
 use \PDOException;
-use MantisBT\Db\DriverInterface;
-use MantisBT\Db\PDO\PDOAbstract;
+use MantisBT\Database\DriverInterface;
+use MantisBT\Database\PDO\PDODriverAbstract;
 use MantisBT\Exception\Database\QueryFailed;
 
 /**
@@ -29,7 +29,7 @@ use MantisBT\Exception\Database\QueryFailed;
  * @package MantisBT
  * @subpackage classes
  */
-class Mysql extends PDOAbstract implements DriverInterface {
+class MySQLDriver extends PDODriverAbstract implements DriverInterface {
     /**
      * Returns the driver-dependent DSN for PDO based on members stored by connect.
      * Must be called after connect (or after $dbname, $dbhost, etc. members have been set).

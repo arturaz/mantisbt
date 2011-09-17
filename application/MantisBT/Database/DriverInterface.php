@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace MantisBT\Db;
+namespace MantisBT\Database;
 
 /**
  * Abstract database driver class.

@@ -16,11 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace MantisBT\Db\PDO;
+namespace MantisBT\Database\PDO;
 
 use \PDO;
 use \PDOException;
-use MantisBT\Db\DriverAbstract;
+use MantisBT\Database\DriverAbstract;
 use MantisBT\Exception\Database\ConnectionFailed;
 use MantisBT\Exception\Database\DatabaseTypeNotSupported;
 use MantisBT\Exception\Database\QueryFailed;
@@ -30,7 +30,7 @@ use MantisBT\Exception\Database\QueryFailed;
  * @package MantisBT
  * @subpackage classes
  */
-abstract class PDOAbstract extends DriverAbstract {
+abstract class PDODriverAbstract extends DriverAbstract {
 	protected $pdb;
 
 	/**
