@@ -38,6 +38,7 @@
  */
 
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Attachment\AttachmentOversized;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -58,7 +59,7 @@ $f_file		= gpc_get_file( 'file', -1 );
 
 if ( $f_bug_id == -1 && $f_file	== -1 ) {
 	# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
-	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+	throw new AttachmentOversized();
 }
 
 form_security_validate( 'bug_file_add' );

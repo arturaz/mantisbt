@@ -37,6 +37,7 @@
 
 use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Attachment\AttachmentOversized;
 use MantisBT\Exception\Field\EmptyField;
 
 require_once( 'core.php' );
@@ -99,7 +100,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 	$t_file_size = filesize( $v_tmp_name );
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if ( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		throw new AttachmentOversized();
 	}
 	$c_file_size = db_prepare_int( $t_file_size );
 
