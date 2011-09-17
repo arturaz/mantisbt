@@ -43,6 +43,8 @@
  * @uses string_api.php
  */
 
+use MantisBT\Exception\Column\ColumnInvalid;
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
@@ -372,9 +374,7 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
 		if( !in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
-			error_parameters( $p_field_name, $t_column );
-			trigger_error( ERROR_COLUMNS_INVALID, ERROR );
-			return false;
+			throw new ColumnInvalid( $p_field_name, $t_column );
 		}
 	}
 
