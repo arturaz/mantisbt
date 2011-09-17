@@ -31,6 +31,8 @@
  * @uses database_api.php
  */
 
+use MantisBT\Exception\Token\TokenNotFound;
+
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -63,7 +65,7 @@ function token_exists( $p_token_id ) {
  */
 function token_ensure_exists( $p_token_id ) {
 	if( !token_exists( $p_token_id ) ) {
-		trigger_error( ERROR_TOKEN_NOT_FOUND, ERROR );
+		throw new TokenNotFound( $p_token_id );
 	}
 
 	return true;
