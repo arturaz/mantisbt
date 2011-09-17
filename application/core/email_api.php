@@ -48,6 +48,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Email\EmailAddressInvalid;
 use MantisBT\Exception\Issue\Relationship\RelationshipNotFound;
 
 require_api( 'access_api.php' );
@@ -156,7 +157,7 @@ function email_is_valid( $p_email ) {
  */
 function email_ensure_valid( $p_email ) {
 	if( !email_is_valid( $p_email ) ) {
-		trigger_error( ERROR_EMAIL_INVALID, ERROR );
+		throw new EmailAddressInvalid( $p_email );
 	}
 }
 
