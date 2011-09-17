@@ -48,6 +48,7 @@ use MantisBT\Exception\Access\SponsorshipAssignerAccessDenied;
 use MantisBT\Exception\Access\SponsorshipHandlerAccessDenied;
 use MantisBT\Exception\CustomField\CustomFieldInvalidValue;
 use MantisBT\Exception\Field\EmptyField;
+use MantisBT\Exception\Issue\DependantIssuesNotResolved;
 use MantisBT\Exception\Issue\IssueDuplicateSelf;
 use MantisBT\Exception\Issue\IssueReadOnly;
 use MantisBT\Exception\Issue\Relationship\RelationshipDuplicate;
@@ -153,7 +154,7 @@ if ( $t_existing_bug->status < $t_resolved_status &&
 # If resolving or closing, ensure that all dependant issues have been resolved.
 if ( ( $t_resolve_issue || $t_close_issue ) &&
      !relationship_can_resolve_bug( $f_bug_id ) ) {
-	trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+	throw new DependantIssuesNotResolved( $f_bug_id );
 }
 
 # Validate any change to the status of the issue.
