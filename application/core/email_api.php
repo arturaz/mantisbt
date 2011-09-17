@@ -48,6 +48,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\Email\DisposableEmailAddressDisallowed;
 use MantisBT\Exception\Email\EmailAddressInvalid;
 use MantisBT\Exception\Issue\Relationship\RelationshipNotFound;
 
@@ -182,7 +183,7 @@ function email_is_disposable( $p_email ) {
  */
 function email_ensure_not_disposable( $p_email ) {
 	if( email_is_disposable( $p_email ) ) {
-		trigger_error( ERROR_EMAIL_DISPOSABLE, ERROR );
+		throw new DisposableEmailAddressDisallowed( $p_email );
 	}
 }
 
