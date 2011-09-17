@@ -27,6 +27,7 @@
  */
 
 use MantisBT\Exception\UnspecifiedException;
+use MantisBT\Exception\Plugin\PluginNotRegistered;
 
 /**
  * MantisBT Core API's
@@ -51,7 +52,7 @@ $t_action = $t_matches[2];
 
 global $g_plugin_cache;
 if ( !isset( $g_plugin_cache[$t_basename] ) ) {
-	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+	throw new PluginNotRegistered( $t_basename );
 }
 
 $t_page = "$t_plugin_path$t_basename/pages/$t_action.php";

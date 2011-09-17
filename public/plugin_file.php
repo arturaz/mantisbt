@@ -27,6 +27,7 @@
  */
 
 use MantisBT\Exception\UnspecifiedException;
+use MantisBT\Exception\Plugin\PluginNotRegistered;
 
 $g_bypass_headers = true;
 header( 'Content-type: ' );
@@ -51,7 +52,7 @@ $t_file = $t_matches[2];
 
 global $g_plugin_cache;
 if ( !isset( $g_plugin_cache[$t_basename] ) ) {
-	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+	throw new PluginNotRegistered( $t_basename );
 }
 
 plugin_file_include( $t_file, $t_basename );
