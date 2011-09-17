@@ -41,6 +41,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Database\ColumnNotFound;
 use MantisBT\Exception\User\CannotModifyProtectedAccount;
 use MantisBT\Exception\User\UserByIDNotFound;
@@ -701,8 +702,8 @@ function user_get_row( $p_user_id ) {
 # return the specified user field for the user id
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
-		trigger_error( 'user_get_field() for NO_USER', WARNING );
-		return '@null@';
+		throw new UnspecifiedException();
+		//return '@null@';
 	}
 
 	$row = user_get_row( $p_user_id );
