@@ -53,6 +53,8 @@
  * @uses version_api.php
  */
 
+use MantisBT\Exception\HTTP\PageRedirectionFailed;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_group_action_api.php' );
@@ -116,13 +118,12 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 
 	$t_url = string_prepare_header( $t_url );
 
-	# don't send more headers if they have already been sent (guideweb)
+	# don't send more headers if they have already been sent
 	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=utf-8' );
 		header( "Location: $t_url" );
 	} else {
-		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
-		return false;
+		throw new PageRedirectionFailed();
 	}
 
 	if( $p_die ) {
