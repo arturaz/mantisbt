@@ -38,6 +38,7 @@
  */
 
 use MantisBT\Exception\UnspecifiedException;
+use MantisBT\Exception\Plugin\PluginAlreadyInstalled;
 
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -585,8 +586,7 @@ function plugin_install( $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
 	if( plugin_is_installed( $p_plugin->basename ) ) {
-		trigger_error( ERROR_PLUGIN_ALREADY_INSTALLED, WARNING );
-		return null;
+		throw new PluginAlreadyInstalled( $p_plugin->basename );
 	}
 
 	plugin_push_current( $p_plugin->basename );
