@@ -14,8 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once( 'bug_api.php' );
-require_once( 'user_api.php' );
+use MantisBT\Exception\CustomField\CustomFieldNotLinkedToProject;
+
+require_api( 'bug_api.php' );
+require_api( 'user_api.php' );
 require_once( 'Interface.php' );
 
 class ImportXml_Issue implements ImportXml_Interface {
@@ -208,8 +210,8 @@ class ImportXml_Issue implements ImportXml_Interface {
 					custom_field_set_value( $t_custom_field->id, $this->new_id_, $t_custom_field->value );
 				}
 				else {
-					error_parameters( $t_custom_field->name, $t_custom_field_id );
-					trigger_error( ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT, ERROR );
+					/* TODO: review this exception - it doesn't have a clear purpose or usage */
+					throw new CustomFieldNotLinkedToProject( $t_custom_field->name, $t_custom_field_id );
 				}
 			}
 		}
