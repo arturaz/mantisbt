@@ -33,14 +33,12 @@
  *
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses error_api.php
  */
 
 use MantisBT\Exception\UnspecifiedException;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 
 /**
  * converts a 1 value to X
@@ -176,7 +174,8 @@ function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 		$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['" . $p_key . "'], \$b['" . $p_key . "'] );" );
 		uasort( $p_array, $t_function );
 	} else {
-		trigger_error(ERROR_INVALID_SORT_FIELD, ERROR);
+		//invalid sort field
+		throw new UnspecifiedException();
 	}
 	return $p_array;
 }

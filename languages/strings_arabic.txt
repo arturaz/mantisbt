@@ -1199,6 +1199,5 @@ $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسة غير صح�
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسة "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحة.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح.  هل أرسلت الاستمارة مرتين بطريق الخطأ؟';
-$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'حقل ترتيب غير صحيح.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'نسق تاريخ غير صالح.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'تعذّر تحديث المنطقة الزمنية.';
