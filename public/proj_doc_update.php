@@ -37,6 +37,7 @@
 
 use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Access\AccessDenied;
+use MantisBT\Exception\Attachment\AttachmentMoveFailed;
 use MantisBT\Exception\Attachment\AttachmentOversized;
 use MantisBT\Exception\Field\EmptyField;
 
@@ -120,7 +121,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
 			if ( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
-				trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+				throw new AttachmentMoveFailed();
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
