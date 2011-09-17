@@ -15,8 +15,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace MantisBT\Db\PDO;
+
 use MantisBT\Db\DriverAbstract;
+use MantisBT\Exception\Database\ConnectionFailed;
+use MantisBT\Exception\Database\DatabaseTypeNotSupported;
 use MantisBT\Exception\Db AS DbException;
 use \PDO;
 use \PDOException;
@@ -27,38 +31,30 @@ use \PDOException;
  * @subpackage classes
  */
 abstract class PDOAbstract extends DriverAbstract {
-    protected $pdb;
-    protected $lastError = null;
+	protected $pdb;
+	protected $lastError = null;
 
-	/**
-	 */
-    public function connect($dsn, $dbHost, $dbUser, $dbPass, $dbName, array $dbOptions=null) {
-        $driverstatus = $this->driverInstalled();
-
-        if ($driverstatus !== true) {
-			error_parameters( 0, 'PHP Support for database is not enabled' );
-			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-
-            //throw new DbException('DatabaseDriverProblem', $driverstatus);
-        }
+	public function connect($dsn, $dbHost, $dbUser, $dbPass, $dbName, array $dbOptions = null) {
+		$driverStatus = $this->driverInstalled();
+		if ($driverStatus !== true) {
+			throw new DatabaseTypeNotSupported($this->getDbType());
+		}
 
 		$this->dbHost = $dbHost;
 		$this->dbUser = $dbUser;
 		$this->dbPass = $dbPass;
 		$this->dbName = $dbName;
 
-        try{
-            $this->pdb = new PDO( $this->getDsn(), $this->dbUser, $this->dbPass, $this->getPdoOptions());
-
-            $this->pdb->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
-            $this->pdb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->postConnect();
-            return true;
-        } catch ( PDOException $ex ) {
-            throw new DbException( ERROR_DB_QUERY_FAILED, $ex->getMessage() );
-            return false;
-        }
-    }
+		try {
+			$this->pdb = new PDO( $this->getDsn(), $this->dbUser, $this->dbPass, $this->getPdoOptions());
+			$this->pdb->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+			$this->pdb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->postConnect();
+		} catch (PDOException $exception) {
+			throw new ConnectionFailed($exception->getCode(), $exception->getMessage());
+		}
+		return true;
+	}
 
     /**
      * Returns the DSN for PDO.

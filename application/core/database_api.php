@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 use MantisBT\Db\DriverAbstract;
+use MantisBT\Exception\Database\ConnectionFailed;
 
 /**
  * Database API
@@ -74,11 +75,6 @@ function db_connect( $dsn, $hostname = null, $username = null, $password = null,
 	$g_db = DriverAbstract::getDriverInstance($dbType);
 	$result = $g_db->connect( $dsn, $hostname, $username, $password, $databaseName, $dbOptions );
 
-	if( !$result ) {
-		db_error();
-		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-		return false;
-	}
 	$g_db_connected = true;
 	return true;
 }
