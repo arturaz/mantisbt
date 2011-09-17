@@ -1185,7 +1185,6 @@ $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Non se cargou a extensión LDA
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Fallou a conexión coa base de datos. O erro recibido desde a base de datos foi #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Fallou a pescuda na base de datos. O erro recibido desde a base de datos foi #%1$d: %2$s para a pescuda: %3$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Xa existe unha categoría con ese nome.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Non se especificou ningunha acción de copiado.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Non se atopou a categoría.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Non se atopou a categoría "%1$s" no proxecto %2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Xa existe unha versión con ese nome.';

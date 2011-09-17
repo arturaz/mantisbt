@@ -1112,7 +1112,6 @@ $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Rozšírenie nie je nač�
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Zlyhalo pripojenie k databáze. Chyba databázy #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Požiadavka do databázy zlyhala. Chyba databázy #%1$d: %2$s pri požiadavke: %3$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategória s týmyo menom už existuje.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Žiadna akcia kopírovania nebola špecifikovaná.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategória nenájdená.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategória \'%1$s\' pre projekt \'%2$s\' nebola nájdená.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verzia s týmyo menom už existuje.';

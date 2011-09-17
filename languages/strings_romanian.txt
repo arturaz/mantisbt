@@ -918,7 +918,6 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexiunea cu serverul LDAP e
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'EROARE: Conexiunea la baza de date a eşuat.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'EROARE: Interogarea bazei de date a eşuat.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'EROARE: Această categorie există deja.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'EROARE: Nu a fost specificată o acţiune de copiere.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'EROARE: Categoria nu este găsită.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'EROARE: Această versiune există deja.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'EROARE: Versiunea nu este găsită.';

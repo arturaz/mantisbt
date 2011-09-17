@@ -1175,7 +1175,6 @@ $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'No està carregada l\'extensi�
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Ha fallat la connexió a la base de dades. L\'error rebut de la base de dades és: #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Ha fallat la consulta a la base de dades. L\'error rebut de la base de dades és #%1$d: %2$s per la consulta: %3$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Aquesta és una categoria duplicada.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No s\'ha especificat cap acció de còpia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria no trobada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" no trobada pel projecte "%2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Aquesta és una versió duplicada.';

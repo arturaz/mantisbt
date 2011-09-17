@@ -466,7 +466,6 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Miedet fela pelönedük�
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Yümam ad nünodem no eplöpon. Pöl se nünodem pedagetöl äbinon: #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Nünödemaseivid no eplöpon. Pöl pedagetöl se nünödem äbinon #%1$d: %2$s tefü seivid: %3$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Klad labü nem at ya dabinon.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No kopiedadun pebegon.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Klad no petuvon.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Klad: „%1$s“ no petuvon pro proyeg: „%2$s“.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Fomam labü nem at ya dabinon.';

@@ -31,6 +31,8 @@
  * @uses project_api.php
  */
 
+use MantisBT\Exception\Field\EmptyField;
+
 /**
  * MantisBT Core API's
  */
@@ -63,7 +65,7 @@ if ( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	trigger_error( ERROR_CATEGORY_NO_ACTION, ERROR );
+	throw new EmptyField( 'copy_from|copy_to' );
 }
 
 project_copy_custom_fields( $t_dst_project_id, $t_src_project_id );

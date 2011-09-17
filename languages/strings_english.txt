@@ -1549,7 +1549,6 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_DB_CONNECT_FAILED => 'Database connection failed. Error received from database was #%1$d: %2$s.',
 	ERROR_DB_QUERY_FAILED => 'Database query failed. Error received from database was #%1$d: %2$s for the query: %3$s.',
 	ERROR_CATEGORY_DUPLICATE => 'A category with that name already exists.',
-	ERROR_CATEGORY_NO_ACTION => 'No copy action was specified.',
 	ERROR_CATEGORY_NOT_FOUND => 'Category not found.',
 	ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT => 'Category "%1$s" not found for project "%2$s".',
 	ERROR_VERSION_DUPLICATE => 'A version with that name already exists.',

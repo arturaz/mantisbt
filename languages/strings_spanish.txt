@@ -1182,7 +1182,6 @@ $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensión LDAP No Cargada.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Ha fallado la conexión a la base de datos. El error devuelto por la base de datos fue #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Ha fallado la consulta a la base de datos. El error devuelto por la base de datos fue #%1$d: %2$s para la consulta: %3$s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ya existe una categoría con ese nombre.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No se ha especificado ninguna acción de copia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoría no encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoría \'%1$s\' no encontrada para el proyecto \'%2$s\'.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ya existe una versión con ese nombre.';

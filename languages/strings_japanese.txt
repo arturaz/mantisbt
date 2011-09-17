@@ -1172,7 +1172,6 @@ $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP 拡張が読み込まれ�
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'データベースに接続できませんでした。データベースからエラーを受け取りました。#%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'データベースの検索に失敗しました。データベースからエラーを受け取りました。#%1$d: %2$s (クエリー: %3$s)';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'その名前のカテゴリーが既に存在しています。';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'コピー元、コピー先が指定されていません。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'カテゴリーがありません。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'プロジェクト「%1$s」にカテゴリー「%2$s」がありません。';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'バージョンが重複しています。';

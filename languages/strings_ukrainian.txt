@@ -743,7 +743,6 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Не вдалось зв\'я�
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Помилка з\'єднання з базою даних. Отримана відповідь #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Помилка в запиті до бази даних. Відповідь містила #%1$d: %2$s на запит: %3$s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Така категорія вже існує.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Не ваказана операція копіювання.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Не вдалось знайти таку категорію.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Така версія вже існує.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версію "%1$s" не знайдено.';
