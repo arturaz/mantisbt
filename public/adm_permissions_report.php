@@ -25,7 +25,6 @@
  * @uses access_api.php
  * @uses config_api.php
  * @uses constant_inc.php
- * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
  * @uses string_api.php
@@ -38,7 +37,6 @@ require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
-require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
@@ -69,7 +67,7 @@ function get_section_begin_apr( $p_section_name ) {
 function get_capability_row( $p_caption, $p_access_level ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	$t_output = '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	$t_output = '<tr><td>' . string_display( $p_caption ) . '</td>';
 	foreach( $t_access_levels as $t_access_level ) {
 		if ( $t_access_level >= (int)$p_access_level ) {
 			$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';

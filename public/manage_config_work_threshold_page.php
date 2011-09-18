@@ -130,7 +130,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	echo '<tr><td>' . string_display( $p_caption ) . '</td>';
 	foreach( $t_access_levels as $t_access_level => $t_access_label ) {
 		$t_file = in_array( $t_access_level, $t_file_exp );
 		$t_global = in_array( $t_access_level, $t_global_exp );
@@ -198,7 +198,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 		}
 	}
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	echo '<tr><td>' . string_display( $p_caption ) . '</td>';
 	if ( $t_can_change ) {
 		$t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
 		$t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
@@ -247,7 +247,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 		}
 	}
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	echo '<tr><td>' . string_display( $p_caption ) . '</td>';
 	if ( $t_can_change ) {
 		echo '<td class="left" colspan="3"' . $t_colour . '><select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );

@@ -210,7 +210,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 				helper_alternate_class( 1 );
 			}
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td class="small-caption">
 			<?php echo $t_item[$t_name_field] ?>
 		</td>
@@ -263,7 +263,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 	helper_alternate_class( 1 );
 	foreach ( $t_user_summary as $t_username => $t_total_time ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td class="small-caption">
 			<?php echo $t_username; ?>
 		</td>

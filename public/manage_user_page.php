@@ -27,7 +27,6 @@
  * @uses constant_inc.php
  * @uses database_api.php
  * @uses gpc_api.php
- * @uses helper_api.php
  * @uses html_api.php
  * @uses icon_api.php
  * @uses lang_api.php
@@ -46,7 +45,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'icon_api.php' );
 require_api( 'lang_api.php' );
@@ -301,7 +299,7 @@ $t_user_count = count( $t_users );
 		if( !isset( $t_access_level[$u_access_level] ) ) {
 			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
 		} ?>
-		<tr <?php echo helper_alternate_class( $i ) ?>>
+		<tr>
 			<td><?php
 				if ( access_has_global_level( $u_access_level ) ) { ?>
 					<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php

@@ -138,7 +138,7 @@ $result = db_query_bound( $query );
 		</tr><?php
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' ); ?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td class="center">
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>

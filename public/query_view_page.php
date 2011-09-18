@@ -26,7 +26,6 @@
  * @uses config_api.php
  * @uses database_api.php
  * @uses filter_api.php
- * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
@@ -42,7 +41,6 @@ require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
 require_api( 'filter_api.php' );
-require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
@@ -72,7 +70,7 @@ $t_max_column_count = 2;
 
 foreach( $t_query_arr as $t_id => $t_name ) {
 	if ( $t_column_count == 0 ) {
-		print '<tr ' . helper_alternate_class() . '>';
+		print '<tr>';
 	}
 
 	print '<td>';

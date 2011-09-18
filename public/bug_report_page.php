@@ -228,7 +228,7 @@ print_recently_visited();
 
 	if ( $tpl_show_category ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category" width="30%">
 			<?php
 			echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>';
@@ -253,7 +253,7 @@ print_recently_visited();
 	if ( $tpl_show_reproducibility ) {
 ?>
 
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="reproducibility"><?php print_documentation_link( 'reproducibility' ) ?></label>
 		</th>
@@ -284,7 +284,7 @@ print_recently_visited();
 
 	if ( $tpl_show_severity ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="severity"><?php print_documentation_link( 'severity' ) ?></label>
 		</th>
@@ -299,7 +299,7 @@ print_recently_visited();
 
 	if ( $tpl_show_priority ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="priority"><?php print_documentation_link( 'priority' ) ?></label>
 		</th>
@@ -319,7 +319,7 @@ print_recently_visited();
 			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
 		}
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
@@ -329,7 +329,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 <?php if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) { ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
 		</th>
@@ -341,7 +341,7 @@ print_recently_visited();
 			<?php } ?>
 		</td>
 	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td colspan="2" class="none">
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_open( 'profile' ); collapse_icon('profile'); ?>
@@ -350,7 +350,7 @@ print_recently_visited();
 					<?php } else { ?>
 						<?php echo lang_get( 'or_fill_in' ); ?>
 					<?php } ?>
-					<tr <?php echo helper_alternate_class() ?>>
+					<tr>
 						<th class="category">
 							<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
 						</th>
@@ -367,7 +367,7 @@ print_recently_visited();
 							?>
 						</td>
 					</tr>
-					<tr <?php echo helper_alternate_class() ?>>
+					<tr>
 						<th class="category">
 							<label for="os"><?php echo lang_get( 'os' ) ?></label>
 						</th>
@@ -384,7 +384,7 @@ print_recently_visited();
 							?>
 						</td>
 					</tr>
-					<tr <?php echo helper_alternate_class() ?>>
+					<tr>
 						<th class="category">
 							<label for="os_build"><?php echo lang_get( 'os_version' ) ?></label>
 						</th>
@@ -419,7 +419,7 @@ print_recently_visited();
 			$t_product_version_released_mask = VERSION_ALL;
 		}
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="product_version"><?php echo lang_get( 'product_version' ) ?></label>
 		</th>
@@ -433,7 +433,7 @@ print_recently_visited();
 	}
 ?>
 <?php if ( $tpl_show_product_build ) { ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="build"><?php echo lang_get( 'product_build' ) ?></label>
 		</th>
@@ -444,7 +444,7 @@ print_recently_visited();
 <?php } ?>
 
 <?php if ( $tpl_show_handler ) { ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="handler_id"><?php echo lang_get( 'assign_to' ) ?></label>
 		</th>
@@ -459,7 +459,7 @@ print_recently_visited();
 
 <?php // Target Version (if permissions allow)
 	if ( $tpl_show_target_version ) { ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="target_version"><?php echo lang_get( 'target_version' ) ?></label>
 		</th>
@@ -471,7 +471,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 <?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<span class="required">*</span><label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
 		</th>
@@ -479,7 +479,7 @@ print_recently_visited();
 			<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
 		</td>
 	</tr>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<span class="required">*</span><label for="description"><?php print_documentation_link( 'description' ) ?></label>
 		</th>
@@ -489,7 +489,7 @@ print_recently_visited();
 	</tr>
 
 <?php if ( $tpl_show_steps_to_reproduce ) { ?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<th class="category">
 				<label for="steps_to_reproduce"><?php print_documentation_link( 'steps_to_reproduce' ) ?></label>
 			</th>
@@ -500,7 +500,7 @@ print_recently_visited();
 <?php } ?>
 
 <?php if ( $tpl_show_additional_info ) { ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="additional_info"><?php print_documentation_link( 'additional_information' ) ?></label>
 		</th>
@@ -519,7 +519,7 @@ print_recently_visited();
 		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?>
 			<?php if ( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
@@ -537,7 +537,7 @@ print_recently_visited();
 <?php if ( $tpl_show_attachments ) { // File Upload (if enabled)
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td class="category">
 			<label for="file"><?php echo lang_get( 'upload_file' ) ?></label><br />
 			<span class="small"><?php echo lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) ?>k</span>
@@ -552,7 +552,7 @@ print_recently_visited();
 
 	if ( $tpl_show_view_state ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<?php echo lang_get( 'view_status' ) ?>
 		</th>
@@ -566,7 +566,7 @@ print_recently_visited();
 	//Relationship (in case of cloned bug creation...)
 	if( $f_master_bug_id > 0 ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<?php echo lang_get( 'relationship_with_parent' ) ?>
 		</th>
@@ -576,7 +576,7 @@ print_recently_visited();
 		</td>
 	</tr>
 
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td class="category">
 			<?php echo lang_get( 'copy_from_parent' ) ?>
 		</td>
@@ -588,7 +588,7 @@ print_recently_visited();
 <?php
 	}
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<?php print_documentation_link( 'report_stay' ) ?>
 		</th>

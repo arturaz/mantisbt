@@ -23,7 +23,6 @@
  * @uses authentication_api.php
  * @uses database_api.php
  * @uses form_api.php
- * @uses helper_api.php
  * @uses lang_api.php
  * @uses string_api.php
  * @uses user_api.php
@@ -37,7 +36,6 @@ if ( !defined( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW' ) ) {
 require_api( 'authentication_api.php' );
 require_api( 'database_api.php' );
 require_api( 'form_api.php' );
-require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
@@ -156,8 +154,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 <?php # display the checkboxes
 for ($i=0 ; $i <$field_name_count ; $i++) {
-
-	printf ( '<tr %s>', helper_alternate_class( $i ) );
+	echo '<tr>';
 ?>
 
 	<th class="category">

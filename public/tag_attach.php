@@ -28,7 +28,6 @@
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
- * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
@@ -49,7 +48,6 @@ require_api( 'constant_inc.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
@@ -116,7 +114,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 	}
 
 	foreach( $t_tags_failed as $t_tag_row ) {
-		echo '<tr ',helper_alternate_class(),'>';
+		echo '<tr>';
 		if ( -1 == $t_tag_row['id'] ) {
 			echo '<th class="category">', lang_get( 'tag_create_denied' ), '</th>';
 		} else if ( -2 == $t_tag_row['id'] ) {
@@ -131,7 +129,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 	}
 ?>
 	<tr class="spacer"><td colspan="2"></td></tr>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 	<th class="category"><?php echo lang_get( 'tag_attach_long' ) ?></th>
 	<td>
 <?php

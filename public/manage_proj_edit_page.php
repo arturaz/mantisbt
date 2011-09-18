@@ -33,7 +33,6 @@
  * @uses file_api.php
  * @uses form_api.php
  * @uses gpc_api.php
- * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
@@ -61,7 +60,6 @@ require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
@@ -223,7 +221,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				foreach ( $t_subproject_ids as $t_subproject_id ) {
 					$t_subproject = project_get_row( $t_subproject_id );
 					$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id, true ); ?>
-				<tr <?php echo helper_alternate_class() ?>>
+				<tr>
 					<td>
 						<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>"><?php echo string_display( $t_subproject['name'] ) ?></a>
 					</td>
@@ -285,7 +283,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			$t_id = $t_category['id'];
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 		?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td><?php echo string_display( category_full_name( $t_id, /* showProject */ $t_inherited, $f_project_id ) )  ?></td>
 			<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 			<td class="center">
@@ -316,9 +314,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</form>
 
 </div><?php
-
-# reset the class counter
-helper_alternate_class( 0 ); ?>
 
 <div id="project-versions-div" class="form-container">
 	<h2><?php echo lang_get( 'versions' ); ?></h2>
@@ -356,7 +351,7 @@ helper_alternate_class( 0 ); ?>
 				$t_date_formatted = ' ';
 			} ?>
 
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td><?php echo string_display( $t_name ) ?></td>
 			<td><?php echo trans_bool( $t_released ) ?></td>
 			<td><?php echo trans_bool( $t_obsolete ) ?></td>
@@ -386,9 +381,6 @@ helper_alternate_class( 0 ); ?>
 		</fieldset>
 	</form>
 </div><?php
-
-# reset the class counter
-helper_alternate_class( 0 );
 
 # You need either global permissions or project-specific permissions to link
 #  custom fields
@@ -420,7 +412,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 		</tr><?php
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id ); ?>
-			<tr <?php echo helper_alternate_class() ?>>
+			<tr>
 				<td><?php echo string_display( $t_desc['name'] ) ?></td>
 				<td>
 					<form method="post" action="manage_proj_custom_field_update.php">
@@ -521,16 +513,13 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 
-	# reset the class counter
-	helper_alternate_class( 0 );
-
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
 	for ( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td><?php echo $t_display[$i] ?></td>
 			<td>
 			<?php

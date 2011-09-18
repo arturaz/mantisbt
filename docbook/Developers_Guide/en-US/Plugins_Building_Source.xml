@@ -121,12 +121,12 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
     &lt;td class="form-title" rowspan="2"&gt;&lt;?php echo plugin_lang_get( 'configuration' ) ?&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
-&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+&lt;tr&gt;
     &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'foo_or_bar' ) ?&gt;&lt;/td&gt;
     &lt;td&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
-&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+&lt;tr&gt;
     &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'reset' ) ?&gt;&lt;/td&gt;
     &lt;td&gt;&lt;input type="checkbox" name="reset"/&gt;&lt;/td&gt;
 &lt;/tr&gt;

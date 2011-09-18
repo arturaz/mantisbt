@@ -134,7 +134,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 		foreach ( $t_result as $t_tag_row ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
 			$t_tag_description = string_display( $t_tag_row['description'] ); ?>
-		<tr <?php echo helper_alternate_class() ?>><?php
+		<tr><?php
 		if ( $t_can_edit ) { ?>
 			<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td><?php
 		} else { ?>

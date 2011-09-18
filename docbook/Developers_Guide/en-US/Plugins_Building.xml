@@ -451,12 +451,12 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
     &lt;td class="form-title" rowspan="2"&gt;&lt;?php echo plugin_lang_get( 'configuration' ) ?&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
-&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+&lt;tr&gt;
     &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'foo_or_bar' ) ?&gt;&lt;/td&gt;
     &lt;td&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
-&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+&lt;tr&gt;
     &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'reset' ) ?&gt;&lt;/td&gt;
     &lt;td&gt;&lt;input type="checkbox" name="reset"/&gt;&lt;/td&gt;
 &lt;/tr&gt;
@@ -477,9 +477,8 @@ html_page_bottom();
 				The two calls to <function>html_page_top()</function> and
 				<function>html_page_bottom()</function> trigger the standard MantisBT header and
 				footer portions, respectively, which also displays things such as the menus and
-				triggers other layout-related events.  <function>helper_alternate_class()</function>
-				generates the CSS classes for alternating row colors in the table.  The rest of the
-				HTML and CSS follows the "standard" MantisBT markup styles for content and layout.
+				triggers other layout-related events.  The rest of the HTML and CSS follows the
+				"standard" MantisBT markup styles for content and layout.
 			</para>
 		</sect2>
 
