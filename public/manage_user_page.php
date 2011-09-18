@@ -332,14 +332,10 @@ $t_user_count = count( $t_users );
 		?>
 	</div>
 </div>
-<?php
-	# Manage Form END
-	helper_alternate_class_no_attribute(0);
-?>
 	<div id="manage-user-edit-div" class="form-container">
 		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
 			<fieldset>
-				<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<div class="field-container">
 					<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 					<span class="input"><input id="username" type="text" name="username" value="" /></span>
 					<span class="label-style"></span>

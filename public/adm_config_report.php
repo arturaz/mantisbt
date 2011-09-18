@@ -169,7 +169,7 @@ if ( $t_read_write_access ) { ?>
 		<fieldset>
 			<legend><span><?php echo lang_get( 'set_configuration_option' ) ?></span></legend>
 			<?php echo form_security_field( 'adm_config_set' ) ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="select">
 					<select id="config-user-id" name="user_id">
@@ -179,7 +179,7 @@ if ( $t_read_write_access ) { ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
 				<span class="select">
 					<select id="config-project-id" name="project_id">
@@ -189,12 +189,12 @@ if ( $t_read_write_access ) { ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
 				<span class="input"><input type="text" id="config-option" name="config_option" value="" size="64" maxlength="64" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
 				<span class="select">
 					<select id="config-type" name="type">
@@ -206,7 +206,7 @@ if ( $t_read_write_access ) { ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
 				<span class="textarea"><textarea id="config-value" name="value" cols="80" rows="10"></textarea></span>
 				<span class="label-style"></span>

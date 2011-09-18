@@ -159,14 +159,14 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 		<fieldset class="has-required">
 			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
 			<?php echo form_security_field( 'tag_create' ); ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="tag-name" class="required"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
 				<span class="input"><input type="text" id="tag-name" name="name" size="40" maxlength="100" />
 				<span><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></span>
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
 				<span class="textarea"><textarea id="tag-description" name="description" cols="80" rows="6"></textarea></span>
 				<span class="label-style"></span>
