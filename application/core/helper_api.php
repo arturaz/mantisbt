@@ -55,28 +55,6 @@ require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
 /**
- * alternate color function
- * If no index is given, continue alternating based on the last index given
- * @param int $p_index
- * @param string $p_odd_color
- * @param string $p_even_color
- * @return string
- */
-function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
-	static $t_index = 1;
-
-	if( null !== $p_index ) {
-		$t_index = $p_index;
-	}
-
-	if( 1 == $t_index++ % 2 ) {
-		return $p_odd_color;
-	} else {
-		return $p_even_color;
-	}
-}
-
-/**
  * get the color string for the given status
  * @param int $p_status
  * @return string

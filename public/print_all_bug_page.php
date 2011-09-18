@@ -231,10 +231,9 @@ $t_icon_path = config_get( 'icon_path' );
 		$t_row = $result[$i];
 
 		# alternate row colors
-		$status_color = helper_alternate_colors( $i, '#ffffff', '#dddddd' );
 		if ( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
 ?>
-<tr bgcolor="<?php echo $status_color ?>">
+<tr>
 <?php
 		foreach( $t_columns as $t_column ) {
 			$t_column_value_function = 'print_column_value';
