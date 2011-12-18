@@ -269,7 +269,7 @@ print_recently_visited();
 	if ( $tpl_show_eta ) {
 ?>
 
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<th class="category">
 			<label for="eta"><?php print_documentation_link( 'eta' ) ?></label>
 		</th>

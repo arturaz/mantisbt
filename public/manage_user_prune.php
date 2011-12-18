@@ -56,6 +56,8 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
+helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ), lang_get( 'prune_accounts_button' ) );
+
 # Delete the users who have never logged in and are older than 1 week
 $days_old = (int)7 * SECONDS_PER_DAY;
 
@@ -67,18 +69,10 @@ if ( !$t_result ) {
 	throw new UnspecifiedException();
 }
 
-$t_count = db_num_rows( $t_result );
-
-if ( $t_count > 0 ) {
-	helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ),
-							 lang_get( 'prune_accounts_button' ) );
-}
-
-for ( $i = 0; $i < $t_count; $i++ ) {
-	$t_row = db_fetch_array( $t_result );
+while ( $t_user = db_fetch_array( $t_result ) ) {
 	# Don't prune accounts with a higher global access level than the current user
-	if ( access_has_global_level( $t_row['access_level'] ) ) {
-		user_delete( $t_row['id'] );
+	if ( access_has_global_level( $t_user['access_level'] ) ) {
+		user_delete( $t_user['id'] );
 	}
 }
 

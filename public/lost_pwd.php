@@ -75,24 +75,20 @@ if( auth_is_user_authenticated() ) {
 
 $f_username = gpc_get_string('username');
 $f_email = gpc_get_string('email');
-
+if ( is_blank( $f_email ) ) {
+	throw new LostPasswordBlankEmail();
+}
 $f_email = email_append_domain( $f_email );
 email_ensure_valid( $f_email );
 
 /** @todo Consider moving this query to user_api.php */
-$query = 'SELECT id FROM {user} WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
-$result = db_query_bound( $query, array( $f_username, $f_email, true ) );
-
-if ( 0 == db_num_rows( $result ) ) {
+$t_query = 'SELECT id FROM {user} WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
+$t_result = db_query_bound( $t_query, array( $f_username, $f_email, true ) );
+$t_row = db_fetch_array( $t_result );
+if ( !$t_row ) {
 	throw new LostPasswordInvalidAccount();
 }
-
-if( is_blank( $f_email ) ) {
-	throw new LostPasswordBlankEmail();
-}
-
-$row = db_fetch_array( $result );
-$t_user_id = $row['id'];
+$t_user_id = $t_row['id'];
 
 if( user_is_protected( $t_user_id ) ) {
 	throw new CannotModifyProtectedAccount();
