@@ -38,6 +38,7 @@
  * @uses utility_api.php
  */
 
+use MantisBT\Exception\UnspecifiedException;
 use MantisBT\Exception\Configuration\ConfigurationOptionInvalidValue;
 
 require_api( 'access_api.php' );
@@ -136,7 +137,7 @@ function check_checked( $p_var, $p_val = true ) {
 				# Reaching this point is a a sign that you need to
 				# check the types of the parameters passed to this
 				# function. They should match.
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new UnspecifiedException();
 			}
 			# We need to be careful when comparing an array of
 			# version number strings (["1.0", "1.1", "1.10"]) to
@@ -166,7 +167,7 @@ function check_checked( $p_var, $p_val = true ) {
 			# Reaching this point is a a sign that you need to
 			# check the types of the parameters passed to this
 			# function. They should match.
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 		}
 		# Refer to the comment above for the is_array($p_var)===true
 		# case. The same reasoning applies here too!
@@ -195,7 +196,7 @@ function check_selected( $p_var, $p_val = true ) {
 				# Reaching this point is a a sign that you need to
 				# check the types of the parameters passed to this
 				# function. They should match.
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new UnspecifiedException();
 			}
 			# Refer to the comment in this same place within the
 			# check_checked function. The same reasoning applies
@@ -210,7 +211,7 @@ function check_selected( $p_var, $p_val = true ) {
 			# Reaching this point is a a sign that you need to
 			# check the types of the parameters passed to this
 			# function. They should match.
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new UnspecifiedException();
 		}
 		#Refer to the comment in this same place within the
 		# check_checked function. The same reasoning applies here too!
