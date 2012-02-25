@@ -189,8 +189,6 @@ function db_query_bound( $p_query, $p_arr_parms = null, $p_limit = -1, $p_offset
 
 	$p_query = db_prefix_tables( $p_query );
 
-	$t_start = microtime(true);
-
 	if( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 		$t_result = $g_db->selectLimit( $p_query, $p_limit, $p_offset, $p_arr_parms );
 	} else {
@@ -239,10 +237,10 @@ function db_query_bound( $p_query, $p_arr_parms = null, $p_limit = -1, $p_offset
 				$i++;
 			}
 		}
-		log_event( LOG_DATABASE, array( $p_query, $t_elapsed), debug_backtrace() );
-		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
+		log_event( LOG_DATABASE, array( $p_query ), debug_backtrace() );
+		array_push( $g_queries_array, array( $p_query ) );
 	} else {
-		array_push( $g_queries_array, array( '', $t_elapsed ) );
+		array_push( $g_queries_array, array( '' ) );
 	}
 
 	return $t_result;
