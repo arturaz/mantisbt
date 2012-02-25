@@ -128,7 +128,7 @@ header( 'Pragma: public' );
 # attached files via HTTPS, we disable the "Pragma: no-cache"
 # command when IE is used over HTTPS.
 global $g_allow_file_cache;
-if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == utf8_strtolower( $_SERVER["HTTPS"] ) ) ) && is_browser_internet_explorer() ) {
+if ( ( isset( $_SERVER["HTTPS"] ) && ( "on" == mb_strtolower( $_SERVER["HTTPS"] ) ) ) && is_browser_internet_explorer() ) {
 	# Suppress "Pragma: no-cache" header.
 } else {
 	if ( !isset( $g_allow_file_cache ) ) {

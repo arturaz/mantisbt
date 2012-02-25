@@ -143,14 +143,14 @@ function http_security_headers() {
 		header( 'X-Frame-Options: DENY' );
 		$t_avatar_img_allow = '';
 		if ( config_get_global( 'show_avatar' ) ) {
-			if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+			if ( isset( $_SERVER['HTTPS'] ) && ( mb_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
 			} else {
 				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
 			}
 		}
 		header( "X-Content-Security-Policy: allow 'self';$t_avatar_img_allow; frame-ancestors 'none'" );
-		if ( isset( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		if ( isset( $_SERVER['HTTPS'] ) && ( mb_strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
 	}

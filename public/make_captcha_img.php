@@ -234,7 +234,7 @@ class masc_captcha
 			if($this->debug) echo "\n<br />-Captcha-Debug: Fill forground with chars and shadows: (".$this->chars.")";
 			for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
 			{
-				$text	= utf8_strtoupper(substr($private_key, $i, 1));
+				$text	= mb_strtoupper(substr($private_key, $i, 1));
 				srand((double)microtime()*1000000);
 				$angle	= intval(rand(($this->maxrotation * -1), $this->maxrotation));
 				srand((double)microtime()*1000000);

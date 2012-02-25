@@ -166,7 +166,7 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
 function file_get_icon_url( $p_display_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
+	$ext = mb_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
 	if( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
 		$ext = '?';
 	}
@@ -185,7 +185,7 @@ function file_get_icon_url( $p_display_filename ) {
  */
 function file_path_combine( $p_path, $p_filename ) {
 	$t_path = $p_path;
-	if ( utf8_substr( $t_path, -1 ) != '/' && utf8_substr( $t_path, -1 ) != '\\' ) {
+	if ( mb_substr( $t_path, -1 ) != '/' && mb_substr( $t_path, -1 ) != '\\' ) {
 		$t_path .= '/';
 	}
 

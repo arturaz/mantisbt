@@ -205,7 +205,7 @@ function db_query_bound( $p_query, $p_arr_parms = null, $p_limit = -1, $p_offset
 				# Realign the offset returned by preg_match as it is byte-based,
 				# which causes issues with UTF-8 characters in the query string
 				# (e.g. from custom fields names)
-				$matches[1] = utf8_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
+				$matches[1] = mb_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
 				if( $i <= count( $p_arr_parms ) ) {
 					if( is_null( $p_arr_parms[$i - 1] ) ) {
 						$replace = 'NULL';
@@ -229,8 +229,8 @@ function db_query_bound( $p_query, $p_arr_parms = null, $p_limit = -1, $p_offset
 						echo( "Invalid argument type passed to query_bound(): $i" );
 						exit( 1 );
 					}
-					$p_query = utf8_substr( $p_query, 0, $matches[1] ) . $replace . utf8_substr( $p_query, $matches[1] + utf8_strlen( $matches[0] ) );
-					$lastOffset = $matches[1] + utf8_strlen( $replace );
+					$p_query = mb_substr( $p_query, 0, $matches[1] ) . $replace . mb_substr( $p_query, $matches[1] + mb_strlen( $matches[0] ) );
+					$lastOffset = $matches[1] + mb_strlen( $replace );
 				} else {
 					$lastOffset = $matches[1] + 1;
 				}
@@ -310,9 +310,9 @@ function db_table_exists( $tableName ) {
 	$tables = db_get_table_list();
 
 	# Can't use in_array() since it is case sensitive
-	$tableName = utf8_strtolower( $tableName );
+	$tableName = mb_strtolower( $tableName );
 	foreach( $tables as $currentTable ) {
-		if( utf8_strtolower( $currentTable ) == $tableName ) {
+		if( mb_strtolower( $currentTable ) == $tableName ) {
 			return true;
 		}
 	}
@@ -338,9 +338,9 @@ function db_index_exists( $tableName, $indexName ) {
 	$indexes = $g_db->getIndexes( $tableName );
 
 	# Can't use in_array() since it is case sensitive
-	$indexName = utf8_strtolower( $indexName );
+	$indexName = mb_strtolower( $indexName );
 	foreach( $indexes as $currentIndexName => $currentIndexObj ) {
-		if( utf8_strtolower( $currentIndexName ) == $indexName ) {
+		if( mb_strtolower( $currentIndexName ) == $indexName ) {
 			return true;
 		}
 	}

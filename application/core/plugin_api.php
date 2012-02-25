@@ -499,12 +499,12 @@ function plugin_dependency( $p_basename, $p_required, $p_initialized = false ) {
 			# check for a less-than-or-equal version requirement
 			$t_ltpos = strpos( $t_required, '<=' );
 			if( $t_ltpos !== false ) {
-				$t_required = trim( utf8_substr( $t_required, $t_ltpos + 2 ) );
+				$t_required = trim( mb_substr( $t_required, $t_ltpos + 2 ) );
 				$t_maximum = true;
 			} else {
 				$t_ltpos = strpos( $t_required, '<' );
 				if( $t_ltpos !== false ) {
-					$t_required = trim( utf8_substr( $t_required, $t_ltpos + 1 ) );
+					$t_required = trim( mb_substr( $t_required, $t_ltpos + 1 ) );
 					$t_maximum = true;
 				}
 			}

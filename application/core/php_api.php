@@ -90,6 +90,6 @@ function php_version_at_least( $p_version_string ) {
 # If mb_* not defined, define it to map to standard methods.
 if ( !function_exists( 'mb_substr' ) ) {
 	function mb_substr( $p_text, $p_index, $p_size ) {
-		return utf8_substr( $p_text, $p_index, $p_size );
+		return mb_substr( $p_text, $p_index, $p_size );
 	}
 }

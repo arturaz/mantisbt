@@ -45,8 +45,6 @@
  * @uses php_api.php
  * @uses user_pref_api.php
  * @uses wiki_api.php
- * @uses utf8/utf8.php
- * @uses utf8/str_pad.php
  */
 
 // Set the initial include_path. for performance
@@ -190,9 +188,38 @@ function __autoload( $p_class_name ) {
 # Register the autoload function to make it effective immediately
 spl_autoload_register( '__autoload' );
 
-# Load UTF8-capable string functions
-require_lib( 'utf8/utf8.php' );
-require_lib( 'utf8/str_pad.php' );
+# Define a multibyte/UTF-8 aware string padding function based on PHP's
+# str_pad function. IMPORTANT NOTE: "length" in this context refers to the
+# number of graphemes in the string, not the number of bytes!
+function mb_str_pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_RIGHT) {
+	$input_length = mb_strlen($input);
+	if ($pad_length <= $input_length) {
+		return $input;
+	}
+	$pad_characters_required = $pad_length - $input_length;
+	$pad_string_length = mb_strlen($pad_string);
+	$padded_string = $input;
+	switch ($pad_type) {
+		case STR_PAD_RIGHT:
+			$repetitions = ceil($pad_length / $pad_string_length );
+			$padded_string = mb_substr($input . str_repeat($pad_string, $repetitions), 0, $pad_length);
+			break;
+		case STR_PAD_LEFT:
+			$repetitions = ceil($pad_length / $pad_string_length );
+			$padded_string = mb_substr(str_repeat($pad_string, $repetitions), 0, $pad_length) . $input;
+			break;
+		case STR_PAD_BOTH:
+			$pad_amount_left = floor($pad_length / 2);
+			$pad_amount_right = ceil($pad_legnth / 2);
+			$repetitions_left = ceil($pad_amount_left / $pad_string_length);
+			$repetitions_right = ceil($pad_amount_right / $pad_string_length);
+			$padding_left = mb_substr(str_repeat($pad_string, $repetitions_left), 0, $pad_amount_left);
+			$padding_right = mb_substr(str_repeat($pad_string, $repetitions_right), 0, $pad_amount_right);
+			$padded_string = $padding_left . $input . $padding_right;
+			break;
+	}
+	return $padded_string;
+}
 
 # Include PHP compatibility file
 require_api( 'php_api.php' );
