@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Database;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class ConnectionFailed extends ExceptionAbstract {
 	public function __construct($databaseErrorCode, $databaseErrorDescription) {
-		$errorMessage = lang_get(ERROR_DB_CONNECT_FAILED, null, false);
-		$errorMessage = sprintf($errorMessage, $databaseErrorCode, $databaseErrorDescription);
-		parent::__construct(ERROR_DB_CONNECT_FAILED, $errorMessage, null);
+		$errorMessage = sprintf(_('Database connection failed. Error received from database was #%1$d: "%2$s".'), $databaseErrorCode, $databaseErrorDescription);
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Attachment;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class AttachmentsPathInvalid extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_INVALID_UPLOAD_PATH, null, false);
-		parent::__construct(ERROR_INVALID_UPLOAD_PATH, $errorMessage, null);
+		$errorMessage = _('Invalid upload path. Directory either does not exist or not writable to webserver.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\HTTP;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class PageRedirectionFailed extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_PAGE_REDIRECTION, null, false);
-		parent::__construct(ERROR_PAGE_REDIRECTION, $errorMessage, null);
+		$errorMessage = _('Page redirection failed. Ensure that no spaces exist outside the PHP block <?php ... ?> in config_inc.php or custom_*.php files.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

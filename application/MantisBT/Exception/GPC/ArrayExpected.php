@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\GPC;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class ArrayExpected extends ExceptionAbstract {
 	public function __construct($variableName) {
-		$errorMessage = lang_get(ERROR_GPC_ARRAY_EXPECTED, null, false);
-		$errorMessage = sprintf($errorMessage, $variableName);
-		parent::__construct(ERROR_GPC_ARRAY_EXPECTED, $errorMessage, null);
+		$errorMessage = sprintf(_('An array was expected but a string was received for parameter "%1$s".'), $variableName);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

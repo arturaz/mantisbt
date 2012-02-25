@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\CustomField;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class CustomFieldInvalidValue extends ExceptionAbstract {
 	public function __construct($fieldName) {
-		$errorMessage = lang_get(ERROR_CUSTOM_FIELD_INVALID_VALUE, null, false);
-		$errorMessage = sprintf($errorMessage, $fieldName);
-		parent::__construct(ERROR_CUSTOM_FIELD_INVALID_VALUE, $errorMessage, null);
+		$errorMessage = sprintf(_('Invalid value for field "%1$s".'), $fieldName);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

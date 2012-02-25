@@ -2,17 +2,14 @@
 namespace MantisBT\Exception\Database;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class ParameterCountMismatch extends ExceptionAbstract {
 	public function __construct($queryString, array $parameters) {
 		$expectedParameterCount = substr_count($queryString, '?');
 		$actualParameterCount = count($parameters);
-		/* TODO: add new language string */
-		$errorMessage = lang_get(ERROR_GENERIC, null, false);
-		$errorMessage = sprintf($errorMessage, $expectedParameterCount, $actualParameterCount, $queryString);
-		/* TODO: assign new error code instead of 0 */
-		parent::__construct(0, $errorMessage, null);
+		$shortfall = $expectedParameterCount - $actualParameterCount;
+		$errorMessage = n___('The parameter in the following query/statement was not provided: %2$s.', '%1$d expected parameters were not provided for the following query/statement: %2$s.', $shortfall);
+		$errorMessage = sprintf($errorMessage, $shortfall, $queryString); 
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

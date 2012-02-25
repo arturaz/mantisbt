@@ -2893,9 +2893,7 @@ $g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
 /**
  * The regular expression to use when validating new user login names
  * The default regular expression allows a-z, A-Z, 0-9, +, -, dot, space and
- * underscore.  If you change this, you may want to update the
- * ERROR_USER_NAME_INVALID string in the language files to explain
- * the rules you are using on your site
+ * underscore.
  * See http://en.wikipedia.org/wiki/Regular_Expression for more details about
  * regular expressions. For testing regular expressions, use
  * http://rubular.com/.

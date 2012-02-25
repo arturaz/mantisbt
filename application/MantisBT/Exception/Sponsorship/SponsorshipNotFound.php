@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Sponsorship;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class SponsorshipNotFound extends ExceptionAbstract {
 	public function __construct($sponsorshipID) {
-		$errorMessage = lang_get(ERROR_SPONSORSHIP_NOT_FOUND, null, false);
-		$errorMessage = sprintf($errorMessage, $sponsorshipID);
-		parent::__construct(ERROR_SPONSORSHIP_NOT_FOUND, $errorMessage, null);
+		sprintf(_('Sponsorship %1$d not found.'), $sponsorshipID);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Security;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class CSRFTokenInvalid extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_FORM_TOKEN_INVALID, null, false);
-		parent::__construct(ERROR_FORM_TOKEN_INVALID, $errorMessage, null);
+		$errorMessage = _('Invalid form security token. Did you submit the form twice by accident?');
+		parent::__construct($errorMessage);
 		$this->responseCode = 403;
 	}
 }

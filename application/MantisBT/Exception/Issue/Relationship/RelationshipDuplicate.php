@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Issue\Relationship;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class RelationshipDuplicate extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_RELATIONSHIP_ALREADY_EXISTS, null, false);
-		parent::__construct(ERROR_RELATIONSHIP_ALREADY_EXISTS, $errorMessage, null);
+		$errorMessage = _('There is already a relationship between these two issues.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

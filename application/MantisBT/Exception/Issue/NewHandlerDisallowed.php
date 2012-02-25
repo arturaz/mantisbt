@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Issue;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class NewHandlerDisallowed extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, null, false);
-		parent::__construct(ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, $errorMessage, null);
+		$errorMessage = _('The handler specified does not have permission to handle this issue.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

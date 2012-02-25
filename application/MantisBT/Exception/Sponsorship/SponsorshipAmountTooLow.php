@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Sponsorship;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class SponsorshipAmountTooLow extends ExceptionAbstract {
 	public function __construct($proposedAmount, $minimumAmount) {
-		$errorMessage = lang_get(ERROR_SPONSORSHIP_AMOUNT_TOO_LOW, null, false);
-		$errorMessage = sprintf($errorMessage, $proposedAmount, $minimumAmount);
-		parent::__construct(ERROR_SPONSORSHIP_AMOUNT_TOO_LOW, $errorMessage, null);
+		$errorMessage = sprintf(_('Sponsorship (%1$d) is below minimum amount (%2$d).'), $proposedAmount, $minimumAmount);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

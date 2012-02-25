@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Issue\Version;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class VersionDuplicate extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_VERSION_DUPLICATE, null, false);
-		parent::__construct(ERROR_VERSION_DUPLICATE, $errorMessage, null);
+		$errorMessage = _('A version with that name already exists.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

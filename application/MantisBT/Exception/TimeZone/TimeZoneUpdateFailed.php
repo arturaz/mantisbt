@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\TimeZone;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class TimeZoneUpdateFailed extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_UPDATING_TIMEZONE, null, false);
-		parent::__construct(ERROR_UPDATING_TIMEZONE, $errorMessage, null);
+		$errorMessage = _('Unable to update timezone.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Filter;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class FilterTooOldToUpgrade extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_FILTER_TOO_OLD, null, false);
-		parent::__construct(ERROR_FILTER_TOO_OLD, $errorMessage, null);
+		$errorMessage = _('The filter you are trying to use is too old to be upgraded. Please re-create it.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

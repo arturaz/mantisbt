@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Issue;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class IssueDuplicateSelf extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_BUG_DUPLICATE_SELF, null, false);
-		parent::__construct(ERROR_BUG_DUPLICATE_SELF, $errorMessage, null);
+		$errorMessage = _('You cannot set an issue as a duplicate of itself.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

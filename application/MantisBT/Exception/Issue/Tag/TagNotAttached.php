@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Issue\Tag;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class TagNotAttached extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_TAG_NOT_ATTACHED, null, false);
-		parent::__construct(ERROR_TAG_NOT_ATTACHED, $errorMessage, null);
+		$errorMessage = _('Tag is not attached to the issue.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

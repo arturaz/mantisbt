@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\User;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class UserByIDNotFound extends ExceptionAbstract {
 	public function __construct($userID) {
-		$errorMessage = lang_get(ERROR_USER_BY_ID_NOT_FOUND, null, false);
-		$errorMessage = sprintf($errorMessage, $userID);
-		parent::__construct(ERROR_USER_BY_ID_NOT_FOUND, $errorMessage, null);
+		$errorMessage = sprintf(_('User with identifier %1$d not found.'), $userID);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\CustomField;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class CustomFieldInvalidDefinition extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_CUSTOM_FIELD_INVALID_DEFINITION, null, false);
-		parent::__construct(ERROR_CUSTOM_FIELD_INVALID_DEFINITION, $errorMessage, null);
+		$errorMessage = _('Invalid custom field definition.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

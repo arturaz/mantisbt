@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Database;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class ColumnNotFound extends ExceptionAbstract {
 	public function __construct($columnName) {
-		$errorMessage = lang_get(ERROR_DB_FIELD_NOT_FOUND, null, false);
-		$errorMessage = sprintf($errorMessage, $columnName);
-		parent::__construct(ERROR_DB_FIELD_NOT_FOUND, $errorMessage, null);
+		$errorMessage = sprintf(_('A column named "%1$s" was not found in the selected database table.'), $columnName);
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

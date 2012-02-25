@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\Security;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class MasterSaltInvalid extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_CRYPTO_MASTER_SALT_INVALID, null, false);
-		parent::__construct(ERROR_CRYPTO_MASTER_SALT_INVALID, $errorMessage, null);
+		$errorMessage = _('For security reasons MantisBT will not operate when $g_crypto_master_salt is not specified correctly in config_inc.php.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

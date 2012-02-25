@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Project;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class ProjectNameNotUnique extends ExceptionAbstract {
 	public function __construct($projectName) {
-		$errorMessage = lang_get(ERROR_PROJECT_NAME_NOT_UNIQUE, null, false);
-		$errorMessage = sprintf($errorMessage, $projectName);
-		parent::__construct(ERROR_PROJECT_NAME_NOT_UNIQUE, $errorMessage, null);
+		$errorMessage = sprintf(_('A project already exists with the name "%1$s". Please select a unique name for this project.'), $projectName);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

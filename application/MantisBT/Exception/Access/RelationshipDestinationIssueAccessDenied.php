@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Access;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class RelationshipDestinationIssueAccessDenied extends ExceptionAbstract {
 	public function __construct($destinationIssueID) {
-		$errorMessage = lang_get(ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, null, false);
-		$errorMessage = sprintf($errorMessage, $destinationIssueID);
-		parent::__construct(ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, $errorMessage, null);
+		$errorMessage = sprintf(_('Access denied: You do not have permission to modify relationships for destination issue %1$d.'), $destinationIssueID);
+		parent::__construct($errorMessage);
 		$this->responseCode = 403;
 	}
 }

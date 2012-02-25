@@ -1,8 +1,7 @@
 <?php
 namespace MantisBT;
 use \stdClass;
-
-require_api('lang_api.php');
+use \ErrorException;
 
 class Error {
 	/**
@@ -12,7 +11,6 @@ class Error {
 
 	/**
 	 * Indicates if an error/exception has been handled
-	 * Note: this also indicates additional shutdown functions have been setup.
 	 */
 	private static $handled = false;
 
@@ -51,7 +49,7 @@ class Error {
 		$errorInfo->type = 'EXCEPTION';
 		$errorInfo->name = 'InvalidException';
 		$errorInfo->code = 0;
-		$errorInfo->message = 'An invalid exception type was caught by the exception handler. Unfortuantly no further information can be obtained.';
+		$errorInfo->message = _('An invalid exception type was caught by the exception handler. Unfortuantly no further information can be obtained.');
 
 		if (is_object($exception)) {
 			$reflectionClass = new \ReflectionClass($exception);
@@ -62,7 +60,6 @@ class Error {
 				$errorInfo->file = $exception->getFile();
 				$errorInfo->line = $exception->getLine();
 				$errorInfo->trace = $exception->getTrace();
-				$errorInfo->context = $exception->getContext();
 			}
 		}
 
@@ -70,70 +67,8 @@ class Error {
 		self::$allErrors[] = $errorInfo;
 	}
 
-	public static function error_handler( $type, $error, $file, $line, $context ) {
-        $errorInfo = new stdClass();
-        $errorInfo->time = time();
-        $errorInfo->type = 'ERROR';
-        $errorInfo->name = isset( self::$errorConstants[$type] ) ? self::$errorConstants[$type] : 'UNKNOWN';
-        $errorInfo->code = $type;
-        $errorInfo->message = is_numeric( $error ) ? self::error_string( $error ) : $error;
-        $errorInfo->file = $file;
-        $errorInfo->line = $line;
-        $errorInfo->context = $context;
-	$errorInfo->trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
-
-        self::$allErrors[] = $errorInfo;
-
-		if( 0 == error_reporting() ) {
-			return false;
-		}
-
-		// historically we inline warnings
-		if( $type != E_WARNING && $type != E_USER_WARNING ) {
-			self::init();
-		}
-
-		if( $type == E_WARNING || $type == E_USER_WARNING ) {
-
-			switch( $type ) {
-				case E_WARNING:
-					$errorType = 'SYSTEM WARNING';
-					$errorDescription = $error;
-					break;
-				case E_USER_WARNING:
-					$errorType = "APPLICATION WARNING #$error";
-					$errorDescription = self::error_string( $error );
-					break;
-			}
-			$errorDescription = nl2br( $errorDescription );
-			echo '<p style="color:red">', $errorType, ': ', $errorDescription, '</p>';
-
-			return true; // @todo true|false??
-		}
-
-		exit();
-	}
-
-	public static function shutdown_error_handler() {
-		$error = error_get_last();
-		if( $error === null ) {
-			return;
-		}
-
-		self::init();
-
-		$errorInfo = new stdClass();
-        $errorInfo->time = time();
-        $errorInfo->type = 'ERROR_LAST';
-        $errorInfo->name = isset( self::$errorConstants[$error['type']] ) ? self::$errorConstants[$error['type']] : 'UNKNOWN';
-        $errorInfo->code = $error['type'];
-        $errorInfo->message = $error['message'];
-        $errorInfo->file = $error['file'];
-        $errorInfo->line = $error['line'];
-        $errorInfo->trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
-	$errorInfo->context = null;
-
-        self::$allErrors[] = $errorInfo;
+	public static function exception_error_handler( $errno, $errstr, $errfile, $errline ) {
+		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 	}
 
 	public static function display_errors( $noHeader = false ) {
@@ -164,7 +99,7 @@ class Error {
 		echo '<hr />';
 
 		echo '<div align="center">';
-		echo lang_get( 'error_no_proceed' );
+		echo _('Please use the "Back" button in your web browser to return to the previous page. There you can correct whatever problems were identified in this error or select another action. You can also click an option from the menu bar to go directly to a new section.');
 		echo '<br />';
 
 		foreach ( self::$allErrors as $key => $errorInfo ) {
@@ -194,7 +129,7 @@ class Error {
 		echo '<tr><td class="form-title">' . $error->name . '</td></tr>';
 		echo '<tr><td><p class="center" style="color:red">' . nl2br( $error->message ) . '</p></td></tr>';
 		echo '<tr><td>';
-		self::error_print_details( basename( $error->file ), $error->line, $error->context );
+		self::error_print_details( basename( $error->file ), $error->line );
 		echo '</td></tr>';
 		if ( !config_get( 'show_friendly_errors' ) ) {
 			echo '<tr><td>';
@@ -205,13 +140,12 @@ class Error {
 	}
 
 	/**
-	 * Print out the error details including context
+	 * Print out the error details
 	 * @param string $file
 	 * @param int $line
-	 * @param string $context
 	 * @return null
 	 */
-	public static function error_print_details( $file, $line, $context ) {
+	public static function error_print_details( $file, $line ) {
 		if ( !config_get( 'show_friendly_errors' ) ) {
 		?>
 			<table class="width75">
@@ -220,11 +154,6 @@ class Error {
 				</tr>
 				<tr>
 					<td>Line: <?php echo $line?></td>
-				</tr>
-				<tr>
-					<td>
-						<?php self::error_print_context( $context )?>
-					</td>
 				</tr>
 			</table>
 		<?php
@@ -243,47 +172,7 @@ class Error {
 		}
 	}
 
-	/**
-	 * Print out the variable context given
-	 * @param string $context
-	 * @return null
-	 */
-	public static function error_print_context( $context ) {
-		if( !is_array( $context ) && !is_object( $context )) {
-			return;
-		}
-
-		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
-
-		# print normal variables
-		foreach( $context as $var => $val ) {
-			if( !is_array( $val ) && !is_object( $val ) ) {
-				$type = gettype( $val );
-				$val = htmlentities( (string) $val, ENT_COMPAT, 'UTF-8' );
-
-				# Mask Passwords
-				if( strpos( $var, 'pass' ) !== false ) {
-					$val = '**********';
-				}
-
-				echo '<tr><td>', $var, '</td><td>', $val, '</td><td>', $type, '</td></tr>', "\n";
-			}
-		}
-
-		# print arrays
-		foreach( $context as $var => $val ) {
-			if( is_array( $val ) && ( $var != 'GLOBALS' ) ) {
-				echo '<tr><td colspan="3"><br /><strong>', $var, '</strong></td></tr>';
-				echo '<tr><td colspan="3">';
-				self::error_print_context( $val );
-				echo '</td></tr>';
-			}
-		}
-
-		echo '</table>';
-		}
-
-		public static function error_print_stack_trace( $stack ) {
+	public static function error_print_stack_trace( $stack ) {
 		echo '<table class="width75">';
 		echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
@@ -343,28 +232,6 @@ class Error {
 				return var_export( $param, true );
 			}
 		}
-	}
-
-	/**
-	 * Return an error string (in the current language) for the given error.
-	 * @param int $error
-	 * @return string
-	 * @access public
-	 */
-	public static function error_string( $error ) {
-		# We pad the parameter array to make sure that we don't get errors if
-		#  the caller didn't give enough parameters for the error string
-		$padding = array_pad( array(), 10, '' );
-
-		$error = lang_get( $error, null, false );
-
-		if( $error == '' ) {
-			return lang_get( 'missing_error_string' ) . $error;
-		}
-
-		# ripped from string_api
-		$string = call_user_func_array( 'sprintf', array_merge( array( $error ), self::$parameters, $padding ) );
-		return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $string, ENT_COMPAT, 'UTF-8' ) );
 	}
 
 	public static function error_handled() {

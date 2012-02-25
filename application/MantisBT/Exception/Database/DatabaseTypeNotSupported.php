@@ -2,15 +2,10 @@
 namespace MantisBT\Exception\Database;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class DatabaseTypeNotSupported extends ExceptionAbstract {
 	public function __construct($databaseType) {
-		/* TODO: add new language string */
-		$errorMessage = lang_get(ERROR_GENERIC, null, false);
-		$errorMessage = sprintf($errorMessage, $databaseType);
-		/* TODO: assign new error code instead of 0 */
-		parent::__construct(0, $errorMessage, null);
+		$errorMessage = sprintf(_('This PHP installation has not been configured to support the requested "%1$s" database type.', $databaseType));
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

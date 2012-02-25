@@ -2,12 +2,10 @@
 namespace MantisBT\Exception;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class UnspecifiedException extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_GENERIC, null, false);
-		parent::__construct(ERROR_GENERIC, $errorMessage, null);
+		$errorMessage = _('An error occurred during this action. You may wish to report this error to your local administrator.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

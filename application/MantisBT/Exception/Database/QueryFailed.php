@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\Database;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class QueryFailed extends ExceptionAbstract {
 	public function __construct($queryErrorCode, $queryErrorDescription, $queryString) {
-		$errorMessage = lang_get(ERROR_DB_QUERY_FAILED, null, false);
-		$errorMessage = sprintf($errorMessage, $queryErrorCode, $queryErrorDescription, $queryString);
-		parent::__construct(ERROR_DB_QUERY_FAILED, $errorMessage, null);
+		$errorMessage = sprintf(_('Database query failed. Error received from database was #%1$d: "%2$s" for the query: %3$s.'), $queryErrorCode, $queryErrorDescription, $queryString);
+		parent::__construct($errorMessage);
 		$this->responseCode = 500;
 	}
 }

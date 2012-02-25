@@ -2,13 +2,10 @@
 namespace MantisBT\Exception\User;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class UserNameNotUnique extends ExceptionAbstract {
 	public function __construct($userName) {
-		$errorMessage = lang_get(ERROR_USER_NAME_NOT_UNIQUE, null, false);
-		$errorMessage = sprintf($errorMessage, $userName);
-		parent::__construct(ERROR_USER_NAME_NOT_UNIQUE, $errorMessage, null);
+		$errorMessage = sprintf(_('An account already exists with user name "%1$s". Please select a unique user name.'), $userName);
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

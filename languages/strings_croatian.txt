@@ -387,6 +387,3 @@ $s_messages = array(
 );
 
 
-$MANTIS_ERROR[ERROR_GENERIC] = 'U toku ove akcije pojavila se greška. Možete prijaviti grešku administratoru.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Korisnički račun je zaštićen. Za to vrijeme Vam nije omogućen pristup.';

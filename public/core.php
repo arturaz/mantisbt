@@ -242,8 +242,7 @@ if ( ( $t_output = ob_get_contents() ) != '' ) {
 # Register exception handlers
 use MantisBT\Error;
 set_exception_handler(array('MantisBT\Error', 'exception_handler'));
-set_error_handler(array('MantisBT\Error', 'error_handler'));
-register_shutdown_function(array('MantisBT\Error', 'shutdown_error_handler'));
+set_error_handler(array('MantisBT\Error', 'exception_error_handler'));
 
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );

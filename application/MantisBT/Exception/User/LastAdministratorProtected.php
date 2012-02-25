@@ -2,12 +2,10 @@
 namespace MantisBT\Exception\User;
 use MantisBT\Exception\ExceptionAbstract;
 
-require_api('lang_api.php');
-
 class LastAdministratorProtected extends ExceptionAbstract {
 	public function __construct() {
-		$errorMessage = lang_get(ERROR_USER_CHANGE_LAST_ADMIN, null, false);
-		parent::__construct(ERROR_USER_CHANGE_LAST_ADMIN, $errorMessage, null);
+		$errorMessage = _('You cannot remove or demote the last administrator account. To perform the action you requested, you first need to create another administrator account.');
+		parent::__construct($errorMessage);
 		$this->responseCode = 400;
 	}
 }

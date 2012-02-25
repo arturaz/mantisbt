@@ -41,7 +41,6 @@
  * @uses utility_api.php
  */
 
-use MantisBT\Error;
 use MantisBT\Exception\Access\AccessDenied;
 
 require_api( 'config_api.php' );
@@ -833,7 +832,7 @@ function auth_http_prompt() {
 	header( 'WWW-Authenticate: Basic realm="' . lang_get( 'http_auth_realm' ) . '"' );
 	header( 'status: 401 Unauthorized' );
 
-	echo '<p class="center error-msg">' . Error::error_string( ERROR_ACCESS_DENIED ) . '</p>';
+	echo '<p class="center error-msg">' . string_display_line(_('Access denied.')) . '</p>';
 	print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
 
 	exit;
