@@ -19,6 +19,7 @@
 namespace MantisBT\Database;
 
 use MantisBT\Database\PDO\MySQL\MySQLDriver;
+use MantisBT\Exception\Database\DatabaseTypeNotSupported;
 use MantisBT\Exception\Database\ParameterCountMismatch;
 use MantisBT\Exception\Database\QueryFailed;
 use MantisBT\Exception\UnspecifiedException;
