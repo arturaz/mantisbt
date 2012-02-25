@@ -1219,9 +1219,9 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 		$t_where = '';
 		$t_from = '';
 		if( ALL_PROJECTS != $p_project_id ) {
-			$t_where = " AND {mantis_bug}.id = {custom_field_string}.bug_id AND
-							{mantis_bug}.project_id = '$p_project_id'";
-			$t_from = ", {mantis_bug}";
+			$t_where = " AND {bug}.id = {custom_field_string}.bug_id AND
+							{bug}.project_id = '$p_project_id'";
+			$t_from = ", {bug}";
 		}
 		$t_query2 = "SELECT {custom_field_string}.value FROM {custom_field_string}$t_from
 						WHERE {custom_field_string}.field_id='$c_field_id' $t_where
