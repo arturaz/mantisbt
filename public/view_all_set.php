@@ -360,13 +360,13 @@ if ( $f_temp_filter ) {
 }
 
 if ( $f_do_filter_by_date ) {
-	$f_do_filter_by_date = 'on';
+	$f_do_filter_by_date = true;
 }
 
 if ( $f_sticky_issues ) {
-	$f_sticky_issues = 'on';
+	$f_sticky_issues = true;
 } else {
-	$f_sticky_issues = 'off';
+	$f_sticky_issues = false;
 }
 
 if ( $f_type < 0 ) {

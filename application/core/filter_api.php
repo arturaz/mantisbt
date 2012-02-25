@@ -1614,7 +1614,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# date filter
-	if(( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+	if( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
 
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . "-" . $t_filter[FILTER_PROPERTY_START_MONTH] . "-" . $t_filter[FILTER_PROPERTY_START_DAY] . " 00:00:00";
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . "-" . $t_filter[FILTER_PROPERTY_END_MONTH] . "-" . $t_filter[FILTER_PROPERTY_END_DAY] . " 23:59:59";
@@ -2822,7 +2822,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<td class="small-caption" id="do_filter_by_date_filter_target">
 		<?php
-		if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
+		if( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
 			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_MONTH] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_DAY] ), '" />';
@@ -3745,7 +3745,7 @@ function print_filter_view_state() {
 function print_filter_sticky_issues() {
 	global $t_filter;
 	?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] ), true );?> />
+			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( $t_filter[FILTER_PROPERTY_STICKY] );?> />
 		<?php
 }
 
@@ -3771,12 +3771,12 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 ?>
 		<tr>
 			<td colspan="2">
-				<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php check_checked( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE], 'on' ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
+				<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php check_checked( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
 			</td>
 		</tr>
 <?php
 	}
-	$t_menu_disabled = ( !config_get( 'use_javascript' ) || 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ? '' : ' disabled="disabled" ';
+	$t_menu_disabled = ( !config_get( 'use_javascript' ) || $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ? '' : ' disabled="disabled" ';
 ?>
 
 		<!-- Start date -->
