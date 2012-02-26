@@ -67,7 +67,7 @@ compress_enable();
 # don't index my view page
 html_robots_noindex();
 
-html_page_top1( lang_get( 'my_view_link' ) );
+html_page_top1( _('My View') );
 
 if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );

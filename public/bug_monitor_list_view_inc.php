@@ -63,24 +63,24 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 <?php
 	collapse_icon( 'monitoring' );
  ?>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
+		<?php echo _('Users monitoring this issue'); ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<th class="category" width="15%">
-		<?php echo lang_get( 'monitoring_user_list' ); ?>
+		<?php echo _('User List'); ?>
 	</th>
 	<td>
 <?php
 		if ( 0 == $num_users ) {
-			echo lang_get( 'no_users_monitoring_bug' );
+			echo _('There are no users monitoring this issue.');
 		} else {
 			$t_can_delete_others = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );
 	 		for ( $i = 0; $i < $num_users; $i++ ) {
 				echo ($i > 0) ? ', ' : '';
 				echo print_user( $t_users[$i] );
 				if ( $t_can_delete_others ) {
-					echo ' [<a class="small" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_bug_id . '&amp;user_id=' . $t_users[$i] . htmlspecialchars(form_security_param( 'bug_monitor_delete' )) . '">' . lang_get( 'delete_link' ) . '</a>]';
+					echo ' [<a class="small" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_bug_id . '&amp;user_id=' . $t_users[$i] . htmlspecialchars(form_security_param( 'bug_monitor_delete' )) . '">' . _('Delete') . '</a>]';
 				}
 	 		}
  		}
@@ -91,9 +91,9 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 		<form method="get" action="bug_monitor_add.php">
 		<?php echo form_security_field( 'bug_monitor_add' ) ?>
 			<input type="hidden" name="bug_id" value="<?php echo (integer)$f_bug_id; ?>" />
-			<label for="bug_monitor_list_username"><?php echo lang_get( 'username' ) ?></label>
+			<label for="bug_monitor_list_username"><?php echo _('Username') ?></label>
 			<input type="text" id="bug_monitor_list_username" name="username" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
+			<input type="submit" class="button" value="<?php echo _('Add') ?>" />
 		</form>
 		<?php } ?>
 	</td>
@@ -105,7 +105,7 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2"><?php collapse_icon( 'monitoring' ); ?>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
+		<?php echo _('Users monitoring this issue'); ?>
 	</td>
 </tr>
 </table>

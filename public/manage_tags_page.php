@@ -102,13 +102,13 @@ if ( $f_page_number < 1 ) {
 # Retrive Tags from tag table
 $t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
 
-html_page_top( lang_get( 'manage_tags_link' ) );
+html_page_top( _('Manage Tags') );
 print_manage_menu( 'manage_tags_page.php' ); ?>
 
 <div id="manage-tags-filter-menu">
 	<ul class="menu"><?php
 	foreach ( $t_prefix_array as $t_prefix ) {
-		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
+		$t_caption = ( $t_prefix === 'ALL' ? _('All') : $t_prefix );
 		if ( $t_prefix == $f_filter ) {
 			$t_link = "<strong>$t_caption</strong>";
 		} else {
@@ -120,16 +120,16 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 </div>
 
 <div class="table-container">
-	<h2><?php echo lang_get( 'manage_tags_link' ) ?> [<?php echo $t_total_tag_count ?>]</h2>
+	<h2><?php echo _('Manage Tags') ?> [<?php echo $t_total_tag_count ?>]</h2>
 	<?php if ( $t_can_edit ) { ?>
-	<div class="section-link"><?php print_link( '#tagcreate', lang_get( 'tag_create' ) ) ?></div>
+	<div class="section-link"><?php print_link( '#tagcreate', _('Create Tag') ) ?></div>
 	<?php } ?>
 	<table cellspacing="1" cellpadding="5" border="1">
 		<tr class="row-category">
-			<td><?php echo lang_get( 'tag_name' ) ?></td>
-			<td><?php echo lang_get( 'tag_creator' ) ?></td>
-			<td><?php echo lang_get( 'tag_created' ) ?></td>
-			<td><?php echo lang_get( 'tag_updated' ) ?></td>
+			<td><?php echo _('Name') ?></td>
+			<td><?php echo _('Creator') ?></td>
+			<td><?php echo _('Date Created') ?></td>
+			<td><?php echo _('Last Updated') ?></td>
 		</tr><?php
 		foreach ( $t_result as $t_tag_row ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
@@ -157,21 +157,21 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 	<a name="tagcreate" />
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">
 		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
+			<legend><span><?php echo _('Create Tag') ?></span></legend>
 			<?php echo form_security_field( 'tag_create' ); ?>
 			<div class="field-container">
-				<label for="tag-name" class="required"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
+				<label for="tag-name" class="required"><span><?php echo _('Name') ?></span></label>
 				<span class="input"><input type="text" id="tag-name" name="name" size="40" maxlength="100" />
-				<span><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></span>
+				<span><?php echo sprintf( _('(Separate by %1)'), config_get( 'tag_separator' ) ); ?></span>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
+				<label for="tag-description"><span><?php echo _('Tag Description') ?></span></label>
 				<span class="textarea"><textarea id="tag-description" name="description" cols="80" rows="6"></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'tag_create' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Create Tag') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

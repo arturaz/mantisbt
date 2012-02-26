@@ -88,8 +88,8 @@ if ( current_user_is_administrator() &&
 	throw new LastAdministratorProtected();
 }
 
-helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
-						 lang_get( 'delete_account_button' ) );
+helper_ensure_confirmed( _('Are you sure you wish to delete your account?'),
+						 _('Delete Account') );
 
 form_security_purge('account_delete');
 
@@ -107,8 +107,8 @@ html_page_top2a();
 <br />
 <div>
 <?php
-echo lang_get( 'account_removed_msg' ) . '<br />';
-print_bracket_link( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ) );
+echo _('Your account has been removed...') . '<br />';
+print_bracket_link( config_get( 'logout_redirect_page' ), _('Proceed') );
 ?>
 </div>
 

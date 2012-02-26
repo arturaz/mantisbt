@@ -104,22 +104,22 @@ html_page_top2a();
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-		<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
+		<strong><?php echo _('Account registration processed.') ?></strong><br/>
 		<?php echo "[$f_username - $f_email] " ?>
 	</td>
 </tr>
 <tr>
 	<td>
 		<br/>
-		<?php echo lang_get( 'password_emailed_msg' ) ?>
+		<?php echo _('Congratulations. You have registered successfully. You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.') ?>
 		<br /><br/>
-		<?php echo lang_get( 'no_reponse_msg') ?>
+		<?php echo _('You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.') ?>
 		<br/><br/>
 	</td>
 </tr>
 </table>
 <br />
-<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
+<?php print_bracket_link( 'login_page.php', _('Proceed') ); ?>
 </div>
 
 <?php

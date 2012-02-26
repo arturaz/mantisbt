@@ -734,7 +734,7 @@ function string_get_bug_update_page( $p_user_id = null ) {
  * @return string
  */
 function string_get_bug_report_link( $p_user_id = null ) {
-	return '<a href="' . helper_mantis_url( string_get_bug_report_url( $p_user_id ) ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+	return '<a href="' . helper_mantis_url( string_get_bug_report_url( $p_user_id ) ) . '">' . _('Report Issue') . '</a>';
 }
 
 /**

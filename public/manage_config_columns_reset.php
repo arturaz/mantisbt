@@ -55,10 +55,10 @@ echo '<br />';
 echo '<div>';
 
 $t_redirect_url = 'account_manage_columns_page.php';
-html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );
+html_page_top( _('E-mail Notifications'), $t_redirect_url );
 echo '<br />';
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.') . '<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 echo '</div>';
 
 html_page_bottom();

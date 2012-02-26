@@ -63,21 +63,21 @@ if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 	<td class="form-title" colspan="4">
 <?php
 	collapse_icon( 'history' );
-	echo lang_get( 'bug_history' ) ?>
+	echo _('Issue History') ?>
 	</td>
 </tr>
 <tr class="row-category-history">
 	<td class="small-caption">
-		<?php echo lang_get( 'date_modified' ) ?>
+		<?php echo _('Date Modified') ?>
 	</td>
 	<td class="small-caption">
-		<?php echo lang_get( 'username' ) ?>
+		<?php echo _('Username') ?>
 	</td>
 	<td class="small-caption">
-		<?php echo lang_get( 'field' ) ?>
+		<?php echo _('Field') ?>
 	</td>
 	<td class="small-caption">
-		<?php echo lang_get( 'change' ) ?>
+		<?php echo _('Change') ?>
 	</td>
 </tr>
 <?php
@@ -108,7 +108,7 @@ if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 <tr>
 	<td class="form-title" colspan="4">
 	<?php	collapse_icon( 'history' );
-		echo lang_get( 'bug_history' ) ?>
+		echo _('Issue History') ?>
 	</td>
 </tr>
 </table>

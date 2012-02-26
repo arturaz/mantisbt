@@ -69,17 +69,17 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
 <div id="manage-proj-category-update-div" class="form-container">
 	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'edit_project_category_title' ) ?></span></legend>
+			<legend><span><?php echo _('Edit Project Category') ?></span></legend>
 			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
 			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 			<div class="field-container">
-				<label for="proj-category-name"><span><?php echo lang_get( 'category' ) ?></span></label>
+				<label for="proj-category-name"><span><?php echo _('Category') ?></span></label>
 				<span class="input"><input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="proj-category-assigned-to"><span><?php echo lang_get( 'assigned_to' ) ?></span></label>
+				<label for="proj-category-assigned-to"><span><?php echo _('Assigned To') ?></span></label>
 				<span class="select">
 					<select id="proj-category-assigned-to" name="assigned_to">
 						<option value="0"></option>
@@ -88,7 +88,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Update Category') ?>" /></span>
 		</fieldset>
 	</form>
 </div>
@@ -99,7 +99,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
 			<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
 			<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 			<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Delete Category') ?>" /></span>
 		</fieldset>
 	</form>
 </div><?php

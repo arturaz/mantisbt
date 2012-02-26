@@ -48,7 +48,7 @@ function helper_table_row_count( $p_table ) {
 ?>
 <table class="width75" cellspacing="1">
 <tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'database_statistics' ) ?></td>
+<td class="form-title" width="30%" colspan="2"><?php echo _('MantisBT Database Statistics') ?></td>
 </tr>
 <?php
 	foreach( db_get_table_list() as $t_table ) {

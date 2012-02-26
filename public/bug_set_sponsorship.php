@@ -80,8 +80,8 @@ if ( config_get( 'enable_sponsorship' ) == OFF ) {
 access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
 
 helper_ensure_confirmed(
-	sprintf( lang_get( 'confirm_sponsorship' ), $f_bug_id, sponsorship_format_amount( $f_amount ) ),
-	lang_get( 'sponsor_issue' ) );
+	sprintf( _('Please confirm you want to sponsor issue %1 for %2.'), $f_bug_id, sponsorship_format_amount( $f_amount ) ),
+	_('Sponsor issue') );
 
 if ( $f_amount == 0 ) {
 	# if amount == 0, delete sponsorship by current user (if any)

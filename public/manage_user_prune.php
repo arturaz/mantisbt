@@ -56,7 +56,7 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ), lang_get( 'prune_accounts_button' ) );
+helper_ensure_confirmed( _('Are you sure you want to delete old accounts that have never logged in?'), _('Prune') );
 
 # Delete the users who have never logged in and are older than 1 week
 $days_old = (int)7 * SECONDS_PER_DAY;

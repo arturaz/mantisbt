@@ -50,7 +50,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'summary_title' ) ?>
+		<?php echo _('Summary') ?>
 	</td>
 </tr>
 <?php

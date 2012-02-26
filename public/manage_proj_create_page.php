@@ -69,18 +69,18 @@ $f_parent_id = gpc_get( 'parent_id', null );
 			} ?>
 			<legend><span><?php
 			if ( null !== $f_parent_id ) {
-				echo lang_get( 'add_subproject_title' );
+				echo _('Add Subproject');
 			} else {
-				echo lang_get( 'add_project_title' );
+				echo _('Add Project');
 			} ?></span></legend>
 
 			<div class="field-container">
-				<label for="project-name" class="required"><span><?php echo lang_get( 'project_name' )?></span></label>
+				<label for="project-name" class="required"><span><?php echo _('Project Name')?></span></label>
 				<span class="input"><input type="text" id="project-name" name="name" size="64" maxlength="128" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="project-status"><span><?php echo lang_get( 'status' ) ?></span></label>
+				<label for="project-status"><span><?php echo _('Status') ?></span></label>
 				<span class="select">
 					<select id="project-status" name="status">
 						<?php print_enum_string_option_list( 'project_status' ) ?>
@@ -89,7 +89,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
+				<label for="project-view-state"><span><?php echo _('View Status') ?></span></label>
 				<span class="select">
 					<select id="project-view-state" name="view_state">
 						<?php print_enum_string_option_list( 'view_state' ) ?>
@@ -98,13 +98,13 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="project-inherit-global"><span><?php echo lang_get( 'inherit_global' ) ?></span></label>
+				<label for="project-inherit-global"><span><?php echo _('Inherit Global Categories') ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" checked="checked" /></span>
 				<span class="label-style"></span>
 			</div>
 			<?php if ( !is_null( $f_parent_id ) ) { ?>
 			<div class="field-container">
-				<label for="project-inherit-parent"><span><?php echo lang_get( 'inherit_parent' ) ?></span></label>
+				<label for="project-inherit-parent"><span><?php echo _('Inherit Parent Categories') ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="project-inherit-parent" name="inherit_parent" checked="checked" /></span>
 				<span class="label-style"></span>
 			</div><?php
@@ -118,20 +118,20 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				}
 			?>
 			<div class="field-container">
-				<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
+				<label for="project-file-path"><span><?php echo _('Upload File Path') ?></span></label>
 				<span class="input"><input type="text" id="project-file-path" name="file_path" size="70" maxlength="250" value="<?php echo $t_default_upload_path ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			} ?>
 			<div class="field-container">
-				<label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
+				<label for="project-description"><span><?php echo _('Description') ?></span></label>
 				<span class="textarea"><textarea id="project-description" name="description" cols="60" rows="5"></textarea></span>
 				<span class="label-style"></span>
 			</div>
 
 			<?php event_signal( 'EVENT_MANAGE_PROJECT_CREATE_FORM' ) ?>
 
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'add_project_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Add Project') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

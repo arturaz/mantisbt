@@ -50,7 +50,7 @@ access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 $f_tag_id = gpc_get_int( 'tag_id' );
 $t_tag_row = tag_get( $f_tag_id );
 
-helper_ensure_confirmed( lang_get( 'tag_delete_message' ), lang_get( 'tag_delete_button' ) );
+helper_ensure_confirmed( _('Are you sure you wish to delete this tag?'), _('Delete Tag') );
 
 tag_delete( $f_tag_id );
 

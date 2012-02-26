@@ -69,7 +69,7 @@ if ( $f_bug_id ) {
 	$t_bug_data = bug_get( $t_bug_id, true );
 	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id ), true );
 
-	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
+	$t_title = _('Issue #') . $t_bug_id;
 
 } else if ( $f_bugnote_id ) {
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
@@ -77,7 +77,7 @@ if ( $f_bug_id ) {
 
 	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id ), true );
 
-	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bugnote_id;
+	$t_title = _('Note') . ' ' . $f_bugnote_id;
 
 } else if ( $f_rev_id ) {
 	$t_bug_revisions = array_reverse( bug_revision_like( $f_rev_id ), true );
@@ -89,7 +89,7 @@ if ( $f_bug_id ) {
 	$t_bug_id = $t_bug_revisions[$f_rev_id]['bug_id'];
 	$t_bug_data = bug_get( $t_bug_id, true );
 
-	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
+	$t_title = _('Issue #') . $t_bug_id;
 
 } else {
 	throw new UnspecifiedException();
@@ -107,13 +107,13 @@ function show_revision( $t_revision ) {
 
 	switch( $t_revision['type'] ) {
 	case REV_DESCRIPTION:
-		$t_label = lang_get( 'description' );
+		$t_label = _('Description');
 		break;
 	case REV_STEPS_TO_REPRODUCE:
-		$t_label = lang_get( 'steps_to_reproduce' );
+		$t_label = _('Steps To Reproduce');
 		break;
 	case REV_ADDITIONAL_INFO:
-		$t_label = lang_get( 'additional_information' );
+		$t_label = _('Additional Information');
 		break;
 
 	case REV_BUGNOTE:
@@ -125,25 +125,26 @@ function show_revision( $t_revision ) {
 			return null;
 		}
 
-		$t_label = lang_get( 'bugnote' );
+		$t_label = _('Note');
 		break;
 
 	default:
 		$t_label = '';
 	}
 
-$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
+$t_by_string = sprintf( _('%1 by %2'), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
 
 ?>
 <tr class="spacer"><td><a id="revision-<?php echo $t_revision['id'] ?>"></a></td></tr>
 
 <tr>
-<th class="category"><?php echo lang_get( 'revision' ) ?></th>
+<th class="category"><?php echo _('Revision') ?></th>
 <td colspan="2"><?php echo $t_by_string ?></td>
 <td class="center" width="5%">
 <?php if ( $s_can_drop ) {
-	print_bracket_link( 'bug_revision_drop.php?id=' . $t_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
+	print_bracket_link( 'bug_revision_drop.php?id=' . $t_revision['id'] . $s_drop_token, _('Drop') );
 } ?>
+</td>
 </tr>
 
 <tr>
@@ -164,17 +165,17 @@ print_recently_visited();
 <table class="width100" cellspacing="1">
 
 <tr>
-<td class="form-title" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
+<td class="form-title" colspan="2"><?php echo _('View Revisions'), ': ', $t_title ?></td>
 <td class="right" colspan="2">
 <?php
-if ( !$f_bug_id && !$f_bugnote_id ) { print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) ); }
-print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
+if ( !$f_bug_id && !$f_bugnote_id ) { print_bracket_link( '?bug_id=' . $t_bug_id, _('All Revisions') ); }
+print_bracket_link( 'view.php?id=' . $t_bug_id, _('Back to Issue') );
 ?>
 </td>
 </tr>
 
 <tr>
-<th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
+<th class="category" width="15%"><?php echo _('Summary') ?></th>
 <td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
 </tr>
 

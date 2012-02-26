@@ -50,19 +50,19 @@ access_ensure_global_level( config_get( 'manage_site_threshold' ) );
 
 $t_version_suffix = config_get_global( 'version_suffix' );
 
-html_page_top( lang_get( 'manage_link' ) );
+html_page_top( _('Manage') );
 
 print_manage_menu();
 ?>
 <div id="manage-overview-div" class="table-container">
-	<h2><?php echo lang_get( 'site_information' ) ?></h2>
+	<h2><?php echo _('Site Information') ?></h2>
 	<table id="manage-overview-table" cellspacing="1" cellpadding="5" border="1">
 		<tr>
-			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
+			<th class="category"><?php echo _('MantisBT Version') ?></th>
 			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
 		</tr>
 		<tr>
-			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
+			<th class="category"><?php echo _('Schema Version') ?></th>
 			<td><?php echo config_get( 'database_version' ) ?></td>
 		</tr>
 		<tr class="spacer">
@@ -73,15 +73,15 @@ print_manage_menu();
 	if ( $t_is_admin ) {
 	?>
 		<tr>
-			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
+			<th class="category"><?php echo _('Site Path') ?></th>
 			<td><?php echo config_get( 'absolute_path' ) ?></td>
 		</tr>
 		<tr>
-			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
+			<th class="category"><?php echo _('Core Path') ?></th>
 			<td><?php echo APPLICATION_PATH . '/'; ?></td>
 		</tr>
 		<tr>
-			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
+			<th class="category"><?php echo _('Plugin Path') ?></th>
 			<td><?php echo config_get( 'plugin_path' ) ?></td>
 		</tr>
 		<tr class="spacer">

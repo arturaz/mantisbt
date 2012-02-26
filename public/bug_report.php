@@ -283,9 +283,9 @@ html_page_top2();
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
-print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+echo _('Operation successful.') . '<br />';
+print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( _('View Submitted Issue %1'), $t_bug_id ) );
+print_bracket_link( 'view_all_bug_page.php', _('View Issues') );
 
 if ( $f_report_stay ) {
 ?>
@@ -305,7 +305,7 @@ if ( $f_report_stay ) {
 		<input type="hidden" name="report_stay" value="1" />
 		<input type="hidden" name="view_state" value="<?php echo string_attribute( $t_bug_data->view_state ) ?>" />
 		<input type="hidden" name="due_date" value="<?php echo string_attribute( $t_bug_data->due_date ) ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Report More Issues') ?>" />
 	</form>
 	</p>
 <?php

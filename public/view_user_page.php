@@ -71,14 +71,14 @@ html_page_top();
 ?>
 
 <div class="section-container">
-	<h2><?php echo lang_get( 'view_account_title' ) ?></h2>
+	<h2><?php echo _('User Information') ?></h2>
 	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
+		<span class="display-label"><span><?php echo _('Username') ?></span></span>
 		<span class="display-value"><span><?php echo string_display_line( $u_username ) ?></span></span>
 		<span class="label-style"></span>
 	</div>
 	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
+		<span class="display-label"><span><?php echo _('E-mail') ?></span></span>
 		<span class="display-value"><span>
 			<?php
 				if ( ! ( $t_can_manage || $t_can_see_email ) ) {
@@ -94,7 +94,7 @@ html_page_top();
 		<span class="label-style"></span>
 	</div>
 	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
+		<span class="display-label"><span><?php echo _('Real Name') ?></span></span>
 		<span class="display-value"><span><?php
 			if ( ! ( $t_can_manage || $t_can_see_realname ) ) {
 				echo string_display_line(_('Access denied.'));
@@ -106,7 +106,7 @@ html_page_top();
 	</div>
 	<span class="section-links">
 	<?php if ( $t_can_manage ) { ?>
-			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a></span>
+			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo _('Manage User'); ?></a></span>
 	<?php } ?>
 	</span>
 </div><?php

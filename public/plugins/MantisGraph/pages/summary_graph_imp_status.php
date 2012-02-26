@@ -39,7 +39,7 @@
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
 	# gather the data for the graphs
-	$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
+	$t_metrics = create_bug_enum_summary( lang_get('status_enum_string'), 'status' );
 	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 ?>
 

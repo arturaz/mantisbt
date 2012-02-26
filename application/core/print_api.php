@@ -151,8 +151,8 @@ function print_successful_redirect( $p_redirect_to ) {
 	if( helper_log_to_page() ) {
 		html_page_top( null, $p_redirect_to );
 		echo '<br /><div class="center">';
-		echo lang_get( 'operation_successful' ) . '<br />';
-		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
+		echo _('Operation successful.') . '<br />';
+		print_bracket_link( $p_redirect_to, _('Proceed') );
 		echo '</div>';
 		html_page_bottom();
 	} else {
@@ -293,14 +293,14 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  */
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 	?>
-		<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></small>
+		<small><?php echo sprintf( _('(Separate by %1)'), config_get( 'tag_separator' ) )?></small>
 		<form method="post" action="tag_attach.php">
 		<?php echo form_security_field( 'tag_attach' )?>
 		<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" />
 		<?php
 			print_tag_input( $p_bug_id, $p_string );
 	?>
-		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="button" />
+		<input type="submit" value="<?php echo _('Attach')?>" class="button" />
 		</form>
 		<?php
 		return true;
@@ -331,7 +331,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 function print_tag_option_list( $p_bug_id = 0 ) {
 	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
-	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
+	echo '<option value="0">', string_html_specialchars( _('Existing tags') ), '</option>';
 	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
 		if ( !empty( $row['description'] ) ) {
@@ -368,11 +368,11 @@ function print_news_item_option_list() {
 		$t_note_string = '';
 
 		if ( 1 == $t_announcement ) {
-			array_push( $t_notes, lang_get( 'announcement' ) );
+			array_push( $t_notes, _('Announcement') );
 		}
 
 		if ( VS_PRIVATE == $t_view_state ) {
-			array_push( $t_notes, lang_get( 'private' ) );
+			array_push( $t_notes, _('private') );
 		}
 
 		if ( count( $t_notes ) > 0 ) {
@@ -403,10 +403,10 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 			<span class="news-author"><?php echo prepare_user_name( $p_poster_id ); ?></span><?php
 
 			if( 1 == $p_announcement ) { ?>
-				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
+				<span class="news-announcement"><?php echo _('Announcement'); ?></span><?php
 			}
 			if( VS_PRIVATE == $p_view_state ) { ?>
-				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
+				<span class="news-private"><?php echo _('private'); ?></span><?php
 			} ?>
 		</h3>
 		<p class="news-body"><?php echo $t_body; ?></p>
@@ -467,7 +467,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		if ( $p_project_id !== null ) {
 			check_selected( (int)$p_project_id, ALL_PROJECTS );
 		}
-		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
+		echo '>' . _('All Projects') . '</option>' . "\n";
 	}
 
 	$t_project_count = count( $t_project_ids );
@@ -571,7 +571,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	} else {
 		if( 0 == $p_category_id ) {
 			echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
-			echo string_attribute( lang_get( 'select_option' ) ), '</option>';
+			echo string_attribute( _('(select)') ), '</option>';
 		}
 	}
 
@@ -815,7 +815,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 	} else if ( count( $t_enum_list ) == 1 ) {
 		echo array_pop( $t_enum_list );
 	} else {
-		echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_current_value );
+		echo MantisEnum::getLabel( lang_get('status_enum_string'), $p_current_value );
 	}
 }
 
@@ -911,7 +911,7 @@ function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
 
 		echo $t_project_name . ' [' . $t_access_level . '] (' . $t_view_state . ')';
 		if( $p_include_remove_link && access_has_project_level( config_get( 'project_user_threshold' ), $t_project_id ) ) {
-			html_button( 'manage_user_proj_delete.php', lang_get( 'remove_link' ), array( 'project_id' => $t_project_id, 'user_id' => $p_user_id ) );
+			html_button( 'manage_user_proj_delete.php', _('Remove'), array( 'project_id' => $t_project_id, 'user_id' => $p_user_id ) );
 		}
 		echo '<br />';
 	}
@@ -933,7 +933,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
-		print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&project_id=$t_project_id&return=custom_field$t_security_token", lang_get( 'remove_link' ) );
+		print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&project_id=$t_project_id&return=custom_field$t_security_token", _('Remove') );
 		echo '<br />- ';
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -1188,10 +1188,10 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	}
 
 	# Get localized strings
-	$t_first = lang_get( 'first' );
-	$t_last = lang_get( 'last' );
-	$t_prev = lang_get( 'prev' );
-	$t_next = lang_get( 'next' );
+	$t_first = _('First');
+	$t_last = _('Last');
+	$t_prev = _('Prev');
+	$t_next = _('Next');
 
 	$t_page_links = 10;
 
@@ -1316,27 +1316,19 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 # Functions that used to be in html_api
 # =============================
 
-# This prints the little [?] link for user help
-# The $p_a_name is a link into the documentation.html file
-function print_documentation_link( $p_a_name = '' ) {
-	echo lang_get( $p_a_name ) . "\n";
-	# @@@ Disable documentation links for now.  May be re-enabled if linked to new manual.
-	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
-}
-
 # prints the signup link
 function print_signup_link() {
 	if ( ( ON == config_get_global( 'allow_signup' ) ) &&
 	     ( LDAP != config_get_global( 'login_method' ) ) &&
 	     ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
-		print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
+		print_bracket_link( 'signup_page.php', _('Signup for a new account') );
 	}
 }
 
 # prints the login link
 function print_login_link() {
-	print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
+	print_bracket_link( 'login_page.php', _('Login') );
 }
 
 # prints the lost pwd link
@@ -1346,7 +1338,7 @@ function print_lost_password_link() {
 	     ( ON == config_get( 'lost_password_feature' ) ) &&
 	     ( ON == config_get( 'send_reset_password' ) ) &&
 	     ( ON == config_get( 'enable_email_notification' ) ) ) {
-		print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
+		print_bracket_link( 'lost_pwd_page.php', _('Lost your password?') );
 	}
 }
 
@@ -1378,7 +1370,7 @@ function print_recently_visited() {
 		return;
 	}
 
-	echo '<div class="recently-visited">' . lang_get( 'recently_visited' ) . ': ';
+	echo '<div class="recently-visited">' . _('Recently Visited') . ': ';
 	$t_first = true;
 
 	foreach( $t_ids as $t_id ) {
@@ -1456,7 +1448,7 @@ function print_bug_attachment( $p_attachment ) {
 	}
 	print_bug_attachment_header( $p_attachment );
 	if ( $t_show_attachment_preview ) {
-		echo lang_get( 'word_separator' );
+		echo _('&#32;');
 		collapse_icon( $t_collapse_id );
 		if ( $p_attachment['type'] == 'text' ) {
 			print_bug_attachment_preview_text( $p_attachment );
@@ -1465,7 +1457,7 @@ function print_bug_attachment( $p_attachment ) {
 		}
 		collapse_closed( $t_collapse_id );
 		print_bug_attachment_header( $p_attachment );
-		echo lang_get( 'word_separator' );
+		echo _('&#32;');
 		collapse_icon( $t_collapse_id );
 		collapse_end( $t_collapse_id );
 	}
@@ -1486,7 +1478,7 @@ function print_bug_attachment_header( $p_attachment ) {
 		if ( $p_attachment['can_download'] ) {
 			echo '</a>';
 		}
-		echo lang_get( 'word_separator' );
+		echo _('&#32;');
 		if ( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
 		}
@@ -1494,22 +1486,22 @@ function print_bug_attachment_header( $p_attachment ) {
 		if ( $p_attachment['can_download'] ) {
 			echo '</a>';
 		}
-		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
-		echo lang_get( 'word_separator' ) . '<span class="italic">' . date( config_get( 'normal_date_format' ), $p_attachment['date_added'] ) . '</span>';
+		echo _('&#32;') . '(' . number_format( $p_attachment['size'] ) . _('&#32;') . _('bytes') . ')';
+		echo _('&#32;') . '<span class="italic">' . date( config_get( 'normal_date_format' ), $p_attachment['date_added'] ) . '</span>';
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
-		echo lang_get( 'word_separator' ) . '<span class="strike">' . string_display_line( $p_attachment['display_name'] ) . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
+		echo _('&#32;') . '<span class="strike">' . string_display_line( $p_attachment['display_name'] ) . '</span>' . _('&#32;') . '(' . _('Attachment missing') . ')';
 	}
 
 	if ( $p_attachment['can_delete'] ) {
-		echo lang_get( 'word_separator' ) . '[';
-		print_link( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
+		echo _('&#32;') . '[';
+		print_link( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ), _('Delete'), false, 'small' );
 		echo ']';
 	}
 
 	if ( $p_attachment['exists'] ) {
 		if ( config_get( 'file_upload_method' ) == FTP ) {
-			echo lang_get( 'word_separator' ) . '(' . lang_get( 'cached' ) . ')';
+			echo _('&#32;') . '(' . _('Cached') . ')';
 		}
 	}
 }

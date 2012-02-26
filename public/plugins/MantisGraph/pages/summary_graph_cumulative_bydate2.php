@@ -45,7 +45,7 @@ function graph_cumulative_bydate2( $p_metrics, $p_graph_width = 300, $p_graph_he
 
 	$t_graph_font = 'c:\\windows\\fonts\\arial.ttf' ;//graph_get_font();
 
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . _('By Date (days)') );
 
 	$graph = new ezcGraphLineChart();
 
@@ -94,7 +94,7 @@ $graph->driver->options->imageFormat = IMG_JPEG;
 //	$graph->SetMarginColor( 'white' );
 //	$graph->SetFrame( false );
 
-	$graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
+	$graph->title = plugin_lang_get( 'cumulative' ) . ' ' . _('By Date (days)');
 	$graph->options->font = $t_graph_font ;
 
 //	$graph->title->SetFont( $t_graph_font, FS_BOLD );

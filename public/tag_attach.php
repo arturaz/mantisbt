@@ -96,12 +96,12 @@ if ( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
 
 // failed to attach at least one tag
 if ( count( $t_tags_failed ) > 0 ) {
-	html_page_top( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+	html_page_top( _('Attach Tags') . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br/>
 <table class="width75">
 	<tr class="row-category">
-	<td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>
+	<td colspan="2"><?php echo _('Tag attachment failed.') ?></td>
 	</tr>
 	<tr class="spacer"><td colspan="2"></td></tr>
 <?php
@@ -116,9 +116,9 @@ if ( count( $t_tags_failed ) > 0 ) {
 	foreach( $t_tags_failed as $t_tag_row ) {
 		echo '<tr>';
 		if ( -1 == $t_tag_row['id'] ) {
-			echo '<th class="category">', lang_get( 'tag_create_denied' ), '</th>';
+			echo '<th class="category">', _('Create permission denied.'), '</th>';
 		} else if ( -2 == $t_tag_row['id'] ) {
-			echo '<th class="category">', lang_get( 'tag_invalid_name' ), '</th>';
+			echo '<th class="category">', _('Invalid tag name.'), '</th>';
 		}
 		echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
 
@@ -130,7 +130,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 ?>
 	<tr class="spacer"><td colspan="2"></td></tr>
 	<tr>
-	<th class="category"><?php echo lang_get( 'tag_attach_long' ) ?></th>
+	<th class="category"><?php echo _('Attach Tags') ?></th>
 	<td>
 <?php
 	print_tag_attach_form( $f_bug_id, $t_tag_string );

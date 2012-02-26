@@ -50,20 +50,20 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
-html_page_top( lang_get( 'manage_custom_field_link' ) );
+html_page_top( _('Manage Custom Fields') );
 
 print_manage_menu( 'manage_custom_field_page.php' );
 ?>
 
 <div class="table-container">
-	<h2><?php echo lang_get( 'custom_fields_setup' ) ?></h2>
+	<h2><?php echo _('Custom Fields') ?></h2>
 	<table cellspacing="1" cellpadding="5" border="1">
 		<tr>
-			<th class="category"><?php echo lang_get( 'custom_field_name' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_project_count' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_type' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_possible_values' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_default_value' ) ?></th>
+			<th class="category"><?php echo _('Name') ?></th>
+			<th class="category"><?php echo _('Project Count') ?></th>
+			<th class="category"><?php echo _('Type') ?></th>
+			<th class="category"><?php echo _('Possible Values') ?></th>
+			<th class="category"><?php echo _('Default Value') ?></th>
 		</tr><?php
 		$t_custom_fields = custom_field_get_ids();
 		foreach( $t_custom_fields as $t_field_id ) {
@@ -83,7 +83,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
 		<fieldset>
 			<?php echo form_security_field( 'manage_custom_field_create' ); ?>
 			<input type="text" name="name" size="32" maxlength="64" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
+			<input type="submit" class="button" value="<?php echo _('New Custom Field') ?>" />
 		</fieldset>
 	</form>
 </div><?php

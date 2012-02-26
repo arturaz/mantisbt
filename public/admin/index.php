@@ -51,7 +51,7 @@ function print_info_row( $p_description, $p_value ) {
 
 <table class="width75" cellspacing="1">
 <tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'install_information' ) ?></td>
+<td class="form-title" width="30%" colspan="2"><?php echo _('MantisBT Installation Information') ?></td>
 </tr>
 <?php
 	if( ON == config_get( 'show_version' ) ) {
@@ -59,22 +59,22 @@ function print_info_row( $p_description, $p_value ) {
 	} else {
 		$t_version_suffix = '';
 	}
-	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION, $t_version_suffix );
+	print_info_row( _('MantisBT Version'), MANTIS_VERSION, $t_version_suffix );
 	print_info_row( 'php_version', phpversion());
 ?>
 <tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'database_information' ) ?></td>
+<td class="form-title" width="30%" colspan="2"><?php echo _('MantisBT Database Information') ?></td>
 </tr>
 <?php
-	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
+	print_info_row( _('Schema Version'), config_get( 'database_version' ) );
 ?>
 <tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'path_information' ) ?></td>
+<td class="form-title" width="30%" colspan="2"><?php echo _('MantisBT Path Information') ?></td>
 </tr>
 <?php
-	print_info_row( lang_get( 'site_path' ), config_get( 'absolute_path' ) );
-	print_info_row( lang_get( 'core_path' ), APPLICATION_PATH );
-	print_info_row( lang_get( 'plugin_path' ), config_get( 'plugin_path' ) );
+	print_info_row( _('Site Path'), config_get( 'absolute_path' ) );
+	print_info_row( _('Core Path'), APPLICATION_PATH );
+	print_info_row( _('Plugin Path'), config_get( 'plugin_path' ) );
 ?>
 </table>
 <?php

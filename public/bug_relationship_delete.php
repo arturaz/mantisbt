@@ -94,7 +94,7 @@ if ( bug_exists( $t_dest_bug_id )) {
 	}
 }
 
-helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete_relationship_button' ) );
+helper_ensure_confirmed( _('Are you sure you wish to delete this relationship?'), _('Delete') );
 
 $t_bug_relationship_data = relationship_get( $f_rel_id );
 $t_rel_type = $t_bug_relationship_data->type;

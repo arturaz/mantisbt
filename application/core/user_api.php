@@ -750,7 +750,7 @@ function user_get_name( $p_user_id ) {
 	$row = user_cache_row( $p_user_id, false );
 
 	if( false == $row ) {
-		return lang_get( 'prefix_for_deleted_users' ) . (int) $p_user_id;
+		return _('user') . (int) $p_user_id;
 	} else {
 		if( ON == config_get( 'show_realname' ) ) {
 			if( is_blank( $row['realname'] ) ) {

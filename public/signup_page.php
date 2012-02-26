@@ -64,27 +64,27 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 <div id="signup-div" class="form-container">
 	<form id="signup-form" method="post" action="signup.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'signup_title' ) ?></span></legend>
+			<legend><span><?php echo _('Signup') ?></span></legend>
 			<?php echo form_security_field( 'signup' ); ?>
 			<ul id="login-links">
-			<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
+			<li><a href="login_page.php"><?php echo _('Login'); ?></a></li>
 			<?php
 			# lost password feature disabled or reset password via email disabled
 			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'lost_password_feature' ) ) &&
 				( ON == config_get( 'send_reset_password' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) ) ) {
-				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
+				echo '<li><a href="lost_pwd_page.php">', _('Lost your password?'), '</a></li>';
 			}
 			?>
 			</ul>
 			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<label for="username"><span><?php echo _('Username') ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="email-field"><span><?php echo lang_get( 'email_label' ) ?></span></label>
+				<label for="email-field"><span><?php echo _('E-mail') ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>
 			</div>
@@ -95,7 +95,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				# captcha image requires GD library and related option to ON
 
 				echo '<div class="field-container">';
-				echo '<label for="captcha-field"><span>' . lang_get( 'signup_captcha_request_label' ) . '</span></label>';
+				echo '<label for="captcha-field"><span>' . _('Enter the code as it is shown in the box on the right:') . '</span></label>';
 				echo '<span id="captcha-input" class="input">';
 				print_captcha_input( 'captcha', '' );
 				echo '<span class="captcha-image"><img src="make_captcha_img.php?public_key=' . $t_public_key . '" alt="visual captcha" /></span>';
@@ -106,12 +106,12 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			}
 			if( false == $t_allow_passwd ) {
 				echo '<span id="no-password-msg">';
-				echo lang_get( 'no_password_request' );
+				echo _('Your password is managed by another system. Please contact your system administrator.');
 				echo '</span>';
 			}
 			?>
-			<span id="signup-info"><?php echo lang_get( 'signup_info' ); ?></span>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
+			<span id="signup-info"><?php echo _('On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified. Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged. You must specify a valid e-mail address in order to receive the account confirmation e-mail.'); ?></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Signup') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

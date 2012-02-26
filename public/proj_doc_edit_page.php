@@ -84,7 +84,7 @@ html_page_top();
 <tr>
 	<td class="form-title">
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
-		<?php echo lang_get( 'upload_file_title' ) ?>
+		<?php echo _('Upload File') ?>
 	</td>
 	<td class="right">
 		<?php print_doc_menu() ?>
@@ -92,7 +92,7 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<th class="category" width="20%">
-		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
+		<span class="required">*</span><?php echo _('Title') ?>
 	</th>
 	<td width="80%">
 		<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
@@ -100,7 +100,7 @@ html_page_top();
 </tr>
 <tr class="row-2">
 	<th class="category">
-		<?php echo lang_get( 'description' ) ?>
+		<?php echo _('Description') ?>
 	</th>
 	<td>
 		<textarea name="description" cols="60" rows="7"><?php echo $v_description ?></textarea>
@@ -108,7 +108,7 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<th class="category">
-		<?php echo lang_get( 'filename' ) ?>
+		<?php echo _('Filename') ?>
 	</th>
 	<td>
 		<?php
@@ -121,9 +121,9 @@ html_page_top();
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'select_file' ); ?><br />
+		<?php echo _('Select File'); ?><br />
 		<?php // FIXME: hard coded "k" in here. ?>
-		<span class="small"><?php echo lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) ?>k</span>
+		<span class="small"><?php echo _('Maximum size:') . _('&#32;') . number_format( $t_max_file_size/1000 ) ?>k</span>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
@@ -132,10 +132,10 @@ html_page_top();
 <tr>
 <tr>
 	<td class="left">
-		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
+		<span class="required"> * <?php echo _('required') ?></span>
 	</td>
 	<td>
-		<input type="submit" class="button" value="<?php echo lang_get( 'file_update_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Update File') ?>" />
 	</td>
 </tr>
 </table>
@@ -146,7 +146,7 @@ html_page_top();
 	<?php echo form_security_field( 'proj_doc_delete' ) ?>
 	<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
 	<input type="hidden" name="title" value="<?php echo $v_title ?>" />
-	<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
+	<input type="submit" class="button" value="<?php echo _('Delete File') ?>" />
 	</form>
 </div>
 

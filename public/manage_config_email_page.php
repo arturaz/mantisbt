@@ -169,15 +169,15 @@ function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 	echo '<table class="width100">';
 	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
-	echo'<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</td></tr><tr>';
+	echo '<tr><td class="form-title" width="30%" rowspan="2">' . _('Message') . '</td>';
+	echo'<td class="form-title" style="text-align:center" rowspan="2">&#160;' . _('User who reported issue') . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . _('User who is handling the issue') . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . _('Users monitoring this issue') . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . _('Users who added Issue Notes') . '&#160;</td>';
+	echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . _('Access Levels') . '&#160;</td></tr><tr>';
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</td>';
+		echo '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get('access_levels_enum_string'), $t_access_level ) . '&#160;</td>';
 	}
 
 	echo '</tr>' . "\n";
@@ -204,7 +204,7 @@ function get_section_end_for_email() {
 }
 
 
-html_page_top( lang_get( 'manage_email_config' ) );
+html_page_top( _('E-mail Notifications') );
 
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_email_page.php' );
@@ -270,43 +270,43 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 
 	if ( ALL_PROJECTS == $t_project ) {
-		$t_project_title = lang_get( 'config_all_projects' );
+		$t_project_title = _('Note: These configurations affect all projects, unless overridden at the project level.');
 	} else {
-		$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
+		$t_project_title = sprintf( _('Note: These configurations affect only the %1 project.') , string_display( project_get_name( $t_project ) ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
-	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
+	echo '<p>' . _('In the table below, the following color code applies:') . '<br />';
 	if ( ALL_PROJECTS <> $t_project ) {
-		echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
+		echo '<span style="background-color:' . $t_colour_project . '">' . _('Project setting overrides others.') . '</span><br />';
 	}
-	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+	echo '<span style="background-color:' . $t_colour_global . '">' . _('All Project settings override default configuration.') . '</span></p>';
 
-	get_section_begin_for_email( lang_get( 'email_notification' ) );
-#		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
-	get_capability_row_for_email( lang_get( 'email_on_assigned' ), 'owner' );
-	get_capability_row_for_email( lang_get( 'email_on_reopened' ), 'reopened' );
-	get_capability_row_for_email( lang_get( 'email_on_deleted' ), 'deleted' );
-	get_capability_row_for_email( lang_get( 'email_on_bugnote_added' ), 'bugnote' );
+	get_section_begin_for_email( _('E-mail notification') );
+#		get_capability_row_for_email( _('E-mail on New'), 'new' );  # duplicate of status change to 'new'
+	get_capability_row_for_email( _('E-mail on Change of Handler'), 'owner' );
+	get_capability_row_for_email( _('E-mail on Reopened'), 'reopened' );
+	get_capability_row_for_email( _('E-mail on Deleted'), 'deleted' );
+	get_capability_row_for_email( _('E-mail on Note Added'), 'bugnote' );
 	if( config_get( 'enable_sponsorship' ) == ON ) {
-		get_capability_row_for_email( lang_get( 'email_on_sponsorship_changed' ), 'sponsor' );
+		get_capability_row_for_email( _('E-mail on Sponsorship changed'), 'sponsor' );
 	}
 
-	get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relation' );
+	get_capability_row_for_email( _('E-mail on Relationship changed'), 'relation' );
 
 	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach ( $t_statuses as $t_status => $t_label ) {
-		get_capability_row_for_email( lang_get( 'status_changed_to' ) . ' \'' . get_enum_element( 'status', $t_status ) . '\'', $t_label );
+		get_capability_row_for_email( _('Status changes to') . ' \'' . get_enum_element( 'status', $t_status ) . '\'', $t_label );
 	}
 
 	get_section_end_for_email();
 
 	if ( $t_can_change_flags  || $t_can_change_defaults ) {
-		echo '<p>' . lang_get( 'notify_actions_change_access' );
+		echo '<p>' . _('Who can change notifications:');
 		echo '<select name="notify_actions_access">';
 		print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
 		echo '</select> </p>';
 
-		echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
+		echo "<input type=\"submit\" class=\"button\" value=\"" . _('Update Configuration') . "\" />\n";
 
 		echo "</form>\n";
 
@@ -317,9 +317,9 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		echo "<input name=\"return\" type=\"hidden\" value=\"\"></input>";
 		echo "<input type=\"submit\" class=\"button\" value=\"";
 		if ( ALL_PROJECTS == $t_project ) {
-			echo lang_get( 'revert_to_system' );
+			echo _('Delete All Projects Settings');
 		} else {
-			echo lang_get( 'revert_to_all_project' );
+			echo _('Delete Project Specific Settings');
 		}
 		echo "\" />\n";
 		echo "</form></div>\n";

@@ -60,9 +60,9 @@ $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version_info->pro
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
 
 # Confirm with the user
-helper_ensure_confirmed( lang_get( 'version_delete_sure' ) .
-	'<br/>' . lang_get( 'version_label' ) . lang_get( 'word_separator' ) . $t_version_info->version,
-	lang_get( 'delete_version_button' ) );
+helper_ensure_confirmed( _('Are you sure you want to delete this version?') .
+	'<br/>' . _('Version:') . _('&#32;') . $t_version_info->version,
+	_('Delete Version') );
 
 version_remove( $f_version_id );
 
@@ -73,8 +73,8 @@ html_page_top( null, $t_redirect_url );
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ).'<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.').'<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

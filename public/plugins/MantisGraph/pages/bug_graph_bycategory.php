@@ -198,7 +198,7 @@
         html_head_begin();
         html_css();
         html_content_type();
-        html_title( lang_get( 'by_category' ) );
+        html_title( _('By Category') );
     	html_head_end();
     	html_body_begin();
 	    echo '<table class="width100"><tr><td></td>';
@@ -228,5 +228,5 @@
             }
 	    }
 	    array_unshift( $t_category, '' ); // add placeholder
-	    graph_bydate( $t_metrics, $t_category, lang_get( 'by_category' ), $f_width, $f_width * $t_ar );
+	    graph_bydate( $t_metrics, $t_category, _('By Category'), $f_width, $f_width * $t_ar );
     }

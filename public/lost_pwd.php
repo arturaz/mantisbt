@@ -115,19 +115,19 @@ html_page_top();
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-		<strong><?php echo lang_get( 'lost_password_done_title' ) ?></strong>
+		<strong><?php echo _('Password Message Sent') ?></strong>
 	</td>
 </tr>
 <tr>
 	<td>
 		<br/>
-		<?php echo lang_get( 'reset_request_in_progress_msg' ) ?>
+		<?php echo _('If you supplied the correct username and e-mail address for your account, we will now have sent a confirmation message to that e-mail address. Once the message has been received, follow the instructions provided to change the password on your account.') ?>
 		<br/><br/>
 	</td>
 </tr>
 </table>
 <br />
-<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
+<?php print_bracket_link( 'login_page.php', _('Proceed') ); ?>
 </div>
 
 <?php

@@ -81,9 +81,9 @@ html_page_top( null, $f_return );
 echo '<br />';
 echo '<div>';
 
-echo lang_get( 'operation_successful' ) . '<br />';
+echo _('Operation successful.') . '<br />';
 
-print_bracket_link( $f_return, lang_get( 'proceed' ) );
+print_bracket_link( $f_return, _('Proceed') );
 
 echo '</div>';
 

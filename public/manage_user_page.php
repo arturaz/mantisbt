@@ -64,7 +64,7 @@ $f_filter = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage
 $f_page_number		= gpc_get_int( 'page_number', 1 );
 
 $t_cookie_name = config_get( 'manage_cookie' );
-$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
+$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . _('Protected') . '" />';
 $c_filter = '';
 
 # Clean up the form variables
@@ -108,7 +108,7 @@ if ( $f_save ) {
 	}
 }
 
-html_page_top( lang_get( 'manage_users_link' ) );
+html_page_top( _('Manage Users') );
 
 print_manage_menu( 'manage_user_page.php' );
 
@@ -135,7 +135,7 @@ $t_unused_user_count = $t_row['unused_user_count'];
 
 $t_prefix_array = array();
 
-$t_prefix_array['ALL'] = lang_get( 'show_all_users' );
+$t_prefix_array['ALL'] = _('All');
 
 for ( $i = 'A'; $i != 'AA'; $i++ ) {
 	$t_prefix_array[$i] = $i;
@@ -144,17 +144,17 @@ for ( $i = 'A'; $i != 'AA'; $i++ ) {
 for ( $i = 0; $i <= 9; $i++ ) {
 	$t_prefix_array["$i"] = "$i";
 }
-$t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
-$t_prefix_array['NEW'] = lang_get( 'users_new' );
+$t_prefix_array['UNUSED'] = _('Unused');
+$t_prefix_array['NEW'] = _('New');
 
 echo '<div id="manage-user-filter-menu">';
 echo '<ul class="menu">';
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	echo '<li>';
 	if ( $t_prefix === 'UNUSED' ) {
-		$t_title = ' title="[' . $t_unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
+		$t_title = ' title="[' . $t_unused_user_count . '] (' . _('Never Logged In') . ')"';
 	} else if ( $t_prefix === 'NEW' ) {
-		$t_title = ' title="[' . $t_new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
+		$t_title = ' title="[' . $t_new_user_count . '] (' . _('1 Week') . ')"';
 	} else {
 		$t_title = '';
 	}
@@ -236,9 +236,9 @@ while ( $t_row = db_fetch_array( $t_result ) ) {
 $t_user_count = count( $t_users );
 ?>
 <div id="manage-user-div" class="form-container">
-	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $t_total_user_count ?>]
-	<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
-	<?php if ( $f_filter === 'UNUSED' ) echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
+	<h2><?php echo _('Manage Accounts') ?></h2> [<?php echo $t_total_user_count ?>]
+	<?php print_button( 'manage_user_create_page.php', _('Create New Account') ) ?>
+	<?php if ( $f_filter === 'UNUSED' ) echo print_button( 'manage_user_prune.php', _('Prune Accounts') ); ?>
 	<form id="manage-user-filter" method="post" action="manage_user_page.php">
 		<fieldset>
 			<?php # CSRF protection not required here - form does not result in modifications ?>
@@ -246,31 +246,31 @@ $t_user_count = count( $t_users );
 			<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 			<input type="hidden" name="save" value="1" />
 			<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
-			<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
-			<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
+			<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo _('Hide Inactive') ?>
+			<input type="submit" class="button" value="<?php echo _('Apply Filter') ?>" />
 		</fieldset>
 	</form>
 
 	<table cellspacing="1" cellpadding="5" border="1">
 		<tr class="row-category">
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('Username'), 'username', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'username' ); ?>
 			</td>
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('Real Name'), 'realname', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'realname' ); ?>
 			</td>
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('E-mail'), 'email', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'email' ); ?>
 			</td>
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('Access Level'), 'access_level', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'access_level' ); ?>
 			</td>
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('Enabled'), 'enabled', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'enabled' ); ?>
 			</td>
 			<td><?php
@@ -278,11 +278,11 @@ $t_user_count = count( $t_users );
 				print_sort_icon( $c_dir, $c_sort, 'protected' ); ?>
 			</td>
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('Date Created'), 'date_created', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'date_created' ); ?>
 			</td>
 			<td><?php
-				print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter );
+				print_manage_user_sort_link(  'manage_user_page.php', _('Last Visit'), 'last_visit', $c_dir, $c_sort, $c_hide, $c_filter );
 				print_sort_icon( $c_dir, $c_sort, 'last_visit' ); ?>
 			</td>
 		</tr><?php
@@ -334,11 +334,11 @@ $t_user_count = count( $t_users );
 		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
 			<fieldset>
 				<div class="field-container">
-					<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
+					<label for="username"><span><?php echo _('Username') ?></span></label>
 					<span class="input"><input id="username" type="text" name="username" value="" /></span>
 					<span class="label-style"></span>
 				</div>
-				<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+				<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Manage User') ?>" /></span>
 			</fieldset>
 		</form>
 	</div>

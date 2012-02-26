@@ -114,7 +114,7 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 				$v_end = $v_start + count( $rows ) - 1;
 			}
 
-			echo lang_get( 'viewing_bugs_title' );
+			echo _('Viewing Issues');
 			echo " ($v_start - $v_end / $t_bug_count)";
 		?> </span>
 
@@ -122,11 +122,11 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 		<?php
 			# -- Print and Export links --
 			echo '&#160;';
-			print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+			print_bracket_link( 'print_all_bug_page.php', _('Print Reports') );
 			echo '&#160;';
-			print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
+			print_bracket_link( 'csv_export.php', _('CSV Export') );
 			echo '&#160;';
-			print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
+			print_bracket_link( 'excel_xml_export.php', _('Excel Export') );
 
 			$t_event_menu_options = $t_links = event_signal( 'EVENT_MENU_FILTER' );
 
@@ -223,7 +223,7 @@ write_bug_rows($rows);
 <?php
 		if ( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
 			echo '<input type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
-			echo '<label for="bug_arr_all">' . lang_get( 'select_all' ) . '</label>';
+			echo '<label for="bug_arr_all">' . _('Select All') . '</label>';
 		}
 
 		if ( $g_checkboxes_exist ) {
@@ -231,7 +231,7 @@ write_bug_rows($rows);
 			<select name="action">
 				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
 			</select>
-			<input type="submit" class="button" value="<?php echo lang_get( 'ok' ); ?>" />
+			<input type="submit" class="button" value="<?php echo _('OK'); ?>" />
 <?php
 		} else {
 			echo '&#160;';

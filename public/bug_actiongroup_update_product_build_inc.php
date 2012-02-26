@@ -43,7 +43,7 @@ require_api( 'lang_api.php' );
 function action_update_product_build_print_title() {
 	echo '<tr class="form-title">';
 	echo '<td colspan="2">';
-	echo lang_get( 'product_build' );
+	echo _('Product Build');
 	echo '</td></tr>';
 }
 
@@ -54,8 +54,8 @@ function action_update_product_build_print_title() {
  * A row has two columns.
  */
 function action_update_product_build_print_fields() {
-	echo '<tr class="row-1"><th class="category">', lang_get( 'product_build' ), '</th><td><input type="text" name="build" size="32" maxlength="32" /></td></tr>';
-	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'actiongroup_menu_update_product_build' ) . ' " /></td></tr>';
+	echo '<tr class="row-1"><th class="category">', _('Product Build'), '</th><td><input type="text" name="build" size="32" maxlength="32" /></td></tr>';
+	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . _('Update Product Build') . ' " /></td></tr>';
 }
 
 /**
@@ -68,11 +68,11 @@ function action_update_product_build_validate( $p_bug_id ) {
 	$t_bug_id = (int)$p_bug_id;
 
 	if ( bug_is_readonly( $t_bug_id ) ) {
-		return lang_get( 'actiongroup_error_issue_is_readonly' );
+		return _('Issue is readonly.');
 	}
 
 	if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-		return lang_get( 'access_denied' );
+		return _('Access Denied.');
 	}
 
 	return null;

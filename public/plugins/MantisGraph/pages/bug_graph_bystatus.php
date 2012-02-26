@@ -73,7 +73,7 @@
 	}
 	// grab all status levels
 	$t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	$t_status_labels  = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
+	$t_status_labels  = MantisEnum::getAssocArrayIndexedByValues( lang_get('status_enum_string') );
 	$t_default_bug_status = config_get( 'bug_submit_status' );
 
     $t_bug = array();
@@ -160,7 +160,7 @@
         html_head_begin();
         html_css();
         html_content_type();
-        html_title( lang_get( 'by_status' ) );
+        html_title( _('By Status') );
     	html_head_end();
     	html_body_begin();
 	    echo '<table class="width100"><tr><td></td>';
@@ -235,5 +235,5 @@
     	html_body_end();
     	html_end();
     } else {
-	    graph_bydate( $t_metrics, $t_labels, lang_get( 'by_status' ), $f_width, $f_width * $t_ar );
+	    graph_bydate( $t_metrics, $t_labels, _('By Status'), $f_width, $f_width * $t_ar );
 	}

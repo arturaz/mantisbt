@@ -63,7 +63,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 
 access_ensure_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id );
 
-helper_ensure_confirmed( lang_get( 'delete_attachment_sure_msg' ), lang_get( 'delete_attachment_button' ) );
+helper_ensure_confirmed( _('Are you sure you wish to delete this attachment?'), _('Delete') );
 
 file_delete( $f_file_id, 'bug' );
 

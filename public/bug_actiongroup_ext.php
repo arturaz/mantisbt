@@ -103,13 +103,13 @@ if ( count( $t_failed_ids ) > 0 ) {
 
 	echo '<div>';
 
-	$t_word_separator = lang_get( 'word_separator' );
+	$t_word_separator = _('&#32;');
 	foreach( $t_failed_ids as $t_id => $t_reason ) {
-		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
+		$label = sprintf( _('%1:'), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
 		printf("<p>%s%s</p>\n", $label, $t_reason );
 	}
 
-	print_bracket_link( 'view_all_bug_page.php', lang_get( 'proceed' ) );
+	print_bracket_link( 'view_all_bug_page.php', _('Proceed') );
 	echo '</div>';
 
 	html_page_bottom();

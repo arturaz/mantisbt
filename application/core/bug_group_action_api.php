@@ -96,7 +96,7 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 	echo '<table class="width75" cellspacing="1">';
 	echo '<tr class="row-1">';
 	echo '<th class="category" colspan="2">';
-	echo lang_get( 'actiongroup_bugs' );
+	echo _('Selected Issues');
 	echo '</th>';
 	echo '</tr>';
 
@@ -199,21 +199,21 @@ function bug_group_action_get_commands( $p_project_ids = null ) {
 
 		if( !isset( $t_commands['MOVE'] ) &&
 			access_has_project_level( config_get( 'move_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['MOVE'] = lang_get( 'actiongroup_menu_move' );
+			$t_commands['MOVE'] = _('Move');
 		}
 
 		if( !isset( $t_commands['COPY'] ) &&
 			access_has_any_project( config_get( 'report_bug_threshold', null, null, $t_project_id ) ) ) {
-			$t_commands['COPY'] = lang_get( 'actiongroup_menu_copy' );
+			$t_commands['COPY'] = _('Copy');
 		}
 
 		if( !isset( $t_commands['ASSIGN'] ) &&
 			access_has_project_level( config_get( 'update_bug_assign_threshold', null, null, $t_project_id ), $t_project_id ) ) {
 			if( ON == config_get( 'auto_set_status_to_assigned', null, null, $t_project_id ) &&
 				access_has_project_level( access_get_status_threshold( config_get( 'bug_assigned_status', null, null, $t_project_id ), $t_project_id ), $t_project_id ) ) {
-				$t_commands['ASSIGN'] = lang_get( 'actiongroup_menu_assign' );
+				$t_commands['ASSIGN'] = _('Assign');
 			} else {
-				$t_commands['ASSIGN'] = lang_get( 'actiongroup_menu_assign' );
+				$t_commands['ASSIGN'] = _('Assign');
 			}
 		}
 
@@ -221,76 +221,76 @@ function bug_group_action_get_commands( $p_project_ids = null ) {
 			access_has_project_level( config_get( 'update_bug_status_threshold', null, null, $t_project_id ), $t_project_id ) &&
 			( access_has_project_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold', null, null, $t_project_id ), $t_project_id ), $t_project_id ) ||
 				access_has_project_level( config_get( 'allow_reporter_close', null, null, $t_project_id ), $t_project_id ) ) ) {
-			$t_commands['CLOSE'] = lang_get( 'actiongroup_menu_close' );
+			$t_commands['CLOSE'] = _('Close');
 		}
 
 		if( !isset( $t_commands['DELETE'] ) &&
 			access_has_project_level( config_get( 'delete_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['DELETE'] = lang_get( 'actiongroup_menu_delete' );
+			$t_commands['DELETE'] = _('Delete');
 		}
 
 		if( !isset( $t_commands['RESOLVE'] ) &&
 			access_has_project_level( config_get( 'update_bug_status_threshold', null, null, $t_project_id ), $t_project_id ) &&
 			access_has_project_level( access_get_status_threshold( config_get( 'bug_resolved_status_threshold', null, null, $t_project_id ), $t_project_id ), $t_project_id ) ) {
-			$t_commands['RESOLVE'] = lang_get( 'actiongroup_menu_resolve' );
+			$t_commands['RESOLVE'] = _('Resolve');
 		}
 
 		if( !isset( $t_commands['SET_STICKY'] ) &&
 			access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['SET_STICKY'] = lang_get( 'actiongroup_menu_set_sticky' );
+			$t_commands['SET_STICKY'] = _('Set/Unset Sticky');
 		}
 
 		if( !isset( $t_commands['UP_PRIOR'] ) &&
 			access_has_project_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['UP_PRIOR'] = lang_get( 'actiongroup_menu_update_priority' );
+			$t_commands['UP_PRIOR'] = _('Update Priority');
 		}
 
 		if( !isset( $t_commands['EXT_UPDATE_SEVERITY'] ) &&
 			access_has_project_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['EXT_UPDATE_SEVERITY'] = lang_get( 'actiongroup_menu_update_severity' );
+			$t_commands['EXT_UPDATE_SEVERITY'] = _('Update Severity');
 		}
 
 		if( !isset( $t_commands['UP_STATUS'] ) &&
 			access_has_project_level( config_get( 'update_bug_status_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['UP_STATUS'] = lang_get( 'actiongroup_menu_update_status' );
+			$t_commands['UP_STATUS'] = _('Update Status');
 		}
 
 		if( !isset( $t_commands['UP_CATEGORY'] ) &&
 			access_has_project_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['UP_CATEGORY'] = lang_get( 'actiongroup_menu_update_category' );
+			$t_commands['UP_CATEGORY'] = _('Update Category');
 		}
 
 		if( !isset( $t_commands['VIEW_STATUS'] ) &&
 			access_has_project_level( config_get( 'change_view_status_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['VIEW_STATUS'] = lang_get( 'actiongroup_menu_update_view_status' );
+			$t_commands['VIEW_STATUS'] = _('Update View Status');
 		}
 
 		if( !isset( $t_commands['EXT_UPDATE_PRODUCT_BUILD'] ) &&
 			config_get( 'enable_product_build', null, null, $t_project_id ) == ON &&
 			access_has_project_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['EXT_UPDATE_PRODUCT_BUILD'] = lang_get( 'actiongroup_menu_update_product_build' );
+			$t_commands['EXT_UPDATE_PRODUCT_BUILD'] = _('Update Product Build');
 		}
 
 		if( !isset( $t_commands['EXT_ADD_NOTE'] ) &&
 			access_has_project_level( config_get( 'add_bugnote_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['EXT_ADD_NOTE'] = lang_get( 'actiongroup_menu_add_note' );
+			$t_commands['EXT_ADD_NOTE'] = _('Add Note');
 		}
 
 		if( !isset( $t_commands['EXT_ATTACH_TAGS'] ) &&
 			access_has_project_level( config_get( 'tag_attach_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['EXT_ATTACH_TAGS'] = lang_get( 'actiongroup_menu_attach_tags' );
+			$t_commands['EXT_ATTACH_TAGS'] = _('Attach Tags');
 		}
 
 		if( !isset( $t_commands['UP_FIXED_IN_VERSION'] ) &&
 			version_should_show_product_version( $t_project_id ) &&
 			access_has_project_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['UP_FIXED_IN_VERSION'] = lang_get( 'actiongroup_menu_update_fixed_in_version' );
+			$t_commands['UP_FIXED_IN_VERSION'] = _('Update Fixed in Version');
 		}
 
 		if( !isset( $t_commands['UP_TARGET_VERSION'] ) &&
 			version_should_show_product_version( $t_project_id ) &&
 			access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_commands['UP_TARGET_VERSION'] = lang_get( 'actiongroup_menu_update_target_version' );
+			$t_commands['UP_TARGET_VERSION'] = _('Update Target Version');
 		}
 
 		$t_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -300,7 +300,7 @@ function bug_group_action_get_commands( $p_project_ids = null ) {
 			}
 			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 			$t_command_id = 'custom_field_' . $t_custom_field_id;
-			$t_command_caption = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+			$t_command_caption = sprintf( _('Update %1'), lang_get_defaulted( $t_custom_field_def['name'] ) );
 			$t_commands[$t_command_id] = string_display( $t_command_caption );
 		}
 	}

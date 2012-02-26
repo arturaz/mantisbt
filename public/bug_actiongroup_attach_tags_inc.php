@@ -47,7 +47,7 @@ require_api( 'tag_api.php' );
 function action_attach_tags_print_title() {
 	echo '<tr class="form-title">';
 	echo '<td colspan="2">';
-	echo lang_get( 'tag_attach_long' );
+	echo _('Attach Tags');
 	echo '</td></tr>';
 }
 
@@ -55,9 +55,9 @@ function action_attach_tags_print_title() {
  * Prints the table and form for the Attach Tags group action page.
  */
 function action_attach_tags_print_fields() {
-	echo '<tr><th class="category">',lang_get('tag_attach_long'),'</th><td>';
+	echo '<tr><th class="category">',_('Attach Tags'),'</th><td>';
 	print_tag_input();
-	echo '<input type="submit" class="button" value="' . lang_get( 'tag_attach' ) . ' " /></td></tr>';
+	echo '<input type="submit" class="button" value="' . _('Attach') . ' " /></td></tr>';
 }
 
 /**
@@ -73,7 +73,7 @@ function action_attach_tags_validate( $p_bug_id ) {
 
 	$t_can_attach = access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 	if( !$t_can_attach ) {
-		return lang_get( 'tag_attach_denied' );
+		return _('Attach permission denied.');
 	}
 
 	if( !isset( $g_action_attach_tags_tags ) ) {
@@ -93,12 +93,12 @@ function action_attach_tags_validate( $p_bug_id ) {
 
 	$t_can_create = access_has_bug_level( config_get( 'tag_create_threshold' ), $p_bug_id );
 	if( count( $g_action_attach_tags_create ) > 0 && !$t_can_create ) {
-		return lang_get( 'tag_create_denied' );
+		return _('Create permission denied.');
 	}
 
 	if( count( $g_action_attach_tags_create ) == 0 &&
 		count( $g_action_attach_tags_attach ) == 0 ) {
-		return lang_get( 'tag_none_attached' );
+		return _('No tags attached.');
 	}
 
 	return null;

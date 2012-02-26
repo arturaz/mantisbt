@@ -51,8 +51,8 @@ if( ALL_PROJECTS == $t_project_id ) {
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo lang_get( 'select_file' )?><br />
-		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
+		<?php echo _('Select File')?><br />
+		<?php echo '<span class="small">(' . _('Maximum size') . ': ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
 	</td>
 	<td width="85%">
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size?>" />
@@ -96,7 +96,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 </tr>
 
 <tr class="row-2">
-	<th class="category" width="25%"><?php echo lang_get( 'categories' );?></th>
+	<th class="category" width="25%"><?php echo _('Categories');?></th>
 	<td>
 	<p><label for="keepcategory"><?php echo plugin_lang_get( 'keep_same_category' );?></label>
 	<input type="checkbox" checked="checked" id="keepcategory" name="keepcategory" /></p>
@@ -113,7 +113,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 <tr>
 	<td colspan="2" class="center">
-		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' )?>" />
+		<input type="submit" class="button" value="<?php echo _('Upload File')?>" />
 	</td>
 </tr>
 </table>

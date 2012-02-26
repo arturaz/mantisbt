@@ -62,14 +62,14 @@ $t_query_redirect_url = 'query_store_page.php';
 # We can't have a blank name
 if ( is_blank( $f_query_name ) ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
-		. urlencode( lang_get( 'query_blank_name' ) );
+		. urlencode( _('You cannot store a filter without a name. Please give this filter a name before saving it.') );
 	print_header_redirect( $t_query_redirect_url );
 }
 
 // mantis_filters_table.name has a length of 64. Not allowing longer.
 if ( !filter_name_valid_length( $f_query_name ) ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
-		. urlencode( lang_get( 'query_name_too_long' ) );
+		. urlencode( _('You cannot store a filter name with more than 64 characters. Please give this filter a shorter name.') );
 	print_header_redirect( $t_query_redirect_url );
 }
 
@@ -79,7 +79,7 @@ $t_query_arr = filter_db_get_available_queries();
 foreach( $t_query_arr as $t_id => $t_name )	{
 	if ( $f_query_name == $t_name ) {
 		$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
-			. urlencode( lang_get( 'query_dupe_name' ) );
+			. urlencode( _('Another filter already has this name. Please choose a different name for this filter.') );
 		print_header_redirect( $t_query_redirect_url );
 		exit;
 	}
@@ -99,7 +99,7 @@ form_security_purge( 'query_store' );
 
 if ( $t_new_row_id == -1 ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
-		. urlencode( lang_get( 'query_store_error' ) );
+		. urlencode( _('There was an error saving this filter.') );
 	print_header_redirect( $t_query_redirect_url );
 } else {
 	print_header_redirect( 'view_all_bug_page.php' );

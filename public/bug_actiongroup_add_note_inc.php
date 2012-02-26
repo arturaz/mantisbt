@@ -53,7 +53,7 @@ require_api( 'utility_api.php' );
 function action_add_note_print_title() {
 	echo '<tr class="form-title">';
 	echo '<td colspan="2">';
-	echo lang_get( 'add_bugnote_title' );
+	echo _('Add Note');
 	echo '</td></tr>';
 }
 
@@ -64,12 +64,12 @@ function action_add_note_print_title() {
  * A row has two columns.
  */
 function action_add_note_print_fields() {
-	echo '<tr class="row-1"><th class="category">', lang_get( 'add_bugnote_title' ), '</th><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
+	echo '<tr class="row-1"><th class="category">', _('Add Note'), '</th><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
 ?>
 	<!-- View Status -->
 	<tr class="row-2">
 	<th class="category">
-		<?php echo lang_get( 'view_status' ) ?>
+		<?php echo _('View Status') ?>
 	</th>
 	<td>
 <?php
@@ -87,7 +87,7 @@ function action_add_note_print_fields() {
 	</td>
 	</tr>
 	<?php
-	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'add_bugnote_button' ) . ' " /></td></tr>';
+	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . _('Add Note') . ' " /></td></tr>';
 }
 
 /**
@@ -106,11 +106,11 @@ function action_add_note_validate( $p_bug_id ) {
 	$t_bug_id = $p_bug_id;
 
 	if ( bug_is_readonly( $t_bug_id ) ) {
-		return lang_get( 'actiongroup_error_issue_is_readonly' );
+		return _('Issue is readonly.');
 	}
 
 	if ( !access_has_bug_level( $t_add_bugnote_threshold, $t_bug_id ) ) {
-		return lang_get( 'access_denied' );
+		return _('Access Denied.');
 	}
 
 	return null;

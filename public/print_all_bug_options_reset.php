@@ -82,12 +82,12 @@ html_page_top( null, $t_redirect_url );
 echo '<br /><div>';
 
 if ( $result ) {
-	echo lang_get( 'operation_successful' );
+	echo _('Operation successful.');
 } else {
 	echo string_display_line(_('An error occurred during this action. You may wish to report this error to your local administrator.'));
 }
 
 echo '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, _('Proceed') );
 echo '<br /></div>';
 html_page_bottom();

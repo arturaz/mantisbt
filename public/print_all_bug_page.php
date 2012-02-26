@@ -192,7 +192,7 @@ $t_icon_path = config_get( 'icon_path' );
 <tr>
 	<td class="form-title" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
 		<?php
-			echo lang_get( 'viewing_bugs_title' );
+			echo _('Viewing Issues');
 
 			if ( $row_count > 0 ) {
 				$v_start = $f_offset+1;
@@ -206,9 +206,9 @@ $t_icon_path = config_get( 'icon_path' );
 	</td>
 	<td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
 		<?php
-			# print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) );
-			# print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
-			# print_bracket_link( 'summary_page.php', lang_get( 'summary' ) );
+			# print_bracket_link( 'print_all_bug_options_page.php', _('Printing Options') );
+			# print_bracket_link( 'view_all_bug_page.php', _('View Issues') );
+			# print_bracket_link( 'summary_page.php', _('Summary') );
 		?>
 	</td>
 </tr>
@@ -250,7 +250,7 @@ $t_icon_path = config_get( 'icon_path' );
 
 <br />
 
-<input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
+<input type="submit" class="button" value="<?php echo _('Display selected only') ?>" />
 </form>
 
 <?php

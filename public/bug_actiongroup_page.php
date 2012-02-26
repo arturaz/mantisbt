@@ -136,93 +136,93 @@ switch ( $f_action )  {
 	# Use a simple confirmation page, if close or delete...
 	case 'CLOSE' :
 		$t_finished 			= true;
-		$t_question_title 		= lang_get( 'close_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'close_group_bugs_button' );
+		$t_question_title 		= _('Are you sure you wish to close these issues?');
+		$t_button_title 		= _('Close Issues');
 		$t_bugnote				= true;
 		break;
 
 	case 'DELETE' :
 		$t_finished 			= true;
-		$t_question_title		= lang_get( 'delete_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'delete_group_bugs_button' );
+		$t_question_title		= _('Are you sure you wish to delete these issues?');
+		$t_button_title 		= _('Delete Issues');
 		break;
 
 	case 'SET_STICKY' :
 		$t_finished 			= true;
-		$t_question_title		= lang_get( 'set_sticky_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'set_sticky_group_bugs_button' );
+		$t_question_title		= _('Are you sure you wish to set/unset these issues sticky?');
+		$t_button_title 		= _('Set/Unset Sticky');
 		break;
 
 	# ...else we define the variables used in the form
 	case 'MOVE' :
-		$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'move_group_bugs_button' );
+		$t_question_title 		= _('Move issues to');
+		$t_button_title 		= _('Move Issues');
 		$t_form					= 'project_id';
 		break;
 
 	case 'COPY' :
-		$t_question_title 		= lang_get( 'copy_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'copy_group_bugs_button' );
+		$t_question_title 		= _('Copy issues to');
+		$t_button_title 		= _('Copy Issues');
 		$t_form					= 'project_id';
 		break;
 
 	case 'ASSIGN' :
-		$t_question_title 		= lang_get( 'assign_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'assign_group_bugs_button' );
+		$t_question_title 		= _('Assign issues to');
+		$t_button_title 		= _('Assign Issues');
 		$t_form 				= 'assign';
 		break;
 
 	case 'RESOLVE' :
-		$t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
+		$t_question_title 		= _('Choose issues resolution');
+		$t_button_title 		= _('Resolve Issues');
 		$t_form 				= 'resolution';
 		if ( ALL_PROJECTS != $t_project_id ) {
-			$t_question_title2 = lang_get( 'fixed_in_version' );
+			$t_question_title2 = _('Fixed in Version');
 			$t_form2 = 'fixed_in_version';
 		}
 		$t_bugnote				= true;
 		break;
 
 	case 'UP_PRIOR' :
-		$t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'priority_group_bugs_button' );
+		$t_question_title 		= _('Choose issues priority');
+		$t_button_title 		= _('Update Priority');
 		$t_form 				= 'priority';
 		break;
 
 	case 'UP_STATUS' :
-		$t_question_title 		= lang_get( 'status_bugs_conf_msg' );
-		$t_button_title 		= lang_get( 'status_group_bugs_button' );
+		$t_question_title 		= _('Choose issues status');
+		$t_button_title 		= _('Update Status');
 		$t_form 				= 'status';
 		$t_bugnote				= true;
 		break;
 
 	case 'UP_CATEGORY' :
-		$t_question_title		= lang_get( 'category_bugs_conf_msg' );
-		$t_button_title			= lang_get( 'category_group_bugs_button' );
+		$t_question_title		= _('Choose issues category');
+		$t_button_title			= _('Update Category');
 		$t_form					= 'category';
 		break;
 
 	case 'VIEW_STATUS' :
-		$t_question_title		= lang_get( 'view_status_bugs_conf_msg' );
-		$t_button_title			= lang_get( 'view_status_group_bugs_button' );
+		$t_question_title		= _('Choose issues view status');
+		$t_button_title			= _('Update View Status');
 		$t_form					= 'view_status';
 		break;
 
 	case 'UP_FIXED_IN_VERSION':
-		$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
-		$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
+		$t_question_title		= _('Update Fixed in Version to');
+		$t_button_title			= _('Update Fixed in Version');
 		$t_form					= 'fixed_in_version';
 		break;
 
 	case 'UP_TARGET_VERSION':
-		$t_question_title		= lang_get( 'target_version_bugs_conf_msg' );
-		$t_button_title			= lang_get( 'target_version_group_bugs_button' );
+		$t_question_title		= _('Update Target Version to');
+		$t_button_title			= _('Update Target Version');
 		$t_form					= 'target_version';
 		break;
 
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
-		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+		$t_question_title = sprintf( _('Update %1'), lang_get_defaulted( $t_custom_field_def['name'] ) );
 		$t_button_title = $t_question_title;
 		$t_form = "custom_field_$t_custom_field_id";
 		break;
@@ -234,7 +234,7 @@ switch ( $f_action )  {
 bug_group_action_print_top();
 
 if ( $t_multiple_projects ) {
-	echo '<p class="bold">' . lang_get( 'multiple_projects' ) . '</p>';
+	echo '<p class="bold">' . _('The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.') . '</p>';
 }
 ?>
 
@@ -357,7 +357,7 @@ if( $t_bugnote ) {
 ?>
 <tr class="row-1">
 	<th class="category">
-		<?php echo lang_get( 'add_bugnote_title' ); ?>
+		<?php echo _('Add Note'); ?>
 	</th>
 	<td>
 		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
@@ -366,7 +366,7 @@ if( $t_bugnote ) {
 <?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) { ?>
 <tr>
 	<th class="category">
-		<?php echo lang_get( 'view_status' ) ?>
+		<?php echo _('View Status') ?>
 	</th>
 	<td>
 <?php
@@ -375,7 +375,7 @@ if( $t_bugnote ) {
 ?>
 			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 <?php
-			echo lang_get( 'private' );
+			echo _('private');
 		} else {
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
 		}

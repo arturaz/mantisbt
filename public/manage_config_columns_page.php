@@ -36,7 +36,7 @@ require_api( 'lang_api.php' );
 
 auth_reauthenticate();
 
-html_page_top( lang_get( 'manage_columns_config' ) );
+html_page_top( _('Manage Columns') );
 
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_columns_page.php' );

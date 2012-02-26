@@ -87,7 +87,7 @@ compress_enable();
 # don't index view issues pages
 html_robots_noindex();
 
-html_page_top1( lang_get( 'view_bugs_link' ) );
+html_page_top1( _('View Issues') );
 
 if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );

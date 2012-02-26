@@ -77,15 +77,15 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'bug_reminder' ) ?>
+		<?php echo _('Send a reminder') ?>
 	</td>
 </tr>
 <tr>
 	<th class="category">
-		<?php echo lang_get( 'to' ) ?>
+		<?php echo _('To') ?>
 	</th>
 	<th class="category">
-		<?php echo lang_get( 'reminder' ) ?>
+		<?php echo _('Reminder') ?>
 	</th>
 </tr>
 <tr>
@@ -111,7 +111,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Send') ?>" />
 	</td>
 </tr>
 </table>
@@ -121,12 +121,12 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 <tr>
 	<td>
 		<?php
-			echo lang_get( 'reminder_explain' ) . ' ';
+			echo _('This note will be sent to the recipients listed requesting feedback on this issue.') . ' ';
 			if ( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
-				echo lang_get( 'reminder_monitor' ) . ' ';
+				echo _('These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.') . ' ';
 			}
 			if ( ON == config_get( 'store_reminders' ) ) {
-				echo lang_get( 'reminder_store' );
+				echo _('This note will be stored with the issue.');
 			}
 		?>
 	</td>

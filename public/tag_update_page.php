@@ -71,54 +71,54 @@ if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 	throw new AccessDenied();
 }
 
-html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
+html_page_top( sprintf( _('Update Tag: %1'), $t_name ) );
 ?>
 <div class="form-container">
 	<form method="post" action="tag_update.php">
 		<fieldset>
-			<legend><span><?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?></span></legend>
-			<div class="section-link"><?php print_bracket_link( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ) ); ?></div>
+			<legend><span><?php echo sprintf( _('Update Tag: %1'), $t_name ) ?></span></legend>
+			<div class="section-link"><?php print_bracket_link( 'tag_view_page.php?tag_id='.$f_tag_id, _('Back to Tag') ); ?></div>
 			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
 			<?php echo form_security_field( 'tag_update' ) ?>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Tag ID') ?></span></span>
 				<span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="tag-name"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
+				<label for="tag-name"><span><?php echo _('Name') ?></span></label>
 				<span class="input"><input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<?php
 					if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
+						echo '<label for="tag-user-id"><span>', _('Creator'), '</span></label>';
 						echo '<span class="select"><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
 						print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
 						echo '</select></span>';
 					} else { ?>
-						<span class="display-label"><span><?php echo lang_get( 'tag_creator' ); ?></span></span>
+						<span class="display-label"><span><?php echo _('Creator'); ?></span></span>
 						<span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></span></span><?php
 					} ?>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Date Created') ?></span></span>
 				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Last Updated') ?></span></span>
 				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
+				<label for="tag-description"><span><?php echo _('Tag Description') ?></span></label>
 				<span class="textarea"><textarea id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" /></span>
+			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo _('Update Tag') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

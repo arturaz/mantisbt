@@ -180,22 +180,22 @@ if ( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );
 	$t_changes = "";
 	if ( strcmp( $f_username, $t_old_username ) ) {
-		$t_changes .= lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_old_username . ' => ' . $f_username . "\n";
+		$t_changes .= _('Username') . _('&#32;') . $t_old_username . ' => ' . $f_username . "\n";
 	}
 	if ( strcmp( $t_realname, $t_old_realname ) ) {
-		$t_changes .= lang_get( 'realname_label' ) . lang_get( 'word_separator' ) . $t_old_realname . ' => ' . $t_realname . "\n";
+		$t_changes .= _('Real Name') . _('&#32;') . $t_old_realname . ' => ' . $t_realname . "\n";
 	}
 	if ( strcmp( $t_email, $t_old_email ) ) {
-		$t_changes .= lang_get( 'email_label' ) . lang_get( 'word_separator' ) . $t_old_email . ' => ' . $t_email . "\n";
+		$t_changes .= _('E-mail') . _('&#32;') . $t_old_email . ' => ' . $t_email . "\n";
 	}
 	if ( strcmp( $f_access_level, $t_old_access_level ) ) {
 		$t_old_access_string = get_enum_element( 'access_levels', $t_old_access_level );
 		$t_new_access_string = get_enum_element( 'access_levels', $f_access_level );
-		$t_changes .= lang_get( 'access_level_label' ) . lang_get( 'word_separator' ) . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
+		$t_changes .= _('Access Level') . _('&#32;') . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
 	}
 	if ( !empty( $t_changes ) ) {
-		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
-		$t_updated_msg = lang_get( 'email_user_updated_msg' );
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . _('Account updated');
+		$t_updated_msg = _('Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:');
 		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
 		email_store( $t_email, $t_subject, $t_message );
 		log_event( LOG_EMAIL, sprintf( 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' ) );
@@ -217,12 +217,12 @@ html_page_top( null, $result ? $t_redirect_url : null );
 <div>
 <?php
 if ( $f_protected && $t_old_protected ) {				# PROTECTED
-	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
+	echo _('Account protected. Access level and enabled protected. Otherwise, account has been updated...') . '<br />';
 } else if ( $result ) {					# SUCCESS
-	echo lang_get( 'operation_successful' ) . '<br />';
+	echo _('Operation successful.') . '<br />';
 }
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

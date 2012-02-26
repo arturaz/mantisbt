@@ -176,22 +176,22 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
 		if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 			if ( 'advanced' == $f_view_type ) {
-				print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+				print_bracket_link( $f_switch_view_link . 'simple', _('Simple Filters') );
 			} else {
-				print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+				print_bracket_link( $f_switch_view_link . 'advanced', _('Advanced Filters') );
 			}
 		}
 	?>
 	</td>
 </tr>
 <tr class="row-category2">
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'reporter' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'monitored_by' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'assigned_to' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'category' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'severity' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'profile' ) ?></th>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Reporter') ?></th>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Monitored By') ?></th>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Assigned To') ?></th>
+	<th class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo _('Category') ?></th>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Severity') ?></th>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Resolution') ?></th>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Profile') ?></th>
 	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
 <tr class="row-1">
@@ -227,31 +227,31 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 </tr>
 
 <tr class="row-category2">
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Status') ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 	<?php
 	if ( 'simple' == $f_view_type ) {
-		echo lang_get( 'hide_status' );
+		echo _('Hide Status');
 	} else {
 		echo '&#160;';
 	}
 	?>
 	</td>
 	<?php if ( $t_show_build ) { ?>
-		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Product Build') ?></td>
 	<?php } else { ?>
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&#160;</td>
 	<?php } ?>
 	<?php if ( $t_show_product_version ) { ?>
-		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
-		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo _('Product Version') ?></td>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Fixed in Version') ?></td>
 	<?php } else { ?>
 		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">&#160;</td>
 		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&#160;</td>
 	<?php } ?>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Priority') ?></td>
 	<?php if ( $t_show_product_version ) { ?>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'target_version' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Target Version') ?></td>
 	<?php } else { ?>
 	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&#160;</td>
 	<?php } ?>
@@ -308,15 +308,15 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 </tr>
 
 <tr class="row-category2">
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Show') ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('View Status') ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Show Sticky Issues') ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Changed(hrs)') ?></td>
 	<td class="small-caption" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
-		<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>" <?php check_checked( $t_filter['filter_by_date'] ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
+		<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>" <?php check_checked( $t_filter['filter_by_date'] ) ?> /><?php echo _('Use Date Filters')?></label>
 	</td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<?php echo lang_get( 'bug_relationships' ) ?>
+		<?php echo _('Relationships') ?>
 	</td>
 	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
@@ -399,7 +399,7 @@ if ( 'simple' == $f_view_type ) {
 
 <tr class="row-1">
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<?php echo lang_get( 'sort_label' ) ?>
+		<?php echo _('Sort by:') ?>
 	</td>
 	<td colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
 		<?php
@@ -410,7 +410,7 @@ if ( 'simple' == $f_view_type ) {
 		if ( 'advanced' == $f_view_type ) {
 	?>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<?php echo lang_get( 'email_project_label' ) ?>
+				<?php echo _('Project:') ?>
 			</td>
 			<td colspan="<?php echo( 2 * $t_custom_cols ); ?>">
 				<?php
@@ -475,8 +475,8 @@ if ( $t_column > 0 ) {
 ?>
 
 <tr class="row-category2">
-<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
-<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { echo lang_get( 'tags' ); } ?></td>
+<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo _('Search') ?></td>
+<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { echo _('Tags'); } ?></td>
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
 </tr>
 <tr class="row-1">
@@ -489,7 +489,7 @@ if ( $t_column > 0 ) {
 
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="submit" name="filter" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<input type="submit" name="filter" class="button" value="<?php echo _('Apply Filter') ?>" />
 	</td>
 </tr>
 </table>

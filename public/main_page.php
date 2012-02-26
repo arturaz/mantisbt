@@ -68,23 +68,23 @@ if ( OFF != $t_rss_enabled && news_is_enabled() ) {
 	html_set_rss_link( $t_rss_link );
 }
 
-html_page_top( lang_get( 'main_link' ) );
+html_page_top( _('Main') );
 
 if ( !current_user_is_anonymous() ) {
 	$t_current_user_id = auth_get_current_user_id();
 	$t_hide_status = config_get( 'bug_resolved_status_threshold' );
 	echo '<div class="quick-summary-left">';
-	echo lang_get( 'open_and_assigned_to_me_label' ) . lang_get( 'word_separator' );
+	echo _('Open and assigned to me:') . _('&#32;');
 	print_link( "view_all_set.php?type=1&handler_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_assigned_open_bug_count(), false, 'subtle' );
 	echo '</div>';
 
 	echo '<div class="quick-summary-right">';
-	echo lang_get( 'open_and_reported_to_me_label' ) . lang_get( 'word_separator' );
+	echo _('Open and reported by me:') . _('&#32;');
 	print_link( "view_all_set.php?type=1&reporter_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_reported_open_bug_count(), false, 'subtle' );
 	echo '</div>';
 
 	echo '<div class="quick-summary-left">';
-	echo lang_get( 'last_visit_label' ) . lang_get( 'word_separator' );
+	echo _('Last Visit:') . _('&#32;');
 	echo date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) );
 	echo '</div>';
 }
@@ -112,21 +112,21 @@ if ( news_is_enabled() ) {
 
 	echo '<div id="news-menu">';
 
-	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
+	print_bracket_link( 'news_list_page.php', _('Archives') );
 	$t_news_view_limit = config_get( 'news_view_limit' );
 	$f_offset_next = $f_offset + $t_news_view_limit;
 	$f_offset_prev = $f_offset - $t_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
+		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, _('Newer News') );
 	}
 
 	if ( $t_news_count == $t_news_view_limit ) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
+		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, _('Older News') );
 	}
 
 	if ( OFF != $t_rss_enabled ) {
-		print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
+		print_bracket_link( $t_rss_link, _('RSS') );
 	}
 
 	echo '</div>';

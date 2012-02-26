@@ -102,23 +102,23 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<td class="form-title">
 		<?php
 		if ( $t_graph_relation )
-			echo lang_get( 'viewing_bug_relationship_graph_title' );
+			echo _('Relationship Graph');
 		else
-			echo lang_get( 'viewing_bug_dependency_graph_title' );
+			echo _('Dependency Graph');
 		?>
 	</td>
 	<!-- Links -->
 	<td class="right">
 		<!-- View Issue -->
-		<span class="small"><?php print_bracket_link( 'view.php?id=' . $f_bug_id, lang_get( 'view_issue' ) ) ?></span>
+		<span class="small"><?php print_bracket_link( 'view.php?id=' . $f_bug_id, _('View Issue') ) ?></span>
 
 		<!-- Relation/Dependency Graph Switch -->
 		<span class="small">
 <?php
 		if ( $t_graph_relation )
-			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency", lang_get( 'dependency_graph' ) );
+			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency", _('Dependency Graph') );
 		else
-			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=relation", lang_get( 'relation_graph' ) );
+			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=relation", _('Relation Graph') );
 ?>
 		</span>
 <?php
@@ -128,9 +128,9 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		<span class="small">
 <?php
 			if ( $t_graph_horizontal )
-				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=vertical", lang_get( 'vertical' ) );
+				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=vertical", _('Vertical') );
 			else
-				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=horizontal", lang_get( 'horizontal' ) );
+				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=horizontal", _('Horizontal') );
 ?>
 		</span>
 <?php
@@ -164,15 +164,15 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		<tr>
 			<td class="center">
 				<img alt="" src="images/rel_related.png" />
-				<?php echo lang_get( 'related_to' ) ?>
+				<?php echo _('related to') ?>
 			</td>
 			<td class="center">
 				<img alt="" src="images/rel_dependant.png" />
-				<?php echo lang_get( 'blocks' ) ?>
+				<?php echo _('child of') ?>
 			</td>
 			<td class="center">
 				<img alt="" src="images/rel_duplicate.png" />
-				<?php echo lang_get( 'duplicate_of' ) ?>
+				<?php echo _('duplicate of') ?>
 			</td>
 		</tr>
 		</table>

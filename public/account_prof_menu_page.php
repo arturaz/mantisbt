@@ -72,7 +72,7 @@ if ( $g_global_profiles ) {
 	access_ensure_global_level( config_get( 'add_profile_threshold' ) );
 }
 
-html_page_top( lang_get( 'manage_profiles_link' ) );
+html_page_top( _('Profiles') );
 
 if ( $g_global_profiles ) {
 	print_manage_menu( 'manage_prof_menu_page.php' );
@@ -89,7 +89,7 @@ if ( $g_global_profiles ) {
 <div id="account-profile-div" class="form-container">
 	<form id="account-profile-form" method="post" action="account_prof_update.php">
 		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'add_profile_title' ) ?></span></legend>
+			<legend><span><?php echo _('Add Profile') ?></span></legend>
 			<?php  echo form_security_field( 'profile_update' )?>
 			<input type="hidden" name="action" value="add" />
 			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
@@ -99,26 +99,26 @@ if ( $g_global_profiles ) {
 			}
 			?>
 			<div class="field-container">
-				<label for="platform" class="required"><span><?php echo lang_get( 'platform' ) ?></span></label>
+				<label for="platform" class="required"><span><?php echo _('Platform') ?></span></label>
 				<span class="input"><input id="platform" type="text" name="platform" size="32" maxlength="32" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="os" class="required"><span><?php echo lang_get( 'operating_system' ) ?></span></label>
+				<label for="os" class="required"><span><?php echo _('Operating System') ?></span></label>
 				<span class="input"><input id="os" type="text" name="os" size="32" maxlength="32" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="os-version" class="required"><span><?php echo lang_get( 'os_version' ) ?></span></label>
+				<label for="os-version" class="required"><span><?php echo _('OS Version') ?></span></label>
 				<span class="input"><input id="os-version" type="text" name="os_build" size="16" maxlength="16" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="description"><span><?php echo lang_get( 'additional_description' ) ?></span></label>
+				<label for="description"><span><?php echo _('Additional Description') ?></span></label>
 				<span class="textarea"><textarea id="description" name="description" cols="80" rows="8"></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'add_profile_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Add Profile') ?>" /></span>
 		</fieldset>
 	</form>
 </div>
@@ -133,27 +133,27 @@ if ( $g_global_profiles ) {
 <div id="account-profile-update-div" class="form-container">
 	<form id="account-profile-update-form" method="post" action="account_prof_update.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'edit_or_delete_profiles_title' ) ?></span></legend>
+			<legend><span><?php echo _('Edit or Delete Profiles') ?></span></legend>
 			<?php  echo form_security_field( 'profile_update' )?>
 			<div class="field-container">
-				<label for="action-edit"><span><?php echo lang_get( 'edit_profile' ) ?></span></label>
+				<label for="action-edit"><span><?php echo _('Edit Profile') ?></span></label>
 				<span class="input"><input id="action-edit" type="radio" name="action" value="edit" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<?php if ( !$g_global_profiles ) { ?>
-				<label for="action-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>
+				<label for="action-default"><span><?php echo _('Make Default') ?></span></label>
 				<span class="input"><input id="action-default" type="radio" name="action" value="make_default" /></span>
 				<?php } ?>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="action-delete"><span><?php echo lang_get( 'delete_profile' ) ?></span></label>
+				<label for="action-delete"><span><?php echo _('Delete Profile') ?></span></label>
 				<span class="input"><input id="action-delete" type="radio" name="action" value="delete" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="select-profile"><span><?php echo lang_get( 'select_profile' ) ?></span></label>
+				<label for="select-profile"><span><?php echo _('Select Profile') ?></span></label>
 				<span class="input">
 					<select id="select-profile" name="profile_id">
 						<?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>
@@ -161,7 +161,7 @@ if ( $g_global_profiles ) {
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Submit') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

@@ -715,7 +715,7 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 	echo "<a href='tag_view_page.php?tag_id=$p_tag_row[id]' title='$t_description'>$t_name</a>";
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
-		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), $t_name ) );
+		$t_tooltip = string_html_specialchars( sprintf( _('Detach %1'), $t_name ) );
 		echo " <a href='tag_detach.php?bug_id=$p_bug_id&amp;tag_id=$p_tag_row[id]$t_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\" alt=\"X\"/></a>";
 	}
 
@@ -730,7 +730,7 @@ function tag_display_attached( $p_bug_id ) {
 	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
 
 	if( count( $t_tag_rows ) == 0 ) {
-		echo lang_get( 'tag_none_attached' );
+		echo _('No tags attached.');
 	} else {
 		$i = 0;
 		foreach( $t_tag_rows as $t_tag ) {

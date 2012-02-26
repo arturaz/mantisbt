@@ -66,7 +66,7 @@ current_user_ensure_unprotected();
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
 
-html_page_top( lang_get( 'change_preferences_link' ) );
+html_page_top( _('Preferences') );
 
 edit_account_prefs();
 

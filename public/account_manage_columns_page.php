@@ -34,7 +34,7 @@ require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-html_page_top( lang_get( 'manage_columns_config' ) );
+html_page_top( _('Manage Columns') );
 
 current_user_ensure_unprotected();
 

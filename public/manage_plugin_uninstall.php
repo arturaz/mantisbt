@@ -60,7 +60,7 @@ plugin_register_installed();
 $f_basename = gpc_get_string( 'name' );
 $t_plugin = plugin_register( $f_basename, true );
 
-helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), string_display_line( $t_plugin->name ) ), lang_get( 'plugin_uninstall' ) );
+helper_ensure_confirmed( sprintf( _('Are you sure you want to uninstall the %1 plugin?'), string_display_line( $t_plugin->name ) ), _('Uninstall') );
 
 if ( !is_null( $t_plugin ) ) {
 	plugin_uninstall( $t_plugin );

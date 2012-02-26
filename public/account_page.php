@@ -102,14 +102,14 @@ $t_force_pw_reset = is_page_name( 'verify.php' );
 # Only show the update button if there is something to update.
 $t_show_update_button = false;
 
-html_page_top( lang_get( 'account_link' ) );
+html_page_top( _('My Account') );
 
 if ( $t_force_pw_reset ) {
 	echo '<div id="reset-passwd-msg" class="important-msg">';
 	echo '<ul>';
-	echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
+	echo '<li>' . _('Your account information has been verified. The account confirmation message you have received is now invalid.') . '</li>';
 	if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-		echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+		echo '<li>' . _('You must set a password here to allow you to log in again.') . '</li>';
 	}
 	echo '</ul>';
 	echo '</div>';
@@ -119,20 +119,20 @@ if ( $t_force_pw_reset ) {
 <div id="account-update-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
 		<fieldset <?php if ( $t_force_pw_reset ) { ?> class="has-required"<?php } ?>>
-			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
+			<legend><span><?php echo _('Edit Account'); ?></span></legend>
 			<?php echo form_security_field( 'account_update' );
 			print_account_menu( 'account_page.php' );
 
 		if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 			# With LDAP --> ?>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Username') ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'password' ) ?></span></span>
-				<span class="input"><span class="field-value"><?php echo lang_get( 'no_password_change' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Password') ?></span></span>
+				<span class="input"><span class="field-value"><?php echo _('The password is controlled by another system, hence cannot be edited here.') ?></span></span>
 				<span class="label-style"></span>
 			</div><?php
 		} else {
@@ -140,23 +140,23 @@ if ( $t_force_pw_reset ) {
 			$t_show_update_button = true;
 			?>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Username') ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
+				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo _('Password') ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
+				<label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo _('Confirm Password') ?></span></label>
 				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 		} ?>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('E-mail') ?></span></span>
 				<span class="input"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 					// With LDAP
@@ -172,7 +172,7 @@ if ( $t_force_pw_reset ) {
 			<div class="field-container"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 					# With LDAP
-					echo '<span class="display-label"><span>' . lang_get( 'realname' ) . '</span></span>';
+					echo '<span class="display-label"><span>' . _('Real Name') . '</span></span>';
 					echo '<span class="input">';
 					echo '<span class="field-value">';
 					echo string_display_line( ldap_realname_from_username( $u_username ) );
@@ -181,7 +181,7 @@ if ( $t_force_pw_reset ) {
 				} else {
 					# Without LDAP
 					$t_show_update_button = true;
-					echo '<label for="realname"><span>' . lang_get( 'realname' ) . '</span></label>';
+					echo '<label for="realname"><span>' . _('Real Name') . '</span></label>';
 					echo '<span class="input">';
 					echo '<input id="realname" type="text" size="32" maxlength="' . DB_FIELD_SIZE_REALNAME . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
 					echo '</span>';
@@ -189,12 +189,12 @@ if ( $t_force_pw_reset ) {
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'access_level' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Access Level') ?></span></span>
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', $u_access_level ); ?></span></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'access_level_project' ) ?></span></span>
+				<span class="display-label"><span><?php echo _('Project Access Level') ?></span></span>
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?></span></span>
 				<span class="label-style"></span>
 			</div>
@@ -202,7 +202,7 @@ if ( $t_force_pw_reset ) {
 			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
 			if( count( $t_projects ) > 0 ) {
 				echo '<div class="field-container">';
-				echo '<span class="display-label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
+				echo '<span class="display-label"><span>' . _('Assigned Projects') . '</span></span>';
 				echo '<div class="input">';
 				echo '<ul class="project-list">';
 				foreach( $t_projects AS $t_project_id=>$t_project ) {
@@ -221,7 +221,7 @@ if ( $t_force_pw_reset ) {
 			}
 			?>
 	<?php if ( $t_show_update_button ) { ?>
-		<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
+		<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Update User') ?>" /></span>
 	<?php } ?>
 		</fieldset>
 	</form>
@@ -234,7 +234,7 @@ if ( ON == config_get( 'allow_account_delete' ) ) { ?>
 	<form method="post" action="account_delete.php">
 		<fieldset>
 			<?php echo form_security_field( 'account_delete' ) ?>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Delete Account') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

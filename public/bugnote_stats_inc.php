@@ -91,7 +91,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 			<td class="form-title" colspan="4">
 				<?php
 					collapse_icon( 'bugnotestats' );
-					echo lang_get( 'time_tracking' )
+					echo _('Time tracking')
 				?>
 			</td>
 		</tr>
@@ -114,7 +114,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 			<td class="center" colspan="2">
 				<input type="submit" class="button"
 					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
+					value="<?php echo _('Get Time Tracking Information') ?>"
 				/>
 			</td>
 		</tr>
@@ -134,9 +134,11 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		# Sort the array by user/real name
 		if ( ON == config_get( 'show_realname' ) ) {
 			$t_name_field = 'realname';
+			$t_name_field_label = _('Real Name');
 		}
 		else {
 			$t_name_field = 'username';
+			$t_name_field_label = _('Username');
 		}
 		$t_sort_name = array();
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
@@ -149,10 +151,10 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 <table class="width100" cellspacing="0">
 	<tr class="row-category-history">
 		<td class="small-caption">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo $t_name_field_label ?>
 		</td>
 		<td class="small-caption">
-			<?php echo lang_get( 'time_tracking' ) ?>
+			<?php echo _('Time tracking') ?>
 		</td>
 	</tr>
 
@@ -177,7 +179,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 ?>
 	<tr class="row-category2">
 		<td class="small-caption bold">
-			<?php echo lang_get( 'total_time' ) ?>
+			<?php echo _('Total time') ?>
 		</td>
 		<td class="small-caption bold">
 			<?php echo db_minutes_to_hhmm ( $t_sum_in_minutes ) ?>
@@ -196,7 +198,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		<td class="form-title" colspan="4">
 			<?php
 				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' )
+				echo _('Time tracking')
 			?>
 		</td>
 	</tr>

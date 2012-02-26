@@ -58,9 +58,9 @@ access_ensure_project_level( config_get( 'delete_project_threshold' ), $f_projec
 
 $t_project_name = project_get_name( $f_project_id );
 
-helper_ensure_confirmed( lang_get( 'project_delete_msg' ) .
-		'<br/>' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
-		lang_get( 'project_delete_button' ) );
+helper_ensure_confirmed( _('Are you sure you want to delete this project and all attached issue reports?') .
+		'<br/>' . _('Project Name:') . _('&#32;') . $t_project_name,
+		_('Delete Project') );
 
 project_delete( $f_project_id );
 

@@ -80,7 +80,7 @@ $t_excel = implode( ', ', $t_columns );
 <div id="manage-columns-div" class="form-container">
 	<form id="manage-columns-form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
 		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'manage_columns_config' ) ?></span></legend>
+			<legend><span><?php echo _('Manage Columns') ?></span></legend>
 			<?php
 			if ( $t_account_page ) {
 				print_account_menu( 'account_manage_columns_page.php' );
@@ -91,42 +91,42 @@ $t_excel = implode( ', ', $t_columns );
 			<input type="hidden" name="form_page" value="<?php echo $t_account_page ? 'account' : 'manage'; ?>" />
 
 			<div class="field-container">
-				<label for="all-columns"><span><?php echo lang_get( 'all_columns_title' )?></span></label>
+				<label for="all-columns"><span><?php echo _('All Available Columns')?></span></label>
 				<span class="textarea"><textarea id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="view-issues-columns" class="required"><span><?php echo lang_get( 'view_issues_columns_title' )?></span></label>
+				<label for="view-issues-columns" class="required"><span><?php echo _('View Issues Columns')?></span></label>
 				<span class="textarea"><textarea id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="print-issues-columns" class="required"><span><?php echo lang_get( 'print_issues_columns_title' )?></span></label>
+				<label for="print-issues-columns" class="required"><span><?php echo _('Print Issues Columns')?></span></label>
 				<span class="textarea"><textarea id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="csv-columns" class="required"><span><?php echo lang_get( 'csv_columns_title' )?></span></label>
+				<label for="csv-columns" class="required"><span><?php echo _('CSV Columns')?></span></label>
 				<span class="textarea"><textarea id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="excel-columns" class="required"><span><?php echo lang_get( 'excel_columns_title' )?></span></label>
+				<label for="excel-columns" class="required"><span><?php echo _('Excel Columns')?></span></label>
 				<span class="textarea"><textarea id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<?php
 			if ( $t_account_page ) {
 				if ( $t_project_id == ALL_PROJECTS ) { ?>
-					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /></span><?php
+					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo _('Update Columns as Default for All Projects') ?>" /></span><?php
 				} else { ?>
-					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
+					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo _('Update Columns For Current Project') ?>" /></span><?php
 
 			}
 		}
 
 		if ( $t_manage_page && current_user_is_administrator() ) { ?>
-			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /></span><?php
+			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo _('Update Columns as Global Default for All Projects') ?>" /></span><?php
 		} ?>
 		</fieldset>
 	</form>
@@ -145,9 +145,9 @@ $t_excel = implode( ', ', $t_columns );
 
 			<?php # Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator
 			if ( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) { ?>
-			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" /><?php
+			<input type="submit" name="copy_from" class="button" value="<?php echo _('Copy Columns From') ?>" /><?php
 			} ?>
-			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
+			<input type="submit" name="copy_to" class="button" value="<?php echo _('Copy Columns To') ?>" />
 		</fieldset>
 	</form>
 </div>
@@ -159,7 +159,7 @@ if ( $t_account_page ) {
 	<form method="post" action="manage_config_columns_reset.php">
 		<fieldset>
 			<?php echo form_security_field( 'manage_config_columns_reset' ) ?>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Reset Columns Configuration') ?>" /></span>
 		</fieldset>
 	</form>
 </div>

@@ -124,14 +124,14 @@ if( $f_error || $f_cookie_error ) {
 	echo '<ul>';
 
 	# Display short greeting message
-	# echo lang_get( 'login_page_info' ) . '<br />';
+	# echo _('Welcome to the Issue Tracker.') . '<br />';
 
 	# Only echo error message if error variable is set
 	if ( $f_error ) {
-		echo '<li>' . lang_get( 'login_error' ) . '</li>';
+		echo '<li>' . _('Your account may be disabled or blocked or the username/password you entered is incorrect.') . '</li>';
 	}
 	if ( $f_cookie_error ) {
-		echo '<li>' . lang_get( 'login_cookies_disabled' ) . '</li>';
+		echo '<li>' . _('Your browser either does not know how to handle cookies, or refuses to handle them.') . '</li>';
 	}
 	echo '</ul>';
 	echo '</div>';
@@ -142,7 +142,7 @@ if( $f_error || $f_cookie_error ) {
 <div id="login-div" class="form-container">
 	<form id="login-form" method="post" action="login.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'login_title' ) ?></span></legend>
+			<legend><span><?php echo _('Login') ?></span></legend>
 			<?php
 			if ( !is_blank( $f_return ) ) {
 				echo '<input type="hidden" name="return" value="', string_html_specialchars( $f_return ), '" />';
@@ -151,50 +151,50 @@ if( $f_error || $f_cookie_error ) {
 			echo '<ul id="login-links">';
 
 			if ( ON == config_get( 'allow_anonymous_login' ) ) {
-				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a></li>';
+				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . _('Login Anonymously') . '</a></li>';
 			}
 
 			if ( ( ON == config_get_global( 'allow_signup' ) ) &&
 				( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) )
 			) {
-				echo '<li><a href="signup_page.php">', lang_get( 'signup_link' ), '</a></li>';
+				echo '<li><a href="signup_page.php">', _('Signup for a new account'), '</a></li>';
 			}
 			# lost password feature disabled or reset password via email disabled -> stop here!
 			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'lost_password_feature' ) ) &&
 				( ON == config_get( 'send_reset_password' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) ) ) {
-				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
+				echo '<li><a href="lost_pwd_page.php">', _('Lost your password?'), '</a></li>';
 			}
 			?>
 			</ul>
 			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<label for="username"><span><?php echo _('Username') ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="password"><span><?php echo lang_get( 'password' ) ?></span></label>
+				<label for="password"><span><?php echo _('Password') ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="remember-login"><span><?php echo lang_get( 'save_login' ) ?></span></label>
+				<label for="remember-login"><span><?php echo _('Remember my login in this browser') ?></span></label>
 				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
 				<span class="label-style"></span>
 			</div>
 			<?php if ( $t_session_validation ) { ?>
 			<div class="field-container">
-				<label id="secure-session-label" for="secure-session"><span><?php echo lang_get( 'secure_session' ) ?></span></label>
+				<label id="secure-session-label" for="secure-session"><span><?php echo _('Secure Session') ?></span></label>
 				<span class="input">
 					<input id="secure-session" type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
-					<span id="session-msg"><?php echo lang_get( 'secure_session_long' ); ?></span>
+					<span id="session-msg"><?php echo _('Only allow your session to be used from this IP address.'); ?></span>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<?php } ?>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Login') ?>" /></span>
 		</fieldset>
 	</form>
 </div>
@@ -210,7 +210,7 @@ $t_warnings = array();
 # if db version is 0, we do not have a valid database.
 $t_db_version = config_get( 'database_version' , 0 );
 if ( $t_db_version == 0 ) {	
-	$t_warnings[] = lang_get( 'error_database_no_schema_version' );
+	$t_warnings[] = _('Error: The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.');
 }
 
 # Check for db upgrade for versions > 1.0.0 using new installer and schema
@@ -221,9 +221,9 @@ if ( ( 0 < $t_db_version ) &&
 		( $t_db_version != $t_upgrades_reqd ) ) {
 
 	if ( $t_db_version < $t_upgrades_reqd ) {
-		$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
+		$t_warnings[] = _('Warning: The database structure may be out of date. Please upgrade via admin/install.php before logging in.');
 	} else {
-		$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
+		$t_warnings[] = _('Warning: The database structure is more up-to-date than the code installed. Please upgrade the code.');
 	}
 }
 

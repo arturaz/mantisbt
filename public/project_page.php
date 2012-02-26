@@ -71,32 +71,32 @@ echo '<h1>', string_display( project_get_field( $f_project_id, 'name' ) ), '</h1
 echo '<p>';
 
 # View Issues
-print_bracket_link( $t_view_issues_url, lang_get( 'view_bugs_link' ) );
+print_bracket_link( $t_view_issues_url, _('View Issues') );
 
 # Changelog
-print_bracket_link( "changelog_page.php?project_id=$f_project_id", lang_get( 'changelog_link' ) );
+print_bracket_link( "changelog_page.php?project_id=$f_project_id", _('Change Log') );
 
 # Roadmap
-print_bracket_link( "roadmap_page.php?project_id=$f_project_id", lang_get( 'roadmap_link' ) );
+print_bracket_link( "roadmap_page.php?project_id=$f_project_id", _('Roadmap') );
 
 # Documentation
 if ( config_get( 'enable_project_documentation' ) == ON ) {
-	print_bracket_link( "proj_doc_page.php?project_id=$f_project_id", lang_get( 'docs_link' ) );
+	print_bracket_link( "proj_doc_page.php?project_id=$f_project_id", _('Docs') );
 }
 
 # Wiki
 if ( config_get( 'wiki_enable' ) == ON ) {
-	print_bracket_link( "wiki.php?type=project&id=$f_project_id", lang_get( 'wiki' ) );
+	print_bracket_link( "wiki.php?type=project&id=$f_project_id", _('Wiki') );
 }
 
 # Summary Page for Project
 if ( access_has_project_level( config_get( 'view_summary_threshold' ), $f_project_id ) ) {
-	print_bracket_link( "summary_page.php?project_id=$f_project_id", lang_get( 'summary_link' ) );
+	print_bracket_link( "summary_page.php?project_id=$f_project_id", _('Summary') );
 }
 
 # Manage Project Page
 if ( access_has_project_level( config_get( 'manage_project_threshold' ), $f_project_id ) ) {
-	print_bracket_link( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'manage_link' ) );
+	print_bracket_link( "manage_proj_edit_page.php?project_id=$f_project_id", _('Manage') );
 }
 
 echo '</p>';
@@ -107,7 +107,7 @@ echo '</p>';
 $t_description = project_get_field( $f_project_id, 'description' );
 
 if ( !is_blank( $t_description ) ) {
-	echo '<h2>', lang_get( 'description' ), '</h2>';
+	echo '<h2>', _('Description'), '</h2>';
 	echo '<p>', string_display( $t_description ), '</p>';
 }
 
@@ -117,7 +117,7 @@ $t_users = project_get_all_user_rows( $f_project_id, $t_access_level_for_dev_tea
 $t_show_real_names = config_get( 'show_realname' ) == ON;
 
 if ( count( $t_users ) > 0 ) {
-	echo '<h2>', lang_get( 'development_team' ), '</h2>';
+	echo '<h2>', _('Development Team'), '</h2>';
 
 	/** @todo sort users in DESC order by access level, then ASC by username/realname. */
 	foreach ( $t_users as $t_user_data ) {

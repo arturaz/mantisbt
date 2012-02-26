@@ -73,40 +73,40 @@ if ( 'ASC' == $f_dir ) {
 	$t_direction = DESCENDING;
 }
 
-html_page_top( lang_get( 'manage_projects_link' ) );
+html_page_top( _('Manage Projects') );
 
 print_manage_menu( 'manage_proj_page.php' );
 
 # Project Menu Form BEGIN
 ?>
 <div class="form-container">
-	<h2><?php echo lang_get( 'projects_title' ); ?></h2><?php
+	<h2><?php echo _('Projects'); ?></h2><?php
 
 	# Check the user's global access level before allowing project creation
 	if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-		print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
+		print_button( 'manage_proj_create_page.php', _('Create New Project') );
 	} ?>
 
 	<table cellspacing="1" cellpadding="5" border="1">
 		<tr class="row-category">
 			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
+				print_manage_project_sort_link( 'manage_proj_page.php', _('Name'), 'name', $t_direction, $f_sort );
 				print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
 			</td>
 			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
+				print_manage_project_sort_link( 'manage_proj_page.php', _('Status'), 'status', $t_direction, $f_sort );
 				print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
 			</td>
 			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
+				print_manage_project_sort_link( 'manage_proj_page.php', _('Enabled'), 'enabled', $t_direction, $f_sort );
 				print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
 			</td>
 			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
+				print_manage_project_sort_link( 'manage_proj_page.php', _('View Status'), 'view_state', $t_direction, $f_sort );
 				print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
 			</td>
 			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
+				print_manage_project_sort_link( 'manage_proj_page.php', _('Description'), 'description', $t_direction, $f_sort );
 				print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
 			</td>
 		</tr><?php
@@ -161,17 +161,17 @@ print_manage_menu( 'manage_proj_page.php' );
 </div>
 
 <div id="categories" class="form-container">
-	<h2><?php echo lang_get( 'global_categories' ) ?></h2>
+	<h2><?php echo _('Global Categories') ?></h2>
 	<table cellspacing="1" cellpadding="5" border="1"><?php
 		$t_categories = category_get_all_rows( ALL_PROJECTS );
 		$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
 
 		if ( count( $t_categories ) > 0 ) { ?>
 		<tr class="row-category">
-			<td><?php echo lang_get( 'category' ) ?></td>
-			<td><?php echo lang_get( 'assign_to' ) ?></td>
+			<td><?php echo _('Category') ?></td>
+			<td><?php echo _('Assign To') ?></td>
 			<?php if( $t_can_update_global_cat ) { ?>
-			<td class="center"><?php echo lang_get( 'actions' ) ?></td>
+			<td class="center"><?php echo _('Actions') ?></td>
 			<?php } ?>
 		</tr><?php
 		}
@@ -188,9 +188,9 @@ print_manage_menu( 'manage_proj_page.php' );
 					$t_id = urlencode( $t_id );
 					$t_project_id = urlencode( ALL_PROJECTS );
 
-					print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
+					print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", _('Edit') );
 					echo '&#160;';
-					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", _('Delete') );
 				?>
 			</td>
 			<?php } ?>
@@ -204,7 +204,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
 			<input type="text" name="name" size="32" maxlength="128" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" class="button" value="<?php echo _('Add Category') ?>" />
 		</fieldset>
 	</form>
 <?php } ?>

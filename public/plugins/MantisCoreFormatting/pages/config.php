@@ -79,7 +79,7 @@ print_manage_menu( );
 
 <tr>
 	<td class="center" colspan="3">
-		<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />
+		<input type="submit" class="button" value="<?php echo _('Update Configuration')?>" />
 	</td>
 </tr>
 

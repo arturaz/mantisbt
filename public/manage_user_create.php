@@ -100,8 +100,8 @@ if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enabl
 	# Password won't to be sent by email. It entered by the admin
 	# Now, if the password is empty, confirm that that is what we wanted
 	if ( is_blank( $f_password ) ) {
-		helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
-				 lang_get( 'empty_password_button' ) );
+		helper_ensure_confirmed( _('The user has an empty password. Are you sure that is what you want?'),
+				 _('Use Empty Password') );
 	}
 }
 
@@ -137,9 +137,9 @@ html_page_top( null, $t_redirect_url );
 <div>
 <?php
 $t_access_level = get_enum_element( 'access_levels', $f_access_level );
-echo lang_get( 'created_user_part1' ) . ' <span class="bold">' . $f_username . '</span> ' . lang_get( 'created_user_part2' ) . ' <span class="bold">' . $t_access_level . '</span><br />';
+echo sprintf(_('Created user %1$s with an access level of %1$s.'), string_display_line($f_username), string_display_line($t_access_level));
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

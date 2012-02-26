@@ -70,10 +70,10 @@ html_page_top();
 
 <br />
 <div>
-	<?php echo lang_get( 'operation_successful' ) ?><br />
+	<?php echo _('Operation successful.') ?><br />
 <?php
-print_bracket_link( "news_edit_page.php?news_id=$f_news_id&action=edit", lang_get( 'edit_link' ) );
-print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
+print_bracket_link( "news_edit_page.php?news_id=$f_news_id&action=edit", _('Edit') );
+print_bracket_link( 'news_menu_page.php', _('Proceed') );
 
 echo '<br /><br />';
 print_news_entry( $f_headline, $f_body, $row['poster_id'], $f_view_state, $f_announcement, $row['date_posted'] );

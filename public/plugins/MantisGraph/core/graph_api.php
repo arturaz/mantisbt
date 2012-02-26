@@ -352,7 +352,7 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_height = 380 ) {
 
 	$t_graph_font = graph_get_font();
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . _('By Date (days)') );
 
 	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$graph = new ezcGraphLineChart();
@@ -392,7 +392,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->driver->options->jpegQuality = 100;
 		$graph->driver->options->imageFormat = IMG_JPEG;
 
-		$graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
+		$graph->title = plugin_lang_get( 'cumulative' ) . ' ' . _('By Date (days)');
 		$graph->options->font = $t_graph_font ;
 
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
@@ -416,7 +416,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 		$graph->SetY2Scale("lin");
 		$graph->SetMarginColor( 'white' );
 		$graph->SetFrame( false );
-		$graph->title->Set( plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+		$graph->title->Set( plugin_lang_get( 'cumulative' ) . ' ' . _('By Date (days)') );
 		$graph->title->SetFont( $t_graph_font, FS_BOLD );
 
 		$graph->legend->Pos( 0.05, 0.9, 'right', 'bottom' );
@@ -467,7 +467,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 # --------------------
 function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p_graph_height = 380 ) {
 	$t_graph_font = graph_get_font();
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'by_date' ) );
+	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, _('By Date (days)') );
 
 	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$t_metrics = array();
@@ -502,7 +502,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 		$graph->driver->options->jpegQuality = 100;
 		$graph->driver->options->imageFormat = IMG_JPEG;
 
-		$graph->title = $p_title . ' ' . lang_get( 'by_date' );
+		$graph->title = $p_title . ' ' . _('By Date (days)');
 		$graph->options->font = $t_graph_font ;
 
 		$graph->renderToOutput( $p_graph_width, $p_graph_height);
@@ -515,7 +515,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 		$graph->SetScale( 'linlin' );
 		$graph->SetMarginColor( 'white' );
 		$graph->SetFrame( false );
-		$graph->title->Set( $p_title . ' ' . lang_get( 'by_date' ) );
+		$graph->title->Set( $p_title . ' ' . _('By Date (days)') );
 		$graph->title->SetFont( $t_graph_font, FS_BOLD );
 
 		$graph->legend->Pos( 0.01, 0.05, 'right', 'top' );

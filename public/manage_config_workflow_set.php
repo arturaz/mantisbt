@@ -61,7 +61,7 @@ $t_redirect_url = 'manage_config_workflow_page.php';
 $t_project = helper_get_current_project();
 $t_access = current_user_get_access_level();
 
-html_page_top( lang_get( 'manage_workflow_config' ), $t_redirect_url );
+html_page_top( _('Workflow Transitions'), $t_redirect_url );
 
 # process the changes to threshold values
 $t_valid_thresholds = array( 'bug_submit_status', 'bug_resolved_status_threshold', 'bug_reopen_status' );
@@ -97,7 +97,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 			$t_first = false;
 		} else {
 			# error default state isn't in the matrix
-			echo '<p>' . sprintf( lang_get( 'default_not_in_flow' ), get_enum_element( 'status', $t_default ), get_enum_element( 'status', $t_state ) )  . '</p>';
+			echo '<p>' . sprintf( _('The default status of %1 is not selected in the next statuses for %2. It will be ignored.'), get_enum_element( 'status', $t_default ), get_enum_element( 'status', $t_state ) )  . '</p>';
 			$t_first = true;
 		}
 		if ( isset( $t_matrix[$t_state] ) ) {
@@ -150,8 +150,8 @@ form_security_purge( 'manage_config_workflow_set' );
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.') . '<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

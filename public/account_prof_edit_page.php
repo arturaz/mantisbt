@@ -89,7 +89,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 <tr>
 	<td class="form-title">
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
-		<?php echo lang_get( 'edit_profile_title' ) ?>
+		<?php echo _('Edit Profile') ?>
 	</td>
 	<td class="right">
 		<?php
@@ -101,7 +101,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr class="row-1">
 	<th class="category" width="25%">
-		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
+		<span class="required">*</span><?php echo _('Platform') ?>
 	</th>
 	<td width="75%">
 		<input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
@@ -109,7 +109,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr class="row-2">
 	<th class="category">
-		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
+		<span class="required">*</span><?php echo _('Operating System') ?>
 	</th>
 	<td>
 		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
@@ -117,7 +117,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr class="row-1">
 	<th class="category">
-		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
+		<span class="required">*</span><?php echo _('OS Version') ?>
 	</th>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
@@ -125,7 +125,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr class="row-2">
 	<th class="category">
-		<?php echo lang_get( 'additional_description' ) ?>
+		<?php echo _('Additional Description') ?>
 	</th>
 	<td>
 		<textarea name="description" cols="60" rows="8"><?php echo string_textarea( $v_description ) ?></textarea>
@@ -133,7 +133,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Update Profile') ?>" />
 	</td>
 </tr>
 </table>

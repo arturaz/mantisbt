@@ -64,12 +64,12 @@ require_api( 'lang_api.php' );
 	<td class="form-title" colspan="2">
 <?php
 	collapse_icon( 'bugnote_add' );
-	echo lang_get( 'add_bugnote_title' ) ?>
+	echo _('Add Note') ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<th class="category" width="25%">
-		<?php echo lang_get( 'bugnote' ) ?>
+		<?php echo _('Note') ?>
 	</th>
 	<td width="75%">
 		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
@@ -78,7 +78,7 @@ require_api( 'lang_api.php' );
 <?php if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) { ?>
 <tr class="row-1">
 	<th class="category">
-		<?php echo lang_get( 'view_status' ) ?>
+		<?php echo _('View Status') ?>
 	</th>
 	<td>
 <?php
@@ -86,7 +86,7 @@ require_api( 'lang_api.php' );
 		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<input type="checkbox" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-			<label for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
+			<label for="bugnote_add_view_status"><?php echo _('private') ?></label>
 <?php
 		} else {
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
@@ -100,13 +100,13 @@ require_api( 'lang_api.php' );
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 <tr>
 	<th class="category">
-		<?php echo lang_get( 'time_tracking' ) ?>
+		<?php echo _('Time tracking') ?>
 	</th>
 	<td>
 		<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
 		<input type="text" name="time_tracking" class="stopwatch_time" size="8" placeholder="hh:mm:ss" />
-		<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
-		<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />
+		<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo _('Start') ?>" />
+		<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo _('Reset') ?>" />
 		<?php } else { ?>
 		<input type="text" name="time_tracking" size="5" placeholder="hh:mm" />
 		<?php } ?>
@@ -118,7 +118,7 @@ require_api( 'lang_api.php' );
 <?php event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) ); ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Add Note') ?>" />
 	</td>
 </tr>
 </table>
@@ -130,7 +130,7 @@ require_api( 'lang_api.php' );
 <tr>
 	<td class="form-title" colspan="2">
 	<?php	collapse_icon( 'bugnote_add' );
-		echo lang_get( 'add_bugnote_title' ) ?>
+		echo _('Add Note') ?>
 	</td>
 </tr>
 </table>

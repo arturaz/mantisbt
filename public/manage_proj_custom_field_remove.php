@@ -67,9 +67,9 @@ access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_pro
 $t_definition = custom_field_get_definition( $f_field_id );
 
 # Confirm with the user
-helper_ensure_confirmed( lang_get( 'confirm_custom_field_unlinking' ) .
-	'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
-	lang_get( 'field_remove_button' ) );
+helper_ensure_confirmed( _('Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?') .
+	'<br/>' . _('Field:') . _('&#32;') . string_attribute( $t_definition['name'] ),
+	_('Remove Field') );
 
 if ( $f_return == 'custom_field' ) {
 	$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
@@ -86,8 +86,8 @@ html_page_top( null, $t_redirect_url );
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ).'<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.').'<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

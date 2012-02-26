@@ -450,16 +450,16 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	$t_email = user_get_email( $p_user_id );
 
 	# Build Welcome Message
-	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
+	$t_subject = '[' . config_get( 'window_title' ) . '] ' . _('Account registration');
 
 	//if( $p_admin_created && $p_admin_name) {
 	if( $p_admin_name ) {
-		$intro_text = sprintf( lang_get( 'new_account_greeting_admincreated' ), $p_admin_name, $t_username );
+		$intro_text = sprintf( _('The user %1 has created an account for you with username %2. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:'), $p_admin_name, $t_username );
 	} else {
-		$intro_text = sprintf( lang_get( 'new_account_greeting' ), $t_username );
+		$intro_text = sprintf( _('Thank you for registering. You have an account with username %1. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:'), $t_username );
 	}
 
-	$t_message = $intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . lang_get( 'new_account_message' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );
+	$t_message = $intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . _('If you did not request any registration, ignore this message and nothing will happen.') . "\n\n" . _('Do not reply to this message');
 
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
@@ -493,9 +493,9 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	$t_username = user_get_field( $p_user_id, 'username' );
 	$t_email = user_get_email( $p_user_id );
 
-	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
+	$t_subject = '[' . config_get( 'window_title' ) . '] ' . _('Password Reset');
 
-	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . ' ' . $t_username . " \n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER["REMOTE_ADDR"] . " \n\n" . lang_get( 'new_account_do_not_reply' );
+	$t_message = _('Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen. If you requested this verification, visit the following URL to change your password:') . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . _('Username:') . ' ' . $t_username . " \n" . _('Remote IP address:') . ' ' . $_SERVER["REMOTE_ADDR"] . " \n\n" . _('Do not reply to this message');
 
 	# Send password reset regardless of mail notification prefs
 	# or else users won't be able to receive their reset pws
@@ -527,9 +527,9 @@ function email_notify_new_account( $p_username, $p_email ) {
 		lang_push( user_pref_get_language( $t_user['id'] ) );
 
 		$t_recipient_email = user_get_email( $t_user['id'] );
-		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . _('Account registration');
 
-		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . ' ' . $p_username . "\n" . lang_get( 'new_account_email' ) . ' ' . $p_email . "\n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER["REMOTE_ADDR"] . "\n" . $g_path . "\n\n" . lang_get( 'new_account_do_not_reply' );
+		$t_message = _('The following account has been created:') . "\n\n" . _('Username:') . ' ' . $p_username . "\n" . _('E-mail:') . ' ' . $p_email . "\n" . _('Remote IP address:') . ' ' . $_SERVER["REMOTE_ADDR"] . "\n" . $g_path . "\n\n" . _('Do not reply to this message');
 
 		if( !is_blank( $t_recipient_email ) ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
@@ -1141,7 +1141,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		} else {
 			$t_sender_email = '';
 		}
-		$t_header = "\n" . lang_get( 'on_date' ) . " $t_date, $t_sender $t_sender_email " . lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
+		$t_header = "\n" . _('On') . " $t_date, $t_sender $t_sender_email " . _('sent you this reminder about') . ": \n\n";
 		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n$p_message";
 
 		if( ON == config_get( 'enable_email_notification' ) ) {
@@ -1276,26 +1276,26 @@ function email_format_bug_message( $p_visible_bug_data ) {
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
-	$t_message .= lang_get( 'email_description' ) . ": \n" . $p_visible_bug_data['email_description'] . "\n";
+	$t_message .= _('Description') . ": \n" . $p_visible_bug_data['email_description'] . "\n";
 
 	if ( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
-		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . $p_visible_bug_data['email_steps_to_reproduce'] . "\n";
+		$t_message .= "\n" . _('Steps to Reproduce') . ": \n" . $p_visible_bug_data['email_steps_to_reproduce'] . "\n";
 	}
 
 	if ( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
-		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . $p_visible_bug_data['email_additional_information'] . "\n";
+		$t_message .= "\n" . _('Additional Information') . ": \n" . $p_visible_bug_data['email_additional_information'] . "\n";
 	}
 
 	if( isset( $p_visible_bug_data['relations'] ) ) {
 		if( $p_visible_bug_data['relations'] != '' ) {
-			$t_message .= $t_email_separator1 . "\n" . str_pad( lang_get( 'bug_relationships' ), 20 ) . str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $p_visible_bug_data['relations'];
+			$t_message .= $t_email_separator1 . "\n" . str_pad( _('Relationships'), 20 ) . str_pad( _('ID'), 8 ) . _('Summary') . "\n" . $t_email_separator2 . "\n" . $p_visible_bug_data['relations'];
 		}
 	}
 
 	# Sponsorship
 	if( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
 		$t_message .= $t_email_separator1 . " \n";
-		$t_message .= sprintf( lang_get( 'total_sponsorship_amount' ), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
+		$t_message .= sprintf( _('Total Sponsorship = %1'), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
 
 		if( isset( $p_visible_bug_data['sponsorships'] ) ) {
 			foreach( $p_visible_bug_data['sponsorships'] as $t_sponsorship ) {
@@ -1318,7 +1318,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 		$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
 
 		if( $t_bugnote->time_tracking > 0 ) {
-			$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
+			$t_time_tracking = ' ' . _('Time tracking') . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
 		} else {
 			$t_time_tracking = '';
 		}
@@ -1340,8 +1340,8 @@ function email_format_bug_message( $p_visible_bug_data ) {
 
 	# format history
 	if( array_key_exists( 'history', $p_visible_bug_data ) ) {
-		$t_message .= lang_get( 'bug_history' ) . " \n";
-		$t_message .= mb_str_pad( lang_get( 'date_modified' ), 17 ) . mb_str_pad( lang_get( 'username' ), 15 ) . mb_str_pad( lang_get( 'field' ), 25 ) . mb_str_pad( lang_get( 'change' ), 20 ) . " \n";
+		$t_message .= _('Issue History') . " \n";
+		$t_message .= mb_str_pad( _('Date Modified'), 17 ) . mb_str_pad( _('Username'), 15 ) . mb_str_pad( _('Field'), 25 ) . mb_str_pad( _('Change'), 20 ) . " \n";
 
 		$t_message .= $t_email_separator1 . " \n";
 

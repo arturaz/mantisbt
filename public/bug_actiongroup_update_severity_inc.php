@@ -45,7 +45,7 @@ require_api( 'print_api.php' );
 function action_update_severity_print_title() {
 	echo '<tr class="form-title">';
 	echo '<td colspan="2">';
-	echo lang_get( 'update_severity_title' );
+	echo _('Update Severity');
 	echo '</td></tr>';
 }
 
@@ -57,11 +57,11 @@ function action_update_severity_print_title() {
  */
 function action_update_severity_print_fields() {
 	echo '<tr class="row-1"><th class="category">';
-	echo lang_get( 'update_severity_msg' );
+	echo _('Choose issue severity');
 	echo '</th><td><select name="severity">';
 	print_enum_string_option_list( 'severity' );
 	echo '</select></td></tr>';
-	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'update_severity_button' ) . ' " /></td></tr>';
+	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . _('Update Severity') . ' " /></td></tr>';
 }
 
 /**
@@ -76,11 +76,11 @@ function action_update_severity_validate( $p_bug_id ) {
 	$t_bug_id = $p_bug_id;
 
 	if ( bug_is_readonly( $t_bug_id ) ) {
-		return lang_get( 'actiongroup_error_issue_is_readonly' );
+		return _('Issue is readonly.');
 	}
 
 	if ( !access_has_bug_level( $t_update_severity_threshold, $t_bug_id ) ) {
-		return lang_get( 'access_denied' );
+		return _('Access Denied.');
 	}
 
 	return null;

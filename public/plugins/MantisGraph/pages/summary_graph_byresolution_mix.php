@@ -34,7 +34,7 @@
 
 	$t_token = token_get_value( TOKEN_GRAPH );
 	if ( $t_token == null ) {
-		$t_metrics = enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution' );
+		$t_metrics = enum_bug_group( lang_get('resolution_enum_string'), 'resolution' );
 	} else {
 		 $t_metrics = unserialize( $t_token );
 	}

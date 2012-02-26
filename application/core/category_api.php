@@ -579,7 +579,7 @@ function category_get_field( $p_category_id, $p_field_name ) {
 function category_full_name( $p_category_id, $p_show_project = true, $p_current_project = null ) {
 	if( 0 == $p_category_id ) {
 		# No Category
-		return lang_get( 'no_category' );
+		return _('(No Category)');
 	} else {
 		$t_row = category_get_row( $p_category_id );
 		$t_project_id = $t_row['project_id'];

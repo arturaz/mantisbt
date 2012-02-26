@@ -102,7 +102,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 			<td class="form-title" colspan="4">
 				<?php
 					collapse_icon( 'bugnotestats' );
-					echo lang_get( 'time_tracking' )
+					echo _('Time tracking')
 				?>
 			</td>
 		</tr>
@@ -126,7 +126,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 ?>
 		<tr class="row-1">
 			<td>
-				<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
+				<?php echo _('Cost / Hour:') ?>
 				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
 			</td>
 		</tr>
@@ -137,7 +137,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 			<td class="center" colspan="2">
 				<input type="submit" class="button"
 					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
+					value="<?php echo _('Get Time Tracking Information') ?>"
 				/>
 			</td>
 		</tr>
@@ -154,9 +154,11 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 		# Sort the array by bug_id, user/real name
 		if ( ON == config_get( 'show_realname' ) ) {
 			$t_name_field = 'realname';
+			$t_name_field_label = _('Real Name');
 		}
 		else {
 			$t_name_field = 'username';
+			$t_name_field_label = _('Username');
 		}
 		$t_sort_bug = $t_sort_name = array();
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
@@ -176,14 +178,14 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 <table class="width100" cellspacing="0">
 	<tr class="row-category2">
 		<td class="small-caption bold">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo $t_name_field_label ?>
 		</td>
 		<td class="small-caption bold">
-			<?php echo lang_get( 'time_tracking' ) ?>
+			<?php echo _('Time tracking') ?>
 		</td>
 <?php	if ( $t_cost_col) { ?>
 		<td class="small-caption bold right">
-			<?php echo lang_get( 'time_tracking_cost' ) ?>
+			<?php echo _('Cost') ?>
 		</td>
 <?php	} ?>
 
@@ -204,7 +206,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 			$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 			if ( $t_item['bug_id'] != $t_prev_id) {
-				$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_item['bug_id'] ) ) . lang_get( 'word_separator' ) . string_display( $t_item['summary'] );
+				$t_link = sprintf( _('%1:'), string_get_bug_view_link( $t_item['bug_id'] ) ) . _('&#32;') . string_display( $t_item['summary'] );
 				echo '<tr class="row-category-history"><td colspan="4">' . $t_link . "</td></tr>";
 				$t_prev_id = $t_item['bug_id'];
 			}
@@ -227,7 +229,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 	<tr class="row-category2">
 		<td class="small-caption bold">
-			<?php echo lang_get( 'total_time' ); ?>
+			<?php echo _('Total time'); ?>
 		</td>
 		<td class="small-caption bold">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
@@ -246,14 +248,14 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 <table class="width100" cellspacing="0">
 	<tr class="row-category2">
 		<td class="small-caption bold">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo $t_name_field_label ?>
 		</td>
 		<td class="small-caption bold">
-			<?php echo lang_get( 'time_tracking' ) ?>
+			<?php echo _('Time tracking') ?>
 		</td>
 <?php	if ( $t_cost_col ) { ?>
 		<td class="small-caption bold right">
-			<?php echo lang_get( 'time_tracking_cost' ) ?>
+			<?php echo _('Cost') ?>
 		</td>
 <?php	} ?>
 	</tr>
@@ -277,7 +279,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 <?php	} ?>
 	<tr class="row-category2">
 		<td class="small-caption bold">
-			<?php echo lang_get( 'total_time' ); ?>
+			<?php echo _('Total time'); ?>
 		</td>
 		<td class="small-caption bold">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
@@ -300,7 +302,7 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 		<td class="form-title" colspan="4">
 			<?php
 				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' )
+				echo _('Time tracking')
 			?>
 		</td>
 	</tr>

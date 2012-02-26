@@ -88,13 +88,13 @@ $t_note_count = count( $t_notes );
 ?>
 <tr>
 	<td class="print" colspan="2">
-		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
+		<?php echo _('There are no notes attached to this issue.') ?>
 	</td>
 </tr>
 <?php } else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'bug_notes_title' ) ?>
+		<?php echo _('Notes') ?>
 	</td>
 </tr>
 <?php
@@ -137,7 +137,7 @@ $t_note_count = count( $t_notes );
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&#160;&#160;&#160;
 				<?php if ( $v3_date_submitted != $v3_last_modified ) {
-					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
+					echo '<br />(' . _('Last edited:') . _('&#32;') . $v3_last_modified . ')';
 				} ?>
 			</td>
 		</tr>
@@ -150,7 +150,7 @@ $t_note_count = count( $t_notes );
 				<?php
 					switch ( $v3_note_type ) {
 						case REMINDER:
-							echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ' ';
+							echo '<div class="italic">' . _('Reminder sent to:') . ' ';
 							$v3_note_attr = mb_substr( $v3_note_attr, 1, mb_strlen( $v3_note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {

@@ -68,7 +68,7 @@ if ( 'delete' == $f_action ) {
 		access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
 	}
 
-	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );
+	helper_ensure_confirmed( _('Are you sure you wish to delete this news item?'), _('Delete News Item') );
 
 	news_delete( $f_news_id );
 
@@ -88,7 +88,7 @@ access_ensure_project_level( config_get( 'manage_news_threshold' ), $v_project_i
 $v_headline = string_attribute( $v_headline );
 $v_body 	= string_textarea( $v_body );
 
-html_page_top( lang_get( 'edit_news_title' ) );
+html_page_top( _('Edit News') );
 
 # Edit News Form BEGIN
 ?>
@@ -96,22 +96,22 @@ html_page_top( lang_get( 'edit_news_title' ) );
 <div id="news-update-div" class="form-container">
 	<form id="news-update-form" method="post" action="news_update.php">
 		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'headline' ) ?></span></legend>
-			<div class="section-link"><?php print_bracket_link( 'news_menu_page.php', lang_get( 'go_back' ) ) ?></div>
+			<legend><span><?php echo _('Headline') ?></span></legend>
+			<div class="section-link"><?php print_bracket_link( 'news_menu_page.php', _('Go Back') ) ?></div>
 			<?php echo form_security_field( 'news_update' ); ?>
 			<input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
 			<div class="field-container">
-				<label for="news-update-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
+				<label for="news-update-headline" class="required"><span><?php echo _('Headline') ?></span></label>
 				<span class="input"><input type="text" id="news-update-headline" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="news-update-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
+				<label for="news-update-body" class="required"><span><?php echo _('Body') ?></span></label>
 				<span class="textarea"><textarea id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for=""><span><?php echo lang_get( 'post_to' ) ?></span></label>
+				<label for=""><span><?php echo _('Post to') ?></span></label>
 				<span class="select">
 					<select name="project_id"><?php
 						$t_sitewide = false;
@@ -124,12 +124,12 @@ html_page_top( lang_get( 'edit_news_title' ) );
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="news-update-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
+				<label for="news-update-announcement"><span><?php echo _('Announcement') ?></span> <span class="help-text"><?php echo _('Stays on Top') ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="news-update-announcement" name="announcement" <?php check_checked( $v_announcement, 1 ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for=""><span><?php echo lang_get( 'view_status' ) ?></span></label>
+				<label for=""><span><?php echo _('View Status') ?></span></label>
 				<span class="select">
 					<select name="view_state">
 						<?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
@@ -137,7 +137,7 @@ html_page_top( lang_get( 'edit_news_title' ) );
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_news_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Update News') ?>" /></span>
 		</fieldset>
 	</form>
 </div><?php

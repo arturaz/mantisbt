@@ -66,7 +66,7 @@ $t_query_arr = filter_db_get_available_queries();
 # same as the one we're about the try and save
 foreach( $t_query_arr as $t_id => $t_name ) {
 	if ( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
-		print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
+		print _('This particular filter appears to already exist.') . ' (' . $t_name . ')<br />';
 	}
 }
 
@@ -76,7 +76,7 @@ if ( $t_error_msg != null ) {
 	print "<br />$t_error_msg<br /><br />";
 }
 
-print lang_get( 'query_name_label' ) . lang_get( 'word_separator' );
+print _('Filter Name:') . _('&#32;');
 ?>
 <form method="post" action="query_store.php">
 <?php echo form_security_field( 'query_store' ) ?>
@@ -84,17 +84,17 @@ print lang_get( 'query_name_label' ) . lang_get( 'word_separator' );
 <?php
 if ( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
 	print '<input type="checkbox" name="is_public" value="on" /> ';
-	print lang_get( 'make_public' );
+	print _('Make Public');
 	print '<br />';
 }
 ?>
 <input type="checkbox" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> >
-<?php print lang_get( 'all_projects' ); ?><br /><br />
-<input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>" />
+<?php print _('All Projects'); ?><br /><br />
+<input type="submit" class="button" value="<?php print _('Save Current Filter'); ?>" />
 </form>
 <form action="view_all_bug_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>" />
+<input type="submit" class="button" value="<?php print _('Go Back'); ?>" />
 </form>
 <?php
 echo '</div>';

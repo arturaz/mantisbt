@@ -85,18 +85,18 @@ if ( $t_show_sponsorships ) {
 <table class="width100" cellspacing="1">
 	<tr>
 		<td width="50" rowspan="3">
-			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" />
+			<img src="images/dollars.gif" alt="<?php echo _('Sponsor') ?>" />
 		</td>
 		<td class="form-title" colspan="2">
 		<?php
 			collapse_icon( 'sponsorship' );
 
-			echo lang_get( 'users_sponsoring_bug' );
+			echo _('Users sponsoring this issue');
 
-			$t_details_url = lang_get( 'sponsorship_process_url' );
+			$t_details_url = _('');
 			if ( !is_blank( $t_details_url ) ) {
 				echo '&#160;[<a href="' . $t_details_url . '" target="_blank">'
-					. lang_get( 'sponsorship_more_info' ) . '</a>]';
+					. _('More information about sponsorship') . '</a>]';
 			}
 		?>
 		</td>
@@ -106,14 +106,14 @@ if ( $t_show_sponsorships ) {
 	if ( $t_can_sponsor ) {
 ?>
 	<tr class="row-1">
-		<th class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></th>
+		<th class="category" width="15%"><?php echo _('Sponsor issue') ?></th>
 		<td>
 			<form method="post" action="bug_set_sponsorship.php">
 				<?php echo form_security_field( 'bug_set_sponsorship' ) ?>
 				<?php echo sponsorship_get_currency() ?>
 				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
 				<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
-				<input type="submit" class="button" name="sponsor" value="<?php echo lang_get( 'sponsor_verb' ) ?>" />
+				<input type="submit" class="button" name="sponsor" value="<?php echo _('Sponsor') ?>" />
 			</form>
 		</td>
 	</tr>
@@ -124,10 +124,10 @@ if ( $t_show_sponsorships ) {
 	if ( $t_total_sponsorship > 0 ) {
 ?>
 	<tr class="row-2">
-		<th class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></th>
+		<th class="category" width="15%"><?php echo _('Sponsors List') ?></th>
 		<td>
 		<?php
-			echo sprintf( lang_get( 'total_sponsorship_amount' ),
+			echo sprintf( _('Total Sponsorship = %1'),
 				sponsorship_format_amount( $t_total_sponsorship ) );
 
 			if ( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' )
@@ -142,7 +142,7 @@ if ( $t_show_sponsorships ) {
 					echo ($i > 0) ? '<br />' : '';
 					$i++;
 
-					echo sprintf( lang_get( 'label' ), $t_date_added ) . lang_get( 'word_separator' );
+					echo sprintf( _('%1:'), $t_date_added ) . _('&#32;');
 					print_user( $t_sponsorship->user_id );
 					echo ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')';
 					if ( access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
@@ -167,18 +167,18 @@ if ( $t_show_sponsorships ) {
 		<td class="form-title">
 <?php
 			collapse_icon( 'sponsorship' );
-			echo lang_get( 'users_sponsoring_bug' );
+			echo _('Users sponsoring this issue');
 
-			$t_details_url = lang_get( 'sponsorship_process_url' );
+			$t_details_url = _('');
 			if ( !is_blank( $t_details_url ) ) {
 				echo '&#160;[<a href="' . $t_details_url . '" target="_blank">'
-					. lang_get( 'sponsorship_more_info' ) . '</a>]';
+					. _('More information about sponsorship') . '</a>]';
 			}
 
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
 	if ( $t_total_sponsorship > 0 ) {
 		echo ' <span style="font-weight: normal;">(';
-		echo sprintf( lang_get( 'total_sponsorship_amount' ),
+		echo sprintf( _('Total Sponsorship = %1'),
 			sponsorship_format_amount( $t_total_sponsorship ) );
 		echo ')</span>';
 	}

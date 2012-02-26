@@ -297,52 +297,52 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 
 	switch( $p_field_name ) {
 		case 'category':
-			$t_field_localized = lang_get( 'category' );
+			$t_field_localized = _('Category');
 			break;
 		case 'status':
 			$p_old_value = get_enum_element( 'status', $p_old_value );
 			$p_new_value = get_enum_element( 'status', $p_new_value );
-			$t_field_localized = lang_get( 'status' );
+			$t_field_localized = _('Status');
 			break;
 		case 'severity':
 			$p_old_value = get_enum_element( 'severity', $p_old_value );
 			$p_new_value = get_enum_element( 'severity', $p_new_value );
-			$t_field_localized = lang_get( 'severity' );
+			$t_field_localized = _('Severity');
 			break;
 		case 'reproducibility':
 			$p_old_value = get_enum_element( 'reproducibility', $p_old_value );
 			$p_new_value = get_enum_element( 'reproducibility', $p_new_value );
-			$t_field_localized = lang_get( 'reproducibility' );
+			$t_field_localized = _('Reproducibility');
 			break;
 		case 'resolution':
 			$p_old_value = get_enum_element( 'resolution', $p_old_value );
 			$p_new_value = get_enum_element( 'resolution', $p_new_value );
-			$t_field_localized = lang_get( 'resolution' );
+			$t_field_localized = _('Resolution');
 			break;
 		case 'priority':
 			$p_old_value = get_enum_element( 'priority', $p_old_value );
 			$p_new_value = get_enum_element( 'priority', $p_new_value );
-			$t_field_localized = lang_get( 'priority' );
+			$t_field_localized = _('Priority');
 			break;
 		case 'eta':
 			$p_old_value = get_enum_element( 'eta', $p_old_value );
 			$p_new_value = get_enum_element( 'eta', $p_new_value );
-			$t_field_localized = lang_get( 'eta' );
+			$t_field_localized = _('ETA');
 			break;
 		case 'view_state':
 			$p_old_value = get_enum_element( 'view_state', $p_old_value );
 			$p_new_value = get_enum_element( 'view_state', $p_new_value );
-			$t_field_localized = lang_get( 'view_status' );
+			$t_field_localized = _('View Status');
 			break;
 		case 'projection':
 			$p_old_value = get_enum_element( 'projection', $p_old_value );
 			$p_new_value = get_enum_element( 'projection', $p_new_value );
-			$t_field_localized = lang_get( 'projection' );
+			$t_field_localized = _('Projection');
 			break;
 		case 'sticky':
-			$p_old_value = gpc_string_to_bool( $p_old_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
-			$p_new_value = gpc_string_to_bool( $p_new_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
-			$t_field_localized = lang_get( 'sticky_issue' );
+			$p_old_value = gpc_string_to_bool( $p_old_value ) ? _('Yes') : _('No');
+			$p_new_value = gpc_string_to_bool( $p_new_value ) ? _('Yes') : _('No');
+			$t_field_localized = _('Sticky Issue');
 			break;
 		case 'project_id':
 			if( project_exists( $p_old_value ) ) {
@@ -358,13 +358,13 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			} else {
 				$p_new_value = '@' . $p_new_value . '@';
 			}
-			$t_field_localized = lang_get( 'email_project' );
+			$t_field_localized = _('Project');
 			break;
 		case 'handler_id':
-			$t_field_localized = lang_get( 'assigned_to' );
+			$t_field_localized = _('Assigned To');
 		case 'reporter_id':
 			if( 'reporter_id' == $p_field_name ) {
-				$t_field_localized = lang_get( 'reporter' );
+				$t_field_localized = _('Reporter');
 			}
 			if( 0 == $p_old_value ) {
 				$p_old_value = '';
@@ -379,40 +379,40 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			}
 			break;
 		case 'version':
-			$t_field_localized = lang_get( 'product_version' );
+			$t_field_localized = _('Product Version');
 			break;
 		case 'fixed_in_version':
-			$t_field_localized = lang_get( 'fixed_in_version' );
+			$t_field_localized = _('Fixed in Version');
 			break;
 		case 'target_version':
-			$t_field_localized = lang_get( 'target_version' );
+			$t_field_localized = _('Target Version');
 			break;
 		case 'date_submitted':
-			$t_field_localized = lang_get( 'date_submitted' );
+			$t_field_localized = _('Date Submitted');
 			break;
 		case 'last_updated':
-			$t_field_localized = lang_get( 'last_update' );
+			$t_field_localized = _('Last Update');
 			break;
 		case 'os':
-			$t_field_localized = lang_get( 'os' );
+			$t_field_localized = _('OS');
 			break;
 		case 'os_build':
-			$t_field_localized = lang_get( 'os_version' );
+			$t_field_localized = _('OS Version');
 			break;
 		case 'build':
-			$t_field_localized = lang_get( 'build' );
+			$t_field_localized = _('Build');
 			break;
 		case 'platform':
-			$t_field_localized = lang_get( 'platform' );
+			$t_field_localized = _('Platform');
 			break;
 		case 'summary':
-			$t_field_localized = lang_get( 'summary' );
+			$t_field_localized = _('Summary');
 			break;
 		case 'duplicate_id':
-			$t_field_localized = lang_get( 'duplicate_id' );
+			$t_field_localized = _('Duplicate ID');
 			break;
 		case 'sponsorship_total':
-			$t_field_localized = lang_get( 'sponsorship_total' );
+			$t_field_localized = _('Sponsorship Total');
 			break;
 		case 'due_date':
 			if( $p_old_value !== '' ) {
@@ -421,7 +421,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			if( $p_new_value !== '' ) {
 				$p_new_value = date( config_get( 'normal_date_format' ), (int) $p_new_value );
 			}
-			$t_field_localized = lang_get( 'due_date' );
+			$t_field_localized = _('Due Date');
 			break;
 		default:
 
@@ -439,13 +439,13 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 		if( NORMAL_TYPE != $p_type ) {
 			switch( $p_type ) {
 				case NEW_BUG:
-					$t_note = lang_get( 'new_bug' );
+					$t_note = _('New Issue');
 					break;
 				case BUGNOTE_ADDED:
-					$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;
+					$t_note = _('Note Added') . ': ' . $p_old_value;
 					break;
 				case BUGNOTE_UPDATED:
-					$t_note = lang_get( 'bugnote_edited' ) . ': ' . $p_old_value;
+					$t_note = _('Note Edited') . ': ' . $p_old_value;
 					$t_old_value = (int)$p_old_value;
 					$t_new_value = (int)$p_new_value;
 					if ( $p_linkify && bug_revision_exists( $t_new_value ) ) {
@@ -455,87 +455,87 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 							$t_bug_revision_view_page_argument = 'rev_id=' . $t_new_value;
 						}
 						$t_change = '<a href="bug_revision_view_page.php?' . $t_bug_revision_view_page_argument . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
+							_('View Revisions') . '</a>';
 						$t_raw = false;
 					}
 					break;
 				case BUGNOTE_DELETED:
-					$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
+					$t_note = _('Note Deleted') . ': ' . $p_old_value;
 					break;
 				case DESCRIPTION_UPDATED:
-					$t_note = lang_get( 'description_updated' );
+					$t_note = _('Description Updated');
 					$t_old_value = (int)$p_old_value;
 					if ( $p_linkify && bug_revision_exists( $t_old_value ) ) {
 						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
+							_('View Revisions') . '</a>';
 						$t_raw = false;
 					}
 					break;
 				case ADDITIONAL_INFO_UPDATED:
-					$t_note = lang_get( 'additional_information_updated' );
+					$t_note = _('Additional Information Updated');
 					$t_old_value = (int)$p_old_value;
 					if ( $p_linkify && bug_revision_exists( $t_old_value ) ) {
 						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
+							_('View Revisions') . '</a>';
 						$t_raw = false;
 					}
 					break;
 				case STEP_TO_REPRODUCE_UPDATED:
-					$t_note = lang_get( 'steps_to_reproduce_updated' );
+					$t_note = _('Steps to Reproduce Updated');
 					$t_old_value = (int)$p_old_value;
 					if ( $p_linkify && bug_revision_exists( $t_old_value ) ) {
 						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
+							_('View Revisions') . '</a>';
 						$t_raw = false;
 					}
 					break;
 				case FILE_ADDED:
-					$t_note = lang_get( 'file_added' ) . ': ' . $p_old_value;
+					$t_note = _('File Added') . ': ' . $p_old_value;
 					break;
 				case FILE_DELETED:
-					$t_note = lang_get( 'file_deleted' ) . ': ' . $p_old_value;
+					$t_note = _('File Deleted') . ': ' . $p_old_value;
 					break;
 				case BUGNOTE_STATE_CHANGED:
 					$p_old_value = get_enum_element( 'view_state', $p_old_value );
-					$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_new_value . ': ' . $p_old_value;
+					$t_note = _('Note View State') . ': ' . $p_new_value . ': ' . $p_old_value;
 					break;
 				case BUG_MONITOR:
 					$p_old_value = user_get_name( $p_old_value );
-					$t_note = lang_get( 'bug_monitor' ) . ': ' . $p_old_value;
+					$t_note = _('Issue Monitored') . ': ' . $p_old_value;
 					break;
 				case BUG_UNMONITOR:
 					$p_old_value = user_get_name( $p_old_value );
-					$t_note = lang_get( 'bug_end_monitor' ) . ': ' . $p_old_value;
+					$t_note = _('Issue End Monitor') . ': ' . $p_old_value;
 					break;
 				case BUG_DELETED:
-					$t_note = lang_get( 'bug_deleted' ) . ': ' . $p_old_value;
+					$t_note = _('Issue Deleted') . ': ' . $p_old_value;
 					break;
 				case BUG_ADD_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_added' );
+					$t_note = _('Sponsorship Added');
 					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_UPDATE_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_updated' );
+					$t_note = _('Sponsorship Updated');
 					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_DELETE_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_deleted' );
+					$t_note = _('Sponsorship Deleted');
 					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_PAID_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_paid' );
+					$t_note = _('Sponsorship Paid');
 					$t_change = user_get_name( $p_old_value ) . ': ' . get_enum_element( 'sponsorship', $p_new_value );
 					break;
 				case BUG_ADD_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_added' );
+					$t_note = _('Relationship added');
 					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
 					break;
 				case BUG_REPLACE_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_replaced' );
+					$t_note = _('Relationship replaced');
 					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
 					break;
 				case BUG_DEL_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_deleted' );
+					$t_note = _('Relationship deleted');
 
 					# Fix for #7846: There are some cases where old value is empty, this may be due to an old bug.
 					if( !is_blank( $p_old_value ) && $p_old_value > 0 ) {
@@ -545,28 +545,28 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					}
 					break;
 				case BUG_CLONED_TO:
-					$t_note = lang_get( 'bug_cloned_to' );
+					$t_note = _('Issue cloned');
 					$t_change = bug_format_id( $p_new_value );
 					break;
 				case BUG_CREATED_FROM:
-					$t_note = lang_get( 'bug_created_from' );
+					$t_note = _('Issue generated from');
 					$t_change = bug_format_id( $p_new_value );
 					break;
 				case TAG_ATTACHED:
-					$t_note = lang_get( 'tag_history_attached' ) . ': ' . $p_old_value;
+					$t_note = _('Tag Attached') . ': ' . $p_old_value;
 					break;
 				case TAG_DETACHED:
-					$t_note = lang_get( 'tag_history_detached' ) . ': ' . $p_old_value;
+					$t_note = _('Tag Detached') . ': ' . $p_old_value;
 					break;
 				case TAG_RENAMED:
-					$t_note = lang_get( 'tag_history_renamed' );
+					$t_note = _('Tag Renamed');
 					$t_change = $p_old_value . ' => ' . $p_new_value;
 					break;
 				case BUG_REVISION_DROPPED:
-					$t_note = lang_get( 'bug_revision_dropped_history' ) . ': ' . bug_revision_get_type_name( $p_new_value ) . ': ' . $p_old_value;
+					$t_note = _('Issue Revision Dropped') . ': ' . bug_revision_get_type_name( $p_new_value ) . ': ' . $p_old_value;
 					break;
 				case BUGNOTE_REVISION_DROPPED:
-					$t_note = lang_get( 'bugnote_revision_dropped_history' ) . ': ' . $p_new_value . ': ' . $p_old_value;
+					$t_note = _('Note Revision Dropped') . ': ' . $p_new_value . ': ' . $p_old_value;
 					break;
 			}
 	}

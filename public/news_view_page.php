@@ -66,7 +66,7 @@ if ( $f_news_id !== null ) {
 ?>
 
 <div id="news-menu">
-	<?php print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) ); ?>
+	<?php print_bracket_link( 'news_list_page.php', _('Archives') ); ?>
 </div>
 
 <?php

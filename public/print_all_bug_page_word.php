@@ -122,36 +122,36 @@ $t_count_exported = 0;
 $t_date_format = config_get( 'normal_date_format' );
 $t_short_date_format = config_get( 'short_date_format' );
 
-$t_lang_bug_view_title = lang_get( 'bug_view_title' );
-$t_lang_id = lang_get( 'id' );
-$t_lang_category = lang_get( 'category' );
-$t_lang_severity = lang_get( 'severity' );
-$t_lang_reproducibility = lang_get( 'reproducibility' );
-$t_lang_date_submitted = lang_get( 'date_submitted' );
-$t_lang_last_update = lang_get( 'last_update' );
-$t_lang_reporter = lang_get( 'reporter' );
-$t_lang_assigned_to = lang_get( 'assigned_to' );
-$t_lang_platform = lang_get( 'platform' );
-$t_lang_due_date = lang_get( 'due_date' );
-$t_lang_os = lang_get( 'os' );
-$t_lang_os_version = lang_get( 'os_version' );
-$t_lang_fixed_in_version = lang_get( 'fixed_in_version' );
-$t_lang_resolution = lang_get( 'resolution' );
-$t_lang_priority = lang_get( 'priority' );
-$t_lang_product_build = lang_get( 'product_build' );
-$t_lang_eta = lang_get( 'eta' );
-$t_lang_status = lang_get( 'status' );
-$t_lang_product_version = lang_get( 'product_version' );
-$t_lang_no_bugnotes_msg = lang_get( 'no_bugnotes_msg' );
-$t_lang_projection = lang_get( 'projection' );
-$t_lang_target_version = lang_get( 'target_version' );
-$t_lang_summary = lang_get( 'summary' );
-$t_lang_description = lang_get( 'description' );
-$t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
-$t_lang_additional_information = lang_get( 'additional_information' );
-$t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
-$t_lang_system_profile = lang_get( 'system_profile' );
-$t_lang_attached_files = lang_get( 'attached_files' );
+$t_lang_bug_view_title = _('View Issue Details');
+$t_lang_id = _('ID');
+$t_lang_category = _('Category');
+$t_lang_severity = _('Severity');
+$t_lang_reproducibility = _('Reproducibility');
+$t_lang_date_submitted = _('Date Submitted');
+$t_lang_last_update = _('Last Update');
+$t_lang_reporter = _('Reporter');
+$t_lang_assigned_to = _('Assigned To');
+$t_lang_platform = _('Platform');
+$t_lang_due_date = _('Due Date');
+$t_lang_os = _('OS');
+$t_lang_os_version = _('OS Version');
+$t_lang_fixed_in_version = _('Fixed in Version');
+$t_lang_resolution = _('Resolution');
+$t_lang_priority = _('Priority');
+$t_lang_product_build = _('Product Build');
+$t_lang_eta = _('ETA');
+$t_lang_status = _('Status');
+$t_lang_product_version = _('Product Version');
+$t_lang_no_bugnotes_msg = _('There are no notes attached to this issue.');
+$t_lang_projection = _('Projection');
+$t_lang_target_version = _('Target Version');
+$t_lang_summary = _('Summary');
+$t_lang_description = _('Description');
+$t_lang_steps_to_reproduce = _('Steps To Reproduce');
+$t_lang_additional_information = _('Additional Information');
+$t_lang_bug_notes_title = _('Notes');
+$t_lang_system_profile = _('System Description');
+$t_lang_attached_files = _('Attached Files');
 
 $t_current_user_id = auth_get_current_user_id();
 $t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
@@ -195,22 +195,22 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print-category">
 	<td class="print" width="16%">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_id ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_id ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_category ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_category ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_severity ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_severity ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_reproducibility ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_reproducibility ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_date_submitted ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_date_submitted ) ?>
 	</td>
 	<td class="print" width="16%">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_last_update ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_last_update ) ?>
 	</td>
 </tr>
 <tr class="print">
@@ -240,20 +240,20 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_reporter ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_reporter ) ?>
 	</td>
 	<td class="print">
 		<?php print_user_with_subject( $t_bug->reporter_id, $t_id ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_platform ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_platform ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->platform ) ?>
 	</td>
 <?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_due_date ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_due_date ) ?>
 	</td>
 <?php
 		if ( bug_is_overdue( $t_id ) ) { ?>
@@ -274,7 +274,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_assigned_to ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_assigned_to ) ?>
 	</td>
 	<td class="print">
 		<?php
@@ -284,7 +284,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		?>
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_os ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_os ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->os ) ?>
@@ -293,13 +293,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_priority ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_priority ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'priority', $t_bug->priority ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_version ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_os_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->os_build ) ?>
@@ -308,13 +308,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_status ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_status ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_version ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_product_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->version ) ?>
@@ -323,13 +323,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_build ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_product_build ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->build ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_resolution ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_resolution ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
@@ -338,7 +338,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_projection ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_projection ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
@@ -353,13 +353,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_eta ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_eta ) ?>
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_fixed_in_version ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_fixed_in_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
@@ -375,7 +375,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		&#160;
 	</td>
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_target_version ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_target_version ) ?>
 	</td>
 	<td class="print">
 		<?php echo string_display_line( $t_bug->target_version ) ?>
@@ -389,7 +389,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php echo sprintf( _('%1:'), lang_get_defaulted( $t_def['name'] ) ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php print_custom_field_value( $t_def, $t_custom_field_id, $t_id ); ?>
@@ -405,7 +405,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_summary ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_summary ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_line_links( $t_bug->summary ) ?>
@@ -413,7 +413,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_description ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_description ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_links( $t_bug->description ) ?>
@@ -421,7 +421,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_steps_to_reproduce ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_steps_to_reproduce ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_links( $t_bug->steps_to_reproduce ) ?>
@@ -429,7 +429,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_additional_information ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_additional_information ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php echo string_display_links( $t_bug->additional_information ) ?>
@@ -455,7 +455,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_attached_files ) ?>
+		<?php echo sprintf( _('%1:'), $t_lang_attached_files ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php
@@ -537,7 +537,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			<td class="print">
 				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 				<?php if ( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
-					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
+					echo '<br />(' . _('Last edited:') . _('&#32;') . $t_last_modified . ')';
 				} ?>
 			</td>
 		</tr>
@@ -550,7 +550,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				<?php
 					switch ( $t_bugnote->note_type ) {
 						case REMINDER:
-							echo lang_get( 'reminder_sent_to' ) . ' ';
+							echo _('Reminder sent to:') . ' ';
 							$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {

@@ -86,7 +86,7 @@ $t_ids = email_queue_get_ids();
 
 if( count( $t_ids ) > 0 ) {
 
-	echo '<table><tr><th>' . lang_get('id') . '</th><th>' . lang_get('email') . '</th><th>' . lang_get('timestamp') . '</th><th>Send Or Delete</th></tr>';
+	echo '<table><tr><th>' . _('ID') . '</th><th>' . _('E-mail') . '</th><th>' . _('Timestamp') . '</th><th>Send Or Delete</th></tr>';
 	foreach( $t_ids as $t_id ) {
 		$row = email_queue_get( $t_id );
 

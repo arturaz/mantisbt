@@ -658,7 +658,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
  	if( $p_html == true ) {
  		$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
  		if( VS_PRIVATE == $t_bug->view_state ) {
- 			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+ 			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', _('private'), _('private') );
  		}
   	} else {
  		if( mb_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
@@ -671,7 +671,7 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	# add delete link if bug not read only and user has access level
  	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
  		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' . lang_get( 'delete_link' ) . '</a>]';
+			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' . _('Delete') . '</a>]';
 		}
 	}
 
@@ -713,7 +713,7 @@ function relationship_get_summary_html( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="row-2"><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
+			$t_summary .= '<tr class="row-2"><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' . _('Not all the children of this issue are yet resolved or closed.') . '</strong></td></tr>';
 		}
 		$t_summary = '<table width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 	}
@@ -740,7 +740,7 @@ function relationship_get_summary_html_preview( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="print"><td class="print" colspan=' . ( 5 + $t_show_project ) . '><strong>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
+			$t_summary .= '<tr class="print"><td class="print" colspan=' . ( 5 + $t_show_project ) . '><strong>' . _('Not all the children of this issue are yet resolved or closed.') . '</strong></td></tr>';
 		}
 		$t_summary = '<table width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 	}
@@ -782,12 +782,12 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
 	?>
 <select name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
-<option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
+<option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo _('any')?>]</option>
 <?php
 	}
 
 	if( $p_include_none ) {?>
-<option value="<?php echo BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
+<option value="<?php echo BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo _('none')?>]</option>
 <?php
 	}
 
@@ -815,11 +815,11 @@ function relationship_view_box( $p_bug_id ) {
 	<td width="15%" class="form-title" colspan="2">
 		<?php
 			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
+	echo _('Relationships');
 	if( ON == config_get( 'relationship_graph_enable' ) ) {
 		?>
-		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", lang_get( 'relation_graph' ) )?></span>
-		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=dependency", lang_get( 'dependency_graph' ) )?></span>
+		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", _('Relation Graph') )?></span>
+		<span class="small"><?php print_bracket_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=dependency", _('Dependency Graph') )?></span>
 		<?php
 	}
 	?>
@@ -833,14 +833,14 @@ function relationship_view_box( $p_bug_id ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			?>
 <tr class="row-1">
-	<th class="category"><?php echo lang_get( 'add_new_relationship' )?></th>
-	<td><?php echo lang_get( 'this_bug' )?>
+	<th class="category"><?php echo _('New relationship')?></th>
+	<td><?php echo _('Current issue')?>
 		<form method="post" action="bug_relationship_add.php">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
 		<?php relationship_list_box( config_get( 'default_bug_relationship' ) )?>
 		<input type="text" name="dest_bug_id" value="" />
-		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
+		<input type="submit" name="add_relationship" class="button" value="<?php echo _('Add')?>" />
 		</form>
 	</td></tr>
 <?php
@@ -858,7 +858,7 @@ function relationship_view_box( $p_bug_id ) {
 	<td class="form-title">
 		<?php
 			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
+	echo _('Relationships');
 	?>
 	</td>
 </tr>

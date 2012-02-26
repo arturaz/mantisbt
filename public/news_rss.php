@@ -82,7 +82,7 @@ if ( $f_project_id != ALL_PROJECTS ) {
 
 $encoding = 'utf-8';
 $about = config_get( 'path' );
-$title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
+$title = string_rss_links( config_get( 'window_title' ) . ' - ' . _('News') );
 
 if ( $f_username !== null ) {
 	$title .= " - ($f_username)";
@@ -107,7 +107,7 @@ $publisher = '';
 $creator = '';
 
 $date = (string) date( 'r' );
-$language = lang_get( 'phpmailer_language' );
+$language = _('en');
 $rights = '';
 
 # spatial location , temporal period or jurisdiction

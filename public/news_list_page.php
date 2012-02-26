@@ -76,10 +76,10 @@ if ( $t_count > 0 ) { ?>
 			<span class="news-headline"><a href="news_view_page.php?news_id=<?php echo $v_id; ?>"><?php echo $v_headline; ?></a></span>
 			<span class="news-author"><?php echo prepare_user_name( $v_poster_id ); ?></span><?php
 			if( 1 == $v_announcement ) { ?>
-				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
+				<span class="news-announcement"><?php echo _('Announcement'); ?></span><?php
 			}
 			if( VS_PRIVATE == $v_view_state ) { ?>
-				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
+				<span class="news-private"><?php echo _('private'); ?></span><?php
 			} ?>
 		</li><?php
 	}  	# end for loop ?>

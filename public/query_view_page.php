@@ -77,7 +77,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 
 	if ( OFF != $t_rss_enabled ) {
 		# Use the "new" RSS link style.
-		print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
+		print_rss( rss_get_issues_feed_url( null, null, $t_id ), _('RSS') );
 		echo ' ';
 	}
 
@@ -86,7 +86,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 
 	if ( filter_db_can_delete_filter( $t_id ) ) {
 		echo ' ';
-		print_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
+		print_button( "query_delete_page.php?source_query_id=$t_query_id", _('Delete Filter') );
 	}
 
 	print '</td>';

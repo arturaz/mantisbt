@@ -63,10 +63,10 @@ html_page_top2a();
 <div id="lost-password-div" class="form-container">
 	<form id="lost-password-form" method="post" action="lost_pwd.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'lost_password_title' ); ?></span></legend>
+			<legend><span><?php echo _('Password Reset'); ?></span></legend>
 			 <ul id="login-links">
-				<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
-				<li><a href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a></li>
+				<li><a href="login_page.php"><?php echo _('Login'); ?></a></li>
+				<li><a href="signup_page.php"><?php echo _('Signup for a new account'); ?></a></li>
             </ul>
 			<?php
 			echo form_security_field( 'lost_pwd' );
@@ -74,20 +74,20 @@ html_page_top2a();
 			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
 			if ( $t_allow_passwd ) { ?>
 			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<label for="username"><span><?php echo _('Username') ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="email-field"><span><?php echo lang_get( 'email' ) ?></span></label>
+				<label for="email-field"><span><?php echo _('E-mail') ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>
 			</div>
-			<span id="lost-password-msg"><?php echo lang_get( 'lost_password_info' ); ?></span>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span><?php
+			<span id="lost-password-msg"><?php echo _('To reinstate your lost password, please supply the name and e-mail address for the account. If the data corresponds to a valid account, you will be sent a special URL via e-mail that contains a validation code for your account. Please follow this link to change your password.'); ?></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Submit') ?>" /></span><?php
 			} else {
 				echo '<span id="no-password-msg">';
-				echo lang_get( 'no_password_request' );
+				echo _('Your password is managed by another system. Please contact your system administrator.');
 				echo '</span>';
 			} ?>
 		</fieldset>

@@ -145,7 +145,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'printing_preferences_title' ) ?>
+		<?php echo _('Choose fields to print') ?>
 	</td>
 	<td class="right">
 	</td>
@@ -172,7 +172,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 <tr>
 	<td>&#160;</td>
 	<td>
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Update Prefs') ?>" />
 	</td>
 </tr>
 </table>
@@ -184,7 +184,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 <div class="border center">
 	<form method="post" action="print_all_bug_options_reset.php">
 	<?php echo form_security_field( 'print_all_bug_options_reset' ) ?>
-	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+	<input type="submit" class="button" value="<?php echo _('Reset Prefs') ?>" />
 	</form>
 </div>
 

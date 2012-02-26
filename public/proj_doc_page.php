@@ -104,14 +104,14 @@ $query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, 
 			ORDER BY pt.name ASC, pft.title ASC";
 $result = db_query_bound( $query );
 
-html_page_top( lang_get( 'docs_link' ) );
+html_page_top( _('Docs') );
 ?>
 <br />
 <div>
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'project_documentation_title' ) ?>
+		<?php echo _('Project Documentation') ?>
 	</td>
 	<td class="right">
 		<?php print_doc_menu( 'proj_doc_page.php' ) ?>
@@ -134,13 +134,13 @@ while( $row = db_fetch_array( $result ) ) {
 	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
 	echo $t_href;
 	print_file_icon( $v_filename );
-	echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
+	echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . _('&#32;') . _('bytes') . ')';
 ?>
 	<br />
 	<span class="small">
 <?php
 	if( $v_project_id == ALL_PROJECTS ) {
-		echo lang_get( 'all_projects' ) . '<br/>';
+		echo _('All Projects') . '<br/>';
 	}
 	else if( $v_project_id != $f_project_id ) {
 		$t_project_name = project_get_name( $v_project_id );
@@ -149,9 +149,9 @@ while( $row = db_fetch_array( $result ) ) {
 	echo '(' . $v_date_added . ')';
 	if ( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
 		echo '&#160;';
-		print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
+		print_button( 'proj_doc_edit_page.php?file_id='.$v_id, _('Edit') );
 		echo '&#160;';
-		print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
+		print_button( 'proj_doc_delete.php?file_id=' . $v_id, _('Delete') );
 	}
 ?>
 	</span>

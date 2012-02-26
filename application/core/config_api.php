@@ -537,7 +537,7 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 
 			foreach( $g_cache_config[$p_var] as $t_user_id => $t_user ) {
 				$t_info .= '<li>'
-					. (($t_user_id == 0)? lang_get('all_users') : user_get_name( $t_user_id ))
+					. (($t_user_id == 0)? _('All Users') : user_get_name( $t_user_id ))
 					. ': ';
 				foreach ( $t_user as $t_project_id => $t_project ) {
 					$t_info .= project_get_name( $t_project_id ) . ', ';

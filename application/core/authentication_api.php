@@ -703,16 +703,16 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	?>
 <div class="important-msg">
 <?php
-	echo lang_get( 'reauthenticate_message' );
+	echo _('You are visiting a secure page, and your secure session has expired. Please authenticate yourself to continue.');
 	if( $t_error != false ) {
-		echo '<br /><span class="error-msg">', lang_get( 'login_error' ), '</span>';
+		echo '<br /><span class="error-msg">' . _('Your account may be disabled or blocked or the username/password you entered is incorrect.') . '</span>';
 	}
 ?>
 </div>
 <div id="reauth-div" class="form-container">
 	<form id="reauth-form" method="post" action="">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'reauthenticate_title' ); ?></span></legend>
+			<legend><span><?php echo _('Authenticate'); ?></span></legend>
 
 		<?php
 			# CSRF protection not required here - user needs to enter password
@@ -723,16 +723,16 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
 			<input type="hidden" name="_authenticate" value="1" />
 			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' );?></span></label>
+				<label for="username"><span><?php echo _('Username');?></span></label>
 				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="password"><span><?php echo lang_get( 'password' );?></span></label>
+				<label for="password"><span><?php echo _('Password');?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Login');?>" /></span>
 		</fieldset>
 	</form>
 </div>
@@ -829,11 +829,11 @@ function auth_get_current_user_id() {
  */
 function auth_http_prompt() {
 	header( 'HTTP/1.0 401 Authorization Required' );
-	header( 'WWW-Authenticate: Basic realm="' . lang_get( 'http_auth_realm' ) . '"' );
+	header( 'WWW-Authenticate: Basic realm="' . _('MantisBT Login') . '"' );
 	header( 'status: 401 Unauthorized' );
 
 	echo '<p class="center error-msg">' . string_display_line(_('Access denied.')) . '</p>';
-	print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+	print_bracket_link( 'main_page.php', _('Proceed') );
 
 	exit;
 }

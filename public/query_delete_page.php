@@ -62,18 +62,18 @@ html_page_top();
 <br />
 <div class="center">
 <strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong>
-<?php echo lang_get( 'query_delete_msg' ); ?>
+<?php echo _('Are you sure you wish to delete this filter?'); ?>
 
 <form method="post" action="<?php print $t_delete_url; ?>">
 <?php echo form_security_field( 'query_delete' ) ?>
 <br /><br />
 <input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
-<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
+<input type="submit" class="button" value="<?php print _('Delete Filter'); ?>"/>
 </form>
 
 <form method="post" action="<?php print $t_redirect_url; ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
+<input type="submit" class="button" value="<?php print _('Go Back'); ?>"/>
 </form>
 
 <?php

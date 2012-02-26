@@ -54,7 +54,7 @@ if ( !config_get( 'relationship_graph_enable' ) ) {
 	throw new AccessDenied();
 }
 
-html_page_top( lang_get( 'manage_workflow_graph' ) );
+html_page_top( _('Workflow Graph') );
 
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_workflow_graph_page.php' );
@@ -62,9 +62,9 @@ print_manage_config_menu( 'manage_config_workflow_graph_page.php' );
 $t_project = helper_get_current_project();
 
 if ( $t_project == ALL_PROJECTS ) {
-	$t_project_title = lang_get( 'config_all_projects' );
+	$t_project_title = _('Note: These configurations affect all projects, unless overridden at the project level.');
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
+	$t_project_title = sprintf( _('Note: These configurations affect only the %1 project.') , string_display( project_get_name( $t_project ) ) );
 }
 ?>
 	<br />

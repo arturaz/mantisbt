@@ -128,18 +128,18 @@ html_page_top( null, $t_redirect );
 echo '<br /><div>';
 
 if ( $t_email_updated ) {
-	echo lang_get( 'email_updated' ) . '<br />';
+	echo _('E-mail address successfully updated') . '<br />';
 }
 
 if ( $t_password_updated ) {
-	echo lang_get( 'password_updated' ) . '<br />';
+	echo _('Password successfully updated') . '<br />';
 }
 
 if ( $t_realname_updated ) {
-	echo lang_get( 'realname_updated' ) . '<br />';
+	echo _('Real name successfully updated') . '<br />';
 }
 
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
+echo _('Operation successful.') . '<br />';
+print_bracket_link( $t_redirect, _('Proceed') );
 echo '</div>';
 html_page_bottom();

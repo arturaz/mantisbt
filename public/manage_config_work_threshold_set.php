@@ -55,7 +55,7 @@ auth_reauthenticate();
 $t_redirect_url = 'manage_config_work_threshold_page.php';
 $t_project = helper_get_current_project();
 
-html_page_top( lang_get( 'manage_threshold_config' ), $t_redirect_url );
+html_page_top( _('Workflow Thresholds'), $t_redirect_url );
 
 $t_access = current_user_get_access_level();
 
@@ -182,8 +182,8 @@ form_security_purge( 'manage_config_work_threshold_set' );
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.') . '<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

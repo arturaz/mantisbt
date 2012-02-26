@@ -50,31 +50,31 @@ news_ensure_enabled();
 
 access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 
-html_page_top( lang_get( 'edit_news_link' ) );
+html_page_top( _('Edit News') );
 ?>
 
 <div id="news-add-div" class="form-container">
 	<form id="news-add-form" method="post" action="news_add.php">
 		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'add_news_title' ) ?></span></legend>
+			<legend><span><?php echo _('Add News') ?></span></legend>
 			<?php echo form_security_field( 'news_add' ); ?>
 			<div class="field-container">
-				<label for="news-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
+				<label for="news-headline" class="required"><span><?php echo _('Headline') ?></span></label>
 				<span class="input"><input type="text" id="news-headline" name="headline" size="64" maxlength="64" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="news-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
+				<label for="news-body" class="required"><span><?php echo _('Body') ?></span></label>
 				<span class="textarea"><textarea id="news-body" name="body" cols="60" rows="8"></textarea></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="news-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
+				<label for="news-announcement"><span><?php echo _('Announcement') ?></span> <span class="help-text"><?php echo _('Stays on Top') ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="news-announcement" name="announcement" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="news-view-status"><span><?php echo lang_get( 'view_status' ) ?></span></label>
+				<label for="news-view-status"><span><?php echo _('View Status') ?></span></label>
 				<span class="select">
 					<select id="news-view-status" name="view_state">
 						<?php print_enum_string_option_list( 'view_state' ) ?>
@@ -82,7 +82,7 @@ html_page_top( lang_get( 'edit_news_link' ) );
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'post_news_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Post News') ?>" /></span>
 		</fieldset>
 	</form>
 </div>
@@ -93,16 +93,16 @@ if ( news_get_count( helper_get_current_project(), current_user_is_administrator
 <div id="news-edit-div" class="form-container">
 	<form id="news-edit-form" method="post" action="news_edit_page.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'edit_or_delete_news_title' ) ?></span></legend>
+			<legend><span><?php echo _('Edit or Delete News') ?></span></legend>
 			<?php echo form_security_field( 'news_delete' ); ?>
 			<fieldset class="field-container">
 					<span class="radio"><input type="radio" id="news-edit-action" name="action" value="edit" checked="checked" /></span>
-					<label for="news-edit-action"><span><?php echo lang_get( 'edit_post' ) ?></span></label>
+					<label for="news-edit-action"><span><?php echo _('Edit Post') ?></span></label>
 					<span class="radio"><input type="radio" id="news-delete-action" name="action" value="delete" /></span>
-					<label for="news-delete-action"><span><?php echo lang_get( 'delete_post' ) ?></span></label>
+					<label for="news-delete-action"><span><?php echo _('Delete Post') ?></span></label>
 			</fieldset>
 			<div class="field-container">
-				<label for="news-edit-id"><span><?php echo lang_get( 'select_post' ) ?></span></label>
+				<label for="news-edit-id"><span><?php echo _('Select Post') ?></span></label>
 				<span class="select">
 					<select id="news-edit-id" name="news_id">
 						<?php print_news_item_option_list() ?>
@@ -110,7 +110,7 @@ if ( news_get_count( helper_get_current_project(), current_user_is_administrator
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo _('Submit') ?>" /></span>
 		</fieldset>
 	</form>
 </div><?php

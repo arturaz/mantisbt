@@ -70,9 +70,9 @@ html_page_top( null, $t_redirect_url );
 echo '<br />';
 echo '<div>';
 
-echo lang_get( 'operation_successful' ) . '<br />';
+echo _('Operation successful.') . '<br />';
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, _('Proceed') );
 
 echo '</div>';
 

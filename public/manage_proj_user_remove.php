@@ -64,7 +64,7 @@ access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_
 
 if ( 0 == $f_user_id ) {
 	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
+	helper_ensure_confirmed( _('Are you sure you wish to remove all the users of this project?'), _('Remove All Users') );
 
 	project_remove_all_users( $f_project_id, access_get_project_level( $f_project_id ) );
 } else {
@@ -74,9 +74,9 @@ if ( 0 == $f_user_id ) {
 	$t_user = user_get_row( $f_user_id );
 
 	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
-		'<br/>' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
-		lang_get( 'remove_user_button' ) );
+	helper_ensure_confirmed( _('Are you sure you wish to remove this user?') .
+		'<br/>' . _('Username') . _('&#32;') . $t_user['username'],
+		_('Remove User') );
 
 	project_remove_user( $f_project_id, $f_user_id );
 }
@@ -90,8 +90,8 @@ html_page_top( null, $t_redirect_url );
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ).'<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.').'<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

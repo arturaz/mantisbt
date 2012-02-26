@@ -58,7 +58,7 @@ access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
 
 $t_read_write_access = access_has_global_level( config_get('set_configuration_threshold' ) );
 
-html_page_top( lang_get( 'configuration_report' ) );
+html_page_top( _('Configuration Report') );
 
 print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'adm_config_report.php' );
@@ -107,7 +107,7 @@ function print_config_value_as_string( $p_type, $p_value ) {
 	echo '<pre>';
 
 	if ( $t_corrupted ) {
-		echo lang_get( 'configuration_corrupted' );
+		echo _('The configuration in database is corrupted.');
 	} else {
 		if ( function_exists( 'var_export' ) ) {
 			var_export( $t_value );
@@ -123,24 +123,24 @@ $query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM {
 $result = db_query_bound( $query );
 ?>
 <div id="adm-config-div" class="table-container">
-	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
+	<h2><?php echo _('Database Configuration') ?></h2>
 	<table cellspacing="1" cellpadding="5" border="1">
 		<tr class="row-category">
-			<th class="center"><?php echo lang_get( 'username' ) ?></th>
-			<th class="center"><?php echo lang_get( 'project_name' ) ?></th>
-			<th><?php echo lang_get( 'configuration_option' ) ?></th>
-			<th class="center"><?php echo lang_get( 'configuration_option_type' ) ?></th>
-			<th class="center"><?php echo lang_get( 'configuration_option_value' ) ?></th>
-			<th class="center"><?php echo lang_get( 'access_level' ) ?></th>
+			<th class="center"><?php echo _('Username') ?></th>
+			<th class="center"><?php echo _('Project Name') ?></th>
+			<th><?php echo _('Configuration Option') ?></th>
+			<th class="center"><?php echo _('Type') ?></th>
+			<th class="center"><?php echo _('Value') ?></th>
+			<th class="center"><?php echo _('Access Level') ?></th>
 			<?php if ( $t_read_write_access ): ?>
-			<th class="center"><?php echo lang_get( 'actions' ) ?></th>
+			<th class="center"><?php echo _('Actions') ?></th>
 			<?php endif; ?>
 		</tr><?php
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' ); ?>
 		<tr>
 			<td class="center">
-				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
+				<?php echo ($v_user_id == 0) ? _('All Users') : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
 			<td class="center"><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 			<td><?php echo string_display_line( $v_config_id ) ?></td>
@@ -151,7 +151,7 @@ $result = db_query_bound( $query );
 			<td class="center">
 				<?php
 					if ( config_can_delete( $v_config_id ) ) {
-						print_button( "adm_config_delete.php?user_id=$v_user_id&project_id=$v_project_id&config_option=$v_config_id", lang_get( 'delete_link' ) );
+						print_button( "adm_config_delete.php?user_id=$v_user_id&project_id=$v_project_id&config_option=$v_config_id", _('Delete') );
 					} else {
 						echo '&#160;';
 					}
@@ -167,35 +167,35 @@ if ( $t_read_write_access ) { ?>
 <div class="form-container">
 	<form method="post" action="adm_config_set.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'set_configuration_option' ) ?></span></legend>
+			<legend><span><?php echo _('Set Configuration Option') ?></span></legend>
 			<?php echo form_security_field( 'adm_config_set' ) ?>
 			<div class="field-container">
-				<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<label for="config-user-id"><span><?php echo _('Username') ?></span></label>
 				<span class="select">
 					<select id="config-user-id" name="user_id">
-						<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
+						<option value="0" selected="selected"><?php echo _('All Users'); ?></option>
 						<?php print_user_option_list( 0 ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
+				<label for="config-project-id"><span><?php echo _('Project Name') ?></span></label>
 				<span class="select">
 					<select id="config-project-id" name="project_id">
-						<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
+						<option value="0" selected="selected"><?php echo _('All Projects'); ?></option>
 						<?php print_project_option_list( ALL_PROJECTS, false ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
+				<label for="config-option"><span><?php echo _('Configuration Option') ?></span></label>
 				<span class="input"><input type="text" id="config-option" name="config_option" value="" size="64" maxlength="64" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
+				<label for="config-type"><span><?php echo _('Type') ?></span></label>
 				<span class="select">
 					<select id="config-type" name="type">
 						<option value="default" selected="selected">default</option>
@@ -207,11 +207,11 @@ if ( $t_read_write_access ) { ?>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
+				<label for="config-value"><span><?php echo _('Value') ?></span></label>
 				<span class="textarea"><textarea id="config-value" name="value" cols="80" rows="10"></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" /></span>
+			<span class="submit-button"><input type="submit" name="config_set" class="button" value="<?php echo _('Set Configuration Option') ?>" /></span>
 		</fieldset>
 	</form>
 </div><?php

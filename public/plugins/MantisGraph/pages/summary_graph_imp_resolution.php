@@ -40,7 +40,7 @@
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
 	# gather the data for the graphs
-	$t_metrics = enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution');
+	$t_metrics = enum_bug_group( lang_get('resolution_enum_string'), 'resolution');
 	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 
 ?>

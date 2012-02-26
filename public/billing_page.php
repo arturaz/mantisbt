@@ -42,7 +42,7 @@ if ( !config_get( 'time_tracking_enabled' ) )
 
 access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
-html_page_top( lang_get( 'time_tracking_billing_link' )  );
+html_page_top( _('Time Tracking')  );
 ?>
 
 <br />

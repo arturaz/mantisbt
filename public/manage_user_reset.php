@@ -86,22 +86,22 @@ echo '<div>';
 if( $t_reset ) {
 	if ( false == $t_result ) {
 		# PROTECTED
-		echo lang_get( 'account_reset_protected_msg' ) . '<br />';
+		echo _('Account protected. Cannot reset the password.') . '<br />';
 	} else {
 		# SUCCESSFUL RESET
 		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# send the new random password via email
-			echo lang_get( 'account_reset_msg' ) . '<br />';
+			echo _('A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.') . '<br />';
 		} else {
 			# email notification disabled, then set the password to blank
-			echo lang_get( 'account_reset_msg2' ) . '<br />';
+			echo _('Account password has been set to blank...') . '<br />';
 		}
 	}
 } else {
 	# UNLOCK
-	echo lang_get( 'account_unlock_msg' ) . '<br />';
+	echo _('The account has been unlocked.') . '<br />';
 }
 
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $t_redirect_url, _('Proceed') );
 echo '</div>';
 html_page_bottom();

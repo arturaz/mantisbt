@@ -118,10 +118,10 @@ html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 <tr>
 	<td class="form-title">
 		<input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
-		<?php echo lang_get( 'edit_bugnote_title' ) ?>
+		<?php echo _('Edit Note') ?>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( $t_redirect_url, lang_get( 'go_back' ) ) ?>
+		<?php print_bracket_link( $t_redirect_url, _('Go Back') ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -133,7 +133,7 @@ html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
 <tr class="row-2">
 	<td class="center" colspan="2">
-		<strong><?php echo lang_get( 'time_tracking') ?> (HH:MM)</strong><br />
+		<strong><?php echo _('Time tracking') ?> (HH:MM)</strong><br />
 		<input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
 	</td>
 </tr>
@@ -144,7 +144,7 @@ html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Update Information') ?>" />
 	</td>
 </tr>
 </table>

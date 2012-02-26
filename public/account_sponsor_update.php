@@ -89,9 +89,9 @@ html_page_top( null, $t_redirect );
 
 echo '<br /><div>';
 
-echo lang_get( 'payment_updated' ) . '<br />';
+echo _('Payment information updated.') . '<br />';
 
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
+echo _('Operation successful.') . '<br />';
+print_bracket_link( $t_redirect, _('Proceed') );
 echo '</div>';
 html_page_bottom();

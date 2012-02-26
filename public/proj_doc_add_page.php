@@ -62,7 +62,7 @@ html_page_top();
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'upload_file_title' ) ?>
+		<?php echo _('Upload File') ?>
 	</td>
 	<td class="right">
 		<?php print_doc_menu( 'proj_doc_add_page.php' ) ?>
@@ -70,7 +70,7 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<th class="category" width="25%">
-		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
+		<span class="required">*</span><?php echo _('Title') ?>
 	</th>
 	<td width="75%">
 		<input type="text" name="title" size="70" maxlength="250" />
@@ -78,7 +78,7 @@ html_page_top();
 </tr>
 <tr class="row-2">
 	<th class="category">
-		<?php echo lang_get( 'description' ) ?>
+		<?php echo _('Description') ?>
 	</th>
 	<td>
 		<textarea name="description" cols="60" rows="7"></textarea>
@@ -86,9 +86,9 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'select_file' ); ?><br />
+		<span class="required">*</span><?php echo _('Select File'); ?><br />
 		<?php // FIXME: hard coded "k" in here. ?>
-		<span class="small"><?php echo lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) ?>k</span>
+		<span class="small"><?php echo _('Maximum size:') . _('&#32;') . number_format( $t_max_file_size/1000 ) ?>k</span>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
@@ -97,10 +97,10 @@ html_page_top();
 </tr>
 <tr>
 	<td class="left">
-		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
+		<span class="required"> * <?php echo _('required') ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo _('Upload File') ?>" />
 	</td>
 </tr>
 </table>

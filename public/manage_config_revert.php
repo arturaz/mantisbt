@@ -72,9 +72,9 @@ if ( !$t_access ) {
 
 if ( '' != $f_revert ) {
 	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . lang_get( 'word_separator' ) .
-		string_html_specialchars( implode( ', ', $t_revert_vars ) ) . lang_get( 'word_separator' ) . lang_get( 'in_project' ) . lang_get( 'word_separator' ) . project_get_name( $f_project_id ),
-		lang_get( 'delete_config_button' ) );
+	helper_ensure_confirmed( _('Are you sure you want to delete the settings for:') . _('&#32;') .
+		string_html_specialchars( implode( ', ', $t_revert_vars ) ) . _('&#32;') . _('in project') . _('&#32;') . project_get_name( $f_project_id ),
+		_('Delete Settings') );
 
 	foreach ( $t_revert_vars as $t_revert ) {
 		config_delete( $t_revert, null , $f_project_id );
@@ -90,8 +90,8 @@ html_page_top( null, $t_redirect_url );
 <br />
 <div>
 <?php
-echo lang_get( 'operation_successful' ).'<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+echo _('Operation successful.').'<br />';
+print_bracket_link( $t_redirect_url, _('Proceed') );
 ?>
 </div>
 

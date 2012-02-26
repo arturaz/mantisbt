@@ -50,7 +50,7 @@ require_api( 'utility_api.php' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-html_page_top( lang_get( 'manage_plugin_link' ) );
+html_page_top( _('Manage Plugins') );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
@@ -85,19 +85,19 @@ if ( 0 < count( $t_plugins_installed ) ) {
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="7">
-		<?php echo lang_get( 'plugins_installed' ) ?>
+		<?php echo _('Installed Plugins') ?>
 
 	</td>
 </tr>
 
 <!-- Info -->
 <tr class="row-category">
-	<td width="20%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="35%"><?php echo lang_get( 'plugin_description' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
-	<td width="7%"><?php echo lang_get( 'plugin_priority' ) ?></td>
-	<td width="8%"><?php echo lang_get( 'plugin_protected' ) ?></td>
-	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
+	<td width="20%"><?php echo _('Plugin') ?></td>
+	<td width="35%"><?php echo _('Description') ?></td>
+	<td width="20%"><?php echo _('Dependencies') ?></td>
+	<td width="7%"><?php echo _('Priority') ?></td>
+	<td width="8%"><?php echo _('Protected') ?></td>
+	<td width="10%"><?php echo _('Actions') ?></td>
 </tr>
 
 <?php
@@ -123,15 +123,15 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+			$t_author = '<br/>' . sprintf( _('Author: %1'),
 				'<a href="mailto:' . string_attribute( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
-			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+			$t_author = '<br/>' . string_display_line( sprintf( _('Author: %1'), $t_author ) );
 		}
 	}
 
 	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+		$t_url = '<br/>' . _('Website:') . _('&#32;') . "<a href=\"$t_url\">$t_url</a>";
 	}
 
 	$t_upgrade = plugin_needs_upgrade( $t_plugin );
@@ -157,7 +157,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	if ( 0 < count( $t_depends ) ) {
 		$t_depends = implode( $t_depends, '<br/>' );
 	} else {
-		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
+		$t_depends = '<span class="small dependency_met">' . _('No dependencies') . '</span>';
 	}
 
 	echo '<tr>';
@@ -174,14 +174,14 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 		echo '<td class="center">','<input type="checkbox" name="protected_',$t_basename,'" '.( $t_protected ? 'checked="checked" ' : '').'/>','</td>';
 	}
 	echo '<td class="center">';
-	if ( $t_upgrade ) { print_bracket_link( 'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ), lang_get( 'plugin_upgrade' ) ); }
-	if ( $t_uninstall ) { print_bracket_link( 'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ), lang_get( 'plugin_uninstall' ) ); }
+	if ( $t_upgrade ) { print_bracket_link( 'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ), _('Upgrade') ); }
+	if ( $t_uninstall ) { print_bracket_link( 'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ), _('Uninstall') ); }
 	echo '</td></tr>';
 } ?>
 
 <tr>
 	<td colspan="3"></td>
-	<td colspan="2" class="center"><input type="submit" value="<?php echo lang_get( 'plugin_update' ) ?>"/></td>
+	<td colspan="2" class="center"><input type="submit" value="<?php echo _('Update') ?>"/></td>
 	<td></td>
 </tr>
 
@@ -198,17 +198,17 @@ if ( 0 < count( $t_plugins_available ) ) {
 <!-- Title -->
 <tr>
 	<td class="form-title" colspan="7">
-		<?php echo lang_get( 'plugins_available' ) ?>
+		<?php echo _('Available Plugins') ?>
 
 	</td>
 </tr>
 
 <!-- Info -->
 <tr class="row-category">
-	<td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
-	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
+	<td width="25%"><?php echo _('Plugin') ?></td>
+	<td width="45%"><?php echo _('Description') ?></td>
+	<td width="20%"><?php echo _('Dependencies') ?></td>
+	<td width="10%"><?php echo _('Actions') ?></td>
 </tr>
 
 <?php
@@ -227,15 +227,15 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+			$t_author = '<br/>' . sprintf( _('Author: %1'),
 				'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
-			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+			$t_author = '<br/>' . string_display_line( sprintf( _('Author: %1'), $t_author ) );
 		}
 	}
 
 	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+		$t_url = '<br/>' . _('Website:') . _('&#32;') . "<a href=\"$t_url\">$t_url</a>";
 	}
 
 	$t_ready = true;
@@ -257,7 +257,7 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	if ( 0 < count( $t_depends ) ) {
 		$t_depends = implode( $t_depends, '<br/>' );
 	} else {
-		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
+		$t_depends = '<span class="small dependency_met">' . _('No dependencies') . '</span>';
 	}
 
 	echo '<tr>';
@@ -265,18 +265,18 @@ foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
 	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
 	echo '<td class="center">',$t_depends,'</td>';
 	echo '<td class="center">';
-	if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ), lang_get( 'plugin_install' ) ); }
+	if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ), _('Install') ); }
 	echo '</td></tr>';
 } ?>
 
 </table>
 <?php } ?>
 
-<br/><?php echo lang_get( 'plugin_key_label' ) ?>
-<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
-<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
-<span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,
-<span class='dependency_upgrade'><?php echo lang_get( 'plugin_key_upgrade' ) ?></span>.
+<br/><?php echo _('Key:') ?>
+<span class='dependency_met'><?php echo _('plugin ready') ?></span>,
+<span class='dependency_unmet'><?php echo _('unmet dependencies') ?></span>,
+<span class='dependency_dated'><?php echo _('outdated dependencies') ?></span>,
+<span class='dependency_upgrade'><?php echo _('upgrade needed') ?></span>.
 
 <?php
 html_page_bottom();

@@ -136,9 +136,9 @@ html_page_top( null, $f_redirect_url );
 
 echo '<br /><div>';
 
-echo lang_get( 'operation_successful' );
+echo _('Operation successful.');
 
 echo '<br />';
-print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
+print_bracket_link( $f_redirect_url, _('Proceed') );
 echo '<br /></div>';
 html_page_bottom();

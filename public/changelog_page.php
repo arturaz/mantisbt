@@ -86,15 +86,15 @@ function print_version_header( $p_version_id ) {
 		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
 
 		if ( (bool) $t_version_released ) {
-			$t_release_date = ' (' . lang_get('released') . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
+			$t_release_date = ' (' . _('Released') . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
 		} else {
-			$t_release_date = ' (' . lang_get( 'not_released' ) . ')';
+			$t_release_date = ' (' . _('Not Yet Released') . ')';
 		}
 	} else {
 		$t_release_date = '';
 	}
 
-	echo '<br />', $t_release_title, $t_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
+	echo '<br />', $t_release_title, $t_release_date, _('&#32;'), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ), _('View Issues') ), '<br />';
 
 	$t_release_title_without_hyperlinks = $t_project_name . ' - ' . $t_version_name . $t_release_date;
 	echo mb_str_pad( '', mb_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
@@ -106,7 +106,7 @@ function print_version_header( $p_version_id ) {
  * @return null
  */
 function print_project_header_changelog ( $p_project_name ) {
-	echo '<br /><span class="pagetitle">', string_display_line( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
+	echo '<br /><span class="pagetitle">', string_display_line( $p_project_name ), ' - ', _('Change Log'), '</span><br />';
 	echo '<tt>';
 }
 
@@ -173,7 +173,7 @@ if ( ALL_PROJECTS == $t_project_id ) {
 	array_unshift( $t_project_ids, $t_project_id );
 }
 
-html_page_top( lang_get( 'changelog' ) );
+html_page_top( _('Change Log') );
 
 $t_project_index = 0;
 
@@ -334,10 +334,10 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		if ( $t_issues_resolved == 1 ) {
-			echo "[{$t_issues_resolved} " . lang_get( 'bug' ) . ']';
+			echo "[{$t_issues_resolved} " . _('issue') . ']';
 			echo "<br />";
 		} else if ( $t_issues_resolved > 1 ) {
-			echo "[{$t_issues_resolved} " . lang_get( 'bugs' ) . ']';
+			echo "[{$t_issues_resolved} " . _('issues') . ']';
 			echo "<br />";
 		}
 
@@ -350,6 +350,6 @@ foreach( $t_project_ids as $t_project_id ) {
 }
 
 if ( $t_project_index == 0 ) {
-	echo '<br /><span class="pagetitle">' . lang_get('changelog_empty') . '</span>';
+	echo '<br /><span class="pagetitle">' . _('No Change Log information available') . '</span>';
 }
 html_page_bottom();

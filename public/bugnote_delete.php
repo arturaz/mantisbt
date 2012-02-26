@@ -80,8 +80,8 @@ if ( $t_user_id == $t_reporter_id ) {
 	access_ensure_bugnote_level( config_get( 'delete_bugnote_threshold' ), $f_bugnote_id );
 }
 
-helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
-						 lang_get( 'delete_bugnote_button' ) );
+helper_ensure_confirmed( _('Are you sure you wish to delete this note?'),
+						 _('Delete Note') );
 
 bugnote_delete( $f_bugnote_id );
 
