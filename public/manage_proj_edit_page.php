@@ -313,8 +313,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		</fieldset>
 	</form>
 
-</div><?php
-
+</div>
 <div id="project-versions-div" class="form-container">
 	<h2><?php echo lang_get( 'versions' ); ?></h2>
 	<form id="manage-project-version-copy-form" method="post" action="manage_proj_ver_copy.php">
