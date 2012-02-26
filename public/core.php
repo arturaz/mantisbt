@@ -71,6 +71,10 @@ defined('CONFIG_PATH')
 defined('LANGUAGES_PATH')
     || define('LANGUAGES_PATH', realpath(dirname(__FILE__) . '/../languages') );
 
+// Define path to core locale directory
+defined('LOCALE_PATH')
+    || define('LOCALE_PATH', realpath(dirname(__FILE__) . '/../locale') );
+
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -221,10 +225,40 @@ function mb_str_pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_
 	return $padded_string;
 }
 
+
+/* Register the exception handler */
+use MantisBT\Error;
+set_exception_handler(array('MantisBT\Error', 'exception_handler'));
+set_error_handler(array('MantisBT\Error', 'exception_error_handler'));
+
+
+/* Guess the current locale from the Accept-Language header or fall back to
+ * the default locale defined in config_inc.php. The core gettext text domain
+ * will also be loaded so strings from here on in are translated into the
+ * user's preferred language.
+ *
+ * TODO: also check for a locale override provided by a user cookie?
+ *
+ * TODO: make mention of a user override that is applied later on once a user
+ *       identifies themselves by logging in?
+ */
+use MantisBT\Locale\LocaleManager;
+use MantisBT\Exception\Locale\LocaleNotSupportedByUser;
+$localeManager = new LocaleManager();
+try {
+	$localeManager->setLocale();
+} catch (LocaleNotSupportedByUser $e) {
+	$localeManager->setLocale($g_default_locale);
+}
+$localeManager->addTextDomain('core', LOCALE_PATH);
+textdomain('core');
+
+
 # Include PHP compatibility file
 require_api( 'php_api.php' );
 
 # Enforce our minimum PHP requirements
+# TODO: perhaps move this to the front of of core.php so it is called earlier
 if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 	@ob_end_clean();
 	echo '<strong>FATAL ERROR: Your version of PHP is too old. MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</strong><br />Your version of PHP is version ' . phpversion();
@@ -238,11 +272,6 @@ if ( ( $t_output = ob_get_contents() ) != '' ) {
 	echo var_dump( $t_output );
 	die;
 }
-
-# Register exception handlers
-use MantisBT\Error;
-set_exception_handler(array('MantisBT\Error', 'exception_handler'));
-set_error_handler(array('MantisBT\Error', 'exception_error_handler'));
 
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );

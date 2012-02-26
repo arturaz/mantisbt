@@ -621,6 +621,27 @@ $g_version_suffix = '';
  */
 $g_copyright_statement = '';
 
+
+
+
+
+/****************************
+ * MantisBT Locale Settings *
+ ****************************/
+
+ /**
+ * Specify the default/fallback locale that will be used for users that have
+ * not provided a valid locale preference via the HTTP Accept-Language header,
+ * a saved cookie or user account settings. You should always specify the use
+ * of a UTF-8 character set (ensure the locale name ends with ".UTF-8").
+ * @global string $g_default_locale
+ */
+$g_default_locale = 'en_US.UTF-8';
+
+
+
+
+
 /******************************
  * MantisBT Language Settings *
  ******************************/

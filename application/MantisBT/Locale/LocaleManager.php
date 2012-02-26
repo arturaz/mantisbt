@@ -32,9 +32,10 @@ class LocaleManager {
 		}
 	}
 
-	/* $newLocales is either a string (en_US) or an array of strings that
-	 * are locale names to try. The order of the strings in the array is
-	 * important as the first valid locale name in the array will be used.
+	/* $newLocales is either a string (en_US.UTF-8) or an array of strings
+	 * that are locale names to try. The order of the strings in the array
+	 * is important as the first valid locale name in the array will be
+	 * used.
 	 */
 	public function setLocale($newLocales = null) {
 		if ($newLocales === null) {
